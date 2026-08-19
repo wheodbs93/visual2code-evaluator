@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+.env
+.claude/
+
+workspaces/
+data/inputs/
+data/visual2code.db
+data/evaluations/
+.claude/

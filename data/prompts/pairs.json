@@ -1,0 +1,118 @@
+{
+  "pairs": [
+    {
+      "pair_id": "dukeandexter_001",
+      "prompt_id": "dukeandexter_001",
+      "prompt": "We need to perfectly recreate the website homepage shown in the provided reference materials.\n\nReview the attached screenshots and video and use them as the design reference. Recreate the design, layout, content structure, and scrolling interactions as faithfully as possible. Do not sway from what is shown in the supplied reference materials; the recreation should be as exact as possible.\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The supplied screenshots and video should be used as the visual reference for the recreation.\n\nDo not reinterpret, redesign, modernize, or add unsupported creative elements. If a minor implementation detail is not observable in the supplied materials, make the most reasonable choice consistent with the visible reference and continue.\n\nComplete the full landing-page implementation in this one-shot task without pausing for questions, review, confirmation, or additional input.\n\nBefore finishing, QA your work section by section against the supplied screenshots and video. Check for material differences from the reference and correct them before completing the task.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "Ecommerce & Retail",
+      "complexity": "asset_based",
+      "difficulty": 4,
+      "strategy": "direct_recreation",
+      "quality_tier": "very_good",
+      "reference_site_url": "",
+      "reference_input_dir": "dukeandexter",
+      "reference_assets": [
+        "data/inputs/dukeandexter/DukeandDexter Screen Recording.mov",
+        "data/inputs/dukeandexter/dukeanddexter.com_pages_rewards.png",
+        "data/inputs/dukeandexter/dukeanddexter.com_landing page.png",
+        "data/inputs/dukeandexter/dukeanddexter.com_collections_custom-hand-painted-shoes.png",
+        "data/inputs/dukeandexter/dukeanddexter.com_account_login.png"
+      ],
+      "rubric": [
+        {
+          "id": "dd01",
+          "text": "The homepage reproduces the overall visual composition and section structure shown in the reference materials.",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dd02",
+          "text": "Major visible content areas and navigation structure are reproduced faithfully.",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dd03",
+          "text": "Typography, spacing, imagery, alignment, and visual hierarchy closely match the supplied reference materials.",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dd04",
+          "text": "The implementation preserves the reference's visual character without introducing an unrelated or modernized aesthetic.",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dd05",
+          "text": "Scrolling behavior and visible motion/interactions are reproduced faithfully where they can be observed in the video.",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        },
+        {
+          "id": "dd06",
+          "text": "The page remains coherent and usable across the evaluated viewport sizes.",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        },
+        {
+          "id": "dd07",
+          "text": "The page communicates the same primary purpose and content hierarchy as the reference.",
+          "dimension": "clarity_messaging",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dd08",
+          "text": "The implementation does not rely on or reproduce source code from the reference website.",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dd09",
+          "text": "No unsupported redesign, modernization, or creative reinterpretation is introduced.",
+          "dimension": "prompt_adherence",
+          "importance": "negated",
+          "requires_interaction": false
+        },
+        {
+          "id": "dd10",
+          "text": "The generated page passes section-by-section QA against the supplied screenshots and video without material visible discrepancies.",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "dukeandexter_001_A",
+          "model": "Claude",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/dukeandexter_001/A",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/dukeandexter_001/a",
+          "render_url": "/renders/dukeandexter_001/a/",
+          "status": "READY_FOR_EVALUATION",
+          "build_log": "No index.html or package.json found",
+          "qa": {}
+        },
+        "B": {
+          "output_id": "dukeandexter_001_B",
+          "model": "Codex",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/dukeandexter_001/B",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/dukeandexter_001/b",
+          "render_url": "/renders/dukeandexter_001/b/",
+          "status": "READY_FOR_EVALUATION",
+          "build_log": "Pair dukeandexter_001 has no reference_input_dir configured",
+          "qa": {}
+        }
+      },
+      "status": "READY_FOR_EVALUATION"
+    }
+  ]
+}
