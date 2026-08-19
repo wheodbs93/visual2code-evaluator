@@ -1,1 +1,190 @@
-<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Fluxboard B</title></head><body style='font-family:system-ui;margin:0'><section style='padding:60px;background:#eae7df;color:#222;min-height:80vh'><div style='max-width:900px;margin:auto'><span>FLUXBOARD AI</span><h1 style='font-size:72px'>Your work, finally in focus.</h1><p style='font-size:22px;max-width:650px'>An AI workspace for teams that want clarity without the overhead.</p><button style='padding:16px 24px;border:none;border-radius:999px'>Explore the workspace</button></div></section><section style='padding:70px;max-width:1100px;margin:auto'><h2>Designed for momentum.</h2><p>One place to plan, automate and learn.</p><div style='display:grid;grid-template-columns:2fr 1fr;gap:24px'><div style='padding:30px;background:#f3f0ea'>Adaptive workflows<br><br>Bring projects, notes and actions together.</div><div style='padding:30px;background:#222;color:#fff'>Signals<br><br>AI highlights what changed.</div></div></section></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Duke + Dexter</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:#171512;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.announcement{height:24px;background:#1b1a18;color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:.08em}
+.nav{position:absolute;top:24px;left:0;right:0;height:65px;z-index:5;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 48px;color:#fff;font-size:10px;letter-spacing:.09em}
+.navlinks,.actions{display:flex;gap:25px;align-items:center}
+.actions{justify-content:flex-end}
+.logo{font-family:Georgia,serif;font-size:18px;letter-spacing:.45em;font-weight:bold;white-space:nowrap}
+.bag{width:15px;height:17px;border:1px solid currentColor;display:inline-block;position:relative}
+.bag:before{content:"";position:absolute;width:7px;height:5px;border:1px solid currentColor;border-bottom:0;border-radius:6px 6px 0 0;left:3px;top:-6px}
+.hero{height:68vw;min-height:590px;max-height:1040px;position:relative;overflow:hidden;background:
+radial-gradient(ellipse at 50% 62%,rgba(255,255,255,.25),transparent 18%),
+linear-gradient(145deg,#756e60 0 18%,#352f29 42%,#8e8574 100%)}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(105deg,transparent 0 150px,rgba(255,255,255,.05) 151px,transparent 153px);opacity:.55}
+.shoes{position:absolute;left:9%;top:8%;width:60%;height:87%;filter:drop-shadow(0 28px 20px rgba(0,0,0,.55))}
+.shoe{position:absolute;width:38%;height:88%;top:2%;background:linear-gradient(90deg,#151514,#3f3932 34%,#111 88%);border-radius:44% 48% 25% 27%/12% 15% 60% 65%;border:4px solid #0c0b0a;transform:rotate(8deg)}
+.shoe.right{right:3%;transform:rotate(-7deg)}
+.shoe.left{left:16%}
+.shoe:before{content:"";position:absolute;left:13%;right:12%;top:11%;height:58%;border-radius:45% 45% 25% 25%;background:
+radial-gradient(circle at 20% 30%,#798d5d 0 4%,transparent 5%),
+radial-gradient(circle at 67% 48%,#788b58 0 4%,transparent 5%),
+linear-gradient(145deg,transparent 0 35%,#66784c 36% 39%,transparent 40% 60%,#8d9970 61% 64%,transparent 65%),
+#e8dfc9;border:3px solid #cabda5}
+.shoe:after{content:"";position:absolute;left:7%;right:7%;top:34%;height:13%;border-radius:5px;background:linear-gradient(#2d2a27,#111 48%,#5a554c 52%,#171513);box-shadow:0 55px 0 #171513}
+.hero-copy{position:absolute;right:6%;top:38%;text-align:center;color:#d14944;font-family:Georgia,serif;font-style:italic}
+.hero-copy .big{font-size:4.5vw;line-height:1.05;white-space:nowrap}
+.hero-copy .small{font-size:2.7vw;border-top:2px solid #d14944;margin-top:10px;padding-top:12px}
+.button{display:inline-block;background:#fff;color:#121212;padding:16px 31px;font-size:11px;font-weight:bold;font-style:normal;font-family:Arial,sans-serif;margin-top:70px;border-radius:2px}
+.strip{height:290px;background:#fff;display:flex;gap:8px;padding:14px 0;overflow:hidden}
+.card{min-width:20%;text-align:center;font-family:Georgia,serif;font-size:12px;line-height:1.35}
+.product{height:210px;background:#f3f3f2;position:relative;overflow:hidden}
+.loaf{position:absolute;left:8%;right:8%;height:28%;bottom:24%;border-radius:55% 14% 22% 24%/72% 42% 36% 38%;background:linear-gradient(160deg,#171716,#48423d 43%,#090909 80%);box-shadow:0 10px 8px rgba(0,0,0,.17)}
+.loaf:before{content:"";position:absolute;width:42%;height:50%;left:43%;top:-23%;border-radius:60% 25% 10% 20%;background:inherit;border-bottom:5px solid rgba(255,255,255,.15)}
+.loaf:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:10px;background:#121212;border-radius:50%}
+.brown .loaf{background:linear-gradient(160deg,#3a2015,#8a563e 43%,#2a160e 88%)}
+.cream .loaf:before{background:#eee9da}
+.text{padding:17px 8px 0}
+.price{font-family:Arial,sans-serif;margin-top:3px}
+.feature{height:65vw;min-height:570px;max-height:990px;position:relative;overflow:hidden;background:linear-gradient(#090807 0 15%,#1e1714 38%,#49392f 100%)}
+.feature-shoes{position:absolute;top:24%;left:-4%;right:-3%;display:flex;justify-content:space-around}
+.pair{width:27%;height:240px;position:relative}
+.pair .mini{position:absolute;bottom:0;width:48%;height:70%;border-radius:48% 48% 28% 28%/35% 35% 50% 50%;background:linear-gradient(90deg,#160e0b,#704531,#21120d);border:5px solid #110c09}
+.pair .mini:last-child{right:0;transform:rotate(-4deg)}
+.pair .mini:first-child{left:0;transform:rotate(4deg)}
+.pair.contrast .mini:after{content:"";position:absolute;left:10%;right:10%;top:18%;height:38%;background:#eee9dd;border-radius:35% 35% 28% 28%}
+.pair.black .mini{background:linear-gradient(90deg,#020202,#383c3d,#050505)}
+.feature-copy{position:absolute;right:8%;bottom:13%;color:white;text-align:center}
+.feature-copy h2{font:700 21px Georgia,serif;margin:0 0 20px}
+.feature-copy p{font-size:12px;margin-bottom:0}
+.feature-copy .button{margin-top:36px;color:#111}
+.video-placeholder{height:63vw;min-height:650px;background:#99968f}
+.category{height:77vw;min-height:700px;max-height:1160px;position:relative;background:#fff}
+.category-title{position:absolute;bottom:10%;left:50%;transform:translateX(-50%);color:#8f1918;font-size:12px;font-weight:bold;border-bottom:1px solid #8f1918;padding-bottom:10px}
+.brown-block{height:56vw;min-height:560px;background:#432619}
+.light-block{height:63vw;min-height:650px;background:#b8afa3}
+.collection-strip{height:305px}
+.garment{position:absolute;inset:22px 16%;background:#eee9df;clip-path:polygon(24% 0,40% 8%,60% 8%,76% 0,100% 21%,84% 42%,75% 32%,75% 100%,25% 100%,25% 32%,16% 42%,0 21%)}
+.garment.white{background:#e8e6df}
+.garment.tan{background:#b6936b}
+.garment:after{content:"NY  ✦  D+D  ☺";position:absolute;left:27%;top:39%;font:11px Georgia;transform:rotate(-9deg)}
+.footer{padding:90px 7% 35px;display:grid;grid-template-columns:1.2fr .8fr .8fr 1.4fr;gap:60px;font-size:11px;color:#777}
+.footer h3{font-size:11px;color:#2a2927;letter-spacing:.04em;margin:0 0 30px}
+.footer a{display:block;margin:0 0 20px}
+.socials{display:flex;gap:28px;font-size:17px}
+.newsletter{display:flex;margin-top:22px}
+.newsletter input{height:42px;flex:1;border:1px solid #444;padding:0 15px;font-size:11px}
+.newsletter button{border:0;background:#282624;color:#fff;padding:0 24px;font-size:10px;letter-spacing:.08em}
+.footer-bottom{grid-column:1/-1;border-top:1px solid #eee;padding-top:25px;display:flex;justify-content:space-between;font-size:8px}
+.reveal{opacity:0;transform:translateY(18px);transition:.6s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:760px){
+.nav{padding:0 18px}.navlinks a:not(:first-child),.actions a:first-child{display:none}.logo{font-size:12px}
+.hero{height:105vw;min-height:540px}.hero-copy{right:5%;top:48%}.hero-copy .big{font-size:7vw}.hero-copy .small{font-size:4.5vw}.button{margin-top:35px}
+.shoes{left:-5%;width:86%;height:70%}.strip{height:220px}.card{min-width:40%;font-size:10px}.product{height:145px}
+.feature{height:100vw}.pair{height:150px}.feature-copy{right:5%;bottom:7%}
+.video-placeholder,.light-block,.category{min-height:500px}.brown-block{min-height:450px}
+.footer{grid-template-columns:1fr 1fr;padding:60px 25px}.footer .mail{grid-column:1/-1}.footer-bottom{display:block}
+}
+</style>
+</head>
+<body>
+<div class="announcement">FREE EXPRESS SHIPPING ON ORDERS OVER $250</div>
+
+<header class="nav">
+  <div class="navlinks">
+    <a href="#">NEW</a><a href="#men">MEN</a><a href="#women">WOMEN</a><a href="#">CLOTHING</a><a href="#">LOYALTY</a>
+  </div>
+  <a class="logo" href="#">DUKE + DEXTER</a>
+  <div class="actions"><a href="#">ACCOUNT</a><a href="#">SEARCH</a><span class="bag"></span></div>
+</header>
+
+<section class="hero">
+  <div class="shoes"><div class="shoe left"></div><div class="shoe right"></div></div>
+  <div class="hero-copy">
+    <div class="big">Summer Sketch</div>
+    <div class="small">New Additions</div>
+    <a class="button" href="#women">SHOP NOW</a>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="card cream"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Olive Sketch Penny Loafer<br><span class="price">$360</span></div></div>
+  <div class="card"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Black Penny Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card cream"><div class="product"><i class="loaf"></i></div><div class="text">Wilde White Penny Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card brown"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Tan Penny Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Black Penny Loafer<br><span class="price">$340</span></div></div>
+</section>
+
+<section class="feature">
+  <div class="feature-shoes">
+    <div class="pair contrast"><i class="mini"></i><i class="mini"></i></div>
+    <div class="pair"><i class="mini"></i><i class="mini"></i></div>
+    <div class="pair contrast black"><i class="mini"></i><i class="mini"></i></div>
+  </div>
+  <div class="feature-copy reveal"><h2>The Ezra Loafer</h2><p>Three New Colourways</p><a class="button" href="#">SHOP NOW</a></div>
+</section>
+
+<section class="strip">
+  <div class="card cream"><div class="product"><i class="loaf"></i></div><div class="text">Ezra Black + White Ruched Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card brown cream"><div class="product"><i class="loaf"></i></div><div class="text">Ezra Chestnut + White Ruched Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card brown"><div class="product"><i class="loaf"></i></div><div class="text">Ezra Chestnut Ruched Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card cream"><div class="product"><i class="loaf"></i></div><div class="text">Ezra Black + White Ruched Loafer - Women's<br><span class="price">$340</span></div></div>
+  <div class="card brown"><div class="product"><i class="loaf"></i></div><div class="text">Ezra Chestnut Ruched Loafer - Women's<br><span class="price">$340</span></div></div>
+</section>
+
+<section class="video-placeholder"></section>
+
+<section class="strip">
+  <div class="card"><div class="product"><i class="loaf"></i></div><div class="text">CB Black Foldable Ruched Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card brown"><div class="product"><i class="loaf"></i></div><div class="text">CB Brown Suede Foldable Ruched Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card"><div class="product"><div class="garment" style="background:#315b97"></div></div><div class="text">CB Emblem Trucker Blue Jacket<br><span class="price">$380</span></div></div>
+  <div class="card"><div class="product"><div style="position:absolute;width:65%;height:42%;left:18%;top:31%;background:#225696;border-radius:55% 55% 20% 20%;transform:skew(-10deg)"></div></div><div class="text">CB Eivissa Merch Cap<br><span class="price">$70</span></div></div>
+  <div class="card"><div class="product"><i class="loaf"></i></div><div class="text">CB Black Ruched Loafer<br><span class="price">$340</span></div></div>
+</section>
+
+<section class="category" id="men"><a class="category-title" href="#">MEN'S</a></section>
+<section class="brown-block"></section>
+
+<section class="strip">
+  <div class="card"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Black Penny Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card brown"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Chestnut Penny Loafer - Men's<br><span class="price">$340</span></div></div>
+  <div class="card cream"><div class="product"><i class="loaf"></i></div><div class="text">Wilde White Rose Penny Loafer - Men's<br><span class="price">$360</span></div></div>
+  <div class="card cream"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Rose Penny Loafer - Women's<br><span class="price">$360</span></div></div>
+  <div class="card"><div class="product"><i class="loaf"></i></div><div class="text">Ezra Black Foldable Loafer<br><span class="price">$340</span></div></div>
+</section>
+
+<section class="light-block" id="women"></section>
+
+<section class="strip collection-strip">
+  <div class="card"><div class="product"><div class="garment white"></div></div><div class="text">NY Sketch Vintage White + Red + Black Shirt<br><span class="price">$280</span></div></div>
+  <div class="card"><div class="product"><div class="garment white"></div></div><div class="text">PD Sketch Antique White Shirt<br><span class="price">$280</span></div></div>
+  <div class="card"><div class="product"><div class="garment tan"></div></div><div class="text">Duke Sketch Sand Jacket<br><span class="price">$450</span></div></div>
+  <div class="card"><div class="product"><div class="garment white"></div></div><div class="text">NY Sketch Vintage White T-Shirt<br><span class="price">$120</span></div></div>
+  <div class="card"><div class="product"><i class="loaf"></i></div><div class="text">Wilde Pleasant Dreams Snake Loafer<br><span class="price">$360</span></div></div>
+</section>
+
+<footer class="footer">
+  <div><h3>SOCIAL</h3><div class="socials"><span>f</span><span>◎</span><span>◉</span><span>◌</span></div></div>
+  <div><h3>HELP</h3><a href="#">Shipping</a><a href="#">Returns</a><a href="#">FAQs</a><a href="#">Sizing Guide</a><a href="#">Contact Us</a></div>
+  <div><h3>BRAND</h3><a href="#">Our Story</a><a href="#">The Factory</a><a href="#">D+D World</a><a href="#">Stockists</a></div>
+  <div class="mail"><h3>MAIL</h3><p>Sign up for 10% off your first order plus the latest D+D news, events and exclusive early access to product drops. <u>Conditions apply.</u></p><div class="newsletter"><input aria-label="Email address" placeholder="Enter your email address"><button>SUBSCRIBE</button></div></div>
+  <div class="footer-bottom"><span>© DUKE + DEXTER · Privacy · Terms &amp; Conditions</span><span>United States (USD $) &nbsp;&nbsp; Visa &nbsp; Mastercard &nbsp; Amex</span></div>
+</footer>
+
+<script>
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})
+},{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+document.querySelectorAll('.strip').forEach(strip=>{
+  let down=false,startX=0,startScroll=0;
+  strip.addEventListener('pointerdown',e=>{
+    down=true;startX=e.clientX;startScroll=strip.scrollLeft;strip.setPointerCapture(e.pointerId)
+  });
+  strip.addEventListener('pointermove',e=>{if(down)strip.scrollLeft=startScroll-(e.clientX-startX)});
+  strip.addEventListener('pointerup',()=>down=false);
+  strip.addEventListener('pointercancel',()=>down=false);
+});
+</script>
+</body>
+</html>

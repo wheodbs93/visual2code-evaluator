@@ -196,23 +196,37 @@ class CodexAdapter(Adapter):
                 f"Codex CLI not found: {self.cmd}"
             )
 
-        artifact_prompt = f"""
-Generate the requested website.
+        response_file = workspace / ".codex_last_message.txt"
 
-Review all supplied reference materials in:
+        artifact_prompt = f"""
+You are generating a landing page for an automated website benchmark.
+
+Follow the user's request exactly.
+
+REFERENCE MATERIALS:
+All screenshots, images, videos, and other supplied materials are available
+under the local directory:
+
 reference_inputs/
 
+Review all applicable reference materials before generating the page.
+
+IMPORTANT OUTPUT CONTRACT:
 Return the complete website as a SINGLE self-contained HTML document.
 
 Requirements:
 - Start with <!DOCTYPE html>
 - End with </html>
-- Inline CSS.
-- Inline JavaScript.
-- Inline SVG/assets where appropriate.
-- No external source files.
-- No prose explanation.
-- Return only the complete HTML document.
+- Inline CSS in <style> blocks.
+- Inline JavaScript in <script> blocks.
+- Use inline SVG where appropriate.
+- Do not depend on external source files.
+- Do not inspect or reproduce reference-site source code.
+- Do not return a prose explanation.
+- Do not return JSON.
+- Your final response must contain the complete HTML document only.
+
+The pipeline will save your final response to index.html and render it separately.
 
 USER REQUEST:
 
@@ -222,17 +236,20 @@ USER REQUEST:
         cmd = [
             self.cmd,
             "exec",
-            "--json",
-            "--full-auto",
+            "--sandbox",
+            "workspace-write",
+            "--skip-git-repo-check",
             "--cd",
             str(workspace),
-            artifact_prompt,
+            "--output-last-message",
+            str(response_file),
         ]
 
         started = time.time()
 
         proc = subprocess.run(
             cmd,
+            input=artifact_prompt,
             cwd=workspace,
             text=True,
             capture_output=True,
@@ -245,8 +262,51 @@ USER REQUEST:
             "command": cmd,
             "returncode": proc.returncode,
             "elapsed_seconds": round(elapsed, 3),
-            "stdout": proc.stdout[-30000:],
+            "stdout": proc.stdout[-20000:],
             "stderr": proc.stderr[-10000:],
+        }
+
+        if proc.returncode != 0:
+            (workspace / ".generation.json").write_text(
+                json.dumps(meta, indent=2),
+                encoding="utf-8",
+            )
+
+            raise GenerationError(
+                f"Codex generation failed: "
+                f"{proc.stderr[-4000:] or proc.stdout[-4000:]}"
+            )
+
+        if not response_file.exists():
+            raise GenerationError(
+                "Codex completed but did not produce "
+                f"{response_file.name}"
+            )
+
+        result = response_file.read_text(
+            encoding="utf-8",
+            errors="replace",
+        )
+
+        html = _strip_code_fence(result)
+
+        if "<html" not in html.lower():
+            raise GenerationError(
+                "Codex completed successfully but did not "
+                "return HTML."
+            )
+
+        index_path = workspace / "index.html"
+
+        index_path.write_text(
+            html,
+            encoding="utf-8",
+        )
+
+        meta["artifact"] = {
+            "type": "html",
+            "path": "index.html",
+            "bytes": len(html.encode("utf-8")),
         }
 
         (workspace / ".generation.json").write_text(
@@ -254,13 +314,6 @@ USER REQUEST:
             encoding="utf-8",
         )
 
-        if proc.returncode != 0:
-            raise GenerationError(
-                f"Codex generation failed: "
-                f"{proc.stderr[-4000:] or proc.stdout[-4000:]}"
-            )
-
-        # Codex output handling will be hardened after we validate Claude.
         return meta
 
 
