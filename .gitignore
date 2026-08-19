@@ -11,3 +11,6 @@ data/inputs/
 data/visual2code.db
 data/evaluations/
 .claude/
+data/*.db
+data/*.db-shm
+data/*.db-wal
