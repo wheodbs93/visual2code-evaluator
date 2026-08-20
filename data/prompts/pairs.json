@@ -54,15 +54,25 @@
         "A": {
           "output_id": "supra_pac_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/supra_pac_001/A",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/supra_pac_001/a",
+          "render_url": "/renders/supra_pac_001/a/",
+          "status": "READY_FOR_EVALUATION",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "supra_pac_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/supra_pac_001/B",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/supra_pac_001/b",
+          "render_url": "/renders/supra_pac_001/b/",
+          "status": "READY_FOR_EVALUATION",
+          "build_log": "",
+          "qa": {}
         }
       },
-      "status": "NEW"
+      "status": "READY_FOR_EVALUATION"
     },
     {
       "pair_id": "roasty_coffee_001",
@@ -115,12 +125,22 @@
         "A": {
           "output_id": "roasty_coffee_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "roasty_coffee_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -272,12 +292,22 @@
         "A": {
           "output_id": "withywindle_winyard_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "withywindle_winyard_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -349,12 +379,22 @@
         "A": {
           "output_id": "habito_studio_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "habito_studio_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -421,12 +461,22 @@
         "A": {
           "output_id": "rangefinder_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "rangefinder_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -496,12 +546,22 @@
         "A": {
           "output_id": "oura_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "oura_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -556,12 +616,22 @@
         "A": {
           "output_id": "doubletab_saas_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "doubletab_saas_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -631,12 +701,22 @@
         "A": {
           "output_id": "possiblefinance_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "possiblefinance_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -700,12 +780,22 @@
         "A": {
           "output_id": "extrasensory_electronics_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "extrasensory_electronics_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"
@@ -776,12 +866,22 @@
         "A": {
           "output_id": "weavy_001_A",
           "model": "Claude",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         },
         "B": {
           "output_id": "weavy_001_B",
           "model": "Codex",
-          "status": "PENDING"
+          "workspace": "",
+          "source_path": "",
+          "render_url": "",
+          "status": "PENDING",
+          "build_log": "",
+          "qa": {}
         }
       },
       "status": "NEW"

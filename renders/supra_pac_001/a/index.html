@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supra PAC — Fight fire with fire</title>
+<meta name="description" content="Supra PAC matches Super PAC spending dollar for dollar against the candidates they buy, and traces every funding chain back to the people behind it.">
+<!--
+==================================================================================
+ DESIGN.MD — SUPRA PAC BRAND & WEB DESIGN GUIDELINES
+ Translated from the Culture & Community Power Fund reference into a new identity.
+==================================================================================
+
+ 0. SOURCE READING
+ Reviewed: five full-page reference screenshots (home, about-us, community-power,
+ how-we-distribute-funds, connect, knowledge-commons).
+ Not reviewed: the supplied screen recording — video decoding tools (ffmpeg/ffprobe)
+ were unavailable in this environment. The motion rules in §8 are therefore derived
+ from the interaction affordances visible in the stills (sticky bar, quick-nav
+ toggle square, accordion chevrons, dropdown pills, hover-underlined links, flat
+ lazy-load colour placeholders) plus the motion grammar this editorial-activist
+ genre implies. They are written as hard, deterministic rules.
+
+ What the reference is, in one sentence: a Swiss-grid editorial publication set in a
+ heavy condensed poster face, where ONE saturated flat colour does all the shouting,
+ HAIRLINE RULES do all the organising, and enormous deliberate EMPTINESS does all
+ the pacing.
+
+ 1. BRAND PLATFORM
+ Name: Supra PAC. Positioning: "Fight fire with fire."
+ Proposition — two acts, simultaneous:
+   (1) MATCH — community-organised dollars deployed against the candidates a Super
+       PAC has bought, at the scale the Super PAC is spending.
+   (2) UNMASK — trace the shell LLCs, pass-throughs and single-donor trusts behind
+       each PAC and publish the chain.
+ Voice: prosecutorial, plain, numerate. Short declaratives. Figures stated exactly,
+ never rounded up. The tone of a filing, not a fundraising email. No exclamation
+ points, no rally-speak, no fear appeal.
+ Verbal devices (structural heirs of the reference's "[ FEATURED RESOURCE ]"):
+   · bracket status labels — [ EXPOSED ]  [ ACTIVE MATCH ]  [ FILING ]  [ CONTACT ]
+   · ledger dates, right-aligned, em-dash led — "— 14 Mar '26"
+   · attribution behind a 2px vertical rule — "| Research Desk"
+   · money always signed and separated — $2,410,000
+ Fictional-content rule: every organisation, candidate, donor and figure here is
+ invented. A visible disclaimer sits in the footer. Non-negotiable for political
+ subject matter.
+
+ 2. TYPOGRAPHY
+ A strict TWO-FAMILY system, exactly as the reference: one heavy condensed grotesque
+ for every headline and card title, one neutral grotesque for all running text and
+ micro-labels. No third family. No serif anywhere.
+   --font-display : Haettenschweiler, Impact, Franklin Gothic Heavy, Arial Black
+   --font-text    : Helvetica Neue, Helvetica, Arial, system-ui
+ Display scale   size                        lh     tracking  case
+   d-hero        clamp(58px,11.5vw,178px)   0.845   .005em   UPPER  hero only
+   d1            clamp(38px,5.6vw,82px)     0.87    .008em   UPPER  section titles
+   d2            clamp(26px,3.2vw,46px)     0.90    .010em   UPPER  band titles
+   d3            clamp(20px,1.9vw,30px)     1.00    .010em   Title  card/row titles
+   d4            17px                       1.08    .012em   Title  small titles
+ Text scale      size   lh     weight
+   lead          17px   1.34   700   standfirst beside a section title
+   body          13.5px 1.52   400   all running copy
+   small         12px   1.45   400   row descriptions
+   label         10.5px 1.20   500 / .06em   bracket labels, eyebrows
+   caption       9px    1.30   400 / .02em   image credits
+ Rules:
+  · STAGGERED INDENT IS THE SIGNATURE. Multi-line display headlines offset per line
+    (flush left / indented 12–22% / flush right), echoing "ABOUT / US" and
+    "THE / KNOWLEDGE / COMMONS". Used on the hero and four section titles. Never
+    stagger a single-line title.
+  · Bracket a word for emphasis inside a display line: POWER[FUL] -> NEWS[LETTER].
+  · BODY MEASURE IS DELIBERATELY NARROW: max-width 400px (~62 characters). This is
+    what manufactures the reference's emptiness — a 1720px field carrying one 400px
+    column of 13.5px text. Never widened to "fill" a section.
+  · Display is pure --ink; body is --ink-80; micro-labels are --ink-40, never the
+    accent. Display is never justified, never italic, never wide-tracked.
+
+ 3. COLOUR
+ The reference formula, preserved exactly: ONE dominant saturated flat colour filling
+ large architectural blocks + near-black for inverted sections and footer + two greys
+ for banding + a hairline grey carrying all structure + a small set of secondary flats
+ used only as card fills. Supra PAC keeps the formula, changes the hues.
+   --ink      #0E0E0E  display type, inverted sections, footer, redaction bars
+   --ink-80   #2B2B2B  body copy
+   --ink-40   #7C7C7C  micro-labels, captions
+   --line     #D6D6D2  1px hairlines — the entire structural system
+   --paper    #FFFFFF  default ground
+   --fog      #EFEFEC  banded ground
+   --fog-deep #E4E4DF  nested panels, form wells
+   --volt     #DCFF32  PRIMARY. Acid highlighter-lime. Large flat blocks.
+   --ballot   #2F4BF0  secondary flat — deep electric blue (white type)
+   --manila   #E8DCC0  secondary flat — case-file tan (black type)
+   --alarm    #FF3D2E  tertiary — [ EXPOSED ] chips and the ticker ONLY
+ Why lime: the brand is EVIDENCE — a highlighter dragged across a disclosure filing,
+ and a redaction bar. volt+ink is that gesture literally, and it carries the exact
+ structural job of the reference's orange (one loud flat figure on white/grey, black
+ type on top) at equivalent saturation without borrowing the hue.
+ Rules: volt always carries BLACK type (never white; ~17:1). ballot always carries
+ white. alarm never becomes a large field (~1% of page area). No gradients, no
+ shadows, no transparency over imagery — every colour flat and full-strength.
+ Section grounds alternate paper -> fog -> paper -> ink -> paper; two adjacent
+ sections never share a ground. Focus ring: 2px solid --ballot, offset 3px.
+
+ 4. GRID, SPACING, SCALE
+ 12 columns · max-width 1720px · gutter 24px · page inset clamp(18px,3.2vw,56px).
+ Spacing scale (8px base): 4 8 12 16 24 32 48 64 96 128 176.
+ Section padding clamp(64px,9vw,140px); hero and manifesto clamp(88px,12vw,200px).
+ SECTIONS ARE SEPARATED BY A 1PX --line RULE, EDGE TO EDGE — not by shadow, not by
+ spacing alone. This is the reference's primary structural device and the single
+ most important rule in this document.
+ 4.1 EDITORIAL ASYMMETRY — the load-bearing layout rule. The reference almost never
+ centres and almost never fills:
+   · Title/standfirst split — display title cols 1–6, 400px standfirst + button
+     cols 8–12. Never a centred title.
+   · Text/image split — body cols 3–6, image cols 9–12, leaving cols 1–2 and 7–8
+     EMPTY. The void is the design.
+   · Staggered card grid — cards sit in a 3-column field but each carries an
+     independent vertical offset (0 / 56 / 148 / 232px) and independent height, so
+     the grid reads as a drifting column rather than rows. Adjacent cards never
+     align on their top edge.
+   · Pull-quote — indented to col 3, preceded by a 2px black vertical rule, set at
+     d2, right third empty.
+   · Sections may deliberately run half-empty. A band holding one 400px paragraph
+     and nothing else is correct, not unfinished.
+
+ 5. IMAGERY & GRAPHIC DIRECTION
+ The reference's photography is documentary — crowds, marches, community rooms,
+ hand-painted signage — hard-cropped square to the grid and captioned in 9px grey.
+ Its screenshots also expose flat accent-colour rectangles standing in for unloaded
+ images; read as design, that placeholder state is entirely on-brand for the system.
+ Supra PAC ships NO external assets. Imagery is three original inline devices:
+   1. REDACTION PLATES — ruled document lines with --ink bars struck across them;
+      the visible fragments carry the finding. The brand's photographic substitute
+      and its strongest single image.
+   2. MONEY-FLOW SCHEMATICS — illustrative node-and-arc diagrams (shells ->
+      pass-through -> Super PAC -> media buy) with the Supra PAC counter-arc in
+      volt. Strictly illustrative: NO quantity is encoded in geometry, so these are
+      diagrams, not charts — no axes, gridlines or legend anywhere on this site.
+   3. HALFTONE CROWD FIELDS — dot-matrix silhouettes of assembly, the organising
+      counterweight to the money graphics.
+ Rules: square corners everywhere, border-radius 0, including inputs and buttons.
+ Every image block carries a 9px --ink-40 credit directly beneath, right-aligned.
+ Flat colour blocks are legitimate image-scale elements at photograph dimensions.
+ Image blocks are large — min 200px tall in a 4-column slot, up to 560px near hero.
+
+ 6. UI COMPONENTS — hairlines do the work; cards get borders, never shadows.
+   · Primary button — ink fill, white 10.5px label, square, arrow pushed right on a
+     24px gap. Hover: fill flips to volt with black type, arrow +4px.
+   · Ghost pill — transparent, 1px --line, chevron/arrow right. Hover: border -> ink.
+   · Bracket link — hover reveals [ ] either side (absolutely positioned, zero
+     layout shift) and wipes a 1px underline left -> right.
+   · Row / accordion — full width, 1px top rule, [thumb 200px][eyebrow + d3 title]
+     [chevron]. Hover tints the row --fog. Open rotates the chevron 180 degrees.
+   · Resource card — flat accent fill or bordered white: bracket label -> d3 title
+     -> | byline -> flexible gap -> footer row (category <-> — date). Hover -4px.
+   · Stat block — d1 figure over a hairline over a 300px caption. No icon, no chart.
+   · Form field — 10.5px label above, BOTTOM BORDER ONLY, no box, no fill. Focus
+     doubles the rule via inset box-shadow (never border-width, which shifts layout).
+     The textarea is the one field that gets a full 1px box.
+   · Ticker — single-line marquee, caps labels, --alarm dot separators, 44px tall,
+     hairline above and below, paused on hover and focus-within.
+ 6.1 NAVIGATION HIERARCHY — three tiers, matching the reference:
+   1. Fixed 56px top bar, paper ground, bottom hairline that materialises only past
+      12px of scroll. Left: SUPRA/PAC lockup in the display face inside a 2px ink
+      box (inverts to volt-on-black in the footer). Right: five 10.5px links; the
+      ACTIVE ITEM IS WRAPPED IN BRACKETS — [ CONTACT ] — exactly as the reference
+      marks its current page.
+   2. QUICK-NAV SQUARE at the far right: 28px black square, opens a full-viewport
+      ink overlay carrying THREE LABELLED SUBSECTIONS in columns — Campaigns We've
+      Funded / Super PACs Exposed / Contact Our Staff — each a label heading over a
+      stack of d4 links. Closes on Esc, on backdrop click, and on activation; focus
+      is trapped while open and returned to the toggle on close.
+   3. In-page section index — sticky numbered label list pinned in col 1 beside the
+      method section, highlighting the row in view.
+
+ 7. PAGE ARCHITECTURE — ordered to reproduce the reference's large/small/inverted/
+ empty rhythm:
+   1 Hero split (volt block + staggered d-hero + 400px paragraph + button | fog
+     field holding one featured card)  2 Ticker  3 KPI band (three stat blocks +
+   ghost pill)  4 Manifesto, inverted on ink, money-flow schematic right
+   5 Candidates we've backed — the reference's partner/event list, hairline rows,
+     each with an outbound campaign link  6 PACs exposed — the staggered card grid
+     with category filter  7 How we work — four accordions + sticky index
+   8 Pull-quote  9 Next steps — volt "GET INVOLVED" card + NEWS[LETTER] form card
+   10 Contact our staff — text + underline form + 2x2 staff directory
+   11 Footer on ink with volt lockup and the fictional-content disclaimer.
+
+ 8. MOTION — restrained, editorial, functional. It clarifies structure; it never
+ entertains.  --ease cubic-bezier(.16,1,.3,1) · --ease-io cubic-bezier(.65,0,.35,1)
+ · fast 180ms · base 420ms · slow 680ms
+   1. Scroll reveal — opacity 0->1, translateY(16px)->0 over slow/ease, fired once
+      at 12% visibility by IntersectionObserver. Never reverses on scroll-up.
+   2. Stagger — siblings delay 60ms each, CAPPED AT 6 STEPS so long lists never crawl.
+   3. Display line-clip — d-hero and d1 rise per line from translateY(105%) inside
+      overflow:hidden, 90ms apart. The page's one theatrical move: hero + three
+      section titles, no more.
+   4. Counters — KPI figures count up over 1100ms ease-out on reveal, dollar
+      formatting preserved throughout the count.
+   5. Hover — links wipe a 1px underline left->right; buttons invert and nudge the
+      arrow +4px; cards lift -4px; rows tint to fog. All at fast.
+   6. Quick-nav — backdrop fades fast; panel translates -100%->0 over base/ease;
+      column links stagger 40ms apart. Reverse is fast with no stagger. Scroll locks.
+   7. Accordion — grid-template-rows 0fr->1fr over base/ease-io; height is NEVER
+      animated directly. Chevron rotates on the same curve.
+   8. Ticker — continuous linear translateX, 38s per cycle.
+   9. Sticky nav — bottom hairline fades in past 12px. The bar never hides, resizes
+      or changes colour.
+  10. NOTHING MOVES ON LOAD EXCEPT THE HERO. No intro curtain, no logo animation,
+      no parallax, no scroll-jacking, no auto-advancing carousel.
+  11. prefers-reduced-motion: reduce — all transitions collapse to 0.01ms, reveals
+      start visible, the ticker holds static, counters print final values. The page
+      is fully legible and complete with animation entirely disabled.
+
+ 9. ACCESSIBILITY & BUILD CONSTRAINTS
+ Single self-contained document; no external fonts, scripts, styles or image files;
+ all graphics inline SVG or CSS. Landmarks header/nav/main/section[aria-labelledby]/
+ footer, one h1. Accordions are buttons with aria-expanded/aria-controls. The
+ quick-nav toggle carries aria-expanded, traps focus, restores it on Esc. Decorative
+ SVG is aria-hidden; informative SVG carries a title. Body text never below 12px;
+ 9px is reserved for credits that duplicate no unique information. Marquee content
+ is duplicated for seamless looping and the duplicate is aria-hidden.
+
+ 10. ANTI-PATTERNS — DO NOT SHIP
+ Rounded corners · drop shadows · gradients · centred hero text · full-width body
+ paragraphs · a third typeface · white type on volt · alarm as a large field · icon
+ sets · emoji · stock-photo gloss · a chart with axes · parallax · scroll-jacking ·
+ auto-carousels · two adjacent sections on the same ground · a centred section title
+ · sections divided by whitespace alone rather than a hairline.
+==================================================================================
+-->
+<style>
+:root{
+  --ink:#0E0E0E; --ink-80:#2B2B2B; --ink-40:#7C7C7C;
+  --line:#D6D6D2; --paper:#FFFFFF; --fog:#EFEFEC; --fog-deep:#E4E4DF;
+  --volt:#DCFF32; --ballot:#2F4BF0; --manila:#E8DCC0; --alarm:#FF3D2E;
+  --inset:clamp(18px,3.2vw,56px);
+  --gut:24px;
+  --bar:56px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --t-fast:180ms; --t-base:420ms; --t-slow:680ms;
+  --font-display:"Haettenschweiler","Impact","Franklin Gothic Heavy","Arial Narrow Bold","Arial Black",sans-serif;
+  --font-text:"Helvetica Neue",Helvetica,Arial,"Segoe UI",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--bar) + 12px)}
+body{margin:0;background:var(--paper);color:var(--ink-80);font-family:var(--font-text);font-size:13.5px;line-height:1.52;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.is-locked{overflow:hidden}
+svg,img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+input,textarea{border-radius:0}
+ul{list-style:none;margin:0;padding:0}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+:focus-visible{outline:2px solid var(--ballot);outline-offset:3px}
+::selection{background:var(--volt);color:var(--ink)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- type ---------- */
+.d-hero,.d1,.d2,.d3,.d4{font-family:var(--font-display);font-weight:400;color:var(--ink);margin:0;font-stretch:condensed}
+.d-hero{font-size:clamp(56px,11.4vw,178px);line-height:.845;letter-spacing:.005em;text-transform:uppercase}
+.d1{font-size:clamp(38px,5.6vw,82px);line-height:.87;letter-spacing:.008em;text-transform:uppercase}
+.d2{font-size:clamp(26px,3.2vw,46px);line-height:.9;letter-spacing:.01em;text-transform:uppercase}
+.d3{font-size:clamp(20px,1.9vw,30px);line-height:1;letter-spacing:.01em}
+.d4{font-size:17px;line-height:1.08;letter-spacing:.012em}
+.lead{font-size:17px;line-height:1.34;font-weight:700;color:var(--ink)}
+.small{font-size:12px;line-height:1.45}
+.label{font-size:10.5px;line-height:1.2;letter-spacing:.06em;font-weight:500;color:var(--ink-40);margin:0}
+.label--ink{color:var(--ink)}
+.cap{font-size:9px;line-height:1.3;letter-spacing:.02em;color:var(--ink-40);margin:8px 0 0;text-align:right}
+.measure{max-width:400px}
+.measure-w{max-width:460px}
+.byline{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--ink);letter-spacing:.01em}
+.byline::before{content:"";flex:none;width:2px;align-self:stretch;min-height:1.1em;background:currentColor}
+.mono-num{font-variant-numeric:tabular-nums}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1720px;margin:0 auto;padding-inline:var(--inset)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.sec{border-top:1px solid var(--line);padding-block:clamp(64px,9vw,140px)}
+.sec--fog{background:var(--fog)}
+.sec--ink{background:var(--ink);color:rgba(255,255,255,.76);border-top-color:var(--ink);padding-block:clamp(88px,12vw,190px)}
+.sec--ink .d1,.sec--ink .d2,.sec--ink .d3,.sec--ink .d4{color:#fff}
+.sec--ink .label{color:rgba(255,255,255,.5)}
+.sec--ink .cap{color:rgba(255,255,255,.42)}
+.sec__head{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut);align-items:end;margin-bottom:clamp(40px,5vw,80px)}
+.sec__head h2{grid-column:1/span 7}
+.sec__head .sec__aside{grid-column:9/span 4;display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-width:196px;padding:12px 16px;background:var(--ink);color:#fff;border:1px solid var(--ink);font-size:10.5px;letter-spacing:.06em;font-weight:500;transition:background var(--t-fast) linear,color var(--t-fast) linear,border-color var(--t-fast) linear}
+.btn .ar{transition:transform var(--t-fast) var(--ease)}
+.btn:hover{background:var(--volt);color:var(--ink);border-color:var(--volt)}
+.btn:hover .ar{transform:translateX(4px)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn--ghost:hover{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn--onink{background:transparent;color:#fff;border-color:rgba(255,255,255,.34)}
+.btn--onvolt{background:var(--ink);color:var(--volt);border-color:var(--ink)}
+.btn--onvolt:hover{background:#fff;color:var(--ink);border-color:#fff}
+.blink{position:relative;display:inline-block;color:var(--ink);font-size:10.5px;letter-spacing:.06em;font-weight:500;white-space:nowrap}
+.blink::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-fast) var(--ease)}
+.blink:hover::after,.blink:focus-visible::after{transform:scaleX(1)}
+.blink .ar{display:inline-block;transition:transform var(--t-fast) var(--ease)}
+.blink:hover .ar{transform:translateX(4px)}
+
+/* ---------- top bar ---------- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:80;height:var(--bar);background:var(--paper);display:flex;align-items:center;justify-content:space-between;gap:24px;padding-inline:var(--inset)}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);opacity:0;transition:opacity var(--t-fast) linear}
+.bar.is-stuck::after{opacity:1}
+.lockup{display:inline-flex;align-items:baseline;gap:1px;border:2px solid var(--ink);padding:3px 7px 2px;font-family:var(--font-display);font-size:16px;line-height:1;letter-spacing:.02em;color:var(--ink);text-transform:uppercase}
+.lockup .sl{color:var(--ink-40);padding:0 1px}
+.bar__nav{display:flex;align-items:center;gap:26px}
+.nav-a{position:relative;font-size:10.5px;letter-spacing:.06em;font-weight:500;color:var(--ink-80);transition:color var(--t-fast) linear}
+.nav-a::before,.nav-a::after{position:absolute;top:0;color:var(--ink-40);opacity:0;transition:opacity var(--t-fast) linear}
+.nav-a::before{content:"[";left:-9px}
+.nav-a::after{content:"]";right:-9px}
+.nav-a:hover{color:var(--ink)}
+.nav-a:hover::before,.nav-a:hover::after,.nav-a.is-active::before,.nav-a.is-active::after{opacity:1}
+.nav-a.is-active{color:var(--ink)}
+.qn-btn{width:28px;height:28px;flex:none;background:var(--ink);color:#fff;display:grid;place-items:center;transition:background var(--t-fast) linear,color var(--t-fast) linear}
+.qn-btn:hover{background:var(--volt);color:var(--ink)}
+.qn-btn .x{display:none}
+.qn-btn[aria-expanded="true"]{background:var(--volt);color:var(--ink)}
+.qn-btn[aria-expanded="true"] .p{display:none}
+.qn-btn[aria-expanded="true"] .x{display:block}
+
+/* ---------- quick nav overlay ---------- */
+.qn{position:fixed;inset:0;z-index:90;background:var(--ink);color:rgba(255,255,255,.7);overflow-y:auto;transform:translateY(-100%);visibility:hidden;transition:transform var(--t-base) var(--ease),visibility 0s linear var(--t-base)}
+.qn.is-open{transform:none;visibility:visible;transition:transform var(--t-base) var(--ease),visibility 0s linear 0s}
+.qn__in{padding:calc(var(--bar) + 40px) var(--inset) 64px;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut) var(--gut)}
+.qn__col{grid-column:span 4;border-top:1px solid rgba(255,255,255,.2);padding-top:18px}
+.qn__col > .label{color:rgba(255,255,255,.5);margin-bottom:20px}
+.qn__col li{border-bottom:1px solid rgba(255,255,255,.12)}
+.qn__l{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;color:#fff;font-family:var(--font-display);font-size:17px;line-height:1.1;letter-spacing:.012em;opacity:0;transform:translateY(10px);transition:opacity var(--t-base) var(--ease),transform var(--t-base) var(--ease),color var(--t-fast) linear}
+.qn.is-open .qn__l{opacity:1;transform:none}
+.qn__l:hover{color:var(--volt)}
+.qn__l .m{font-family:var(--font-text);font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.45);white-space:nowrap}
+.qn__foot{grid-column:1/-1;margin-top:24px;border-top:1px solid rgba(255,255,255,.2);padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 26px;align-items:center}
+.qn__foot a{font-size:10.5px;letter-spacing:.06em;color:rgba(255,255,255,.62)}
+.qn__foot a:hover{color:var(--volt)}
+
+/* ---------- hero ---------- */
+main{padding-top:var(--bar)}
+.hero{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);min-height:calc(100vh - var(--bar));padding-left:var(--inset)}
+.hero__l{background:var(--volt);color:var(--ink);padding:clamp(26px,3.2vw,54px);display:flex;flex-direction:column;justify-content:space-between;gap:clamp(36px,5vw,72px)}
+.hero__l p{color:#1a1a12}
+.hero__h{margin-top:clamp(10px,2vw,26px)}
+.hero__h .l2{padding-left:14%}
+.hero__h .l3{padding-left:30%}
+.hero__foot{display:flex;flex-direction:column;gap:26px;align-items:flex-start}
+.hero__r{background:var(--fog);display:flex;align-items:center;justify-content:center;padding:clamp(26px,3.4vw,64px)}
+.fcard{background:var(--volt);border:1px solid var(--volt);width:100%;max-width:432px;padding:22px;display:flex;flex-direction:column;min-height:300px;transition:transform var(--t-fast) var(--ease)}
+.fcard:hover{transform:translateY(-4px)}
+.fcard .label{color:#3d4415}
+.fcard__ft{margin-top:auto;padding-top:44px;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+
+/* ---------- ticker ---------- */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);height:44px;display:flex;align-items:center;overflow:hidden;background:var(--paper)}
+.ticker__track{display:flex;width:max-content;animation:mq 38s linear infinite}
+.ticker:hover .ticker__track,.ticker:focus-within .ticker__track{animation-play-state:paused}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker__i{display:inline-flex;align-items:center;gap:12px;padding:0 22px;font-size:10.5px;letter-spacing:.06em;font-weight:500;color:var(--ink-80);text-transform:uppercase;white-space:nowrap}
+.ticker__d{width:5px;height:5px;background:var(--alarm);flex:none}
+
+/* ---------- kpi ---------- */
+.kpi__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(34px,4vw,58px)}
+.kpi__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
+.stat__n{font-family:var(--font-display);font-size:clamp(38px,5.6vw,82px);line-height:.87;letter-spacing:.008em;color:var(--ink)}
+.stat hr{border:0;border-top:1px solid var(--line);margin:20px 0 16px}
+.stat p{max-width:300px;font-size:13.5px}
+
+/* ---------- manifesto ---------- */
+.mani{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.mani__t{grid-column:1/span 6}
+.mani__t .l2{padding-left:18%}
+.mani__b{grid-column:1/span 4;margin-top:clamp(30px,3.6vw,54px);display:flex;flex-direction:column;gap:26px;align-items:flex-start}
+.mani__g{grid-column:7/span 6;align-self:end}
+.flow{width:100%;height:auto}
+
+/* ---------- candidate rows ---------- */
+.row{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut);border-top:1px solid var(--line);padding:clamp(26px,3vw,44px) 0;transition:background var(--t-fast) linear}
+.row:hover{background:var(--fog)}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row__t{grid-column:1/span 6;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.row__t .d3 a{transition:color var(--t-fast) linear}
+.row__t .d3 a:hover{color:var(--ballot)}
+.row__m{grid-column:9/span 4}
+.ledger{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:11.5px;color:var(--ink);border-top:1px solid var(--line);padding-top:12px;width:100%;max-width:400px}
+.ledger b{font-weight:700}
+.ledger span{color:var(--ink-40)}
+.blk{width:100%;height:clamp(180px,15vw,230px);overflow:hidden}
+.blk--volt{background:var(--volt)}
+.blk--ballot{background:var(--ballot)}
+.blk--manila{background:var(--manila)}
+.plate{width:100%;height:100%}
+
+/* ---------- dossier ---------- */
+.filters{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.filters .label{margin-bottom:7px}
+.filt{font-size:11.5px;color:var(--ink-40);position:relative;padding-left:0;transition:color var(--t-fast) linear}
+.filt:hover{color:var(--ink)}
+.filt.is-on{color:var(--ink)}
+.filt.is-on::before{content:"[";position:absolute;left:-9px}
+.filt.is-on::after{content:"]";margin-left:5px}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);align-items:start}
+.card{border:1px solid var(--line);background:var(--paper);padding:20px;display:flex;flex-direction:column;min-height:312px;transition:transform var(--t-fast) var(--ease),border-color var(--t-fast) linear,opacity var(--t-base) linear}
+.card:hover{transform:translateY(-4px);border-color:var(--ink)}
+.card--volt{background:var(--volt);border-color:var(--volt)}
+.card--manila{background:var(--manila);border-color:var(--manila)}
+.card--ballot{background:var(--ballot);border-color:var(--ballot);color:rgba(255,255,255,.82)}
+.card--ballot .d3,.card--ballot .blink,.card--ballot .byline{color:#fff}
+.card--ballot .label{color:rgba(255,255,255,.6)}
+.card--volt .label,.card--manila .label{color:#4a4a34}
+.card__ft{margin-top:auto;padding-top:26px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card .chain{font-size:11.5px;margin-top:14px}
+.card .chain b{font-weight:700;color:inherit}
+.chip{display:inline-block;background:var(--alarm);color:#fff;font-size:9.5px;letter-spacing:.08em;font-weight:500;padding:3px 7px;margin-bottom:16px}
+.o1{margin-top:56px}
+.o2{margin-top:148px}
+.o3{margin-top:24px}
+.card .plate{height:96px;margin-top:16px;border:1px solid var(--line)}
+
+/* ---------- method ---------- */
+.method{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.method__i{grid-column:1/span 3}
+.idx{position:sticky;top:calc(var(--bar) + 28px)}
+.idx .label{margin-bottom:16px}
+.idx li{border-top:1px solid var(--line)}
+.idx button{display:flex;gap:12px;width:100%;padding:9px 0;font-size:11.5px;color:var(--ink-40);text-align:left;transition:color var(--t-fast) linear}
+.idx button:hover{color:var(--ink)}
+.idx button.is-cur{color:var(--ink)}
+.method__a{grid-column:5/span 8}
+.acc{border-top:1px solid var(--line)}
+.acc:last-of-type{border-bottom:1px solid var(--line)}
+.acc__btn{display:grid;grid-template-columns:200px 1fr 28px;gap:var(--gut);align-items:center;width:100%;text-align:left;padding:20px 0;transition:background var(--t-fast) linear}
+.acc__btn:hover{background:var(--fog)}
+.acc__thumb{height:112px;overflow:hidden}
+.acc__chev{justify-self:end;transition:transform var(--t-base) var(--ease-io);color:var(--ink)}
+.acc.is-open .acc__chev{transform:rotate(180deg)}
+.acc__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--t-base) var(--ease-io)}
+.acc.is-open .acc__panel{grid-template-rows:1fr}
+.acc__inner{overflow:hidden}
+.acc__body{padding:0 0 30px;display:grid;grid-template-columns:200px 1fr;gap:var(--gut)}
+.acc__body > div:last-child{max-width:460px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+
+/* ---------- quote ---------- */
+.quote{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.quote blockquote{grid-column:3/span 8;margin:0;border-left:2px solid var(--ink);padding-left:26px}
+.quote figcaption{grid-column:3/span 8;margin-top:20px;padding-left:28px}
+
+/* ---------- next steps ---------- */
+.next__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.cta{grid-column:1/span 6;background:var(--volt);color:var(--ink);padding:clamp(22px,2.4vw,34px);display:grid;grid-template-columns:1fr auto;gap:22px;align-content:space-between;min-height:330px}
+.cta .d2{grid-column:1}
+.cta__img{grid-column:2;width:clamp(120px,13vw,190px)}
+.cta p{grid-column:1/-1;max-width:360px;color:#1a1a12;justify-self:center;text-align:left}
+.cta__go{grid-column:1/-1;justify-self:end}
+.nl{grid-column:8/span 5;background:var(--fog-deep);padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;gap:22px;min-height:330px}
+.nl__end{margin-top:auto;display:flex;justify-content:flex-end}
+.nl__row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+/* ---------- contact ---------- */
+.contact{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.contact__l{grid-column:1/span 4;display:flex;flex-direction:column;gap:24px}
+.contact__f{grid-column:6/span 6;max-width:520px}
+.f{display:flex;flex-direction:column;gap:20px}
+.f label{display:block}
+.f .label{margin-bottom:2px}
+.f input,.f textarea{width:100%;font-family:inherit;font-size:13.5px;line-height:1.5;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);padding:9px 0;transition:box-shadow var(--t-fast) linear}
+.f textarea{border:1px solid var(--line);padding:10px;min-height:98px;resize:vertical}
+.f input:focus,.f textarea:focus{outline:none;box-shadow:inset 0 -2px 0 0 var(--ink)}
+.f textarea:focus{box-shadow:inset 0 0 0 2px var(--ink)}
+.f__sub{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.f__note{font-size:10.5px;letter-spacing:.06em;color:var(--ink-40)}
+.staff{margin-top:clamp(52px,6vw,92px);border-top:1px solid var(--line);padding-top:34px;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut) var(--gut)}
+.staff > .label{grid-column:1/span 3}
+.staff__grid{grid-column:5/span 8;display:grid;grid-template-columns:1fr 1fr;gap:34px var(--gut)}
+.person{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.person .role{font-size:10.5px;letter-spacing:.06em;color:var(--ink-40)}
+.mail{font-size:12px;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color var(--t-fast) linear}
+.mail:hover{border-color:var(--ink)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--ink);color:rgba(255,255,255,.6);padding-block:56px 34px}
+.foot__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut) var(--gut)}
+.foot .lockup{border-color:var(--volt);color:var(--volt);grid-column:1/span 3}
+.foot .lockup .sl{color:rgba(220,255,50,.55)}
+.foot__c1{grid-column:5/span 3}
+.foot__c2{grid-column:9/span 3}
+.foot__grid li{margin-bottom:9px}
+.foot a{font-size:11.5px;color:rgba(255,255,255,.62);transition:color var(--t-fast) linear}
+.foot a:hover{color:var(--volt)}
+.foot__base{grid-column:1/-1;margin-top:48px;border-top:1px solid rgba(255,255,255,.16);padding-top:18px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.foot__base p{font-size:10.5px;letter-spacing:.04em;color:rgba(255,255,255,.42);margin:0}
+.disc{grid-column:1/-1;margin-top:14px;font-size:9px;letter-spacing:.02em;line-height:1.5;color:rgba(255,255,255,.34);max-width:640px}
+
+/* ---------- motion ---------- */
+.rv{opacity:0;transform:translateY(16px);transition:opacity var(--t-slow) var(--ease),transform var(--t-slow) var(--ease)}
+.rv.in{opacity:1;transform:none}
+.lc{display:block;overflow:hidden}
+.lc > span{display:block;transform:translateY(105%);transition:transform var(--t-slow) var(--ease)}
+.lc.in > span,.in .lc > span{transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .sec__head h2{grid-column:1/span 12}
+  .sec__head .sec__aside{grid-column:1/span 12}
+  .mani__t,.mani__b{grid-column:1/span 12}
+  .mani__g{grid-column:1/span 12;margin-top:44px}
+  .method__i{grid-column:1/span 12;margin-bottom:28px}
+  .idx{position:static}
+  .idx ul{display:flex;flex-wrap:wrap;gap:0 24px}
+  .idx li{border-top:0}
+  .method__a{grid-column:1/span 12}
+  .dgrid{grid-template-columns:repeat(2,1fr)}
+  .o2{margin-top:56px}
+  .cta{grid-column:1/span 12}
+  .nl{grid-column:1/span 12}
+  .contact__l{grid-column:1/span 12}
+  .contact__f{grid-column:1/span 12}
+  .staff > .label{grid-column:1/span 12}
+  .staff__grid{grid-column:1/span 12}
+  .quote blockquote,.quote figcaption{grid-column:1/span 12}
+}
+@media (max-width:900px){
+  :root{--bar:52px}
+  .hero{grid-template-columns:1fr;min-height:0;padding-left:0}
+  .hero__l{padding:clamp(24px,6vw,40px)}
+  .hero__r{padding:clamp(24px,6vw,40px)}
+  .hero__h .l2{padding-left:10%}
+  .hero__h .l3{padding-left:22%}
+  .bar__nav .nav-a{display:none}
+  .kpi__grid{grid-template-columns:1fr;gap:36px}
+  .row__t{grid-column:1/span 12;order:2}
+  .row__m{grid-column:1/span 12;order:1;margin-bottom:20px}
+  .qn__col{grid-column:1/span 12}
+  .acc__btn{grid-template-columns:120px 1fr 24px}
+  .acc__thumb{height:76px}
+  .acc__body{grid-template-columns:1fr;padding-left:0}
+  .staff__grid{grid-template-columns:1fr}
+  .foot .lockup{grid-column:1/span 12;margin-bottom:26px}
+  .foot__c1{grid-column:1/span 6}
+  .foot__c2{grid-column:7/span 6}
+  .cta{grid-template-columns:1fr}
+  .cta__img{grid-column:1;width:clamp(120px,40vw,190px)}
+}
+@media (max-width:640px){
+  .dgrid{grid-template-columns:1fr}
+  .o1,.o2,.o3{margin-top:0}
+  .nl__row{grid-template-columns:1fr}
+  .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .rv{opacity:1;transform:none}
+  .lc > span{transform:none}
+  .ticker__track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <a class="lockup" href="#top" aria-label="Supra PAC — home">Supra<span class="sl">/</span>PAC</a>
+  <nav class="bar__nav" aria-label="Primary">
+    <a class="nav-a" href="#counterspend">The Counter-Spend</a>
+    <a class="nav-a" href="#campaigns">Campaigns</a>
+    <a class="nav-a" href="#dossier">PACs Exposed</a>
+    <a class="nav-a" href="#method">How We Work</a>
+    <a class="nav-a is-active" href="#contact">Contact</a>
+    <button class="qn-btn" id="qnBtn" aria-expanded="false" aria-controls="quicknav" aria-label="Open quick navigation">
+      <svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true">
+        <g class="p" fill="currentColor"><rect x="5" y="0" width="1.4" height="11"/><rect x="0" y="4.8" width="11" height="1.4"/></g>
+        <g class="x" fill="currentColor"><rect x="5" y="-1" width="1.4" height="13" transform="rotate(45 5.7 5.5)"/><rect x="5" y="-1" width="1.4" height="13" transform="rotate(-45 5.7 5.5)"/></g>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<div class="qn" id="quicknav" role="dialog" aria-modal="true" aria-label="Quick navigation">
+  <div class="qn__in">
+    <div class="qn__col">
+      <p class="label">Campaigns We've Funded</p>
+      <ul>
+        <li><a class="qn__l" href="#campaigns">Naomi Reyes-Ortega <span class="m">AZ-07</span></a></li>
+        <li><a class="qn__l" href="#campaigns">Marcus Bell <span class="m">OH SD-24</span></a></li>
+        <li><a class="qn__l" href="#campaigns">Priya Raghunathan <span class="m">PA-08</span></a></li>
+        <li><a class="qn__l" href="#campaigns">Danielle Okafor <span class="m">GA PSC</span></a></li>
+        <li><a class="qn__l" href="#campaigns">Tomás Iglesias <span class="m">NV AG</span></a></li>
+        <li><a class="qn__l" href="#campaigns">June Whitmore <span class="m">MI-11</span></a></li>
+      </ul>
+    </div>
+    <div class="qn__col">
+      <p class="label">Super PACs Exposed</p>
+      <ul>
+        <li><a class="qn__l" href="#dossier">Meridian Growth Fund <span class="m">$41.2M</span></a></li>
+        <li><a class="qn__l" href="#dossier">Keystone Freedom Alliance <span class="m">$18.6M</span></a></li>
+        <li><a class="qn__l" href="#dossier">The Harbor Line Project <span class="m">$12.2M</span></a></li>
+        <li><a class="qn__l" href="#dossier">American Tide PAC <span class="m">$9.4M</span></a></li>
+        <li><a class="qn__l" href="#dossier">Bellweather Civic Trust <span class="m">$7.1M</span></a></li>
+        <li><a class="qn__l" href="#dossier">Grantham Liberty Committee <span class="m">$5.8M</span></a></li>
+      </ul>
+    </div>
+    <div class="qn__col">
+      <p class="label">Contact Our Staff</p>
+      <ul>
+        <li><a class="qn__l" href="#staff">Alina Vasquez <span class="m">Executive Director</span></a></li>
+        <li><a class="qn__l" href="#staff">Ray Mbeki <span class="m">Research Desk</span></a></li>
+        <li><a class="qn__l" href="#staff">Sam Oduya <span class="m">Field</span></a></li>
+        <li><a class="qn__l" href="#staff">Jess Lindqvist <span class="m">Counsel</span></a></li>
+        <li><a class="qn__l" href="#contact">General inquiries <span class="m">hello@suprapac.org</span></a></li>
+        <li><a class="qn__l" href="#contact">Press desk <span class="m">press@suprapac.org</span></a></li>
+      </ul>
+    </div>
+    <div class="qn__foot">
+      <a href="#counterspend">The Counter-Spend</a>
+      <a href="#primer">What is a Supra PAC?</a>
+      <a href="#method">How We Work</a>
+      <a href="#next">Become a member</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="heroH">
+    <div class="hero__l">
+      <div>
+        <p class="label" style="color:#3d4415">[ Supra PAC ]</p>
+        <h1 class="d-hero hero__h rv" id="heroH">
+          <span class="lc"><span>Fight</span></span>
+          <span class="lc l2"><span>Fire</span></span>
+          <span class="lc l3"><span>With Fire</span></span>
+        </h1>
+      </div>
+      <div class="hero__foot rv">
+        <p class="measure">Supra PAC answers Super PACs on their own terms. We organise communities to match their spending, dollar for dollar, against the candidates they have bought — and we trace the money back through every shell, trust and pass-through until the people funding it have names.</p>
+        <a class="btn btn--onvolt" href="#primer"><span>How the match works</span><span class="ar" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+    <div class="hero__r">
+      <a class="fcard rv" href="#dossier">
+        <p class="label">[ Active Match ]</p>
+        <p class="d3" style="margin:16px 0 14px">We put $2,410,000 against the Meridian Growth Fund in Arizona's 7th</p>
+        <p class="byline">Counter-Spend Desk</p>
+        <div class="fcard__ft">
+          <span class="label">Dispatch</span>
+          <span class="label">&#8212; 14 Mar '26</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-label="Live counter-spend activity">
+    <div class="ticker__track" id="tickTrack">
+      <div class="ticker__set" style="display:flex">
+        <span class="ticker__i"><i class="ticker__d"></i>[ Active Match ] AZ-07 &#8212; $2,410,000 committed</span>
+        <span class="ticker__i"><i class="ticker__d"></i>[ Exposed ] Meridian Growth Fund &#8212; three shell LLCs, one donor</span>
+        <span class="ticker__i"><i class="ticker__d"></i>[ Filing ] Q1 disclosure published in full</span>
+        <span class="ticker__i"><i class="ticker__d"></i>[ Active Match ] OH SD-24 &#8212; $860,000 committed</span>
+        <span class="ticker__i"><i class="ticker__d"></i>[ Exposed ] Keystone Freedom Alliance &#8212; $18,600,000 traced</span>
+        <span class="ticker__i"><i class="ticker__d"></i>41,802 members organising across 19 states</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ KPI ============ -->
+  <section class="sec" id="counterspend" aria-labelledby="kpiH">
+    <div class="wrap">
+      <div class="kpi__top rv">
+        <h2 class="lead" id="kpiH" style="margin:0">A snapshot of the counter-spend</h2>
+        <a class="btn btn--ghost" href="#method"><span>How we spend</span><span class="ar" aria-hidden="true">&#8594;</span></a>
+      </div>
+      <div class="kpi__grid">
+        <div class="stat rv" data-stagger>
+          <div class="stat__n mono-num" data-count="18.4" data-pre="$" data-post="M" data-dec="1">$18.4M</div>
+          <hr>
+          <p>Matched against Super PAC buys since 2024, funded entirely by member contributions averaging $31.</p>
+        </div>
+        <div class="stat rv" data-stagger>
+          <div class="stat__n mono-num" data-count="41" data-dec="0">41</div>
+          <hr>
+          <p>Federal, state and judicial races where we contested a Super PAC's chosen candidate in the open.</p>
+        </div>
+        <div class="stat rv" data-stagger>
+          <div class="stat__n mono-num" data-count="12" data-dec="0">12</div>
+          <hr>
+          <p>Super PAC funding chains traced to their original donors and published in full, with the filings attached.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MANIFESTO ============ -->
+  <section class="sec sec--ink" id="primer" aria-labelledby="maniH">
+    <div class="wrap mani">
+      <h2 class="d1 mani__t rv" id="maniH">
+        <span class="lc"><span>What is a</span></span>
+        <span class="lc l2"><span>Supra PAC?</span></span>
+      </h2>
+      <div class="mani__b rv">
+        <p class="measure">A Super PAC converts anonymous money into political outcomes at a scale ordinary donors cannot answer. A Supra PAC is the answer: a legal, fully disclosed, community-funded vehicle that sits above the same rules and runs them in reverse.</p>
+        <p class="measure">We spend where they spend. We publish what they hide. Every dollar we raise is named, every dollar we deploy is announced on the day it is deployed, and every chain we unpick is released with its source documents. Fire with fire — in daylight.</p>
+        <a class="btn btn--onink" href="#method"><span>A primer on matched spending</span><span class="ar" aria-hidden="true">&#8594;</span></a>
+      </div>
+      <div class="mani__g rv">
+        <svg class="flow" viewBox="0 0 560 470" role="img" aria-labelledby="flowT">
+          <title id="flowT">Schematic of a typical single-donor Super PAC funding chain, and the Supra PAC counter-spend entering the same media market</title>
+          <g stroke="rgba(255,255,255,.22)" stroke-dasharray="3 4" fill="none">
+            <rect x="1" y="14" width="128" height="182"/>
+          </g>
+          <text x="1" y="208" fill="rgba(255,255,255,.42)" font-family="Helvetica,Arial,sans-serif" font-size="8.5" letter-spacing="1">ORIGIN NOT DISCLOSED</text>
+          <g fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1">
+            <path d="M113 44 C160 44 165 101 200 101"/>
+            <path d="M113 101 H200"/>
+            <path d="M113 158 C160 158 165 101 200 101"/>
+            <path d="M330 101 H382"/>
+            <path d="M458 121 V252"/>
+          </g>
+          <g fill="rgba(255,255,255,.4)">
+            <polygon points="200,101 192,97 192,105"/>
+            <polygon points="382,101 374,97 374,105"/>
+            <polygon points="458,252 454,244 462,244"/>
+          </g>
+          <g fill="none" stroke="rgba(255,255,255,.34)">
+            <rect x="16" y="30" width="97" height="28"/>
+            <rect x="16" y="87" width="97" height="28"/>
+            <rect x="16" y="144" width="97" height="28"/>
+            <rect x="200" y="86" width="130" height="30"/>
+          </g>
+          <rect x="382" y="85" width="160" height="36" fill="none" stroke="#fff" stroke-width="1.4"/>
+          <rect x="382" y="252" width="160" height="36" fill="none" stroke="rgba(255,255,255,.34)"/>
+          <g fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="8.5" letter-spacing="1">
+            <text x="26" y="49" fill="rgba(255,255,255,.72)">SHELL LLC 01</text>
+            <text x="26" y="106" fill="rgba(255,255,255,.72)">SHELL LLC 02</text>
+            <text x="26" y="163" fill="rgba(255,255,255,.72)">SHELL LLC 03</text>
+            <text x="210" y="105" fill="rgba(255,255,255,.72)">PASS-THROUGH 501(c)(4)</text>
+            <text x="392" y="108">SUPER PAC</text>
+            <text x="392" y="275" fill="rgba(255,255,255,.72)">MEDIA BUY &#183; AZ-07</text>
+          </g>
+          <path d="M246 404 C332 404 348 320 382 292" fill="none" stroke="#DCFF32" stroke-width="2"/>
+          <polygon points="382,292 373,290 377,298" fill="#DCFF32"/>
+          <rect x="16" y="386" width="230" height="36" fill="#DCFF32"/>
+          <text x="28" y="409" fill="#0E0E0E" font-family="Helvetica,Arial,sans-serif" font-size="8.5" letter-spacing="1" font-weight="bold">SUPRA PAC &#183; 41,802 NAMED DONORS</text>
+          <text x="16" y="443" fill="rgba(255,255,255,.42)" font-family="Helvetica,Arial,sans-serif" font-size="8.5" letter-spacing="1">FULLY DISCLOSED &#183; PUBLISHED SAME DAY</text>
+        </svg>
+        <p class="cap">Schematic &#8212; typical single-donor chain as reconstructed by the Research Desk. Illustrative only; proportions are not to scale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CANDIDATES ============ -->
+  <section class="sec" id="campaigns" aria-labelledby="candH">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 class="d1 rv" id="candH">
+          <span class="lc"><span>Candidates we've</span></span>
+          <span class="lc" style="padding-left:9%"><span>backed 2024&#8211;2026</span></span>
+        </h2>
+        <div class="sec__aside rv">
+          <p class="measure">We do not endorse. We counter. When a Super PAC commits money against a candidate, we commit the same amount for them — and we say so publicly, on the day we do it.</p>
+          <a class="btn" href="#method"><span>Our funding model</span><span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+      </div>
+
+      <div class="row rv" data-stagger>
+        <div class="row__t">
+          <p class="label">Arizona &#183; 7th Congressional District</p>
+          <h3 class="d3"><a href="#campaigns">Naomi Reyes-Ortega</a></h3>
+          <p class="measure">A water-rights attorney running in a district where a single agricultural family office has funded every opposing advertisement since 2022. Our members matched the buy inside nine days.</p>
+          <div class="ledger"><span>Matched</span><b>$2,410,000</b><span>Against</span><b>Meridian Growth Fund</b></div>
+          <a class="blink" href="#campaigns">Visit the campaign <span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+        <div class="row__m">
+          <div class="blk blk--volt"></div>
+          <p class="cap">Field canvass, Maryvale &#8212; Supra PAC organising record, Mar 2026.</p>
+        </div>
+      </div>
+
+      <div class="row rv" data-stagger>
+        <div class="row__t">
+          <p class="label">Ohio &#183; State Senate, District 24</p>
+          <h3 class="d3"><a href="#campaigns">Marcus Bell</a></h3>
+          <p class="measure">A former county auditor whose disclosure bill drew $860,000 of outside attack spending within a fortnight of its first reading. We answered it line for line.</p>
+          <div class="ledger"><span>Matched</span><b>$860,000</b><span>Against</span><b>Keystone Freedom Alliance</b></div>
+          <a class="blink" href="#campaigns">Visit the campaign <span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+        <div class="row__m">
+          <div class="blk blk--ballot"></div>
+          <p class="cap">Ledger plate 024-B &#8212; matched buy, Cuyahoga media market.</p>
+        </div>
+      </div>
+
+      <div class="row rv" data-stagger>
+        <div class="row__t">
+          <p class="label">Pennsylvania &#183; 8th Congressional District</p>
+          <h3 class="d3"><a href="#campaigns">Priya Raghunathan</a></h3>
+          <p class="measure">Two of the three largest donors to her opposition were incorporated in the same building. We published the deed record alongside the counter-buy the same morning.</p>
+          <div class="ledger"><span>Matched</span><b>$1,940,000</b><span>Against</span><b>The Harbor Line Project</b></div>
+          <a class="blink" href="#campaigns">Visit the campaign <span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+        <div class="row__m">
+          <div class="blk">
+            <svg class="plate" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="320" height="200" fill="#F4F4F1"/>
+              <g fill="#C9C9C4"><rect x="22" y="26" width="164" height="6"/><rect x="22" y="44" width="256" height="6"/><rect x="22" y="62" width="220" height="6"/><rect x="22" y="80" width="248" height="6"/><rect x="22" y="98" width="180" height="6"/><rect x="22" y="116" width="262" height="6"/><rect x="22" y="134" width="206" height="6"/><rect x="22" y="152" width="150" height="6"/></g>
+              <g fill="#0E0E0E"><rect x="60" y="40" width="126" height="14"/><rect x="96" y="76" width="152" height="14"/><rect x="22" y="112" width="88" height="14"/><rect x="150" y="130" width="78" height="14"/></g>
+              <rect x="22" y="170" width="96" height="10" fill="#DCFF32"/>
+            </svg>
+          </div>
+          <p class="cap">Redacted registration filing, Bucks County &#8212; Research Desk exhibit 08.</p>
+        </div>
+      </div>
+
+      <div class="row rv" data-stagger>
+        <div class="row__t">
+          <p class="label">Georgia &#183; Public Service Commission</p>
+          <h3 class="d3"><a href="#campaigns">Danielle Okafor</a></h3>
+          <p class="measure">Down-ballot regulatory seats attract the least scrutiny and the most concentrated money. We treat them as first-order races because the utilities do.</p>
+          <div class="ledger"><span>Matched</span><b>$470,000</b><span>Against</span><b>American Tide PAC</b></div>
+          <a class="blink" href="#campaigns">Visit the campaign <span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+        <div class="row__m">
+          <div class="blk blk--manila"></div>
+          <p class="cap">Case file GA-PSC-2026 &#8212; open, published in full.</p>
+        </div>
+      </div>
+
+      <div class="row rv" data-stagger>
+        <div class="row__t">
+          <p class="label">Nevada &#183; Attorney General</p>
+          <h3 class="d3"><a href="#campaigns">Tom&#225;s Iglesias</a></h3>
+          <p class="measure">The trust funding his opposition had filed no public activity in three years before this cycle. It filed $1.1M in the last eleven weeks of it.</p>
+          <div class="ledger"><span>Matched</span><b>$1,120,000</b><span>Against</span><b>Bellweather Civic Trust</b></div>
+          <a class="blink" href="#campaigns">Visit the campaign <span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+        <div class="row__m">
+          <div class="blk blk--volt"></div>
+          <p class="cap">Member phone bank, Clark County &#8212; 2,940 volunteer hours logged.</p>
+        </div>
+      </div>
+
+      <div class="row rv" data-stagger>
+        <div class="row__t">
+          <p class="label">Michigan &#183; 11th Congressional District</p>
+          <h3 class="d3"><a href="#campaigns">June Whitmore</a></h3>
+          <p class="measure">The same fund that operated in Arizona re-entered here under a second committee name. Our members recognised the creative before our researchers did.</p>
+          <div class="ledger"><span>Matched</span><b>$2,050,000</b><span>Against</span><b>Meridian Growth Fund</b></div>
+          <a class="blink" href="#campaigns">Visit the campaign <span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+        <div class="row__m">
+          <div class="blk blk--ballot"></div>
+          <p class="cap">Ledger plate 011-A &#8212; matched buy, Detroit media market.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOSSIER ============ -->
+  <section class="sec sec--fog" id="dossier" aria-labelledby="dosH">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 class="d1 rv" id="dosH">
+          <span class="lc"><span>We follow</span></span>
+          <span class="lc" style="padding-left:24%"><span>the money</span></span>
+        </h2>
+        <div class="sec__aside rv" style="display:grid;grid-template-columns:1fr auto;gap:var(--gut);align-items:start">
+          <p class="measure" style="max-width:340px">Every dossier below reconstructs a funding chain from public filings, corporate registries and deed records — then names the people at the end of it. Source documents are attached to each.</p>
+          <div class="filters" role="group" aria-label="Filter dossiers by category">
+            <p class="label">Filter by category</p>
+            <button class="filt is-on" data-filter="all">All</button>
+            <button class="filt" data-filter="federal">Federal</button>
+            <button class="filt" data-filter="state">State</button>
+            <button class="filt" data-filter="judicial">Judicial</button>
+            <button class="filt" data-filter="ballot">Ballot measure</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dgrid" id="dgrid">
+        <a class="card card--volt rv" href="#dossier" data-cat="federal">
+          <span class="chip">[ EXPOSED ]</span>
+          <p class="d3">Meridian Growth Fund</p>
+          <p class="chain">$41,200,000 raised. Three limited liability companies registered in Delaware on the same afternoon supplied <b>94%</b> of it. All three list one registered agent and one mailing address.</p>
+          <p class="byline" style="margin-top:14px">Traced to a single agricultural holdings family office</p>
+          <div class="card__ft"><span class="label">Federal</span><span class="label">&#8212; 14 Mar '26</span></div>
+        </a>
+
+        <a class="card card--ballot rv o1" href="#dossier" data-cat="state">
+          <span class="chip">[ EXPOSED ]</span>
+          <p class="d3">Keystone Freedom Alliance</p>
+          <p class="chain">$18,600,000, routed through a 501(c)(4) that reported no other activity across two filing periods and dissolved eleven days after the general.</p>
+          <p class="byline" style="margin-top:14px">Traced to two out-of-state energy trusts</p>
+          <div class="card__ft"><span class="label">State</span><span class="label">&#8212; 02 Feb '26</span></div>
+        </a>
+
+        <a class="card rv o2" href="#dossier" data-cat="federal">
+          <span class="chip">[ EXPOSED ]</span>
+          <p class="d3">The Harbor Line Project</p>
+          <p class="chain">$12,200,000 across four states. Its treasurer serves as treasurer to nine other committees, six of which share a bank.</p>
+          <svg class="plate" viewBox="0 0 320 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="320" height="120" fill="#F4F4F1"/>
+            <g fill="#C9C9C4"><rect x="16" y="18" width="180" height="6"/><rect x="16" y="36" width="264" height="6"/><rect x="16" y="54" width="212" height="6"/><rect x="16" y="72" width="248" height="6"/><rect x="16" y="90" width="160" height="6"/></g>
+            <g fill="#0E0E0E"><rect x="54" y="32" width="140" height="14"/><rect x="120" y="68" width="128" height="14"/><rect x="16" y="86" width="70" height="14"/></g>
+          </svg>
+          <div class="card__ft"><span class="label">Federal</span><span class="label">&#8212; 19 Jan '26</span></div>
+        </a>
+
+        <a class="card card--manila rv o3" href="#dossier" data-cat="judicial">
+          <span class="chip">[ EXPOSED ]</span>
+          <p class="d3">American Tide PAC</p>
+          <p class="chain">$9,400,000 spent on two state supreme court seats. Its largest disclosed donor is a trade association whose own donor list is sealed by charter.</p>
+          <p class="byline" style="margin-top:14px">Chain incomplete &#8212; litigation filed for the remainder</p>
+          <div class="card__ft"><span class="label">Judicial</span><span class="label">&#8212; 08 Dec '25</span></div>
+        </a>
+
+        <a class="card rv" href="#dossier" data-cat="state">
+          <span class="chip">[ EXPOSED ]</span>
+          <p class="d3">Bellweather Civic Trust</p>
+          <p class="chain">$7,100,000 in eleven weeks after three dormant years. The trust's sole officer is the beneficiary of the estate that capitalised it.</p>
+          <svg class="plate" viewBox="0 0 320 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="320" height="120" fill="#F4F4F1"/>
+            <g fill="#C9C9C4"><rect x="16" y="18" width="240" height="6"/><rect x="16" y="36" width="176" height="6"/><rect x="16" y="54" width="262" height="6"/><rect x="16" y="72" width="198" height="6"/><rect x="16" y="90" width="230" height="6"/></g>
+            <g fill="#0E0E0E"><rect x="16" y="14" width="112" height="14"/><rect x="88" y="50" width="164" height="14"/><rect x="140" y="86" width="96" height="14"/></g>
+            <rect x="252" y="86" width="52" height="10" fill="#DCFF32"/>
+          </svg>
+          <div class="card__ft"><span class="label">State</span><span class="label">&#8212; 21 Nov '25</span></div>
+        </a>
+
+        <a class="card card--volt rv o1" href="#dossier" data-cat="ballot">
+          <span class="chip">[ EXPOSED ]</span>
+          <p class="d3">Grantham Liberty Committee</p>
+          <p class="chain">$5,800,000 against a single municipal transit measure. Ninety-one per cent of it arrived from one address in the last fourteen days of the campaign.</p>
+          <p class="byline" style="margin-top:14px">Traced to a regional parking and freight operator</p>
+          <div class="card__ft"><span class="label">Ballot measure</span><span class="label">&#8212; 04 Nov '25</span></div>
+        </a>
+      </div>
+      <p class="label rv" style="margin-top:36px" id="dcount">Showing 6 of 6 dossiers</p>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section class="sec" id="method" aria-labelledby="metH">
+    <div class="wrap method">
+      <div class="method__i">
+        <h2 class="d2 rv" id="metH" style="margin-bottom:34px">How we<br>work</h2>
+        <nav class="idx" aria-label="Method sections">
+          <p class="label">Navigate through sections</p>
+          <ul>
+            <li><button data-goto="m1" class="is-cur"><span>1.</span><span>Match the buy</span></button></li>
+            <li><button data-goto="m2"><span>2.</span><span>Investigate the chain</span></button></li>
+            <li><button data-goto="m3"><span>3.</span><span>Expose the funders</span></button></li>
+            <li><button data-goto="m4"><span>4.</span><span>Organise the answer</span></button></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="method__a">
+        <div class="acc is-open" id="m1">
+          <h3 style="margin:0">
+            <button class="acc__btn" aria-expanded="true" aria-controls="p1">
+              <span class="acc__thumb"><span class="blk blk--volt" style="height:112px"></span></span>
+              <span>
+                <span class="label" style="display:block;margin-bottom:8px">01 &#183; Deployment</span>
+                <span class="d3">Match the buy</span>
+              </span>
+              <svg class="acc__chev" width="13" height="8" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 1l5.5 5.5L12 1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </button>
+          </h3>
+          <div class="acc__panel" id="p1" role="region"><div class="acc__inner"><div class="acc__body">
+            <div></div>
+            <div>
+              <p class="small">When a Super PAC reserves airtime against a candidate, that reservation is public. Within seventy-two hours our members vote on whether to match it, and at what share. If the vote carries, we buy into the same markets, at the same weight, in the same week — and we announce the amount before the first spot runs.</p>
+              <p class="small">Median member contribution across all matched buys to date is $31. No single donor may exceed two per cent of any individual match.</p>
+              <a class="blink" href="#next">Read the deployment rules <span class="ar" aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="acc" id="m2">
+          <h3 style="margin:0">
+            <button class="acc__btn" aria-expanded="false" aria-controls="p2">
+              <span class="acc__thumb">
+                <svg class="plate" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="320" height="200" fill="#F4F4F1"/>
+                  <g fill="#C9C9C4"><rect x="20" y="28" width="200" height="7"/><rect x="20" y="52" width="266" height="7"/><rect x="20" y="76" width="230" height="7"/><rect x="20" y="100" width="252" height="7"/><rect x="20" y="124" width="184" height="7"/><rect x="20" y="148" width="242" height="7"/></g>
+                  <g fill="#0E0E0E"><rect x="66" y="47" width="150" height="16"/><rect x="110" y="95" width="164" height="16"/><rect x="20" y="143" width="104" height="16"/></g>
+                </svg>
+              </span>
+              <span>
+                <span class="label" style="display:block;margin-bottom:8px">02 &#183; Research</span>
+                <span class="d3">Investigate the chain</span>
+              </span>
+              <svg class="acc__chev" width="13" height="8" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 1l5.5 5.5L12 1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </button>
+          </h3>
+          <div class="acc__panel" id="p2" role="region"><div class="acc__inner"><div class="acc__body">
+            <div></div>
+            <div>
+              <p class="small">Our Research Desk works backwards from the committee filing: registered agents, incorporation dates, shared addresses, treasurer overlap, deed and lien records, and the timing of transfers relative to reservation deadlines. Where a chain terminates in a sealed entity, we say so plainly rather than inferring.</p>
+              <p class="small">Nothing is published on a single source. Every claim carries the document that supports it, and every document is mirrored so it cannot be withdrawn.</p>
+              <a class="blink" href="#dossier">See an open dossier <span class="ar" aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="acc" id="m3">
+          <h3 style="margin:0">
+            <button class="acc__btn" aria-expanded="false" aria-controls="p3">
+              <span class="acc__thumb"><span class="blk blk--ballot" style="height:112px"></span></span>
+              <span>
+                <span class="label" style="display:block;margin-bottom:8px">03 &#183; Publication</span>
+                <span class="d3">Expose the funders</span>
+              </span>
+              <svg class="acc__chev" width="13" height="8" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 1l5.5 5.5L12 1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </button>
+          </h3>
+          <div class="acc__panel" id="p3" role="region"><div class="acc__inner"><div class="acc__body">
+            <div></div>
+            <div>
+              <p class="small">Findings go out as a full dossier — chain diagram, named principals, source filings — released to local newsrooms in the affected market forty-eight hours before general publication, so the reporting lands where the money was spent rather than where the press corps sits.</p>
+              <p class="small">We publish corrections at the same prominence as the original finding. Three have been issued to date; all three remain linked from the dossiers they amend.</p>
+              <a class="blink" href="#contact">Request a briefing <span class="ar" aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="acc" id="m4">
+          <h3 style="margin:0">
+            <button class="acc__btn" aria-expanded="false" aria-controls="p4">
+              <span class="acc__thumb"><span class="blk blk--manila" style="height:112px"></span></span>
+              <span>
+                <span class="label" style="display:block;margin-bottom:8px">04 &#183; Field</span>
+                <span class="d3">Organise the answer</span>
+              </span>
+              <svg class="acc__chev" width="13" height="8" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 1l5.5 5.5L12 1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </button>
+          </h3>
+          <div class="acc__panel" id="p4" role="region"><div class="acc__inner"><div class="acc__body">
+            <div></div>
+            <div>
+              <p class="small">Money buys attention; it does not buy turnout. Every matched buy is paired with a field programme run by members in the district — canvasses, phone banks, and public readings of the dossier at community meetings, so the finding travels by voice as well as by broadcast.</p>
+              <p class="small">41,802 members across 19 states. 128,600 volunteer hours logged since 2024.</p>
+              <a class="blink" href="#next">Join a field team <span class="ar" aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUOTE ============ -->
+  <section class="sec sec--fog" aria-label="Statement of principle">
+    <div class="wrap">
+      <figure class="quote" style="margin:0">
+        <blockquote class="d2 rv">Disclosure is not a courtesy. It is the price of spending money on somebody else's democracy.</blockquote>
+        <figcaption class="label rv">Alina Vasquez &#183; Executive Director &#183; testimony before the state elections committee, Feb 2026</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ NEXT STEPS ============ -->
+  <section class="sec" id="next" aria-labelledby="nextH">
+    <div class="wrap">
+      <h2 class="lead rv" id="nextH" style="margin:0 0 26px">Next steps</h2>
+      <div class="next__grid">
+        <div class="cta rv">
+          <p class="d2">Get</p>
+          <div class="cta__img">
+            <svg viewBox="0 0 240 140" aria-hidden="true">
+              <defs><pattern id="ht" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.5" fill="#0E0E0E"/></pattern></defs>
+              <rect width="240" height="140" fill="#0E0E0E"/>
+              <rect width="240" height="140" fill="#DCFF32"/>
+              <rect width="240" height="140" fill="url(#ht)" opacity=".5"/>
+              <g fill="#0E0E0E">
+                <circle cx="22" cy="94" r="9"/><rect x="13" y="105" width="18" height="35"/>
+                <circle cx="56" cy="88" r="9"/><rect x="47" y="99" width="18" height="41"/>
+                <circle cx="92" cy="97" r="9"/><rect x="83" y="108" width="18" height="32"/>
+                <circle cx="128" cy="86" r="9"/><rect x="119" y="97" width="18" height="43"/>
+                <circle cx="164" cy="95" r="9"/><rect x="155" y="106" width="18" height="34"/>
+                <circle cx="200" cy="90" r="9"/><rect x="191" y="101" width="18" height="39"/>
+                <g transform="rotate(-7 66 46)"><rect x="34" y="28" width="64" height="34"/></g>
+                <g transform="rotate(6 160 40)"><rect x="128" y="20" width="70" height="32"/></g>
+                <rect x="60" y="62" width="4" height="34"/><rect x="158" y="52" width="4" height="38"/>
+              </g>
+            </svg>
+          </div>
+          <p>Power grows through collective action. Whether you are ready to organise a field team or just want to see where the money went, we would like to hear from you.</p>
+          <a class="d2 cta__go blink" href="#contact" style="font-size:clamp(26px,3.2vw,46px);letter-spacing:.01em">Involved <span class="ar" aria-hidden="true">&#8594;</span></a>
+        </div>
+
+        <div class="nl rv">
+          <p class="d2">News[letter]</p>
+          <form class="f" novalidate data-demo>
+            <div class="nl__row">
+              <label><span class="label">Name *</span><input type="text" name="first" autocomplete="given-name" required><span class="cap" style="text-align:left;display:block">First</span></label>
+              <label><span class="label" style="visibility:hidden">Last</span><input type="text" name="last" autocomplete="family-name"><span class="cap" style="text-align:left;display:block">Last</span></label>
+            </div>
+            <label><span class="label">Enter your email for updates *</span><input type="email" name="email" autocomplete="email" required></label>
+            <div class="f__sub">
+              <button class="btn" type="submit" style="min-width:150px"><span>Subscribe</span><span class="ar" aria-hidden="true">&#8594;</span></button>
+              <span class="f__note" data-status role="status"></span>
+            </div>
+          </form>
+          <div class="nl__end"><p class="d2" style="text-align:right">From the<br>front lines</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="sec sec--fog" id="contact" aria-labelledby="conH">
+    <div class="wrap">
+      <div class="contact">
+        <div class="contact__l rv">
+          <h2 class="d2" id="conH">Contact us</h2>
+          <p class="measure">We are glad to hear from members, reporters, candidates and researchers. Reach us through the form or write to a desk directly — every address below is monitored by a named person.</p>
+          <ul>
+            <li class="small" style="margin-bottom:9px">&#8250; General inquiries: <a class="mail" href="mailto:hello@suprapac.org">hello@suprapac.org</a></li>
+            <li class="small" style="margin-bottom:9px">&#8250; Press desk: <a class="mail" href="mailto:press@suprapac.org">press@suprapac.org</a></li>
+            <li class="small" style="margin-bottom:9px">&#8250; Tips and documents: <a class="mail" href="mailto:tips@suprapac.org">tips@suprapac.org</a></li>
+            <li class="small">&#8250; Compliance and legal: <a class="mail" href="mailto:counsel@suprapac.org">counsel@suprapac.org</a></li>
+          </ul>
+        </div>
+        <div class="contact__f rv">
+          <form class="f" novalidate data-demo>
+            <label><span class="label">Full Name *</span><input type="text" name="name" autocomplete="name" required></label>
+            <label><span class="label">Organization</span><input type="text" name="org" autocomplete="organization"></label>
+            <label><span class="label">Email *</span><input type="email" name="email2" autocomplete="email" required></label>
+            <label><span class="label">Your message</span><textarea name="msg" placeholder="Your message"></textarea></label>
+            <div class="f__sub">
+              <button class="btn" type="submit" style="min-width:150px"><span>Send</span><span class="ar" aria-hidden="true">&#8594;</span></button>
+              <span class="f__note" data-status role="status"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="staff" id="staff">
+        <p class="label rv">Contact our staff</p>
+        <div class="staff__grid">
+          <div class="person rv" data-stagger>
+            <p class="d4">Alina Vasquez</p>
+            <p class="role">Executive Director</p>
+            <p class="small measure">Twenty years in campaign finance litigation and state disclosure reform. Leads deployment strategy and testifies on the organisation's behalf.</p>
+            <a class="mail" href="mailto:alina@suprapac.org">alina@suprapac.org</a>
+          </div>
+          <div class="person rv" data-stagger>
+            <p class="d4">Ray Mbeki</p>
+            <p class="role">Director of Research</p>
+            <p class="small measure">Runs the Research Desk. Built the registry-matching method behind every dossier we have published, and signs off on each chain before release.</p>
+            <a class="mail" href="mailto:ray@suprapac.org">ray@suprapac.org</a>
+          </div>
+          <div class="person rv" data-stagger>
+            <p class="d4">Sam Oduya</p>
+            <p class="role">Field Director</p>
+            <p class="small measure">Organises the 41,802 members who fund and vote on every match. First point of contact for anyone starting a field team in their district.</p>
+            <a class="mail" href="mailto:sam@suprapac.org">sam@suprapac.org</a>
+          </div>
+          <div class="person rv" data-stagger>
+            <p class="d4">Jess Lindqvist</p>
+            <p class="role">Counsel &amp; Compliance</p>
+            <p class="small measure">Keeps every dollar we raise and spend inside the disclosure rules we ask of everyone else, and files the litigation when a chain is sealed.</p>
+            <a class="mail" href="mailto:jess@suprapac.org">jess@suprapac.org</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <a class="lockup" href="#top" aria-label="Supra PAC — back to top">Supra<span class="sl">/</span>PAC</a>
+    <ul class="foot__c1">
+      <li><a href="#counterspend">The Counter-Spend</a></li>
+      <li><a href="#campaigns">Campaigns We've Funded</a></li>
+      <li><a href="#dossier">Super PACs Exposed</a></li>
+      <li><a href="#method">How We Work</a></li>
+      <li><a href="#primer">What is a Supra PAC?</a></li>
+    </ul>
+    <ul class="foot__c2">
+      <li><a href="#contact">Contact Our Staff</a></li>
+      <li><a href="#next">Become a Member</a></li>
+      <li><a href="#dossier">Filings &amp; Disclosures</a></li>
+      <li><a href="#contact">Press Desk</a></li>
+      <li><a href="#contact">Terms &amp; Conditions</a></li>
+    </ul>
+    <div class="foot__base">
+      <p>Copyright &#169; 2026 Supra PAC</p>
+      <p>Paid for by Supra PAC. Not authorised by any candidate or candidate's committee.</p>
+    </div>
+    <p class="disc">Illustrative design concept. Supra PAC, all candidates, committees, organisations, staff, quotations, dollar figures and dossiers presented on this page are fictional and created for demonstration purposes. No real person, campaign or political committee is depicted or referenced.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- sticky bar hairline ---------- */
+  var bar = document.getElementById('bar');
+  var onScroll = function(){
+    if (window.scrollY > 12) bar.classList.add('is-stuck');
+    else bar.classList.remove('is-stuck');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---------- reveal on scroll, capped stagger ---------- */
+  var revealables = [].slice.call(document.querySelectorAll('.rv'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    revealables.forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('.lc').forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var groupIndex = new WeakMap();
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var step = 0;
+        if (el.hasAttribute('data-stagger') && el.parentNode) {
+          var sibs = [].slice.call(el.parentNode.children).filter(function(n){ return n.hasAttribute && n.hasAttribute('data-stagger'); });
+          step = Math.min(sibs.indexOf(el), 6);
+        }
+        el.style.transitionDelay = (step * 60) + 'ms';
+        var lines = el.querySelectorAll('.lc > span');
+        for (var i = 0; i < lines.length; i++) {
+          lines[i].style.transitionDelay = (step * 60 + i * 90) + 'ms';
+        }
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, {threshold: 0.12, rootMargin: '0px 0px -6% 0px'});
+    revealables.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- KPI counters ---------- */
+  var counters = [].slice.call(document.querySelectorAll('[data-count]'));
+  var fmt = function(v, dec, pre, post){
+    var n = dec > 0 ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US');
+    return (pre || '') + n + (post || '');
+  };
+  var runCount = function(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var pre = el.getAttribute('data-pre') || '';
+    var post = el.getAttribute('data-post') || '';
+    if (reduce) { el.textContent = fmt(target, dec, pre, post); return; }
+    var dur = 1100, t0 = null;
+    var tick = function(ts){
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * e, dec, pre, post);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = fmt(target, dec, pre, post);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (reduce || !('IntersectionObserver' in window)) {
+    counters.forEach(runCount);
+  } else {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); }
+      });
+    }, {threshold: 0.4});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+
+  /* ---------- ticker: duplicate track for seamless loop ---------- */
+  var track = document.getElementById('tickTrack');
+  if (track) {
+    var set = track.firstElementChild;
+    var clone = set.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  }
+
+  /* ---------- quick nav overlay ---------- */
+  var qn = document.getElementById('quicknav');
+  var qnBtn = document.getElementById('qnBtn');
+  var lastFocus = null;
+  var qnLinks = [].slice.call(qn.querySelectorAll('.qn__l, .qn__foot a'));
+
+  function openQN(){
+    lastFocus = document.activeElement;
+    qn.classList.add('is-open');
+    qnBtn.setAttribute('aria-expanded', 'true');
+    qnBtn.setAttribute('aria-label', 'Close quick navigation');
+    document.body.classList.add('is-locked');
+    qn.querySelectorAll('.qn__l').forEach(function(l, i){
+      l.style.transitionDelay = reduce ? '0ms' : (60 + i * 40) + 'ms';
+    });
+    var first = qn.querySelector('.qn__l');
+    if (first) setTimeout(function(){ first.focus(); }, reduce ? 0 : 260);
+  }
+  function closeQN(){
+    qn.classList.remove('is-open');
+    qnBtn.setAttribute('aria-expanded', 'false');
+    qnBtn.setAttribute('aria-label', 'Open quick navigation');
+    document.body.classList.remove('is-locked');
+    qn.querySelectorAll('.qn__l').forEach(function(l){ l.style.transitionDelay = '0ms'; });
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  qnBtn.addEventListener('click', function(){
+    if (qn.classList.contains('is-open')) closeQN(); else openQN();
+  });
+  qnLinks.forEach(function(l){ l.addEventListener('click', closeQN); });
+  document.addEventListener('keydown', function(e){
+    if (!qn.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeQN(); return; }
+    if (e.key !== 'Tab') return;
+    var focusables = [qnBtn].concat(qnLinks);
+    var idx = focusables.indexOf(document.activeElement);
+    if (e.shiftKey) {
+      if (idx <= 0) { e.preventDefault(); focusables[focusables.length - 1].focus(); }
+    } else {
+      if (idx === focusables.length - 1) { e.preventDefault(); focusables[0].focus(); }
+    }
+  });
+  qn.addEventListener('click', function(e){ if (e.target === qn) closeQN(); });
+
+  /* ---------- dossier filter ---------- */
+  var filts = [].slice.call(document.querySelectorAll('.filt'));
+  var cards = [].slice.call(document.querySelectorAll('#dgrid .card'));
+  var dcount = document.getElementById('dcount');
+  filts.forEach(function(b){
+    b.addEventListener('click', function(){
+      var f = b.getAttribute('data-filter');
+      filts.forEach(function(x){ x.classList.toggle('is-on', x === b); });
+      var shown = 0;
+      cards.forEach(function(c){
+        var ok = (f === 'all' || c.getAttribute('data-cat') === f);
+        c.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+      dcount.textContent = 'Showing ' + shown + ' of ' + cards.length + ' dossiers';
+    });
+  });
+
+  /* ---------- accordions ---------- */
+  var accBtns = [].slice.call(document.querySelectorAll('.acc__btn'));
+  function setAcc(btn, open){
+    var acc = btn.closest('.acc');
+    acc.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  accBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      accBtns.forEach(function(b){ setAcc(b, false); });
+      setAcc(btn, open);
+      if (open) markIndex(btn.closest('.acc').id);
+    });
+  });
+
+  /* ---------- sticky method index ---------- */
+  var idxBtns = [].slice.call(document.querySelectorAll('.idx button'));
+  function markIndex(id){
+    idxBtns.forEach(function(b){ b.classList.toggle('is-cur', b.getAttribute('data-goto') === id); });
+  }
+  idxBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.getAttribute('data-goto');
+      var acc = document.getElementById(id);
+      if (!acc) return;
+      accBtns.forEach(function(x){ setAcc(x, false); });
+      setAcc(acc.querySelector('.acc__btn'), true);
+      markIndex(id);
+      acc.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'});
+    });
+  });
+
+  /* ---------- demo forms (no network) ---------- */
+  [].slice.call(document.querySelectorAll('form[data-demo]')).forEach(function(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var status = form.querySelector('[data-status]');
+      var required = [].slice.call(form.querySelectorAll('[required]'));
+      var missing = required.filter(function(i){ return !i.value.trim(); });
+      if (missing.length) {
+        if (status) status.textContent = 'Please complete the required fields.';
+        missing[0].focus();
+        return;
+      }
+      if (status) status.textContent = 'Received. This is a design concept — nothing was sent.';
+      form.reset();
+    });
+  });
+})();
+</script>
+</body>
+</html>
