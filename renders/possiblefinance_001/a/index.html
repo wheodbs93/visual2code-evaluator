@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Possible Finance — Get money in seconds</title>
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --font: "Aeonik","Basis Grotesque",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+  --blue:#1a5df7;
+  --blue-mid:#2f79f3;
+  --blue-soft:#e9f0ff;
+  --blue-pale:#eef4ff;
+  --blue-line:#cfe0ff;
+
+  --green:#3ddc7f;
+  --green-dk:#26c96b;
+  --mint:#a6e6c7;
+
+  --yellow:#ffc93c;
+  --yellow-panel:#fbe6a1;
+  --amber:#f5b23c;
+
+  --orange:#f5a94f;
+  --orange-btn:#f2933a;
+  --orange-text:#d97218;
+
+  --ink:#08090a;
+  --black:#000;
+  --dark:#0b0c0d;
+  --dark-2:#131415;
+  --line-dark:#2a2c2e;
+
+  --gray-strip:#f0f2f4;
+  --muted:#6b7076;
+  --muted-d:#a8adb3;
+  --line:#e3e6e9;
+
+  --wrap:1460px;
+  --pad:34px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);background:#fff;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  font-size:16px;line-height:1.45;overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4,p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);width:100%}
+
+/* letter shapes / headline sizing */
+.h-xl{font-size:clamp(38px,4.35vw,66px);line-height:1.03;letter-spacing:-.028em;font-weight:500}
+.h-lg{font-size:clamp(30px,3.55vw,54px);line-height:1.16;letter-spacing:-.024em;font-weight:400}
+.h-md{font-size:clamp(26px,2.55vw,38px);line-height:1.14;letter-spacing:-.022em;font-weight:500}
+.h-sm{font-size:clamp(22px,2.1vw,31px);line-height:1.18;letter-spacing:-.018em;font-weight:500}
+
+/* ============================================================
+   BUTTONS / LINKS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;border-radius:999px;
+  padding:11px 20px;font-size:14.5px;font-weight:500;letter-spacing:-.01em;
+  white-space:nowrap;transition:transform .18s ease,background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn .ar{width:11px;height:11px;flex:0 0 auto;transition:transform .2s ease}
+.btn:hover .ar{transform:translate(2px,-2px)}
+.btn-green{background:var(--green);color:#06170e}
+.btn-green:hover{background:#4ee78c}
+.btn-amber{background:var(--amber);color:#1a1204}
+.btn-amber:hover{background:#ffc555}
+.btn-orange{background:var(--orange-btn);color:#221202}
+.btn-orange:hover{background:#f7a352}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-ghost-dark{border:1px solid rgba(255,255,255,.35);color:#fff}
+.btn-ghost-dark:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.6)}
+.btn-ghost-ink{border:1px solid rgba(0,0,0,.3);color:var(--ink)}
+.btn-ghost-ink:hover{border-color:rgba(0,0,0,.65);background:rgba(255,255,255,.28)}
+
+.tlink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;letter-spacing:-.005em}
+.tlink .ar{width:9px;height:9px;transition:transform .2s ease}
+.tlink:hover .ar{transform:translate(2px,-2px)}
+.tlink:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* ============================================================
+   ANNOUNCEMENT BAR
+   ============================================================ */
+.announce{background:#000;color:#fff;font-size:12.5px;position:relative;z-index:70}
+.announce .inner{display:flex;align-items:center;gap:14px;padding:9px var(--pad);max-width:none}
+.announce .tag{
+  background:var(--yellow);color:#1a1204;font-size:11px;font-weight:600;
+  padding:3px 9px;border-radius:5px;letter-spacing:-.01em;white-space:nowrap;flex:0 0 auto;
+}
+.announce .msg{display:flex;align-items:center;gap:7px;flex:1 1 auto;min-width:0}
+.announce .msg span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.95}
+.announce .msg a{display:inline-flex;align-items:center;gap:6px;color:#7fa9ff;font-weight:500;flex:0 0 auto}
+.announce .msg a:hover{text-decoration:underline;text-underline-offset:3px}
+.announce .x{opacity:.7;padding:4px;line-height:0;flex:0 0 auto}
+.announce .x:hover{opacity:1}
+.announce.hide{display:none}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:60;background:var(--blue);
+  transition:background .3s ease,box-shadow .3s ease;
+}
+.nav.solid{background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.nav .bar{display:flex;align-items:center;gap:30px;height:64px}
+.logo{display:flex;align-items:center;gap:5px;flex:0 0 auto}
+.logo .sq{width:11px;height:16px;position:relative}
+.logo .sq i{position:absolute;display:block;width:11px;height:7.4px;background:#000;border-radius:1px}
+.logo .sq i:nth-child(1){top:0}
+.logo .sq i:nth-child(2){bottom:0;background:var(--blue);border:0}
+.nav.solid .logo .sq i:nth-child(2){background:var(--blue)}
+.logo .wm{font-size:21px;font-weight:500;letter-spacing:-.035em;color:#000;line-height:1}
+
+.nav .links{display:flex;align-items:center;gap:22px;flex:1 1 auto}
+.navitem{position:relative}
+.navitem>button{display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:450;letter-spacing:-.008em;padding:20px 0;color:#000}
+.navitem>button svg{width:9px;height:9px;transition:transform .25s ease}
+.navitem:hover>button svg{transform:rotate(180deg)}
+.dd{
+  position:absolute;top:calc(100% - 6px);left:-18px;background:#fff;border-radius:14px;
+  box-shadow:0 18px 44px rgba(0,0,0,.16);padding:12px;min-width:268px;
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:.22s ease;
+}
+.navitem:hover .dd{opacity:1;visibility:visible;transform:translateY(0)}
+.dd a{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border-radius:10px}
+.dd a:hover{background:#f4f6f8}
+.dd .t{font-size:14px;font-weight:500;letter-spacing:-.01em}
+.dd .s{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.35}
+.dd .ic{width:22px;height:22px;flex:0 0 auto;margin-top:1px}
+
+.nav .right{display:flex;align-items:center;gap:16px;flex:0 0 auto}
+.nav .login{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:450;color:#000}
+.nav .login svg{width:10px;height:10px}
+.nav .login:hover{text-decoration:underline;text-underline-offset:4px}
+.burger{display:none}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{background:var(--blue);position:relative;padding-bottom:26px}
+.hero .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:34px;align-items:stretch}
+.hero .left{display:flex;flex-direction:column;justify-content:space-between;padding:16px 0 8px}
+.hero h1{position:relative;padding-left:0;max-width:640px}
+.hero h1 .coin{
+  display:inline-block;vertical-align:-.13em;width:.86em;height:.86em;margin-right:.16em;
+}
+.hero .sent2{display:block;margin-top:.32em}
+.hero .ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:56px}
+.hero .reviews{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:9px 18px;border:1px solid rgba(0,0,0,.28);font-size:13.5px;font-weight:450;letter-spacing:-.01em}
+.hero .reviews .stars{display:inline-flex;gap:1.5px}
+.hero .reviews .stars svg{width:12px;height:12px}
+
+.shot{
+  position:relative;border-radius:14px;overflow:hidden;min-height:520px;height:100%;
+  background:linear-gradient(160deg,#2c2216 0%,#3d3222 42%,#241c12 100%);
+}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.slide.on{opacity:1}
+.slide .cap{position:absolute;left:22px;bottom:20px;color:#fff;z-index:4;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.slide .cap b{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.slide .cap span{display:block;font-size:11.5px;opacity:.85;margin-top:1px}
+.shot .arrows{position:absolute;right:18px;bottom:18px;display:flex;gap:8px;z-index:5}
+.shot .arrows button{
+  width:26px;height:26px;border-radius:999px;border:1px solid rgba(255,255,255,.6);
+  display:grid;place-items:center;color:#fff;backdrop-filter:blur(4px);background:rgba(0,0,0,.12);
+}
+.shot .arrows button:hover{background:rgba(255,255,255,.22)}
+.shot .arrows svg{width:9px;height:9px}
+.shot .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),rgba(0,0,0,0) 42%);z-index:3}
+
+/* photo primitives */
+.ph{position:absolute;inset:0;overflow:hidden}
+.ph .bokeh{position:absolute;border-radius:999px;filter:blur(26px);opacity:.55}
+.ph .person{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:86%}
+
+/* ============================================================
+   FEATURE STRIP
+   ============================================================ */
+.strip{background:var(--gray-strip)}
+.strip .g{display:grid;grid-template-columns:repeat(4,1fr);padding:34px 0 36px}
+.strip .cell{padding:0 26px;border-left:1px solid rgba(0,0,0,.11)}
+.strip .cell:first-child{border-left:0;padding-left:0}
+.strip .hd{display:flex;align-items:center;gap:9px}
+.strip .hd svg{width:19px;height:19px;flex:0 0 auto}
+.strip .hd b{font-size:14px;font-weight:500;letter-spacing:-.012em}
+.strip .tlink{margin-top:7px;color:var(--muted)}
+.strip .tlink:hover{color:var(--ink)}
+
+/* ============================================================
+   STATEMENT
+   ============================================================ */
+.statement{padding:86px 0 92px;text-align:center}
+.pill{
+  display:inline-flex;align-items:center;border-radius:5px;background:var(--blue-soft);
+  color:var(--blue);font-size:11px;font-weight:500;padding:4px 10px;letter-spacing:-.005em;
+}
+.statement .big{max-width:1000px;margin:26px auto 0}
+.statement .big .ic{display:inline-block;vertical-align:-.14em;width:.82em;height:.82em;margin-right:.1em}
+.statement .big .ic svg{width:100%;height:100%}
+.statement .big .w{display:inline-block;opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1)}
+.statement .big.go .w{opacity:1;transform:none}
+
+/* ============================================================
+   PRODUCT SPLIT SECTIONS
+   ============================================================ */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:1090px}
+.split .pane-l{background:#000;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:62px 62px 62px calc((100vw - var(--wrap))/2 + var(--pad))}
+@media (max-width:1528px){.split .pane-l{padding-left:var(--pad)}}
+.brandrow{display:flex;align-items:center;gap:22px}
+.brandrow .badge{width:60px;height:60px;border-radius:999px;display:grid;place-items:center;flex:0 0 auto;position:relative}
+.brandrow .badge.y{background:var(--yellow)}
+.brandrow .badge.g{background:var(--green)}
+.brandrow .badge svg{width:30px;height:30px}
+.brandrow .spark{position:absolute;right:-9px;top:-7px;width:17px;height:17px}
+.brandrow .nm{font-size:clamp(24px,2.3vw,34px);font-weight:450;letter-spacing:-.028em}
+
+.pane-l .body{max-width:520px}
+.pane-l .body h3{margin-bottom:16px;max-width:400px}
+.pane-l .body p.lede{font-size:13.5px;line-height:1.5;color:var(--muted-d);max-width:330px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:26px 44px;margin-top:36px;max-width:520px}
+.feat .it{display:flex;gap:9px}
+.feat .it .ic{width:14px;height:14px;flex:0 0 auto;margin-top:2px}
+.feat .it p{font-size:12.5px;line-height:1.4;letter-spacing:-.005em}
+.feat .it .tlink{margin-top:5px}
+.pane-l .btns{display:flex;gap:11px;margin-top:44px;flex-wrap:wrap}
+.pane-l .fine{font-size:10.5px;line-height:1.45;color:#7d8288;max-width:330px;margin-top:26px}
+
+.pane-r{position:relative;overflow:hidden;display:grid;place-items:center}
+.pane-r.y{background:var(--yellow-panel)}
+.pane-r.g{background:var(--mint)}
+.pane-r .wmk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(74%,470px);opacity:.5;pointer-events:none}
+.pane-r .wmk svg{width:100%;height:auto}
+
+/* ============================================================
+   PHONE MOCK
+   ============================================================ */
+.phone{
+  position:relative;width:312px;border-radius:38px;background:#fff;
+  box-shadow:0 26px 60px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.08);
+  padding:12px 12px 20px;z-index:2;
+}
+.phone .notch{width:96px;height:5px;border-radius:99px;background:#e6e8ea;margin:2px auto 12px}
+.phone .sb{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#8d9298;padding:0 8px 8px}
+.p-in{padding:0 6px}
+.p-title{font-size:14px;font-weight:500;letter-spacing:-.015em;text-align:center;margin-bottom:14px}
+.dots{display:flex;justify-content:center;gap:9px;margin-bottom:14px}
+.dots .d{width:34px;text-align:center}
+.dots .c{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;font-size:12px;font-weight:500}
+.dots .c.paid{background:var(--blue);color:#fff}
+.dots .c.now{background:#0b0c0d;color:#fff}
+.dots .c.next{background:#eef0f2;color:#9aa0a6}
+.dots .lb{font-size:8.5px;color:#9aa0a6;margin-top:4px}
+.p-btn{display:block;width:100%;background:#0b0c0d;color:#fff;border-radius:999px;padding:9px;font-size:12px;font-weight:500;text-align:center}
+.p-amt{margin-top:16px;font-size:12px}
+.p-amt b{font-size:15px;font-weight:600}
+.p-amt span{color:#9aa0a6}
+.p-track{margin-top:9px;height:5px;border-radius:99px;background:#e9ebed;position:relative}
+.p-track i{position:absolute;left:0;top:0;bottom:0;width:50%;background:var(--blue);border-radius:99px}
+.p-track u{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:99px;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.28)}
+.p-h{margin-top:20px;font-size:11px;font-weight:500;text-align:center;color:#5f656b}
+.p-row{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid #eef0f2;font-size:11px}
+.p-row .k{width:20px;height:20px;border-radius:999px;background:#eef4ff;display:grid;place-items:center;flex:0 0 auto}
+.p-row .k svg{width:10px;height:10px}
+.p-row .t{flex:1 1 auto;color:#5f656b}
+.p-row .v{font-weight:500}
+.p-tot{display:flex;justify-content:flex-end;font-size:11px;font-weight:500;padding-top:9px;color:#5f656b}
+
+.chip{
+  position:absolute;display:flex;align-items:center;gap:9px;background:#fff;border-radius:12px;
+  padding:9px 12px;box-shadow:0 12px 30px rgba(0,0,0,.13);max-width:216px;z-index:5;
+}
+.chip .ap{width:22px;height:22px;border-radius:6px;background:var(--blue);display:grid;place-items:center;flex:0 0 auto}
+.chip .ap svg{width:11px;height:11px}
+.chip p{font-size:10.5px;line-height:1.32;letter-spacing:-.005em}
+.floaty{animation:float 6s ease-in-out infinite}
+.floaty.b{animation-delay:-3s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+.darkcard{
+  position:absolute;background:#0b0c0d;color:#fff;border-radius:14px;padding:13px 17px;z-index:6;
+  box-shadow:0 16px 36px rgba(0,0,0,.22);
+}
+.darkcard .lb{font-size:9px;color:#8d9298}
+.darkcard .vl{display:flex;align-items:center;gap:8px;margin-top:5px;font-size:15px;font-weight:500;letter-spacing:-.015em}
+.darkcard .vl svg{width:15px;height:15px}
+
+/* ============================================================
+   CREDIT REPORTING CARD
+   ============================================================ */
+.credit{padding:60px 0 66px}
+.creditcard{
+  border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.05fr;min-height:560px;
+}
+.creditcard .c-l{padding:56px 54px;display:flex;flex-direction:column;justify-content:center}
+.credit .new{display:inline-flex;align-items:center;gap:7px;color:var(--orange-text);font-size:12px;font-weight:500}
+.credit .new svg{width:13px;height:13px}
+.creditcard h3{margin:14px 0 26px;max-width:430px}
+.creditcard .c-r{background:var(--orange);position:relative;display:grid;place-items:center;overflow:hidden}
+.creditcard .c-r .wmk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78%;opacity:.36}
+.tagch{display:inline-flex;align-items:center;gap:6px;border-radius:8px;padding:6px 10px;font-size:10.5px;font-weight:500}
+.tagch.gr{background:#e6f8ee;color:#127a45}
+.tagch.bl{background:#eaf1ff;color:var(--blue)}
+.tagch svg{width:11px;height:11px}
+.minibtn{border:1px solid #dfe2e5;border-radius:999px;padding:5px 12px;font-size:10px;font-weight:500}
+.stickers{position:absolute;right:-26px;top:44px;z-index:7;display:flex;gap:6px;transform:rotate(-6deg)}
+.stickers i{display:block;width:26px;height:34px;border-radius:5px;box-shadow:0 6px 16px rgba(0,0,0,.16)}
+
+/* ============================================================
+   SAVINGS COUNTER
+   ============================================================ */
+.saved{padding:56px 0 0;text-align:center}
+.saved h2{margin-top:16px}
+.band{background:var(--blue-pale);margin-top:30px;padding:24px 0 26px;overflow:hidden}
+.odo{display:flex;justify-content:center;align-items:stretch}
+.odo .cell{
+  min-width:clamp(38px,5.1vw,80px);display:grid;place-items:center;
+  border-right:1px solid var(--blue-line);color:var(--blue-mid);
+  font-size:clamp(40px,7.1vw,112px);line-height:1.02;font-weight:400;letter-spacing:-.02em;
+  padding:6px 0;
+}
+.odo .cell:last-child{border-right:0}
+.odo .cell.sep{min-width:clamp(20px,2.4vw,38px)}
+.saved .after{padding:30px 0 74px;font-size:clamp(19px,1.85vw,28px);letter-spacing:-.018em;font-weight:400}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.tstm{padding:6px 0 60px}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.memphoto{position:relative;border-radius:14px;overflow:hidden;min-height:380px;background:linear-gradient(165deg,#7fa06a,#4d6b46 55%,#2f4530)}
+.memphoto .watch{
+  position:absolute;left:50%;top:58%;transform:translateX(-50%);z-index:6;
+  background:var(--blue);color:#fff;border-radius:999px;padding:8px 16px;font-size:11.5px;font-weight:500;
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;box-shadow:0 8px 22px rgba(0,0,0,.24);
+}
+.memphoto .watch:hover{background:#2f6dff}
+.memphoto .watch svg{width:9px;height:9px}
+.quote{
+  border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;display:flex;flex-direction:column;
+  background:#fff;min-height:290px;
+}
+.quote .qm{width:24px;height:24px;border-radius:5px;background:var(--blue);display:grid;place-items:center;margin-bottom:14px}
+.quote .qm svg{width:11px;height:11px}
+.quote p{font-size:14.5px;line-height:1.34;letter-spacing:-.014em;flex:1 1 auto}
+.quote p em{font-style:normal;color:var(--blue)}
+.quote .who{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:20px}
+.quote .who b{display:block;font-size:11px;font-weight:600;color:var(--blue)}
+.quote .who span{display:block;font-size:10px;color:var(--muted)}
+.av{width:34px;height:34px;border-radius:7px;overflow:hidden;flex:0 0 auto;position:relative}
+.tgrid .r1c2{visibility:hidden}
+.quote.dark{background:transparent;border-color:var(--line-dark);color:#fff;min-height:360px}
+.quote.dark .who span{color:#8d9298}
+
+/* ============================================================
+   RATINGS MARQUEE
+   ============================================================ */
+.rate{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative}
+.rate::before,.rate::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:3;pointer-events:none}
+.rate::before{left:0;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))}
+.rate::after{right:0;background:linear-gradient(270deg,#fff,rgba(255,255,255,0))}
+.track{display:flex;width:max-content;animation:marq 46s linear infinite}
+.rate:hover .track{animation-play-state:paused}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rcell{
+  display:flex;align-items:center;gap:14px;padding:20px 34px;border-right:1px solid var(--line);
+  height:106px;white-space:nowrap;
+}
+.rcell .n{font-size:15px;font-weight:500;letter-spacing:-.015em}
+.rcell .s{font-size:15px;color:var(--muted);letter-spacing:-.015em}
+.rcell .badge{width:44px;height:44px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto}
+.rcell.reviews{gap:10px;padding:20px 30px}
+.rcell.reviews .mid{text-align:center}
+.rcell.reviews .st{display:flex;gap:5px;justify-content:center}
+.rcell.reviews .st svg{width:15px;height:15px}
+.rcell.reviews .tx{font-size:13px;font-weight:600;margin-top:5px;letter-spacing:-.012em}
+.rcell.reviews .lau{width:22px;height:46px}
+.ratefine{text-align:center;font-size:9.5px;color:var(--muted);padding:11px 0 0}
+
+/* ============================================================
+   DARK APP SECTION
+   ============================================================ */
+.appsec{background:#000;color:#fff;padding:84px 0 40px}
+.appgrid{display:grid;grid-template-columns:1fr 1.13fr;gap:60px}
+.iconcluster{position:relative;width:190px;height:150px;margin-bottom:34px}
+.iconcluster i{position:absolute;border-radius:11px;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.appgrid h2{max-width:430px}
+.appgrid .lede{font-size:13px;line-height:1.5;color:var(--muted-d);max-width:380px;margin-top:16px}
+.applinks{display:flex;gap:34px;margin-top:26px;flex-wrap:wrap}
+.applinks .tlink{color:#fff}
+.appgrid .btn{margin-top:30px}
+.qpair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+/* ============================================================
+   FAQ + STAT
+   ============================================================ */
+.faqsec{background:#000;color:#fff;padding:60px 0 96px}
+.faqsec h2{max-width:560px;margin-bottom:44px}
+.faqsec h2 .mark{display:inline-block;width:.28em;height:.4em;position:relative;vertical-align:.02em;margin-right:.08em}
+.faqsec h2 .mark i{position:absolute;left:0;width:100%;height:46%;background:#fff;border-radius:1px}
+.faqsec h2 .mark i:first-child{top:0}
+.faqsec h2 .mark i:last-child{bottom:0;background:var(--blue)}
+.faqgrid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.faqcol{padding-right:56px}
+.statcol{padding-left:56px;border-left:1px solid var(--line-dark)}
+.acc{border:1px solid var(--line-dark);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:border-color .2s ease}
+.acc:hover{border-color:#3d4043}
+.acc>button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;text-align:left;font-size:14px;font-weight:450;letter-spacing:-.012em}
+.acc .pm{width:20px;height:20px;border-radius:999px;border:1px solid #4a4d50;display:grid;place-items:center;flex:0 0 auto;transition:transform .3s ease}
+.acc .pm svg{width:9px;height:9px}
+.acc.open .pm{transform:rotate(45deg);background:#fff;color:#000;border-color:#fff}
+.acc .ans{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.16,1,.3,1)}
+.acc .ans p{padding:0 20px 20px;font-size:12.5px;line-height:1.55;color:var(--muted-d);max-width:520px}
+
+.statcol .st-h{font-size:clamp(22px,2.05vw,31px);line-height:1.2;letter-spacing:-.02em;font-weight:450;max-width:460px}
+.statcol .st-h em{font-style:normal;color:var(--blue-mid)}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:44px;position:relative}
+.trio .m{position:relative;border-radius:11px;overflow:hidden;height:230px}
+.trio .m .nm{position:absolute;left:9px;bottom:8px;color:#fff;font-size:9px;z-index:5;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.trio .m .nm b{display:block;font-weight:600;font-size:10px}
+.trio .chip{left:14px;top:-22px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{background:#000;color:#fff;padding:64px 0 40px;border-top:1px solid var(--line-dark)}
+.footgrid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:40px}
+.foot .logo .wm{color:#fff}
+.foot .logo .sq i:nth-child(1){background:#fff}
+.foot .logo .sq i:nth-child(2){background:var(--blue)}
+.foot .blurb{font-size:12px;color:var(--muted-d);margin-top:16px;max-width:250px;line-height:1.5}
+.stores{display:flex;gap:9px;margin-top:20px}
+.storebtn{display:flex;align-items:center;gap:8px;border:1px solid #35383b;border-radius:9px;padding:7px 12px}
+.storebtn:hover{border-color:#6a6e72}
+.storebtn svg{width:17px;height:17px}
+.storebtn span{font-size:8.5px;color:var(--muted-d);line-height:1.1;display:block}
+.storebtn b{font-size:11.5px;font-weight:500;display:block}
+.foot h5{font-size:12px;font-weight:600;letter-spacing:-.005em;margin-bottom:14px}
+.foot li{margin-bottom:9px}
+.foot li a{font-size:12px;color:var(--muted-d)}
+.foot li a:hover{color:#fff}
+.socials{display:flex;gap:11px;margin-top:22px}
+.socials a{width:30px;height:30px;border-radius:999px;border:1px solid #35383b;display:grid;place-items:center}
+.socials a:hover{border-color:#fff}
+.socials svg{width:13px;height:13px}
+.legal{border-top:1px solid var(--line-dark);margin-top:52px;padding-top:26px;font-size:10px;line-height:1.65;color:#787c81;max-width:1080px}
+.legal a{color:#9aa0a6;text-decoration:underline;text-underline-offset:2px}
+.legal p+p{margin-top:11px}
+.copyr{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:26px;font-size:10.5px;color:#787c81}
+.copyr .lks{display:flex;gap:20px}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1180px){
+  .strip .g{grid-template-columns:repeat(2,1fr);gap:26px 0}
+  .strip .cell:nth-child(3){border-left:0;padding-left:0}
+  .footgrid{grid-template-columns:1fr 1fr 1fr}
+}
+@media (max-width:980px){
+  :root{--pad:22px}
+  .nav .links,.nav .login{display:none}
+  .burger{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;border:1px solid rgba(0,0,0,.2)}
+  .hero .grid{grid-template-columns:1fr}
+  .hero .ctas{margin-top:34px}
+  .shot{min-height:400px}
+  .split{grid-template-columns:1fr;min-height:0}
+  .split .pane-l{padding:52px var(--pad)}
+  .pane-r{padding:60px 0;min-height:640px}
+  .feat{grid-template-columns:1fr}
+  .creditcard{grid-template-columns:1fr}
+  .creditcard .c-r{min-height:520px;padding:50px 0}
+  .creditcard .c-l{padding:44px var(--pad)}
+  .stickers{right:8px}
+  .tgrid{grid-template-columns:1fr}
+  .tgrid .r1c2{display:none}
+  .appgrid{grid-template-columns:1fr;gap:44px}
+  .faqgrid{grid-template-columns:1fr}
+  .faqcol{padding-right:0}
+  .statcol{padding-left:0;border-left:0;border-top:1px solid var(--line-dark);padding-top:44px;margin-top:44px}
+  .footgrid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:620px){
+  .strip .g{grid-template-columns:1fr}
+  .strip .cell{border-left:0;padding-left:0}
+  .qpair{grid-template-columns:1fr}
+  .trio{grid-template-columns:1fr 1fr}
+  .trio .m:last-child{display:none}
+  .footgrid{grid-template-columns:1fr}
+  .announce .msg span{white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .statement .big .w{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SVG SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ar-ne" viewBox="0 0 12 12"><path d="M3 9L9 3M9 3H4.2M9 3v4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="ar-e" viewBox="0 0 12 12"><path d="M2 6h8M6.6 2.6L10 6l-3.4 3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="chev" viewBox="0 0 12 12"><path d="M2.5 4.3L6 7.8l3.5-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="star" viewBox="0 0 20 20"><path d="M10 1.4l2.5 5.5 6 .6-4.5 4 1.3 5.9L10 14.4l-5.3 3 1.3-5.9-4.5-4 6-.6z" fill="currentColor"/></symbol>
+    <symbol id="check" viewBox="0 0 12 12"><path d="M2.2 6.3l2.5 2.5 5.1-5.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="plus" viewBox="0 0 12 12"><path d="M6 1.6v8.8M1.6 6h8.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <!-- person -->
+    <symbol id="person" viewBox="0 0 300 340">
+      <path d="M150 168c-56 0-96 34-104 78-3 17-4 39-4 94h216c0-55-1-77-4-94-8-44-48-78-104-78z" fill="var(--top)"/>
+      <path d="M150 168c-20 0-37 4-51 12l51 62 51-62c-14-8-31-12-51-12z" fill="var(--top2)"/>
+      <path d="M128 132h44v54c0 12-10 20-22 20s-22-8-22-20z" fill="var(--skin)"/>
+      <path d="M128 150c12 10 32 12 44 4v-22h-44z" fill="rgba(0,0,0,.12)"/>
+      <ellipse cx="150" cy="96" rx="58" ry="66" fill="var(--hair)"/>
+      <ellipse cx="150" cy="104" rx="45" ry="55" fill="var(--skin)"/>
+      <path d="M105 92c0-34 20-56 45-56s45 22 45 56c0-8-6-24-18-28-10 12-46 14-58 4-8 6-14 16-14 24z" fill="var(--hair)"/>
+      <ellipse cx="134" cy="104" rx="4.2" ry="5" fill="#2a1f18"/>
+      <ellipse cx="167" cy="104" rx="4.2" ry="5" fill="#2a1f18"/>
+      <path d="M138 128c7 6 18 6 25 0" stroke="#2a1f18" stroke-width="3.2" stroke-linecap="round" fill="none" opacity=".75"/>
+      <path d="M124 92c5-4 12-4 17-1M159 91c5-3 12-3 17 1" stroke="var(--hair)" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ ANNOUNCEMENT ============ -->
+<div class="announce" id="announce">
+  <div class="inner">
+    <span class="tag">Possible Pays Your Bills Contest</span>
+    <span class="msg">
+      <span>Share your story about Possible and you could win $2,000 to help cover your bills</span>
+      <a href="#">Enter now <svg class="ar" style="width:10px;height:10px"><use href="#ar-e"/></svg></a>
+    </span>
+    <button class="x" id="closeAnn" aria-label="Dismiss announcement">
+      <svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap bar">
+    <a class="logo" href="#" aria-label="Possible">
+      <span class="sq"><i></i><i></i></span>
+      <span class="wm">Possible</span>
+    </a>
+
+    <nav class="links">
+      <div class="navitem">
+        <button>Products <svg><use href="#chev"/></svg></button>
+        <div class="dd">
+          <a href="#loan"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ffc93c"/><path d="M12 6.5v11M14.6 9.2c-.6-.8-1.6-1.2-2.8-1.2-1.6 0-2.6.8-2.6 1.9 0 2.9 5.6 1.5 5.6 4.4 0 1.2-1.1 2-2.8 2-1.3 0-2.4-.5-3-1.4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span><span><span class="t">Possible Loan</span><span class="s">Up to $500 instantly, repaid over months</span></span></a>
+          <a href="#advance"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#3ddc7f"/><path d="M13 5.5L7.5 13h4l-1 5.5L18 11h-4z" fill="#08170e"/></svg></span><span><span class="t">Possible Advance</span><span class="s">Cash from your next paycheck, early</span></span></a>
+          <a href="#credit"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5" width="19" height="14" rx="3" fill="#f5a94f"/><path d="M2.5 9.5h19" stroke="#221202" stroke-width="1.6"/></svg></span><span><span class="t">Credit Reporting</span><span class="s">Report bill &amp; rent payments to bureaus</span></span></a>
+        </div>
+      </div>
+      <div class="navitem">
+        <button>Learn <svg><use href="#chev"/></svg></button>
+        <div class="dd">
+          <a href="#faq"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#1a5df7" stroke-width="1.7"/><path d="M9.4 9.4c.2-1.4 1.3-2.2 2.7-2.2 1.5 0 2.6.9 2.6 2.2 0 1.8-2.5 1.9-2.5 3.6" stroke="#1a5df7" stroke-width="1.7" stroke-linecap="round"/><circle cx="12.1" cy="16.4" r="1.1" fill="#1a5df7"/></svg></span><span><span class="t">FAQ</span><span class="s">Answers about applying and repaying</span></span></a>
+          <a href="#reviews"><span class="ic"><svg viewBox="0 0 24 24"><use href="#star" x="2" y="2" width="20" height="20" fill="#1a5df7"/></svg></span><span><span class="t">Member reviews</span><span class="s">More than 150,000 5-star reviews</span></span></a>
+          <a href="#saved"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16l4.5-5 3.5 3.4L20 7" stroke="#1a5df7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="t">Financial literacy</span><span class="s">Build credit history and healthy habits</span></span></a>
+        </div>
+      </div>
+      <div class="navitem">
+        <button>Mission <svg><use href="#chev"/></svg></button>
+        <div class="dd">
+          <a href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1a5df7" stroke-width="1.7"/><circle cx="12" cy="12" r="3.4" fill="#1a5df7"/></svg></span><span><span class="t">About us</span><span class="s">Why we built a fairer way to borrow</span></span></a>
+          <a href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.6-7-9.4A4 4 0 0112 8.4 4 4 0 0119 10.6C19 15.4 12 20 12 20z" fill="#1a5df7"/></svg></span><span><span class="t">Our impact</span><span class="s">$690M+ saved in predatory junk fees</span></span></a>
+          <a href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="7" width="17" height="12" rx="2.5" stroke="#1a5df7" stroke-width="1.7"/><path d="M9 7V5.5A1.5 1.5 0 0110.5 4h3A1.5 1.5 0 0115 5.5V7" stroke="#1a5df7" stroke-width="1.7"/></svg></span><span><span class="t">Careers</span><span class="s">Help us reach the next million members</span></span></a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="right">
+      <a class="login" href="#">Log in <svg><use href="#ar-ne"/></svg></a>
+      <a class="btn btn-green" href="#">Apply now <svg class="ar"><use href="#ar-ne"/></svg></a>
+      <button class="burger" aria-label="Menu">
+        <svg width="16" height="12" viewBox="0 0 16 12"><path d="M0 1h16M0 6h16M0 11h16" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap grid">
+    <div class="left">
+      <h1 class="h-xl">
+        <span class="coin">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#3ddc7f"/><path d="M20 8v24M25.4 13.6c-1.2-1.6-3.2-2.4-5.6-2.4-3.2 0-5.2 1.7-5.2 3.9 0 5.9 11.3 3 11.3 8.9 0 2.4-2.3 4.1-5.7 4.1-2.7 0-4.8-1.1-6.1-2.9" stroke="#07160d" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+        </span>You don't have<br>time for bullsh!t.
+        <span class="sent2">Possible has<br>cash fast<sup style="font-size:.42em;top:-.75em;position:relative">*</sup>.</span>
+      </h1>
+
+      <div class="ctas">
+        <a class="btn btn-green" href="#">Get started <svg class="ar"><use href="#ar-ne"/></svg></a>
+        <span class="reviews">
+          Over 100,000
+          <span class="stars">
+            <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg>
+          </span>
+          app reviews
+        </span>
+      </div>
+    </div>
+
+    <div class="shot" id="shot">
+      <div class="slide on">
+        <div class="ph" style="--skin:#e8b98f;--hair:#c8a262;--top:#eceff2;--top2:#2f4a86">
+          <div class="bokeh" style="width:220px;height:220px;left:-40px;top:20px;background:#5c4a2e"></div>
+          <div class="bokeh" style="width:180px;height:180px;right:-30px;top:80px;background:#6b5836"></div>
+          <div class="bokeh" style="width:150px;height:150px;left:38%;top:-30px;background:#8a7040;opacity:.4"></div>
+          <svg class="person" viewBox="0 0 300 340" style="--skin:#e8b98f;--hair:#c8a262;--top:#eceff2;--top2:#2f4a86"><use href="#person"/></svg>
+        </div>
+        <div class="veil"></div>
+        <div class="cap"><b>Anna, Entrepreneur</b><span>Possible Member since 2018</span></div>
+      </div>
+      <div class="slide">
+        <div class="ph" style="background:linear-gradient(160deg,#20344f,#16283f 60%,#0f1c2c)">
+          <div class="bokeh" style="width:200px;height:200px;left:-30px;top:60px;background:#37557d"></div>
+          <div class="bokeh" style="width:170px;height:170px;right:-20px;top:30px;background:#2c4770"></div>
+          <svg class="person" viewBox="0 0 300 340" style="--skin:#8a5b3c;--hair:#241a14;--top:#e8eaec;--top2:#1f6d4d"><use href="#person"/></svg>
+        </div>
+        <div class="veil"></div>
+        <div class="cap"><b>Kristopher, Driver</b><span>Possible Member since 2023</span></div>
+      </div>
+      <div class="slide">
+        <div class="ph" style="background:linear-gradient(160deg,#4a3a52,#33283c 60%,#1f1826)">
+          <div class="bokeh" style="width:210px;height:210px;left:-20px;top:40px;background:#6b5175"></div>
+          <div class="bokeh" style="width:150px;height:150px;right:-30px;top:110px;background:#7c5f86"></div>
+          <svg class="person" viewBox="0 0 300 340" style="--skin:#6f4429;--hair:#1a1210;--top:#f2c14e;--top2:#c99a2f"><use href="#person"/></svg>
+        </div>
+        <div class="veil"></div>
+        <div class="cap"><b>Dakkota, Caregiver</b><span>Possible Member since 2016</span></div>
+      </div>
+
+      <div class="arrows">
+        <button id="prevS" aria-label="Previous member"><svg viewBox="0 0 12 12" style="transform:rotate(180deg)"><use href="#ar-e"/></svg></button>
+        <button id="nextS" aria-label="Next member"><svg viewBox="0 0 12 12"><use href="#ar-e"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE STRIP ============ -->
+<section class="strip">
+  <div class="wrap g">
+    <div class="cell rv">
+      <div class="hd">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" stroke="#1a5df7" stroke-width="1.6"/><path d="M12 6.6v10.8M14.6 9c-.6-.8-1.6-1.2-2.7-1.2-1.6 0-2.6.8-2.6 1.9 0 2.9 5.5 1.4 5.5 4.3 0 1.2-1.1 2-2.8 2-1.3 0-2.4-.5-3-1.4" stroke="#1a5df7" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <b>Get money in seconds<sup style="font-size:.62em">*</sup></b>
+      </div>
+      <a class="tlink" href="#">How to apply <svg class="ar"><use href="#ar-ne"/></svg></a>
+    </div>
+    <div class="cell rv" style="transition-delay:.06s">
+      <div class="hd">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="3" stroke="#1a5df7" stroke-width="1.6"/><path d="M3.5 9.2h17M8 3v3M16 3v3M8.4 14.2h3.2" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <b>Flexible payments for all</b>
+      </div>
+      <a class="tlink" href="#">Find out more <svg class="ar"><use href="#ar-ne"/></svg></a>
+    </div>
+    <div class="cell rv" style="transition-delay:.12s">
+      <div class="hd">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" stroke="#1a5df7" stroke-width="1.6"/><path d="M8 16l8-8" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round"/><path d="M9.4 10.6v-1.2M14.6 14.6v-1.2" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <b>Never pay late fees</b>
+      </div>
+      <a class="tlink" href="#">Check it out <svg class="ar"><use href="#ar-ne"/></svg></a>
+    </div>
+    <div class="cell rv" style="transition-delay:.18s">
+      <div class="hd">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5l4.6-5.2 3.5 3.4L20 7.4" stroke="#1a5df7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.4 7.4H20v4.6" stroke="#1a5df7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b>Build credit history</b>
+      </div>
+      <a class="tlink" href="#">Make it count <svg class="ar"><use href="#ar-ne"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATEMENT ============ -->
+<section class="statement">
+  <div class="wrap">
+    <span class="pill rv">Join over 1,000,000 customers</span>
+    <h2 class="h-lg big" id="bigStatement">
+      Get money in seconds so you can
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="2.8" width="14" height="18.4" rx="2.4" stroke="#1a5df7" stroke-width="1.6"/><path d="M8.6 8h6.8M8.6 12h6.8M8.6 16h4" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round"/></svg></span>pay bills,
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M2.6 3.4h2.8l2.4 11h9.6l2-7.6H6.6" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.4" cy="19" r="1.7" fill="#1a5df7"/><circle cx="16.6" cy="19" r="1.7" fill="#1a5df7"/></svg></span>get groceries,
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3.4 10.4L12 3.6l8.6 6.8" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.6 12v8.4h12.8V12" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.8 20.4v-5.2h4.4v5.2" stroke="#1a5df7" stroke-width="1.6" stroke-linecap="round"/></svg></span>make rent,
+      cover medical debt,
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 15.4v-3l1.9-4.6c.3-.8 1-1.3 1.9-1.3h10.4c.9 0 1.6.5 1.9 1.3L21 12.4v3" stroke="#1a5df7" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 15.4h18v2.8H3z" stroke="#1a5df7" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="18.2" r="1.5" fill="#1a5df7"/><circle cx="17" cy="18.2" r="1.5" fill="#1a5df7"/></svg></span>fix the car, or get a
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3.2" y="9.4" width="17.6" height="11.4" rx="1.8" stroke="#1a5df7" stroke-width="1.6"/><rect x="2.2" y="6" width="19.6" height="3.4" rx="1.2" stroke="#1a5df7" stroke-width="1.6"/><path d="M12 6v14.8" stroke="#1a5df7" stroke-width="1.6"/><path d="M12 6S10.6 2.6 8.4 2.6a2 2 0 000 3.4H12zM12 6s1.4-3.4 3.6-3.4a2 2 0 010 3.4H12z" stroke="#1a5df7" stroke-width="1.6" stroke-linejoin="round"/></svg></span>present in time for Mom's birthday.
+    </h2>
+  </div>
+</section>
+
+<!-- ============ LOAN ============ -->
+<section class="split" id="loan">
+  <div class="pane-l">
+    <div class="brandrow rv">
+      <span class="badge y">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M15 4v22M19.4 8.4c-1-1.3-2.6-2-4.6-2-2.6 0-4.3 1.4-4.3 3.2 0 4.8 9.3 2.4 9.3 7.3 0 2-1.9 3.4-4.7 3.4-2.2 0-3.9-.9-5-2.4" stroke="#1a1204" stroke-width="2.3" stroke-linecap="round"/></svg>
+        <svg class="spark" viewBox="0 0 20 20" fill="none"><path d="M10 1l1.9 5.4L17.4 8l-5.5 1.6L10 15l-1.9-5.4L2.6 8l5.5-1.6z" fill="#3ddc7f"/></svg>
+      </span>
+      <span class="nm">Loan</span>
+    </div>
+
+    <div class="body">
+      <h3 class="h-md rv">Handle life's surprises with immediate cash</h3>
+      <p class="lede rv" style="transition-delay:.06s">Quick cash for those moments you didn't see coming—enjoy months to repay with no hidden fees.</p>
+
+      <div class="feat">
+        <div class="it rv" style="transition-delay:.1s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#ffc93c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>Get up to $500<sup style="font-size:.7em">*</sup> instantly<sup style="font-size:.7em">**</sup> and repay over time</p><a class="tlink" href="#" style="color:var(--yellow)">Check it out <svg class="ar"><use href="#ar-ne"/></svg></a></div>
+        </div>
+        <div class="it rv" style="transition-delay:.14s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#ffc93c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>Move payments up to 29 days later with no rescheduling fee</p><a class="tlink" href="#" style="color:var(--yellow)">Find out more <svg class="ar"><use href="#ar-ne"/></svg></a></div>
+        </div>
+        <div class="it rv" style="transition-delay:.18s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#ffc93c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>No late fees or penalty fees</p><a class="tlink" href="#" style="color:var(--yellow)">See the savings <svg class="ar"><use href="#ar-ne"/></svg></a></div>
+        </div>
+        <div class="it rv" style="transition-delay:.22s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#ffc93c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>Build credit history</p><a class="tlink" href="#" style="color:var(--yellow)">How it works <svg class="ar"><use href="#ar-ne"/></svg></a></div>
+        </div>
+      </div>
+
+      <div class="btns rv" style="transition-delay:.26s">
+        <a class="btn btn-amber" href="#">Learn more <svg class="ar"><use href="#ar-ne"/></svg></a>
+        <a class="btn btn-ghost-dark" href="#">Apply now <svg class="ar"><use href="#ar-ne"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pane-r y">
+    <div class="wmk">
+      <svg viewBox="0 0 300 460" fill="none"><path d="M150 20v420M226 92c-17-27-45-42-79-42-45 0-74 25-74 57 0 85 160 42 160 127 0 35-33 59-81 59-38 0-67-16-86-42" stroke="#c9a83f" stroke-width="9" stroke-linecap="round" opacity=".38"/></svg>
+    </div>
+
+    <div style="position:relative">
+      <div class="chip floaty" style="left:-172px;top:-236px">
+        <span class="ap"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1.4v9.2M8 3.5c-.5-.6-1.2-.9-2.1-.9-1.2 0-2 .6-2 1.4 0 2.2 4.2 1.1 4.2 3.3 0 .9-.8 1.5-2.1 1.5-1 0-1.8-.4-2.3-1" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/></svg></span>
+        <p><b style="font-weight:600">Your $250 Possible Loan</b> has been deposited!</p>
+      </div>
+
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="sb"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+        <div class="p-in">
+          <div class="p-title">Upcoming payments</div>
+          <div class="dots">
+            <div class="d"><div class="c paid"><svg width="12" height="12" viewBox="0 0 12 12"><use href="#check"/></svg></div><div class="lb">Jan 8</div></div>
+            <div class="d"><div class="c paid"><svg width="12" height="12" viewBox="0 0 12 12"><use href="#check"/></svg></div><div class="lb">Jan 22</div></div>
+            <div class="d"><div class="c now">22</div><div class="lb">Feb</div></div>
+            <div class="d"><div class="c next">5</div><div class="lb">Mar</div></div>
+          </div>
+          <a class="p-btn" href="#">Reschedule</a>
+          <div class="p-amt"><b>$100</b> <span>paid of total</span></div>
+          <div class="p-track"><i></i><u></u></div>
+          <div class="p-h">History</div>
+          <div class="p-row"><span class="k"><svg viewBox="0 0 12 12" style="color:#1a5df7"><use href="#check"/></svg></span><span class="t">Second installment</span><span class="v">$50</span></div>
+          <div class="p-row"><span class="k"><svg viewBox="0 0 12 12" style="color:#1a5df7"><use href="#check"/></svg></span><span class="t">First installment</span><span class="v">$50</span></div>
+          <div class="p-tot">$200</div>
+        </div>
+      </div>
+
+      <div class="darkcard floaty b" style="left:-84px;bottom:22px">
+        <div class="lb">Pay Over Time</div>
+        <div class="vl">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="1.6" y="3" width="12.8" height="11.4" rx="2.2" stroke="#fff" stroke-width="1.3"/><path d="M1.6 6.4h12.8M5.4 1.6v2.6M10.6 1.6v2.6" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>
+          4 installments
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ADVANCE ============ -->
+<section class="split" id="advance">
+  <div class="pane-l">
+    <div class="brandrow rv">
+      <span class="badge g">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M17.4 3.4L8.4 15.6h6.2l-1.6 11 9.6-13.4h-6.4z" fill="#07160d"/></svg>
+        <svg class="spark" viewBox="0 0 20 20" fill="none"><path d="M10 1l1.9 5.4L17.4 8l-5.5 1.6L10 15l-1.9-5.4L2.6 8l5.5-1.6z" fill="#ffc93c"/></svg>
+      </span>
+      <span class="nm">Advance</span>
+    </div>
+
+    <div class="body">
+      <h3 class="h-md rv">Make payday come early</h3>
+      <p class="lede rv" style="transition-delay:.06s">Access instant<sup style="font-size:.72em">*</sup> cash from your next paycheck. No instant transfer fees.</p>
+
+      <div class="feat">
+        <div class="it rv" style="transition-delay:.1s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#3ddc7f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>Get up to $300<sup style="font-size:.7em">*</sup> instantly<sup style="font-size:.7em">**</sup> and repay over time</p><a class="tlink" href="#" style="color:var(--green)">Check it out <svg class="ar"><use href="#ar-ne"/></svg></a></div>
+        </div>
+        <div class="it rv" style="transition-delay:.14s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#3ddc7f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>Check eligibility for free; you won't pay until you know how much you can get</p></div>
+        </div>
+        <div class="it rv" style="transition-delay:.18s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#3ddc7f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>Transparent pricing. Zero hidden fees, penalties, tipping or interest</p></div>
+        </div>
+        <div class="it rv" style="transition-delay:.22s">
+          <span class="ic"><svg viewBox="0 0 14 14" fill="none"><path d="M1.6 7.2l3 3 7.8-8" stroke="#3ddc7f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><p>Flexible payment options</p></div>
+        </div>
+      </div>
+
+      <div class="btns rv" style="transition-delay:.26s">
+        <a class="btn btn-green" href="#">Learn more <svg class="ar"><use href="#ar-ne"/></svg></a>
+        <a class="btn btn-ghost-dark" href="#">Apply now <svg class="ar"><use href="#ar-ne"/></svg></a>
+      </div>
+
+      <p class="fine">**Max amount not typical and will vary based on your finances. First advances average $85. Non-member max is $150.</p>
+    </div>
+  </div>
+
+  <div class="pane-r g">
+    <div class="wmk">
+      <svg viewBox="0 0 300 460" fill="none"><path d="M150 20v420M226 92c-17-27-45-42-79-42-45 0-74 25-74 57 0 85 160 42 160 127 0 35-33 59-81 59-38 0-67-16-86-42" stroke="#4f9c74" stroke-width="9" stroke-linecap="round" opacity=".32"/></svg>
+    </div>
+
+    <div style="position:relative">
+      <div class="chip floaty" style="left:-166px;top:-224px">
+        <span class="ap" style="background:var(--green-dk)"><svg viewBox="0 0 12 12" fill="none"><path d="M7 1.4L3.4 6.6h2.5L5.2 10.6 8.8 5.4H6.3z" fill="#fff"/></svg></span>
+        <p><b style="font-weight:600">Your $150 Advance</b> is on the way!</p>
+      </div>
+
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="sb"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+        <div class="p-in">
+          <div class="p-title">Get cash now</div>
+          <div style="text-align:center;padding:6px 0 12px">
+            <div style="font-size:44px;font-weight:500;letter-spacing:-.04em;line-height:1">$300</div>
+            <div style="font-size:10.5px;color:#9aa0a6;margin-top:4px">Available to you today</div>
+          </div>
+          <div class="p-track" style="margin-bottom:16px"><i style="width:78%;background:var(--green-dk)"></i><u style="left:78%"></u></div>
+          <a class="p-btn" href="#" style="background:var(--green);color:#07160d">Transfer instantly</a>
+          <div class="p-h">Included</div>
+          <div class="p-row"><span class="k" style="background:#e6f8ee"><svg viewBox="0 0 12 12" style="color:#127a45"><use href="#check"/></svg></span><span class="t">No instant transfer fee</span><span class="v">$0</span></div>
+          <div class="p-row"><span class="k" style="background:#e6f8ee"><svg viewBox="0 0 12 12" style="color:#127a45"><use href="#check"/></svg></span><span class="t">No tipping or interest</span><span class="v">$0</span></div>
+          <div class="p-tot">Repay on payday</div>
+        </div>
+      </div>
+
+      <div class="darkcard floaty b" style="left:-80px;bottom:22px">
+        <div class="lb">Instant transfer</div>
+        <div class="vl">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.4" stroke="#fff" stroke-width="1.3"/><path d="M8 4.4V8l2.4 1.6" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>
+          $0 fee
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDIT REPORTING ============ -->
+<section class="credit" id="credit">
+  <div class="wrap">
+    <div class="creditcard rv">
+      <div class="c-l">
+        <span class="new">
+          <svg viewBox="0 0 14 14" fill="none"><path d="M7 1l1.5 4.1L12.6 6.6 8.5 8 7 12.2 5.5 8 1.4 6.6 5.5 5.1z" fill="#d97218"/></svg>
+          New! Make credit history progress
+        </span>
+        <h3 class="h-md">Report bill &amp; rent payments to credit bureaus</h3>
+        <div><a class="btn btn-orange" href="#">Find out more <svg class="ar"><use href="#ar-ne"/></svg></a></div>
+      </div>
+
+      <div class="c-r">
+        <div class="wmk">
+          <svg viewBox="0 0 400 300" fill="none">
+            <path d="M20 20h360v260H20z" stroke="#c07c26" stroke-width="2" opacity=".5"/>
+            <path d="M20 20l360 260M380 20L20 280" stroke="#c07c26" stroke-width="2" opacity=".28"/>
+          </svg>
+        </div>
+
+        <div class="stickers">
+          <i style="background:#1a5df7"></i>
+          <i style="background:#3ddc7f"></i>
+          <i style="background:#ffc93c"></i>
+        </div>
+
+        <div style="position:relative">
+          <div class="chip floaty" style="left:-152px;top:-200px;max-width:196px">
+            <span class="ap"><svg viewBox="0 0 12 12" fill="none"><path d="M2.4 6.2l2.3 2.3 4.9-5.2" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <p>We already have your eligible bill you can report</p>
+          </div>
+
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="sb"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+            <div class="p-in">
+              <div style="margin-bottom:12px"><span class="tagch gr"><svg><use href="#check"/></svg> Added to reporting</span></div>
+              <div style="border:1px solid #eef0f2;border-radius:11px;padding:12px;margin-bottom:16px">
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:#9aa0a6"><span>Monthly Rent</span><span>Due Mar 1</span></div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:5px"><span style="font-size:17px;font-weight:600;letter-spacing:-.02em">$1,200</span><span style="font-size:10px;color:#127a45">Reporting</span></div>
+              </div>
+              <div style="margin-bottom:10px"><span class="tagch bl"><svg><use href="#plus"/></svg> Eligible for reporting</span></div>
+              <div class="p-row" style="border-bottom:0"><span class="t" style="color:#0a0a0a;font-weight:500">Electric</span><a class="minibtn" href="#">Add to report</a></div>
+              <div class="p-row" style="border-bottom:0"><span class="t" style="color:#0a0a0a;font-weight:500">Utilities</span><a class="minibtn" href="#">Add to report</a></div>
+              <div class="p-row" style="border-bottom:0"><span class="t" style="color:#0a0a0a;font-weight:500">Phone</span><a class="minibtn" href="#">Add to report</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAVINGS COUNTER ============ -->
+<section class="saved" id="saved">
+  <div class="wrap">
+    <span class="pill rv">No predatory junk pricing</span>
+    <h2 class="h-md rv" style="transition-delay:.05s">Possible Loan customers have saved</h2>
+  </div>
+  <div class="band">
+    <div class="odo" id="odo" data-target="690792093" aria-label="$690,792,093"></div>
+  </div>
+  <div class="wrap">
+    <p class="after rv">in predatory junk fees<sup style="font-size:.5em;top:-.7em;position:relative">*</sup> by choosing Possible.</p>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="tstm" id="reviews">
+  <div class="wrap tgrid">
+    <div class="memphoto rv">
+      <div class="ph">
+        <div class="bokeh" style="width:190px;height:190px;left:-30px;top:-20px;background:#9dbd7f;opacity:.7"></div>
+        <div class="bokeh" style="width:160px;height:160px;right:-30px;top:40px;background:#8fae72;opacity:.6"></div>
+        <div class="bokeh" style="width:220px;height:120px;left:10%;bottom:-40px;background:#c2554a;opacity:.45"></div>
+        <svg class="person" viewBox="0 0 300 340" style="--skin:#7a4a2c;--hair:#1c1310;--top:#f0f2f4;--top2:#c8ccd0;height:78%"><use href="#person"/></svg>
+      </div>
+      <div class="veil" style="background:linear-gradient(to top,rgba(0,0,0,.35),rgba(0,0,0,0) 55%)"></div>
+      <a class="watch" href="#">Watch member stories <svg><use href="#ar-ne"/></svg></a>
+    </div>
+
+    <div class="r1c2"></div>
+
+    <div class="quote rv" style="transition-delay:.06s">
+      <span class="qm"><svg viewBox="0 0 12 12" fill="none"><path d="M1.6 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C4.4 4 3.6 4.9 3.5 6h1.7v4.2H1.6zM6.8 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C9.6 4 8.8 4.9 8.7 6h1.7v4.2H6.8z" fill="#fff"/></svg></span>
+      <p>Possible was <em>like a life vest</em> for me and my family. It gave me the chance to float myself for a little bit longer out in the rough waters.</p>
+      <div class="who">
+        <div><b>Katrina</b><span>Member Since 2023</span></div>
+        <div class="av"><div class="ph" style="background:linear-gradient(160deg,#3b5a86,#22354f)"><svg class="person" viewBox="0 0 300 340" style="--skin:#e0b189;--hair:#8a6a3c;--top:#e8eaec;--top2:#c3c7cb;height:96%"><use href="#person"/></svg></div></div>
+      </div>
+    </div>
+
+    <div class="quote rv">
+      <span class="qm"><svg viewBox="0 0 12 12" fill="none"><path d="M1.6 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C4.4 4 3.6 4.9 3.5 6h1.7v4.2H1.6zM6.8 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C9.6 4 8.8 4.9 8.7 6h1.7v4.2H6.8z" fill="#fff"/></svg></span>
+      <p>I was just amazed at how <em>easy it was</em>.</p>
+      <div class="who">
+        <div><b>Gloria</b><span>Member Since 2023</span></div>
+        <div class="av"><div class="ph" style="background:linear-gradient(160deg,#7a6a58,#4a3f34)"><svg class="person" viewBox="0 0 300 340" style="--skin:#c9976c;--hair:#b9b3ad;--top:#dfe2e5;--top2:#b9bec3;height:96%"><use href="#person"/></svg></div></div>
+      </div>
+    </div>
+
+    <div class="quote rv" style="transition-delay:.06s">
+      <span class="qm"><svg viewBox="0 0 12 12" fill="none"><path d="M1.6 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C4.4 4 3.6 4.9 3.5 6h1.7v4.2H1.6zM6.8 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C9.6 4 8.8 4.9 8.7 6h1.7v4.2H6.8z" fill="#fff"/></svg></span>
+      <p>I'm able to pay it back <em>on my own terms</em> instead of having to worry about paying it back all at once.</p>
+      <div class="who">
+        <div><b>Kristopher</b><span>Member Since 2023</span></div>
+        <div class="av"><div class="ph" style="background:linear-gradient(160deg,#2f4a6b,#1b2c40)"><svg class="person" viewBox="0 0 300 340" style="--skin:#8a5b3c;--hair:#221913;--top:#1f6d4d;--top2:#17573c;height:96%"><use href="#person"/></svg></div></div>
+      </div>
+    </div>
+
+    <div class="quote rv" style="transition-delay:.12s">
+      <span class="qm"><svg viewBox="0 0 12 12" fill="none"><path d="M1.6 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C4.4 4 3.6 4.9 3.5 6h1.7v4.2H1.6zM6.8 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C9.6 4 8.8 4.9 8.7 6h1.7v4.2H6.8z" fill="#fff"/></svg></span>
+      <p>I never have to choose between paying my rent and buying groceries.</p>
+      <div class="who">
+        <div><b>Dakkota</b><span>Member Since 2016</span></div>
+        <div class="av"><div class="ph" style="background:linear-gradient(160deg,#5a4260,#33253a)"><svg class="person" viewBox="0 0 300 340" style="--skin:#6f4429;--hair:#171110;--top:#f2c14e;--top2:#d3a336;height:96%"><use href="#person"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RATINGS MARQUEE ============ -->
+<section class="rate">
+  <div class="track" id="track"></div>
+</section>
+<p class="ratefine">Annual members compensated for sharing their opinion. Results vary. Ratings as of January 2026.</p>
+
+<!-- ============ DARK APP SECTION ============ -->
+<section class="appsec">
+  <div class="wrap appgrid">
+    <div>
+      <div class="iconcluster rv">
+        <i style="width:56px;height:56px;left:0;top:0;background:#1a5df7"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="2.5" width="16" height="19" rx="3" stroke="#fff" stroke-width="1.6"/><path d="M8 8h8M8 12h8M8 16h4.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></i>
+        <i style="width:50px;height:50px;left:64px;top:14px;background:#ffc93c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M15.4 8c-.8-1-2-1.5-3.5-1.5-2 0-3.3 1-3.3 2.4 0 3.7 7.1 1.8 7.1 5.5 0 1.5-1.4 2.6-3.6 2.6-1.6 0-3-.7-3.8-1.8" stroke="#1a1204" stroke-width="1.9" stroke-linecap="round"/></svg></i>
+        <i style="width:44px;height:44px;left:22px;top:66px;background:#3ddc7f"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M8 5.5l10 6.5-10 6.5z" fill="#07160d"/></svg></i>
+        <i style="width:40px;height:40px;left:82px;top:82px;background:#f5a94f"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 16.5l5-5.5 3.6 3.4L20 7" stroke="#221202" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+        <i style="width:34px;height:34px;left:130px;top:34px;background:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.4" stroke="#0b0c0d" stroke-width="1.8"/><path d="M12 7.4V12l3 2" stroke="#0b0c0d" stroke-width="1.8" stroke-linecap="round"/></svg></i>
+      </div>
+
+      <h2 class="h-md rv">We built &ldquo;sh#t happens&rdquo; into this app</h2>
+      <p class="lede rv" style="transition-delay:.06s">Can't make your Possible Loan or Advance payments? Easily move them up to 29 days out from the original due date when you need more time to pay—there's no rescheduling fee and no credit impact.</p>
+
+      <div class="applinks rv" style="transition-delay:.1s">
+        <a class="tlink" href="#">No junk fees <svg class="ar"><use href="#ar-ne"/></svg></a>
+        <a class="tlink" href="#">How to move payments <svg class="ar"><use href="#ar-ne"/></svg></a>
+      </div>
+
+      <a class="btn btn-green rv" href="#" style="transition-delay:.14s">Apply now <svg class="ar"><use href="#ar-ne"/></svg></a>
+    </div>
+
+    <div class="qpair">
+      <div class="quote dark rv">
+        <span class="qm"><svg viewBox="0 0 12 12" fill="none"><path d="M1.6 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C4.4 4 3.6 4.9 3.5 6h1.7v4.2H1.6zM6.8 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C9.6 4 8.8 4.9 8.7 6h1.7v4.2H6.8z" fill="#fff"/></svg></span>
+        <p>I was late, they still gave me a chance.</p>
+        <div class="who">
+          <div><b>Tamika</b><span>Member Since 2024</span></div>
+          <div class="av"><div class="ph" style="background:linear-gradient(160deg,#48607f,#28374a)"><svg class="person" viewBox="0 0 300 340" style="--skin:#7d4f31;--hair:#1b1310;--top:#e5e8ea;--top2:#c0c4c8;height:96%"><use href="#person"/></svg></div></div>
+        </div>
+      </div>
+      <div class="quote dark rv" style="transition-delay:.08s">
+        <span class="qm"><svg viewBox="0 0 12 12" fill="none"><path d="M1.6 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C4.4 4 3.6 4.9 3.5 6h1.7v4.2H1.6zM6.8 7.4c0-2.6 1.5-4.5 3.6-5.2l.5 1.3C9.6 4 8.8 4.9 8.7 6h1.7v4.2H6.8z" fill="#fff"/></svg></span>
+        <p>Possible helps the most because just having an extra little bit to lean on can go a long way.</p>
+        <div class="who">
+          <div><b>Kaylene</b><span>Member Since 2022</span></div>
+          <div class="av"><div class="ph" style="background:linear-gradient(160deg,#6d5a48,#3f342a)"><svg class="person" viewBox="0 0 300 340" style="--skin:#e3b58c;--hair:#7b5a34;--top:#d8dcdf;--top2:#b2b7bb;height:96%"><use href="#person"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ + STAT ============ -->
+<section class="faqsec" id="faq">
+  <div class="wrap">
+    <h2 class="h-md rv">A better way to get<br>fast cash is <span class="mark"><i></i><i></i></span>Possible</h2>
+
+    <div class="faqgrid">
+      <div class="faqcol" id="accs">
+        <div class="acc">
+          <button>How quickly can I get the money? <span class="pm"><svg><use href="#plus"/></svg></span></button>
+          <div class="ans"><p>For 95% of customers, funding occurs within seconds once you're approved and you've chosen instant transfer. Standard ACH transfers take 1–2 business days.</p></div>
+        </div>
+        <div class="acc">
+          <button>What about interest rates? <span class="pm"><svg><use href="#plus"/></svg></span></button>
+          <div class="ans"><p>Possible shows you the total cost up front before you accept anything. There is no compounding interest, no tipping, and no hidden charges — what you see is what you repay.</p></div>
+        </div>
+        <div class="acc">
+          <button>Do you check my credit? <span class="pm"><svg><use href="#plus"/></svg></span></button>
+          <div class="ans"><p>Checking your eligibility never affects your credit score. We look at your banking history rather than relying on a traditional hard credit pull, so members with thin or damaged credit files can still qualify.</p></div>
+        </div>
+        <div class="acc">
+          <button>What if I need more time to pay? <span class="pm"><svg><use href="#plus"/></svg></span></button>
+          <div class="ans"><p>Move payments up to 29 days later than the original due date, right from the app. There is no rescheduling fee and no credit impact.</p></div>
+        </div>
+        <div class="acc">
+          <button>Are there late fees or penalty fees? <span class="pm"><svg><use href="#plus"/></svg></span></button>
+          <div class="ans"><p>Never. Possible does not charge late fees or penalty fees. In 2025, on average, customers saved $300+ in fees compared with traditional payday lenders.</p></div>
+        </div>
+        <div class="acc">
+          <button>Does Possible report to credit bureaus? <span class="pm"><svg><use href="#plus"/></svg></span></button>
+          <div class="ans"><p>Yes. Possible Loan repayments are reported to major credit bureaus, and you can now add eligible bill and rent payments to your report to make credit history progress.</p></div>
+        </div>
+        <div class="acc">
+          <button>Where is Possible available? <span class="pm"><svg><use href="#plus"/></svg></span></button>
+          <div class="ans"><p>Products, terms and availability vary by state and are subject to eligibility. Check our State Licenses page to see what's offered where you live.</p></div>
+        </div>
+      </div>
+
+      <div class="statcol">
+        <h3 class="st-h rv">95% of customers get their <em>money in seconds</em><sup style="font-size:.45em;top:-.9em;position:relative">*</sup>.</h3>
+
+        <div class="trio">
+          <div class="chip floaty" style="position:absolute">
+            <span class="ap"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1.4v9.2M8 3.5c-.5-.6-1.2-.9-2.1-.9-1.2 0-2 .6-2 1.4 0 2.2 4.2 1.1 4.2 3.3 0 .9-.8 1.5-2.1 1.5-1 0-1.8-.4-2.3-1" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/></svg></span>
+            <p><b style="font-weight:600">Your $250 Possible Loan</b> has been deposited!</p>
+          </div>
+
+          <div class="m rv">
+            <div class="ph" style="background:linear-gradient(160deg,#8f4a3c,#5d2f26)">
+              <div class="bokeh" style="width:130px;height:130px;left:-20px;top:-10px;background:#b8604c;opacity:.6"></div>
+              <svg class="person" viewBox="0 0 300 340" style="--skin:#7a4a2c;--hair:#c0392b;--top:#1a1a1c;--top2:#2a2a2d;height:88%"><use href="#person"/></svg>
+            </div>
+            <div class="nm"><b>Renata</b>Member since 2021</div>
+          </div>
+          <div class="m rv" style="transition-delay:.07s">
+            <div class="ph" style="background:linear-gradient(160deg,#4b6b4a,#2c4030)">
+              <div class="bokeh" style="width:130px;height:130px;right:-20px;top:20px;background:#6d8f66;opacity:.6"></div>
+              <svg class="person" viewBox="0 0 300 340" style="--skin:#e8b98f;--hair:#c8a262;--top:#f2f4f6;--top2:#2f4a86;height:88%"><use href="#person"/></svg>
+            </div>
+            <div class="nm"><b>Anna</b>Member since 2018</div>
+          </div>
+          <div class="m rv" style="transition-delay:.14s">
+            <div class="ph" style="background:linear-gradient(160deg,#3f5a7a,#22344a)">
+              <div class="bokeh" style="width:130px;height:130px;left:10px;bottom:-20px;background:#5b7ea6;opacity:.55"></div>
+              <svg class="person" viewBox="0 0 300 340" style="--skin:#6f4429;--hair:#151010;--top:#e6e9eb;--top2:#c4c8cb;height:88%"><use href="#person"/></svg>
+            </div>
+            <div class="nm"><b>Dakkota</b>Member since 2016</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <a class="logo" href="#"><span class="sq"><i></i><i></i></span><span class="wm">Possible</span></a>
+        <p class="blurb">A better way to get fast cash. No late fees, no penalty fees, and months to repay.</p>
+        <div class="stores">
+          <a class="storebtn" href="#">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.8 2.2 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.8-1.2 1.2-2.4 1.2-2.5-.1 0-2.3-.9-2.3-3.4zM14.2 5.9c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-.9 2.8 1 .1 2-.5 2.6-1.3z"/></svg>
+            <span>Download on the<b>App Store</b></span>
+          </a>
+          <a class="storebtn" href="#">
+            <svg viewBox="0 0 24 24"><path d="M3.6 2.4l11 9.6-11 9.6c-.3-.2-.5-.6-.5-1.1V3.5c0-.5.2-.9.5-1.1z" fill="#4285f4"/><path d="M18.4 8.9l-3.8 3.1-2.6-2.3 2.6-2.3z" fill="#ea4335"/><path d="M18.4 8.9l2.4 1.3c.9.5.9 1.9 0 2.4l-2.4 1.3-3.8-2.9z" fill="#fbbc04"/><path d="M14.6 12l-2.6 2.3-8.4 7.3c.3.2.8.2 1.3-.1l13.5-7.5z" fill="#34a853"/></svg>
+            <span>Get it on<b>Google Play</b></span>
+          </a>
+        </div>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.6 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.8V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.4V13h2.7v8z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.2l-4.9-6.4L5.1 21H2l7.3-8.3L2.5 3h6.4l4.4 5.8zm-1.1 16.1h1.7L7.7 4.8H5.9z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.3 2.5c.4 2.4 1.8 3.8 4.2 4v2.8c-1.4.1-2.7-.3-4.1-1.2v5.3c0 6.7-7.3 8.8-10.3 4-1.9-3.1-.7-8.5 5.4-8.7v2.9c-.5.1-1 .2-1.4.4-1.4.5-2.2 1.4-2 3 .4 3 5.9 3.9 5.4-2V2.5z"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="#loan">Possible Loan</a></li>
+          <li><a href="#advance">Possible Advance</a></li>
+          <li><a href="#credit">Credit Reporting</a></li>
+          <li><a href="#">Pay Over Time</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#reviews">Member reviews</a></li>
+          <li><a href="#">Financial literacy</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Mission</h5>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Our impact</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Help center</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">State Licenses</a></li>
+          <li><a href="#">Sources &amp; Methodology</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="legal">
+      <p>*For 95% of customers, funding occurs within seconds but ACH transfers take 1–2 business days. Max amount not typical and will vary based on your finances. First advances average $85. Non-member max is $150. Products, amounts and terms vary by state and are subject to eligibility.</p>
+      <p>Ratings as of January 2026. We never sell your data. Loans issued by Possible or Coastal Community Bank. Terms vary by state. Subject to eligibility. View our <a href="#">State Licenses</a>. See <a href="#">Sources &amp; Methodology</a>.</p>
+    </div>
+
+    <div class="copyr">
+      <span>© 2026 Possible Financial Inc. All rights reserved.</span>
+      <span class="lks"><a href="#">Terms of Use</a><a href="#">Privacy Policy</a><a href="#">Electronic Communications Consent</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- announcement ---------- */
+  var ann = document.getElementById('announce');
+  document.getElementById('closeAnn').addEventListener('click', function(){ ann.classList.add('hide'); });
+
+  /* ---------- sticky nav state ---------- */
+  var nav = document.getElementById('nav');
+  var hero = document.querySelector('.hero');
+  function onScroll(){
+    var h = hero ? hero.offsetTop + hero.offsetHeight - 64 : 500;
+    if (window.scrollY > h) nav.classList.add('solid'); else nav.classList.remove('solid');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- hero carousel ---------- */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('#shot .slide'));
+  var idx = 0, timer;
+  function go(n){
+    idx = (n + slides.length) % slides.length;
+    slides.forEach(function(s,i){ s.classList.toggle('on', i === idx); });
+  }
+  function start(){ stop(); timer = setInterval(function(){ go(idx+1); }, 6000); }
+  function stop(){ if (timer) clearInterval(timer); }
+  document.getElementById('nextS').addEventListener('click', function(){ go(idx+1); start(); });
+  document.getElementById('prevS').addEventListener('click', function(){ go(idx-1); start(); });
+  start();
+
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {rootMargin:'0px 0px -12% 0px', threshold:0.08});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  /* ---------- statement word cascade ---------- */
+  var big = document.getElementById('bigStatement');
+  (function splitWords(node){
+    var kids = Array.prototype.slice.call(node.childNodes);
+    kids.forEach(function(n){
+      if (n.nodeType === 3){
+        var parts = n.textContent.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        parts.forEach(function(p){
+          if (!p.trim()){ frag.appendChild(document.createTextNode(p)); return; }
+          var s = document.createElement('span');
+          s.className = 'w'; s.textContent = p;
+          frag.appendChild(s);
+        });
+        node.replaceChild(frag, n);
+      } else if (n.nodeType === 1 && n.classList.contains('ic')){
+        n.classList.add('w');
+      }
+    });
+  })(big);
+  Array.prototype.slice.call(big.querySelectorAll('.w')).forEach(function(w,i){
+    w.style.transitionDelay = (i * 0.018) + 's';
+  });
+  var io2 = new IntersectionObserver(function(en){
+    en.forEach(function(e){ if (e.isIntersecting){ big.classList.add('go'); io2.disconnect(); } });
+  }, {threshold:0.15});
+  io2.observe(big);
+
+  /* ---------- savings odometer ---------- */
+  var odo = document.getElementById('odo');
+  var target = parseInt(odo.getAttribute('data-target'), 10);
+  function render(v){
+    var s = '$' + v.toLocaleString('en-US');
+    if (odo.childElementCount !== s.length){
+      odo.innerHTML = '';
+      for (var i=0;i<s.length;i++){
+        var c = document.createElement('span');
+        c.className = 'cell' + ((s[i] === ',' || s[i] === '$') ? ' sep' : '');
+        c.textContent = s[i];
+        odo.appendChild(c);
+      }
+    } else {
+      for (var j=0;j<s.length;j++){
+        if (odo.children[j].textContent !== s[j]) odo.children[j].textContent = s[j];
+      }
+    }
+  }
+  render(0);
+  var counted = false;
+  var io3 = new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if (e.isIntersecting && !counted){
+        counted = true;
+        var t0 = null, dur = 2400;
+        function step(ts){
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 4);
+          render(Math.floor(target * eased));
+          if (p < 1) requestAnimationFrame(step); else render(target);
+        }
+        requestAnimationFrame(step);
+      }
+    });
+  }, {threshold:0.35});
+  io3.observe(odo);
+
+  /* ---------- ratings marquee ---------- */
+  var STARS = '<span class="st">' +
+      '<svg viewBox="0 0 20 20"><use href="#star"/></svg>'.repeat(5) + '</span>';
+  var LAUREL_L = '<svg class="lau" viewBox="0 0 24 50" fill="none">' +
+    '<path d="M19 2C9 8 4 18 5 30c1 11 7 16 11 18" stroke="#1db954" stroke-width="2.2" stroke-linecap="round"/>' +
+    '<path d="M16 8c-4-1-7 1-8 4 3 1 6 0 8-4zM11 16c-4-1-7 1-8 4 3 1 6 0 8-4zM8 25c-4 0-6 2-7 5 3 1 6 0 7-5zM7 34c-3 1-5 3-5 6 3 0 6-2 5-6zM8 42c-3 1-4 4-4 6 3 0 5-2 4-6z" fill="#1db954"/>' +
+    '</svg>';
+  var LAUREL_R = '<svg class="lau" viewBox="0 0 24 50" fill="none" style="transform:scaleX(-1)">' +
+    '<path d="M19 2C9 8 4 18 5 30c1 11 7 16 11 18" stroke="#1db954" stroke-width="2.2" stroke-linecap="round"/>' +
+    '<path d="M16 8c-4-1-7 1-8 4 3 1 6 0 8-4zM11 16c-4-1-7 1-8 4 3 1 6 0 8-4zM8 25c-4 0-6 2-7 5 3 1 6 0 7-5zM7 34c-3 1-5 3-5 6 3 0 6-2 5-6zM8 42c-3 1-4 4-4 6 3 0 5-2 4-6z" fill="#1db954"/>' +
+    '</svg>';
+
+  var APPLE = '<span class="badge" style="background:#000"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.8 2.2 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.8-1.2 1.2-2.4 1.2-2.5-.1 0-2.3-.9-2.3-3.4zM14.2 5.9c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-.9 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>';
+  var PLAY = '<span class="badge" style="background:#fff;border:1px solid var(--line)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3.6 2.4l11 9.6-11 9.6c-.3-.2-.5-.6-.5-1.1V3.5c0-.5.2-.9.5-1.1z" fill="#4285f4"/><path d="M18.4 8.9l-3.8 3.1-2.6-2.3 2.6-2.3z" fill="#ea4335"/><path d="M18.4 8.9l2.4 1.3c.9.5.9 1.9 0 2.4l-2.4 1.3-3.8-2.9z" fill="#fbbc04"/><path d="M14.6 12l-2.6 2.3-8.4 7.3c.3.2.8.2 1.3-.1l13.5-7.5z" fill="#34a853"/></svg></span>';
+  var TP = '<span class="badge" style="background:#000"><svg width="24" height="24" viewBox="0 0 20 20" fill="#00b67a"><use href="#star"/></svg></span>';
+  var BBB = '<span class="badge" style="background:#000"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.6c1.9 2.2 3.6 3.6 3.6 6 0 1.6-1.1 2.8-2.3 3.3.5-1.4.2-2.9-1.3-4.3-.3 2.5-2.4 3-3.4 5-.9 1.9.2 4.1 2.3 4.6-2.6.2-4.8-1.6-4.8-4.1 0-1.6.8-2.9 1.7-4-.1 1 .2 1.9.8 2.4-.3-2.6 1.4-4.7 3.4-8.9z"/><path d="M6.4 19h11.2v2.2H6.4z"/></svg></span>';
+
+  var CELLS = [
+    '<div class="rcell reviews">' + LAUREL_L + '<div class="mid">' + STARS + '<div class="tx">More than 150,000 5-star reviews</div></div>' + LAUREL_R + '</div>',
+    '<div class="rcell"><span class="n">4.4 stars</span><span class="s">Google Play</span>' + PLAY + '</div>',
+    '<div class="rcell"><span class="n">4.8 stars</span><span class="s">App Store</span>' + APPLE + '</div>',
+    '<div class="rcell"><span class="n">4.5 stars</span><span class="s">Trustpilot</span>' + TP + '</div>',
+    '<div class="rcell"><span class="n">A+</span><span class="s">Better Business Bureau</span>' + BBB + '</div>'
+  ];
+  var one = CELLS.join('');
+  document.getElementById('track').innerHTML = one + one + one + one;
+
+  /* ---------- accordion ---------- */
+  var accs = Array.prototype.slice.call(document.querySelectorAll('#accs .acc'));
+  accs.forEach(function(a){
+    var btn = a.querySelector('button'), ans = a.querySelector('.ans');
+    btn.addEventListener('click', function(){
+      var open = a.classList.contains('open');
+      accs.forEach(function(o){ o.classList.remove('open'); o.querySelector('.ans').style.maxHeight = null; });
+      if (!open){ a.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+    });
+  });
+
+  /* ---------- subtle parallax on product panels ---------- */
+  var panes = Array.prototype.slice.call(document.querySelectorAll('.pane-r .phone, .pane-r .chip, .pane-r .darkcard'));
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      panes.forEach(function(el){
+        var r = el.getBoundingClientRect();
+        var mid = (r.top + r.height/2 - window.innerHeight/2) / window.innerHeight;
+        el.style.setProperty('--par', (mid * -14).toFixed(2) + 'px');
+        if (!el.classList.contains('floaty')) el.style.transform = 'translateY(' + (mid * -14).toFixed(2) + 'px)';
+      });
+      ticking = false;
+    });
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
