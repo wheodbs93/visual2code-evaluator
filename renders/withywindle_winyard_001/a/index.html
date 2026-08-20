@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Withywindle Winyard — Old Vines, Slow Water. Since 1583.</title>
+<meta name="description" content="Withywindle Winyard. Seventeen generations of red, white and rosé grown on the banks of the Withywindle. Natural husbandry, long tables, and nothing hurried." />
+
+<!--
+================================================================================
+ design.md — WITHYWINDLE WINYARD · DESIGN DIRECTION
+ (the workspace file write was declined by the sandbox, so the design brief is
+  carried here, at the head of the deliverable it governs)
+================================================================================
+
+1. POSITION
+   A nearly four-and-a-half-century-old vineyard on a slow river, run by people
+   who believe in doing very little, very carefully. Old, warm, pastoral, a
+   little playful. Whimsy lives in the COPY and the DETAIL (a second-breakfast
+   tasting, a wine called Bumbling Rosé), never in ornament. No gothic, no
+   medieval, no Ren Faire.
+
+2. TYPOGRAPHY — two sizes that matter, and the gap between them
+   Display : high-contrast Didone serif (Didot / Bodoni 72 / Playfair / Hoefler)
+             uppercase, clamp(3.2rem → 11vw), line-height .88–.95, tracking .02em
+   Accent  : formal script (Snell Roundhand / Apple Chancery), sentence case,
+             overlapping the lower-left of the Didone title, rotated ~-3°
+   Editorial: the same Didone set UPPERCASE + CENTRED at 1.34 leading for
+             manifesto paragraphs — the reference's signature move
+   Utility : neutral grotesk (Helvetica Neue / Inter), 10–11px, 700, uppercase,
+             tracking .14–.20em. Nav, eyebrows, captions, footer. Never >12px.
+
+3. COLOUR — warm neutrals · earthy greens · deep wine, all low-saturation/filmic
+   paper #F7F2E6 · paper-2 #FCF9F1 · sage #C7CDB6 · sage-d #9BA588
+   olive #6E7B54 · moss #414C36 · bark #3A362E · bark-d #24211A · ink #1C1A15
+   wine #5E2130 · wine-l #8A3B45 · rosé #C98F80 · straw #C9A961 · cream #F1E9D8
+   Relationships kept from the reference: cream-on-warm-dark, near-black-on-cream,
+   hairline rules at 8–14% opacity. Wine and straw appear only in small doses.
+
+4. GRID & SCALE
+   Gutter clamp(20px,4.5vw,72px). Section rhythm clamp(96px,14vh,200px).
+   Editorial asymmetry: images at 42/58/66% widths, offset from centre; prose
+   columns 48–62ch. The reference's scale inversion is preserved — a 150–210px
+   square image adrift in whitespace above an enormous centred paragraph, set
+   against full-bleed 16:9 landscapes elsewhere. Product grids run edge-to-edge
+   with 3–6px gaps.
+
+5. PAGE RHYTHM (light/dark alternation, dense always followed by spacious)
+   Hero → Manifesto (dark) → PATIENCE (paper) → HUSBANDRY (sage) →
+   THE WINES (dark, 4 product bands) → THE LONG TABLE (paper) → STORY + 1583 →
+   VISITS (dark) → VISIT US (deep dark) → micro footer.
+
+6. IMAGERY
+   All photography is originally composed INLINE SVG — layered gradient
+   landscapes with turbulence grain and one shared warm film grade
+   (saturate .88 / contrast 1.03). Subjects: willow-lined river bends, vine rows
+   in perspective, kitchen gardens and beehives, stone and timber, a lantern-lit
+   cellar, and long trestle tables loaded with food. Bottle shots follow the
+   reference: one bottle, hard warm side-light, coloured seamless backdrop, one
+   prop and its shadow.
+
+7. UI RESTRAINT
+   Micro-nav in the hero (MENU · crest · VISIT); a cream rail of six links pinned
+   to the hero's lower edge that then sticks. Fixed rotated MENU / VISIT labels in
+   the margins thereafter. Buttons are never filled — 10px sans with an underline
+   that wipes in from the left. "Cards" are just image + tiny label + serif name.
+   Rules are 1px at 12%. Radius 0 everywhere but the crest.
+
+8. MOTION — subtle, slow, physical. Nothing bounces.
+   Reveal: opacity 0→1 + translateY 28px, 900ms cubic-bezier(.22,.61,.36,1),
+   staggered 60–90ms. Display type: word-by-word mask reveal (translateY 110%→0).
+   Hero parallax at .25×/.5×/.85×, 40s ambient mist drift. Images enter at
+   scale(1.06) and settle over 1.4s; hover 1.03 + 6% brightness. Underlines wipe
+   420ms. All of it honours prefers-reduced-motion.
+
+9. WHERE ORIGINALITY COMES FROM
+   New name, crest, voice and river-and-willow motif; an original range (Old
+   Withy, Bombadil's Own, Goldberry, Bumbling Rosé, Second Breakfast Frizzante);
+   original section architecture; and entirely newly drawn imagery. What is
+   PRESERVED is the design language, not the site.
+================================================================================
+-->
+
+<style>
+/* ─────────────────────────────  TOKENS  ───────────────────────────── */
+:root{
+  --paper:#F7F2E6; --paper-2:#FCF9F1; --paper-3:#EFE9D9;
+  --sage:#C7CDB6;  --sage-d:#9BA588;  --sage-l:#DDE0CE;
+  --olive:#6E7B54; --moss:#414C36;
+  --bark:#3A362E;  --bark-d:#24211A;  --ink:#1C1A15;
+  --wine:#5E2130;  --wine-l:#8A3B45;  --rose:#C98F80;
+  --straw:#C9A961; --cream:#F1E9D8;
+
+  --serif:"Didot","Bodoni 72","Bodoni MT","Playfair Display","Hoefler Text","Big Caslon",Garamond,"Times New Roman",Georgia,serif;
+  --script:"Snell Roundhand","Apple Chancery","Zapf Chancery","Edwardian Script ITC","Brush Script MT",cursive;
+  --sans:"Helvetica Neue","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+
+  --gut:clamp(18px,4.5vw,72px);
+  --sec:clamp(92px,13vh,196px);
+  --rail:58px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --grade:saturate(.88) contrast(1.03) brightness(1.005);
+}
+
+/* ─────────────────────────────  RESET  ───────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,p,figure,blockquote{margin:0}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+::selection{background:var(--wine);color:var(--cream)}
+
+/* ─────────────────────────  TYPE PRIMITIVES  ─────────────────────── */
+.lbl{
+  font-family:var(--sans);font-size:10px;font-weight:700;line-height:1;
+  letter-spacing:.19em;text-transform:uppercase;
+}
+.lbl-sm{font-size:9px;letter-spacing:.22em}
+.d1{
+  font-family:var(--serif);font-weight:400;font-style:normal;
+  text-transform:uppercase;letter-spacing:.02em;line-height:.9;
+  font-size:clamp(3.1rem,11.2vw,11rem);
+}
+.d2{
+  font-family:var(--serif);font-weight:400;
+  text-transform:uppercase;letter-spacing:.035em;line-height:.94;
+  font-size:clamp(2.5rem,8.2vw,7.6rem);
+}
+.d3{
+  font-family:var(--serif);font-weight:400;
+  text-transform:uppercase;letter-spacing:.045em;line-height:1;
+  font-size:clamp(1.6rem,3.6vw,3.1rem);
+}
+.script{
+  font-family:var(--script);font-style:italic;text-transform:none;
+  letter-spacing:0;line-height:.8;
+}
+.manifesto{
+  font-family:var(--serif);text-transform:uppercase;text-align:center;
+  font-size:clamp(1rem,1.92vw,1.85rem);line-height:1.36;letter-spacing:.012em;
+  max-width:min(46ch,88vw);margin-inline:auto;
+}
+.prose{
+  font-family:var(--serif);font-size:clamp(1rem,1.15vw,1.18rem);
+  line-height:1.62;letter-spacing:.005em;max-width:56ch;
+}
+.micro{
+  font-family:var(--sans);font-size:10.5px;line-height:1.7;
+  letter-spacing:.055em;
+}
+.just{text-align:justify;text-align-last:center}
+
+/* ────────────────────────────  LAYOUT  ──────────────────────────── */
+.wrap{padding-inline:var(--gut)}
+.sec{padding-block:var(--sec)}
+.rule{height:1px;background:currentColor;opacity:.14;border:0;margin:0}
+.dash{width:26px;height:1px;background:currentColor;opacity:.5;margin:0 auto 22px}
+
+.on-dark{background:var(--bark);color:var(--cream)}
+.on-dark-d{background:var(--bark-d);color:var(--cream)}
+.on-sage{background:var(--sage);color:#2B3122}
+.on-paper2{background:var(--paper-2)}
+
+.sechead{text-align:center;position:relative}
+.sechead .eyebrow{opacity:.55;margin-bottom:20px}
+.sechead .cap{
+  max-width:min(58ch,86vw);margin:26px auto 0;opacity:.62;
+  font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;line-height:1.85;
+}
+.titlestack{display:inline-block;position:relative}
+.titlestack .script{
+  position:absolute;left:8%;bottom:-.34em;
+  font-size:clamp(2.2rem,6.4vw,5.6rem);transform:rotate(-3deg);
+  color:var(--wine-l);pointer-events:none;white-space:nowrap;
+}
+.on-dark .titlestack .script,.on-dark-d .titlestack .script{color:var(--straw);opacity:.9}
+
+.tri{
+  display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;
+  gap:12px;opacity:.5;
+}
+.tri>*:nth-child(1){text-align:left}
+.tri>*:nth-child(2){text-align:center}
+.tri>*:nth-child(3){text-align:right}
+
+/* ──────────────────────────  MEDIA / GRADE  ─────────────────────── */
+.fig{position:relative;overflow:hidden;background:var(--paper-3)}
+.fig>svg{width:100%;height:100%;display:block;filter:var(--grade)}
+.fig .inner{position:absolute;inset:0;transform:scale(1.07);transition:transform 1.5s var(--ease)}
+.fig.in .inner{transform:scale(1)}
+.fig .inner>svg{width:100%;height:100%}
+.r169{aspect-ratio:16/9}
+.r43{aspect-ratio:4/3}
+.r11{aspect-ratio:1/1}
+.r34{aspect-ratio:3/4}
+.r219{aspect-ratio:21/9}
+.cap{font-family:var(--sans)}
+figcaption{margin-top:14px;opacity:.55}
+
+/* ─────────────────────────────  HERO  ───────────────────────────── */
+.hero{
+  position:relative;height:calc(100svh - var(--rail));min-height:560px;
+  overflow:hidden;background:#9FB09A;color:var(--cream);
+}
+.hero-media{position:absolute;inset:-8% 0 -8% 0;will-change:transform}
+.hero-media svg{width:100%;height:100%;object-fit:cover;filter:var(--grade)}
+.hero-scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 52%,rgba(30,26,18,.30) 0%,rgba(30,26,18,0) 62%),
+    linear-gradient(to bottom,rgba(28,26,21,.34),rgba(28,26,21,0) 26%,rgba(28,26,21,0) 62%,rgba(28,26,21,.30));
+}
+.hero-top{
+  position:absolute;top:0;left:0;right:0;z-index:6;
+  padding:clamp(18px,2.6vw,32px) var(--gut);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:16px;
+}
+.hero-top .lbl{color:var(--cream)}
+.hero-top>*:nth-child(3){justify-self:end}
+.crest{display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.crest svg{width:38px;height:38px}
+.crest .wm{
+  font-family:var(--serif);font-size:clamp(15px,1.5vw,20px);
+  letter-spacing:.24em;text-transform:uppercase;line-height:1;
+}
+.crest .wm2{font-size:8.5px;font-weight:700;letter-spacing:.32em;opacity:.72;text-transform:uppercase}
+
+.hero-type{
+  position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:0 var(--gut);will-change:transform;
+}
+.hero-type .d1{text-shadow:0 2px 40px rgba(28,24,16,.28)}
+.hero-meta{
+  width:min(760px,84vw);display:flex;justify-content:space-between;
+  margin:.18em 0 .1em;opacity:.9;
+}
+.scrollcue{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  z-index:6;display:flex;flex-direction:column;align-items:center;gap:9px;opacity:.78;
+}
+.scrollcue i{display:block;width:1px;height:34px;background:currentColor;transform-origin:top;animation:cue 2.6s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:0}35%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0;transform-origin:bottom}}
+
+/* ────────────────────────────  RAIL  ────────────────────────────── */
+.rail{
+  position:sticky;top:0;z-index:40;height:var(--rail);
+  background:var(--paper-2);color:var(--ink);
+  border-bottom:1px solid rgba(28,26,21,.10);
+  display:flex;align-items:center;
+}
+.rail ul{
+  width:100%;display:grid;grid-template-columns:repeat(6,1fr);
+  padding-inline:var(--gut);
+}
+.rail li{text-align:center}
+.rail li:first-child{text-align:left}
+.rail li:last-child{text-align:right}
+.rail a{position:relative;display:inline-block;padding-block:6px}
+.rail a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:var(--wine);transform:scaleX(0);transform-origin:left;
+  transition:transform .42s var(--ease);
+}
+.rail a:hover::after{transform:scaleX(1)}
+
+/* ───────────────────────  SIDE FIXED LABELS  ────────────────────── */
+.side{
+  position:fixed;top:50%;z-index:35;mix-blend-mode:difference;color:#8f8f8f;
+  opacity:0;transition:opacity .6s var(--ease);pointer-events:none;
+}
+.side.show{opacity:1;pointer-events:auto}
+.side.l{left:14px;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl}
+.side.r{right:14px;transform:translateY(-50%);writing-mode:vertical-rl}
+
+/* ────────────────────────────  MENU  ────────────────────────────── */
+.overlay{
+  position:fixed;inset:0;z-index:90;background:var(--paper-2);color:var(--ink);
+  clip-path:inset(0 0 100% 0);transition:clip-path .82s var(--ease);
+  display:flex;flex-direction:column;
+}
+.overlay.open{clip-path:inset(0 0 0 0)}
+.overlay .obar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:clamp(18px,2.6vw,32px) var(--gut);
+}
+.overlay nav{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:0 var(--gut) 6vh;
+}
+.overlay nav a{
+  display:block;font-family:var(--serif);text-transform:uppercase;
+  font-size:clamp(2rem,7vw,5.4rem);line-height:1.06;letter-spacing:.03em;
+  padding-block:.06em;transition:color .4s var(--ease),transform .5s var(--ease);
+  opacity:0;transform:translateY(26px);
+}
+.overlay.open nav a{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d,0s),transform .7s var(--ease) var(--d,0s),color .4s var(--ease)}
+.overlay nav a:hover{color:var(--wine)}
+.overlay nav a small{
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;
+  vertical-align:super;opacity:.4;margin-left:14px;
+}
+.overlay .ofoot{padding:0 var(--gut) clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;opacity:.6}
+
+/* ───────────────────────────  REVEALS  ──────────────────────────── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .95s var(--ease),transform .95s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.mw{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.045em}
+.mw>i{display:inline-block;font-style:inherit;transform:translateY(112%);transition:transform 1.05s var(--ease)}
+.split.in .mw>i{transform:translateY(0)}
+
+/* ───────────────────────  EDITORIAL ROWS  ───────────────────────── */
+.rows{margin-top:clamp(56px,7vw,104px)}
+.erow{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  gap:clamp(24px,3vw,52px);align-items:start;
+  padding-block:clamp(36px,5vw,66px);border-top:1px solid rgba(28,26,21,.12);
+}
+@media(min-width:820px){
+  .erow{grid-template-columns:190px minmax(0,1fr);gap:clamp(40px,7vw,120px)}
+  .erow.flip{grid-template-columns:minmax(0,1fr) 190px}
+  .erow.flip .erow-media{order:2}
+  .erow.flip .erow-body{order:1;justify-self:end}
+}
+.erow-media{width:min(190px,52vw)}
+.erow-body{max-width:52ch}
+.erow-body .lbl{opacity:.5;display:block;margin-bottom:16px}
+
+/* ───────────────────────────  WINES  ────────────────────────────── */
+.band{padding-block:clamp(58px,7vw,110px)}
+.band+.band{border-top:1px solid rgba(241,233,216,.10)}
+.grid3{display:grid;grid-template-columns:1fr;gap:4px;margin-top:clamp(34px,4vw,58px)}
+@media(min-width:700px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.grid2{display:grid;grid-template-columns:1fr;gap:4px;margin-top:clamp(34px,4vw,58px)}
+@media(min-width:700px){.grid2{grid-template-columns:repeat(2,1fr)}}
+.pcard .fig{aspect-ratio:4/5}
+.pcard .fig .inner{transition:transform 1.5s var(--ease),filter .9s var(--ease)}
+.pcard:hover .fig .inner{transform:scale(1.035);filter:brightness(1.06)}
+.pcard .plbl{display:flex;justify-content:space-between;gap:12px;opacity:.45;margin-bottom:12px}
+.pcard .pname{font-family:var(--serif);font-size:clamp(1.15rem,1.9vw,1.6rem);letter-spacing:.05em;text-transform:uppercase;margin-top:16px;line-height:1.15}
+.pcard .pnote{font-family:var(--serif);font-size:.95rem;opacity:.62;margin-top:7px;line-height:1.5}
+.pcard .pmore{margin-top:14px;display:inline-block;position:relative;opacity:.55;padding-bottom:4px}
+.pcard .pmore::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .42s var(--ease)}
+.pcard:hover .pmore::after{transform:scaleX(1)}
+.pcard:hover .pmore{opacity:1}
+
+/* ───────────────────────────  TABLE  ────────────────────────────── */
+.split2{display:grid;grid-template-columns:1fr;gap:clamp(30px,4vw,60px);align-items:end}
+@media(min-width:900px){.split2{grid-template-columns:1.35fr .85fr;gap:clamp(40px,6vw,110px)}}
+
+/* ───────────────────────────  STORY  ────────────────────────────── */
+.scatter{position:relative;margin-top:clamp(46px,6vw,84px);min-height:clamp(300px,38vw,470px)}
+.scatter .ph{position:absolute;box-shadow:0 22px 50px rgba(28,24,16,.16)}
+.scatter .ph:nth-child(1){left:0;top:6%;width:clamp(150px,23vw,300px);transform:rotate(-6.5deg)}
+.scatter .ph:nth-child(2){left:34%;top:22%;width:clamp(160px,25vw,330px);transform:rotate(2.4deg)}
+.scatter .ph:nth-child(3){right:1%;top:0;width:clamp(140px,21vw,280px);transform:rotate(6deg);filter:grayscale(1) contrast(1.06)}
+@media(max-width:700px){
+  .scatter{min-height:0;display:grid;gap:16px;grid-template-columns:1fr 1fr}
+  .scatter .ph{position:static;width:auto;transform:none!important;box-shadow:none}
+  .scatter .ph:nth-child(2){grid-column:span 2}
+}
+.bignum{
+  font-family:var(--serif);text-align:center;line-height:.86;letter-spacing:.02em;
+  font-size:clamp(4.6rem,17vw,15rem);margin-top:clamp(30px,4vw,54px);
+}
+
+/* ───────────────────────────  VISITS  ───────────────────────────── */
+.visit{padding-block:clamp(60px,8vw,120px)}
+.visit+.visit{border-top:1px solid rgba(241,233,216,.10)}
+.visit .fig{max-width:min(1000px,84vw);margin:clamp(34px,4vw,56px) auto 0}
+.visit .vnote{max-width:min(76ch,88vw);margin:clamp(22px,3vw,36px) auto 0;opacity:.6;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;line-height:1.9}
+
+/* ──────────────────────────  CONTACT  ───────────────────────────── */
+.contact{text-align:center}
+.contact .lock{position:relative;display:inline-block;margin-bottom:clamp(18px,2vw,26px)}
+.contact .lock .script{
+  position:absolute;left:50%;top:-.52em;transform:translateX(-50%) rotate(-2deg);
+  font-size:clamp(2.3rem,7vw,5.4rem);color:var(--cream);white-space:nowrap;
+}
+.bigaddr{
+  font-family:var(--serif);text-transform:uppercase;letter-spacing:.03em;
+  font-size:clamp(1.5rem,4.4vw,3.6rem);line-height:1.14;
+}
+.bigmail{
+  font-family:var(--serif);text-transform:uppercase;letter-spacing:.03em;
+  font-size:clamp(1.25rem,3.6vw,3rem);line-height:1.24;
+}
+.bigmail a{display:block;transition:color .4s var(--ease)}
+.bigmail a:hover{color:var(--straw)}
+.cinfo{
+  display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,60px);
+  padding-block:clamp(44px,6vw,78px);text-align:left;
+}
+@media(min-width:900px){.cinfo{grid-template-columns:1fr 1fr;align-items:start}}
+.cinfo .h{opacity:.45;display:block;margin-bottom:16px}
+.cinfo .hours{font-family:var(--serif);text-transform:uppercase;font-size:clamp(1.05rem,1.9vw,1.6rem);line-height:1.42;letter-spacing:.03em;text-align:right}
+@media(max-width:899px){.cinfo .hours{text-align:left}}
+.foot{
+  display:grid;grid-template-columns:1fr;gap:26px;
+  padding-block:clamp(28px,3vw,44px);opacity:.55;
+}
+@media(min-width:820px){.foot{grid-template-columns:1fr 1.1fr 1fr}
+  .foot>*:nth-child(2){text-align:center}
+  .foot>*:nth-child(3){text-align:right}
+}
+.foot a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
+
+/* ─────────────────────────  NEWSLETTER  ─────────────────────────── */
+.signup{display:flex;gap:14px;align-items:center;border-bottom:1px solid rgba(241,233,216,.28);padding-bottom:10px;max-width:420px}
+.signup input{
+  flex:1;background:none;border:0;outline:none;color:inherit;
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+}
+.signup input::placeholder{color:currentColor;opacity:.42}
+.signup button{white-space:nowrap;position:relative;padding-bottom:3px}
+.signup button::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .42s var(--ease)}
+.signup button:hover::after{transform:scaleX(1)}
+
+/* ───────────────────────  MARQUEE STRIP  ───────────────────────── */
+.strip{overflow:hidden;border-block:1px solid rgba(28,26,21,.12);padding-block:16px;background:var(--paper-2)}
+.strip .track{display:flex;gap:52px;white-space:nowrap;width:max-content;animation:mq 46s linear infinite}
+.strip span{opacity:.5}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.001s!important}
+  .rv,.split .mw>i{opacity:1!important;transform:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════  SHARED SVG DEFS  ══════════════════════ -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+<defs>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <filter id="blurS"><feGaussianBlur stdDeviation="5"/></filter>
+  <filter id="blurM"><feGaussianBlur stdDeviation="16"/></filter>
+  <filter id="blurL"><feGaussianBlur stdDeviation="46"/></filter>
+
+  <linearGradient id="skyHero" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#93A692"/><stop offset=".34" stop-color="#BFC3A2"/>
+    <stop offset=".66" stop-color="#E6D3A5"/><stop offset="1" stop-color="#F5E5C2"/>
+  </linearGradient>
+  <linearGradient id="skyMorn" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#B9C4B2"/><stop offset=".55" stop-color="#DFDCC2"/><stop offset="1" stop-color="#F3EBD5"/>
+  </linearGradient>
+  <linearGradient id="skyDusk" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#5C6355"/><stop offset=".48" stop-color="#9A8E६F"/><stop offset="1" stop-color="#D8B98A"/>
+  </linearGradient>
+  <linearGradient id="skyEve" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#6B7263"/><stop offset=".5" stop-color="#A79878"/><stop offset="1" stop-color="#DCBC90"/>
+  </linearGradient>
+  <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFEEC4" stop-opacity=".92"/>
+    <stop offset=".45" stop-color="#F6DCA4" stop-opacity=".42"/>
+    <stop offset="1" stop-color="#F6DCA4" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#FFFDF3" stop-opacity="0"/>
+    <stop offset=".5" stop-color="#FFFDF3" stop-opacity=".62"/>
+    <stop offset="1" stop-color="#FFFDF3" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#C9C9A8"/><stop offset=".5" stop-color="#EADFB6"/><stop offset="1" stop-color="#F3E6C0"/>
+  </linearGradient>
+  <linearGradient id="waterCool" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#A9B4A0"/><stop offset=".55" stop-color="#D2D6BC"/><stop offset="1" stop-color="#BDC3A6"/>
+  </linearGradient>
+  <radialGradient id="vig" cx=".5" cy=".48" r=".78">
+    <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#241F14" stop-opacity=".42"/>
+  </radialGradient>
+  <radialGradient id="lamp" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFDFA0" stop-opacity=".95"/>
+    <stop offset=".4" stop-color="#E8B濃66" stop-opacity=".35"/>
+    <stop offset="1" stop-color="#E8B166" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#B9AE97"/><stop offset="1" stop-color="#8E856F"/>
+  </linearGradient>
+
+  <pattern id="rows" width="17" height="20" patternUnits="userSpaceOnUse" patternTransform="skewX(-9)">
+    <rect width="7" height="20" fill="#2F3A25" opacity=".26"/>
+  </pattern>
+  <pattern id="rowsFar" width="11" height="20" patternUnits="userSpaceOnUse" patternTransform="skewX(-6)">
+    <rect width="4.5" height="20" fill="#2F3A25" opacity=".19"/>
+  </pattern>
+  <pattern id="beds" width="26" height="14" patternUnits="userSpaceOnUse">
+    <rect width="26" height="6" fill="#4E5C38" opacity=".5"/>
+  </pattern>
+  <pattern id="masonry" width="54" height="26" patternUnits="userSpaceOnUse">
+    <rect width="54" height="26" fill="none"/>
+    <rect x="0" y="0" width="52" height="24" fill="#000" opacity=".07"/>
+    <rect x="26" y="13" width="52" height="24" fill="#000" opacity=".05"/>
+  </pattern>
+
+  <!-- willow -->
+  <symbol id="willow" viewBox="0 0 200 270">
+    <path d="M96 270 L92 168 L84 132 L94 128 L102 152 L106 128 L114 132 L108 170 L110 270 Z" fill="currentColor"/>
+    <ellipse cx="100" cy="88" rx="74" ry="44" fill="currentColor"/>
+    <ellipse cx="46" cy="106" rx="38" ry="28" fill="currentColor"/>
+    <ellipse cx="152" cy="102" rx="40" ry="28" fill="currentColor"/>
+    <ellipse cx="100" cy="118" rx="58" ry="30" fill="currentColor"/>
+    <g stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M18 106 q10 44 2 78"/><path d="M36 118 q8 48 0 84"/><path d="M56 126 q7 46 1 80"/>
+      <path d="M76 132 q6 44 0 72"/><path d="M98 136 q5 46 0 76"/><path d="M120 132 q6 44 0 74"/>
+      <path d="M142 126 q7 46 1 78"/><path d="M162 116 q9 46 1 80"/><path d="M182 102 q11 44 3 76"/>
+    </g>
+  </symbol>
+
+  <!-- round fruit tree -->
+  <symbol id="tree" viewBox="0 0 160 210">
+    <path d="M74 210 l-2 -74 l-16 -26 l9 -5 l12 20 l1 -34 l8 0 l2 36 l14 -22 l9 5 l-19 30 l-2 70 z" fill="currentColor"/>
+    <circle cx="80" cy="64" r="50" fill="currentColor"/>
+    <circle cx="40" cy="88" r="33" fill="currentColor"/>
+    <circle cx="120" cy="86" r="34" fill="currentColor"/>
+    <circle cx="80" cy="102" r="36" fill="currentColor"/>
+  </symbol>
+
+  <!-- cypress / poplar -->
+  <symbol id="poplar" viewBox="0 0 60 220">
+    <path d="M30 0 c16 40 22 82 22 116 c0 44 -10 74 -22 104 c-12 -30 -22 -60 -22 -104 c0 -34 6 -76 22 -116 z" fill="currentColor"/>
+  </symbol>
+
+  <!-- person silhouette -->
+  <symbol id="fig" viewBox="0 0 62 142">
+    <circle cx="31" cy="15" r="12" fill="currentColor"/>
+    <path d="M31 30 c-14 0 -21 10 -22 25 l-3 33 c-1 8 3 11 7 11 l1 43 h11 l3 -43 h6 l3 43 h11 l1 -43 c4 0 8 -3 7 -11 l-3 -33 c-1 -15 -8 -25 -22 -25 z" fill="currentColor"/>
+  </symbol>
+
+  <!-- barrel (end-on) -->
+  <symbol id="barrel" viewBox="0 0 180 200">
+    <ellipse cx="90" cy="100" rx="76" ry="92" fill="currentColor"/>
+    <ellipse cx="90" cy="100" rx="62" ry="76" fill="#000" opacity=".16"/>
+    <ellipse cx="90" cy="100" rx="15" ry="15" fill="#000" opacity=".3"/>
+    <g fill="#000" opacity=".22">
+      <rect x="8" y="34" width="164" height="9" rx="4"/>
+      <rect x="8" y="156" width="164" height="9" rx="4"/>
+    </g>
+  </symbol>
+
+  <!-- bottle -->
+  <symbol id="bottle" viewBox="0 0 200 620">
+    <path d="M84 34 L84 140 C84 161 70 169 58 187 C40 213 32 237 32 267 L32 583 C32 601 42 611 58 611 L142 611 C158 611 168 601 168 583 L168 267 C168 237 160 213 142 187 C130 169 116 161 116 140 L116 34 Z" fill="currentColor"/>
+    <rect x="80" y="18" width="40" height="86" fill="currentColor"/>
+    <rect x="77" y="18" width="46" height="13" fill="#000" opacity=".22"/>
+    <path d="M52 250 C44 278 42 300 42 330 L42 566 L56 566 L56 330 C56 302 58 280 66 252 Z" fill="#fff" opacity=".13"/>
+    <path d="M150 262 C156 288 158 306 158 332 L158 560 L150 560 L150 332 C150 308 148 290 143 266 Z" fill="#fff" opacity=".07"/>
+  </symbol>
+
+  <!-- wine glass -->
+  <symbol id="glass" viewBox="0 0 120 220">
+    <path d="M22 12 C22 74 38 108 54 118 L54 190 L26 198 L26 206 L94 206 L94 198 L66 190 L66 118 C82 108 98 74 98 12 Z" fill="currentColor" opacity=".55"/>
+  </symbol>
+
+  <!-- crest mark: willow over water -->
+  <symbol id="crestmark" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55"/>
+    <path d="M50 66 L50 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <g stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round">
+      <path d="M50 40 q-14 2 -20 16"/><path d="M50 40 q14 2 20 16"/>
+      <path d="M50 34 q-10 1 -14 12"/><path d="M50 34 q10 1 14 12"/>
+      <path d="M50 28 q-6 1 -8 9"/><path d="M50 28 q6 1 8 9"/>
+    </g>
+    <circle cx="50" cy="24" r="3" fill="currentColor"/>
+    <g stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round">
+      <path d="M22 74 q7 -5 14 0 t14 0 t14 0 t14 0"/>
+      <path d="M26 82 q6 -5 12 0 t12 0 t12 0 t12 0"/>
+    </g>
+  </symbol>
+</defs>
+</svg>
+
+<!-- ══════════════════════════  MENU OVERLAY  ══════════════════════════ -->
+<div class="overlay" id="ovl" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <div class="obar">
+    <span class="lbl" style="opacity:.45">Withywindle Winyard — Est. 1583</span>
+    <button class="lbl" id="ovlClose" aria-label="Close menu">Close</button>
+  </div>
+  <nav>
+    <a href="#patience" data-close><span>Patience</span><small>01</small></a>
+    <a href="#land" data-close><span>The Land</span><small>02</small></a>
+    <a href="#wines" data-close><span>The Wines</span><small>03</small></a>
+    <a href="#table" data-close><span>The Long Table</span><small>04</small></a>
+    <a href="#story" data-close><span>Story</span><small>05</small></a>
+    <a href="#visits" data-close><span>Visits</span><small>06</small></a>
+    <a href="#visit-us" data-close><span>Visit Us</span><small>07</small></a>
+  </nav>
+  <div class="ofoot lbl">
+    <span>Withy Bottom, by the River Withywindle</span>
+    <span>hullo@withywindlewinyard.com</span>
+    <span>Instagram — Journal — Trade</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════  HERO  ══════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-media" data-hpar="0.22">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Golden-hour view over the Withywindle valley: willow trees along a slow river with vine rows running to the horizon.">
+      <rect width="1600" height="900" fill="url(#skyHero)"/>
+      <circle cx="1190" cy="330" r="330" fill="url(#sun)"/>
+      <circle cx="1190" cy="330" r="52" fill="#FFF4D6" opacity=".55" filter="url(#blurM)"/>
+
+      <!-- far ridge -->
+      <path d="M0 424 C 190 392 300 418 436 404 C 604 388 704 344 884 360 C 1064 376 1188 344 1338 358 C 1454 368 1544 390 1600 382 L1600 900 L0 900 Z" fill="#8D9C7E" opacity=".62"/>
+      <g fill="#7A8A6C" opacity=".5">
+        <use href="#poplar" x="300" y="352" width="26" height="92"/>
+        <use href="#poplar" x="330" y="360" width="22" height="80"/>
+        <use href="#poplar" x="1284" y="330" width="24" height="86"/>
+      </g>
+
+      <!-- mist -->
+      <g class="drift"><rect x="-120" y="386" width="1900" height="160" fill="url(#mist)" filter="url(#blurM)" opacity=".8"/></g>
+
+      <!-- mid hill with vine rows -->
+      <path id="hHill" d="M0 516 C 210 468 348 500 528 484 C 706 468 838 432 1016 448 C 1188 464 1336 448 1600 466 L1600 900 L0 900 Z" fill="#66744F"/>
+      <clipPath id="hClip"><use href="#hHill"/></clipPath>
+      <g clip-path="url(#hClip)">
+        <rect x="-200" y="430" width="2100" height="300" fill="url(#rowsFar)"/>
+        <path d="M0 516 C 210 468 348 500 528 484 C 706 468 838 432 1016 448 C 1188 464 1336 448 1600 466 L1600 500 L0 560 Z" fill="#7C8A5E" opacity=".55"/>
+      </g>
+
+      <!-- farmhouse -->
+      <g transform="translate(1290 404) scale(.9)">
+        <rect x="0" y="18" width="96" height="52" fill="#9A8E76"/>
+        <path d="M-8 20 L48 -4 L104 20 Z" fill="#6E5D4A"/>
+        <rect x="16" y="40" width="13" height="18" fill="#3B3227" opacity=".75"/>
+        <rect x="44" y="40" width="13" height="18" fill="#3B3227" opacity=".75"/>
+        <rect x="72" y="40" width="13" height="18" fill="#3B3227" opacity=".75"/>
+        <rect x="70" y="-6" width="11" height="22" fill="#7C6B55"/>
+      </g>
+
+      <!-- river -->
+      <path d="M-60 782 C 240 742 430 716 578 686 C 720 658 786 622 906 606 C 1010 592 1094 586 1178 582 L1196 560 C 1076 556 962 558 856 574 C 712 596 626 634 476 668 C 322 702 138 726 -60 758 Z" fill="url(#water)"/>
+      <g opacity=".55" stroke="#FFF6DC" stroke-width="2.6" fill="none" stroke-linecap="round">
+        <path d="M120 754 q120 -14 236 -34"/><path d="M480 682 q140 -30 250 -50"/><path d="M860 600 q120 -12 230 -16"/>
+      </g>
+
+      <!-- near field -->
+      <path d="M-60 726 C 200 700 392 682 572 656 C 752 630 916 610 1132 600 C 1330 592 1470 600 1660 616 L1660 900 L-60 900 Z" fill="#4E5B3D"/>
+
+      <!-- perspective vine rows -->
+      <g fill="#3C4832">
+        <path d="M980 614 L-420 900 L-180 900 Z"/><path d="M980 614 L-40 900 L150 900 Z"/>
+        <path d="M980 614 L280 900 L432 900 Z"/><path d="M980 614 L540 900 L662 900 Z"/>
+        <path d="M980 614 L762 900 L858 900 Z"/><path d="M980 614 L952 900 L1028 900 Z"/>
+        <path d="M980 614 L1122 900 L1214 900 Z"/><path d="M980 614 L1300 900 L1420 900 Z"/>
+        <path d="M980 614 L1520 900 L1680 900 Z"/><path d="M980 614 L1780 900 L2000 900 Z"/>
+      </g>
+      <g fill="#5C6B46" opacity=".55">
+        <path d="M980 616 L-180 900 L-40 900 Z"/><path d="M980 616 L432 900 L540 900 Z"/>
+        <path d="M980 616 L858 900 L952 900 Z"/><path d="M980 616 L1214 900 L1300 900 Z"/>
+      </g>
+
+      <!-- willows along the water -->
+      <g style="color:#3E4A32">
+        <use href="#willow" x="130" y="558" width="272" height="366"/>
+        <use href="#willow" x="404" y="524" width="212" height="286"/>
+      </g>
+      <g style="color:#48553A" opacity=".9">
+        <use href="#willow" x="1108" y="486" width="168" height="226"/>
+      </g>
+      <g style="color:#404C34"><use href="#tree" x="700" y="530" width="130" height="170"/></g>
+
+      <!-- foreground posts + canopy edge -->
+      <g fill="#2E3826" opacity=".92">
+        <rect x="70" y="742" width="13" height="160" transform="rotate(-2 76 800)"/>
+        <rect x="1470" y="716" width="15" height="190" transform="rotate(1.6 1477 800)"/>
+      </g>
+      <path d="M-40 900 L-40 858 C 220 844 520 856 820 840 C 1120 824 1380 838 1660 826 L1660 900 Z" fill="#2C3524" opacity=".75"/>
+
+      <!-- vine leaf frame, top-left -->
+      <g fill="#38452C" opacity=".9">
+        <path d="M-20 -20 C 120 -10 210 40 232 118 C 246 168 214 196 168 178 C 118 158 62 96 -20 78 Z"/>
+        <path d="M150 -20 C 240 8 296 62 300 118 C 302 152 274 166 246 148 C 208 124 190 56 150 22 Z" opacity=".8"/>
+      </g>
+
+      <rect width="1600" height="900" fill="url(#vig)"/>
+      <rect width="1600" height="900" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+    </svg>
+  </div>
+
+  <div class="hero-scrim"></div>
+
+  <div class="hero-top">
+    <button class="lbl" id="menuBtn" aria-controls="ovl" aria-expanded="false">Menu</button>
+    <a class="crest" href="#top" aria-label="Withywindle Winyard, home">
+      <svg viewBox="0 0 100 100" aria-hidden="true" style="color:var(--cream)"><use href="#crestmark"/></svg>
+      <span class="wm">Withywindle</span>
+      <span class="wm2">Winyard · Est. 1583</span>
+    </a>
+    <a class="lbl" href="#visit-us">Visit</a>
+  </div>
+
+  <div class="hero-type" data-hpar="-0.06">
+    <h1 class="d1 split" style="margin:0">Slow Water</h1>
+    <div class="hero-meta lbl">
+      <span>Seventeen Generations</span>
+      <span>Since 1583</span>
+    </div>
+    <p class="d1 split" style="margin:0">Old Vines</p>
+  </div>
+
+  <div class="scrollcue"><span class="lbl lbl-sm">Wander down</span><i></i></div>
+</section>
+
+<!-- ══════════════════════════════  RAIL  ══════════════════════════════ -->
+<nav class="rail" aria-label="Primary">
+  <ul class="lbl">
+    <li><a href="#top">Home</a></li>
+    <li><a href="#patience">Patience</a></li>
+    <li><a href="#land">The Land</a></li>
+    <li><a href="#wines">The Wines</a></li>
+    <li><a href="#table">The Table</a></li>
+    <li><a href="#visit-us">Visit</a></li>
+  </ul>
+</nav>
+
+<a class="side l lbl" href="#" id="sideMenu">Menu</a>
+<a class="side r lbl" href="#visit-us">Visit</a>
+
+<main>
+
+<!-- ═══════════════════════  MANIFESTO (DARK)  ═════════════════════════ -->
+<section class="on-dark sec wrap" aria-label="Our story">
+  <div class="fig r11 rv" style="width:min(186px,44vw);margin:0 auto clamp(38px,5vw,66px)">
+    <div class="inner">
+      <svg viewBox="0 0 400 400" role="img" aria-label="A pair of hands cradling a bunch of ripe grapes.">
+        <rect width="400" height="400" fill="#5D6A48"/>
+        <ellipse cx="200" cy="330" rx="230" ry="120" fill="#4A563A"/>
+        <path d="M60 300 C 96 236 150 218 200 232 C 250 218 306 236 342 300 C 300 348 250 366 200 366 C 150 366 100 348 60 300 Z" fill="#C9A37A"/>
+        <path d="M92 292 C 124 246 160 236 200 250 C 240 236 278 246 310 292" fill="none" stroke="#A8825E" stroke-width="5" opacity=".7"/>
+        <g fill="#7C5C6B">
+          <circle cx="176" cy="228" r="21"/><circle cx="214" cy="222" r="20"/><circle cx="196" cy="252" r="22"/>
+          <circle cx="158" cy="256" r="18"/><circle cx="234" cy="252" r="19"/><circle cx="196" cy="196" r="18"/>
+          <circle cx="222" cy="278" r="16"/><circle cx="170" cy="284" r="16"/>
+        </g>
+        <g fill="#9A7A88" opacity=".65">
+          <circle cx="170" cy="222" r="7"/><circle cx="208" cy="216" r="6"/><circle cx="190" cy="246" r="7"/><circle cx="228" cy="246" r="5"/>
+        </g>
+        <path d="M232 178 C 268 160 296 172 300 198 C 276 208 244 202 232 178 Z" fill="#4F5D38"/>
+        <rect width="400" height="400" fill="url(#vig)" opacity=".8"/>
+        <rect width="400" height="400" filter="url(#grain)" opacity=".22" style="mix-blend-mode:overlay"/>
+      </svg>
+    </div>
+  </div>
+
+  <p class="manifesto rv">Our story begins in a bend of the river. In 1583 a Withywindle planted sixty vines on the sunny side of the water-meadow and, having planted them, sat down. Seventeen generations have followed that example — work when the vine asks, rest when it doesn’t, and never hurry a thing that knows its own time.</p>
+
+  <div class="tri lbl rv" style="margin-top:clamp(46px,6vw,80px)">
+    <span>Withy Bottom</span><span>The Water-Meadow</span><span>Red · White · Rosé</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  PATIENCE  ═════════════════════════════ -->
+<section class="sec wrap" id="patience">
+  <header class="sechead">
+    <span class="lbl eyebrow rv">Chapter One</span>
+    <div class="dash rv"></div>
+    <h2 class="d2 split" style="margin:0">Patience</h2>
+    <p class="cap rv">Four hundred and forty-three harvests on the same slope. We have learned exactly two things, and one of them is when to leave the vineyard alone.</p>
+  </header>
+
+  <div class="rows">
+    <div class="erow">
+      <div class="erow-media rv">
+        <div class="fig r11">
+          <div class="inner">
+            <svg viewBox="0 0 400 400" role="img" aria-label="The end of an old oak barrel in a cellar.">
+              <rect width="400" height="400" fill="#2E271F"/>
+              <circle cx="200" cy="200" r="260" fill="url(#lamp)" opacity=".35"/>
+              <g style="color:#8A6A46"><use href="#barrel" x="46" y="16" width="308" height="342"/></g>
+              <g fill="#C9A961" opacity=".45"><circle cx="200" cy="188" r="9"/></g>
+              <rect width="400" height="400" fill="url(#vig)"/>
+              <rect width="400" height="400" filter="url(#grain)" opacity=".24" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="erow-body rv">
+        <span class="lbl">01 — The Cellar Under the Bank</span>
+        <p class="prose">The cellar was dug into the river bank long before anyone thought to write down why. It holds a steady eleven degrees all year, smells faintly of damp chalk and old oak, and asks nothing of us but that we close the door behind us. Our reds sleep there for two winters. We visit; we do not fuss.</p>
+      </div>
+    </div>
+
+    <div class="erow flip">
+      <div class="erow-media rv">
+        <div class="fig r11">
+          <div class="inner">
+            <svg viewBox="0 0 400 400" role="img" aria-label="The gnarled trunk of a century-old vine in spring grass.">
+              <rect width="400" height="400" fill="#B9BCA0"/>
+              <rect y="230" width="400" height="170" fill="#6E7B54"/>
+              <rect y="230" width="400" height="170" fill="url(#beds)" opacity=".35"/>
+              <path d="M186 400 C 178 330 168 300 156 272 C 146 250 150 232 168 226 C 180 222 188 232 192 248 C 196 226 206 216 220 220 C 236 226 236 246 226 268 C 214 296 210 336 208 400 Z" fill="#4B3A2C"/>
+              <path d="M192 250 C 168 236 150 214 148 190" stroke="#4B3A2C" stroke-width="9" fill="none" stroke-linecap="round"/>
+              <path d="M214 244 C 240 230 254 208 256 182" stroke="#4B3A2C" stroke-width="9" fill="none" stroke-linecap="round"/>
+              <g fill="#556B3A">
+                <ellipse cx="140" cy="178" rx="30" ry="22" transform="rotate(-18 140 178)"/>
+                <ellipse cx="264" cy="172" rx="32" ry="23" transform="rotate(16 264 172)"/>
+                <ellipse cx="200" cy="150" rx="26" ry="19"/>
+              </g>
+              <rect width="400" height="400" fill="url(#vig)" opacity=".7"/>
+              <rect width="400" height="400" filter="url(#grain)" opacity=".22" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="erow-body rv">
+        <span class="lbl">02 — Vines Older Than the Fence</span>
+        <p class="prose">Some of the vines on the top terrace were planted by a great-great-grandmother who is remembered mostly for her temper and her plum cake. They yield very little and we would not dream of pulling them out. Old roots reach the cold gravel under the meadow; that gravel is why our whites taste of wet stone in a dry August.</p>
+      </div>
+    </div>
+
+    <div class="erow">
+      <div class="erow-media rv">
+        <div class="fig r11">
+          <div class="inner">
+            <svg viewBox="0 0 400 400" role="img" aria-label="Beehives at the edge of the orchard at first light.">
+              <rect width="400" height="400" fill="url(#skyMorn)"/>
+              <rect y="250" width="400" height="150" fill="#7E8A5C"/>
+              <g style="color:#4E5B3A"><use href="#tree" x="12" y="96" width="150" height="196"/><use href="#tree" x="250" y="118" width="140" height="182"/></g>
+              <g>
+                <rect x="150" y="228" width="72" height="14" fill="#B79A6C"/>
+                <rect x="154" y="212" width="64" height="18" fill="#CBB283"/>
+                <rect x="154" y="194" width="64" height="18" fill="#BFA576"/>
+                <path d="M144 194 L188 172 L232 194 Z" fill="#8E7A55"/>
+                <rect x="240" y="252" width="56" height="12" fill="#B79A6C"/>
+                <rect x="243" y="238" width="50" height="15" fill="#CBB283"/>
+                <path d="M234 238 L268 220 L302 238 Z" fill="#8E7A55"/>
+              </g>
+              <g fill="#3A3225" opacity=".7"><circle cx="120" cy="180" r="2.6"/><circle cx="136" cy="196" r="2.2"/><circle cx="256" cy="196" r="2.4"/></g>
+              <rect width="400" height="400" fill="url(#vig)" opacity=".7"/>
+              <rect width="400" height="400" filter="url(#grain)" opacity=".22" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="erow-body rv">
+        <span class="lbl">03 — Nothing We Would Not Drink Ourselves</span>
+        <p class="prose">No herbicide has touched this ground in living memory. We keep bees, geese and a great deal of clover, we plough with more enthusiasm than machinery, and we ferment with what arrives on the skins. If a vintage wants to be small, we let it be small. It is a slower way to farm and a happier one, and it makes a wine that tastes like somewhere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  MARQUEE  ═════════════════════════════ -->
+<div class="strip lbl" aria-hidden="true">
+  <div class="track">
+    <span>Est. 1583</span><span>Seventeen Generations</span><span>Organic Since Always</span><span>Hand Harvested</span><span>Wild Ferment</span><span>Red · White · Rosé</span><span>Second Breakfast Served At Nine</span>
+    <span>Est. 1583</span><span>Seventeen Generations</span><span>Organic Since Always</span><span>Hand Harvested</span><span>Wild Ferment</span><span>Red · White · Rosé</span><span>Second Breakfast Served At Nine</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════  HUSBANDRY (SAGE)  ═════════════════════════ -->
+<section class="on-sage sec wrap" id="land">
+  <div class="tri lbl rv" style="margin-bottom:clamp(40px,5vw,72px)">
+    <span>Withy Bottom</span><span>The Land</span><span>Forty-One Acres</span>
+  </div>
+
+  <header class="sechead">
+    <div class="dash rv"></div>
+    <div class="titlestack">
+      <h2 class="d2 split" style="margin:0">Husbandry</h2>
+      <span class="script rv" aria-hidden="true">by hand</span>
+    </div>
+  </header>
+
+  <div class="fig r169 rv" style="margin:clamp(64px,8vw,120px) auto 0;max-width:min(1180px,92vw)">
+    <div class="inner">
+      <svg viewBox="0 0 1600 900" role="img" aria-label="The kitchen garden in late morning: stone wall, raised beds, fruit trees and a timber glasshouse.">
+        <rect width="1600" height="900" fill="url(#skyMorn)"/>
+        <circle cx="330" cy="180" r="260" fill="url(#sun)" opacity=".6"/>
+        <path d="M0 366 C 240 336 420 356 620 344 C 820 332 980 306 1180 320 C 1360 332 1500 348 1600 340 L1600 900 L0 900 Z" fill="#93A17C" opacity=".65"/>
+
+        <!-- stone wall -->
+        <rect x="0" y="392" width="1600" height="112" fill="url(#stone)"/>
+        <rect x="0" y="392" width="1600" height="112" fill="url(#masonry)"/>
+        <rect x="0" y="384" width="1600" height="14" fill="#A2967C"/>
+
+        <!-- orchard behind -->
+        <g style="color:#59683F" opacity=".9">
+          <use href="#tree" x="60" y="222" width="196" height="252"/>
+          <use href="#tree" x="1290" y="196" width="230" height="290"/>
+        </g>
+        <g style="color:#4C5936"><use href="#willow" x="960" y="176" width="300" height="400"/></g>
+
+        <!-- glasshouse -->
+        <g transform="translate(560 250)">
+          <path d="M0 130 L0 40 L120 -12 L240 40 L240 130 Z" fill="#D6D8C4" opacity=".72"/>
+          <path d="M0 40 L120 -12 L240 40" fill="none" stroke="#8B8368" stroke-width="6"/>
+          <g stroke="#8B8368" stroke-width="4" opacity=".85">
+            <path d="M40 130 L40 22"/><path d="M80 130 L80 6"/><path d="M120 130 L120 -10"/><path d="M160 130 L160 6"/><path d="M200 130 L200 22"/>
+            <path d="M0 78 L240 78"/><path d="M0 106 L240 106"/>
+          </g>
+          <rect x="98" y="76" width="44" height="54" fill="#4C4535" opacity=".7"/>
+        </g>
+
+        <!-- garden ground -->
+        <path d="M0 504 L1600 504 L1600 900 L0 900 Z" fill="#7E8A5C"/>
+        <path d="M0 504 L1600 504 L1600 560 L0 578 Z" fill="#8E9A68" opacity=".7"/>
+
+        <!-- beds in perspective -->
+        <g fill="#5E6C40">
+          <path d="M800 540 L-260 900 L-20 900 Z"/><path d="M800 540 L160 900 L340 900 Z"/>
+          <path d="M800 540 L500 900 L620 900 Z"/><path d="M800 540 L800 900 L900 900 Z"/>
+          <path d="M800 540 L1050 900 L1200 900 Z"/><path d="M800 540 L1360 900 L1580 900 Z"/>
+          <path d="M800 540 L1700 900 L1980 900 Z"/>
+        </g>
+        <g fill="#8FA063" opacity=".55">
+          <path d="M800 542 L-20 900 L160 900 Z"/><path d="M800 542 L620 900 L800 900 Z"/><path d="M800 542 L1200 900 L1360 900 Z"/>
+        </g>
+        <!-- cabbages & canes -->
+        <g fill="#6C7E48">
+          <circle cx="240" cy="768" r="34"/><circle cx="360" cy="826" r="40"/><circle cx="120" cy="852" r="44"/>
+          <circle cx="1300" cy="784" r="36"/><circle cx="1450" cy="846" r="44"/>
+        </g>
+        <g stroke="#8A7A56" stroke-width="7" stroke-linecap="round" fill="none" opacity=".9">
+          <path d="M980 880 L1042 630"/><path d="M1104 880 L1042 630"/><path d="M1042 630 L1042 880"/>
+          <path d="M640 866 L690 660"/><path d="M742 866 L690 660"/>
+        </g>
+
+        <!-- figure with a trug -->
+        <g style="color:#3A3629"><use href="#fig" x="420" y="600" width="88" height="200"/></g>
+        <ellipse cx="500" cy="740" rx="40" ry="15" fill="#A98C60"/>
+
+        <!-- geese -->
+        <g fill="#EDE7D4" opacity=".9">
+          <ellipse cx="1180" cy="700" rx="26" ry="16"/><path d="M1196 690 q10 -22 20 -6 l-8 10 z"/>
+          <ellipse cx="1244" cy="722" rx="24" ry="15"/><path d="M1258 712 q10 -20 19 -6 l-8 10 z"/>
+        </g>
+
+        <rect width="1600" height="900" fill="url(#vig)" opacity=".85"/>
+        <rect width="1600" height="900" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+      </svg>
+    </div>
+  </div>
+
+  <p class="manifesto rv" style="margin-top:clamp(48px,6vw,84px)">Forty-one acres between the river and the ridge — vines on the warm slope, orchard and kitchen garden behind the old wall, and a water-meadow that floods every few winters and is all the better for it. We farm organically because nobody here can think of a good reason not to.</p>
+
+  <div class="tri lbl rv" style="margin-top:clamp(44px,5vw,72px)">
+    <span>Riverside Gravel</span><span>Cool Nights, Long Autumns</span><span>Hand Picked, Always</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  THE WINES  ═══════════════════════════ -->
+<section class="on-dark" id="wines">
+
+  <div class="wrap" style="padding-top:var(--sec);padding-bottom:clamp(20px,3vw,40px)">
+    <header class="sechead">
+      <span class="lbl eyebrow rv">Chapter Two</span>
+      <div class="dash rv"></div>
+      <div class="titlestack">
+        <h2 class="d2 split" style="margin:0">The Wines</h2>
+        <span class="script rv" aria-hidden="true">of the Winyard</span>
+      </div>
+      <p class="cap rv">Eleven wines, made in quantities that would embarrass a serious commercial operation. Reds from the top terrace, whites from the river gravel, rosé because summer arrives whether we plan for it or not.</p>
+    </header>
+  </div>
+
+  <!-- REDS -->
+  <div class="band wrap">
+    <div class="tri lbl rv" style="margin-bottom:26px"><span>Top Terrace</span><span>2016 — 2021</span><span>Three Reds</span></div>
+    <header class="sechead"><h3 class="d3 split" style="margin:0">The Reds</h3>
+      <p class="cap rv">Grown on the stony shoulder above the cellar, picked late, fermented in open wood and left alone for two winters underground.</p>
+    </header>
+    <div class="grid3">
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 01</span><span>Withywindle Rosso</span></div>
+        <div class="fig">
+          <div class="inner">
+            <svg viewBox="0 0 600 750" role="img" aria-label="A dark bottle of Old Withy on a warm taupe backdrop beside a river stone.">
+              <rect width="600" height="750" fill="#B7A895"/>
+              <rect y="470" width="600" height="280" fill="#C6B7A2"/>
+              <ellipse cx="330" cy="712" rx="230" ry="34" fill="#6E6152" opacity=".38" filter="url(#blurS)"/>
+              <path d="M300 700 L560 690 L600 712 L300 726 Z" fill="#7B6E5E" opacity=".28" filter="url(#blurS)"/>
+              <path d="M96 690 C 96 640 130 616 170 620 C 214 624 234 654 228 690 Z" fill="#9C907E"/>
+              <path d="M104 686 C 108 650 132 630 164 632" fill="none" stroke="#C0B4A0" stroke-width="7" opacity=".7"/>
+              <g style="color:#2A1E19"><use href="#bottle" x="212" y="84" width="200" height="620"/></g>
+              <rect x="252" y="418" width="120" height="164" fill="#EDE4CE"/>
+              <rect x="252" y="418" width="120" height="6" fill="#5E2130"/>
+              <text x="312" y="470" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="21" letter-spacing="2" fill="#231C15">OLD</text>
+              <text x="312" y="494" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="21" letter-spacing="2" fill="#231C15">WITHY</text>
+              <text x="312" y="524" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="2.4" fill="#5E2130">WITHYWINDLE</text>
+              <text x="312" y="556" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="16" letter-spacing="2" fill="#231C15">2019</text>
+              <rect width="600" height="750" fill="url(#vig)" opacity=".55"/>
+              <rect width="600" height="750" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Old Withy</h4>
+        <p class="pnote">Bramble, damp earth, a little woodsmoke. The wine we open without asking anyone first.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 02</span><span>Reserve Red</span></div>
+        <div class="fig">
+          <div class="inner">
+            <svg viewBox="0 0 600 750" role="img" aria-label="A reserve red bottle against a deep wine-coloured backdrop with a plum.">
+              <rect width="600" height="750" fill="#4A2028"/>
+              <rect y="470" width="600" height="280" fill="#5C2B32"/>
+              <ellipse cx="330" cy="712" rx="220" ry="32" fill="#1E0F13" opacity=".5" filter="url(#blurS)"/>
+              <path d="M300 704 L580 692 L600 716 L300 728 Z" fill="#2A151A" opacity=".45" filter="url(#blurS)"/>
+              <circle cx="150" cy="656" r="46" fill="#5E3348"/><circle cx="136" cy="642" r="15" fill="#7C4C60" opacity=".55"/>
+              <path d="M150 612 q18 -22 34 -12 q-10 18 -34 16z" fill="#4E5B38"/>
+              <g style="color:#1E1512"><use href="#bottle" x="212" y="84" width="200" height="620"/></g>
+              <rect x="250" y="410" width="124" height="176" fill="#2A1F1A"/>
+              <rect x="250" y="410" width="124" height="176" fill="none" stroke="#C9A961" stroke-width="1.6"/>
+              <text x="312" y="462" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="19" letter-spacing="2" fill="#E9DCBE">BOMBADIL’S</text>
+              <text x="312" y="488" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="19" letter-spacing="2" fill="#E9DCBE">OWN</text>
+              <text x="312" y="518" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="2.4" fill="#C9A961">RESERVE RED</text>
+              <text x="312" y="556" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="16" letter-spacing="2" fill="#E9DCBE">2016</text>
+              <rect width="600" height="750" fill="url(#vig)" opacity=".6"/>
+              <rect width="600" height="750" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Bombadil’s Own</h4>
+        <p class="pnote">Old vines, a long sleep, nothing added and nothing taken away. Two hundred and forty bottles.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 03</span><span>Field Blend</span></div>
+        <div class="fig">
+          <div class="inner">
+            <svg viewBox="0 0 600 750" role="img" aria-label="A field-blend red on a sage backdrop with a sprig of herbs.">
+              <rect width="600" height="750" fill="#A7AE93"/>
+              <rect y="470" width="600" height="280" fill="#BAC0A5"/>
+              <ellipse cx="330" cy="712" rx="220" ry="32" fill="#5D6350" opacity=".38" filter="url(#blurS)"/>
+              <path d="M300 700 L570 688 L600 714 L300 726 Z" fill="#6E7460" opacity=".3" filter="url(#blurS)"/>
+              <g stroke="#5E6C42" stroke-width="5" fill="none" stroke-linecap="round">
+                <path d="M118 690 C 124 640 146 614 176 600"/>
+                <path d="M132 664 q -22 -10 -30 -28"/><path d="M144 640 q 22 -12 28 -32"/><path d="M158 620 q -20 -12 -26 -30"/>
+              </g>
+              <g style="color:#26221A"><use href="#bottle" x="212" y="84" width="200" height="620"/></g>
+              <rect x="252" y="418" width="120" height="164" fill="#E4E6D4"/>
+              <rect x="252" y="572" width="120" height="10" fill="#6E7B54"/>
+              <text x="312" y="472" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="20" letter-spacing="2" fill="#26311D">BARROW</text>
+              <text x="312" y="496" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="20" letter-spacing="2" fill="#26311D">DOWNS</text>
+              <text x="312" y="526" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="2.4" fill="#6E7B54">FIELD BLEND</text>
+              <text x="312" y="556" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="16" letter-spacing="2" fill="#26311D">2021</text>
+              <rect width="600" height="750" fill="url(#vig)" opacity=".5"/>
+              <rect width="600" height="750" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Barrow Downs</h4>
+        <p class="pnote">Cool, savoury, faintly herbal. Seven varieties picked together, as they have always been.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- WHITES -->
+  <div class="band wrap">
+    <div class="tri lbl rv" style="margin-bottom:26px"><span>River Gravel</span><span>2022 — 2023</span><span>Three Whites</span></div>
+    <header class="sechead"><h3 class="d3 split" style="margin:0">The Whites</h3>
+      <p class="cap rv">From the low vines nearest the water, where the fog sits until ten in the morning and the fruit ripens slowly enough to keep its edge.</p>
+    </header>
+    <div class="grid3">
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 04</span><span>River-White</span></div>
+        <div class="fig">
+          <div class="inner">
+            <svg viewBox="0 0 600 750" role="img" aria-label="A pale green bottle of Goldberry on a cream backdrop with elderflower.">
+              <rect width="600" height="750" fill="#E4DCC4"/>
+              <rect y="470" width="600" height="280" fill="#F0E8D2"/>
+              <ellipse cx="330" cy="712" rx="220" ry="32" fill="#9A8F74" opacity=".34" filter="url(#blurS)"/>
+              <path d="M300 700 L575 686 L600 712 L300 726 Z" fill="#A79A7E" opacity=".3" filter="url(#blurS)"/>
+              <g fill="#F7F3E2"><circle cx="140" cy="628" r="6"/><circle cx="158" cy="616" r="6"/><circle cx="124" cy="612" r="6"/><circle cx="150" cy="642" r="6"/><circle cx="170" cy="634" r="6"/><circle cx="128" cy="640" r="6"/></g>
+              <path d="M148 640 C 150 664 148 682 142 696" stroke="#7E8A56" stroke-width="4" fill="none"/>
+              <g style="color:#4E5C2E"><use href="#bottle" x="212" y="84" width="200" height="620"/></g>
+              <rect x="252" y="418" width="120" height="164" fill="#FBF7E9"/>
+              <circle cx="312" cy="450" r="13" fill="none" stroke="#C9A961" stroke-width="1.4"/>
+              <text x="312" y="490" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="21" letter-spacing="2" fill="#2A2A1C">GOLDBERRY</text>
+              <text x="312" y="518" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="2.4" fill="#6E7B54">RIVER-WHITE</text>
+              <text x="312" y="556" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="16" letter-spacing="2" fill="#2A2A1C">2023</text>
+              <rect width="600" height="750" fill="url(#vig)" opacity=".42"/>
+              <rect width="600" height="750" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Goldberry</h4>
+        <p class="pnote">Elderflower, white peach, wet stone. Best drunk outdoors before the sun is over the ridge.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 05</span><span>Dry White</span></div>
+        <div class="fig">
+          <div class="inner">
+            <svg viewBox="0 0 600 750" role="img" aria-label="A dry white bottle on a straw-yellow backdrop with a cut apple.">
+              <rect width="600" height="750" fill="#CFB980"/>
+              <rect y="470" width="600" height="280" fill="#DEC98F"/>
+              <ellipse cx="330" cy="712" rx="220" ry="32" fill="#7E6C40" opacity=".34" filter="url(#blurS)"/>
+              <path d="M300 700 L572 688 L600 712 L300 726 Z" fill="#8E7B4C" opacity=".3" filter="url(#blurS)"/>
+              <circle cx="146" cy="662" r="44" fill="#B9C46E"/><path d="M146 618 q16 -20 30 -10 q-10 16 -30 14z" fill="#5E6C40"/>
+              <circle cx="132" cy="648" r="13" fill="#D7DE9A" opacity=".6"/>
+              <g style="color:#3E4A22"><use href="#bottle" x="212" y="84" width="200" height="620"/></g>
+              <rect x="252" y="418" width="120" height="164" fill="#F4EFDD"/>
+              <rect x="252" y="418" width="120" height="164" fill="none" stroke="#6E7B54" stroke-width="1.4"/>
+              <text x="312" y="470" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="21" letter-spacing="2" fill="#2A2A1C">WITHY</text>
+              <text x="312" y="494" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="21" letter-spacing="2" fill="#2A2A1C">GREEN</text>
+              <text x="312" y="524" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="2.4" fill="#6E7B54">DRY WHITE</text>
+              <text x="312" y="556" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="16" letter-spacing="2" fill="#2A2A1C">2023</text>
+              <rect width="600" height="750" fill="url(#vig)" opacity=".48"/>
+              <rect width="600" height="750" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Withy Green</h4>
+        <p class="pnote">Green apple and a squeeze of lime. Our house white, and the reason we own so many jugs.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 06</span><span>Skin-Rested</span></div>
+        <div class="fig">
+          <div class="inner">
+            <svg viewBox="0 0 600 750" role="img" aria-label="An amber skin-rested white on a terracotta backdrop with a quince.">
+              <rect width="600" height="750" fill="#A9765C"/>
+              <rect y="470" width="600" height="280" fill="#BE8A6C"/>
+              <ellipse cx="330" cy="712" rx="220" ry="32" fill="#5E3D2C" opacity=".38" filter="url(#blurS)"/>
+              <path d="M300 700 L572 688 L600 712 L300 726 Z" fill="#6E4A36" opacity=".34" filter="url(#blurS)"/>
+              <path d="M110 664 c0 -30 20 -48 44 -48 s42 18 42 48 c0 26 -18 42 -42 42 s-44 -16 -44 -42z" fill="#D8B86A"/>
+              <path d="M154 616 q4 -20 18 -22 q-4 18 -18 22z" fill="#5E6C40"/>
+              <g style="color:#5E4A22"><use href="#bottle" x="212" y="84" width="200" height="620"/></g>
+              <rect x="250" y="412" width="124" height="172" fill="#2E241C"/>
+              <text x="312" y="466" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="20" letter-spacing="2" fill="#EFE2C6">LANTERN</text>
+              <text x="312" y="490" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="20" letter-spacing="2" fill="#EFE2C6">HOUR</text>
+              <text x="312" y="520" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="2.4" fill="#C9A961">SKIN-RESTED WHITE</text>
+              <text x="312" y="556" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="16" letter-spacing="2" fill="#EFE2C6">2022</text>
+              <rect width="600" height="750" fill="url(#vig)" opacity=".55"/>
+              <rect width="600" height="750" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Lantern Hour</h4>
+        <p class="pnote">Quince, chamomile and a slow finish. Twelve days on skins, then left to think about it.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ROSÉS -->
+  <div class="band wrap">
+    <div class="tri lbl rv" style="margin-bottom:26px"><span>Water-Meadow</span><span>2024</span><span>Two Rosés</span></div>
+    <header class="sechead"><h3 class="d3 split" style="margin:0">The Rosés</h3>
+      <p class="cap rv">Picked at first light in the third week of August, pressed before breakfast, and drunk far too quickly every single year.</p>
+    </header>
+    <div class="grid2">
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 07</span><span>Rosé</span></div>
+        <div class="fig" style="aspect-ratio:16/11">
+          <div class="inner">
+            <svg viewBox="0 0 900 620" role="img" aria-label="A pale pink bottle of Bumbling Rosé lying beside strawberries in low sun.">
+              <rect width="900" height="620" fill="#D9C8B4"/>
+              <rect y="360" width="900" height="260" fill="#E7D8C4"/>
+              <ellipse cx="470" cy="590" rx="330" ry="30" fill="#8E7A62" opacity=".3" filter="url(#blurS)"/>
+              <path d="M420 574 L880 556 L900 584 L420 600 Z" fill="#9C866C" opacity=".26" filter="url(#blurS)"/>
+              <g style="color:#D9A48F"><use href="#bottle" x="360" y="24" width="180" height="558"/></g>
+              <path d="M382 288 h136 v250 c0 16 -10 26 -28 26 h-80 c-18 0 -28 -10 -28 -26 z" fill="#E6A392" opacity=".85"/>
+              <rect x="396" y="348" width="110" height="150" fill="#FBF5EA"/>
+              <text x="451" y="398" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="19" letter-spacing="2" fill="#5E2130">BUMBLING</text>
+              <text x="451" y="424" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="19" letter-spacing="2" fill="#5E2130">ROSÉ</text>
+              <text x="451" y="452" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="7.5" font-weight="700" letter-spacing="2.2" fill="#C98F80">WATER-MEADOW</text>
+              <text x="451" y="480" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="15" letter-spacing="2" fill="#5E2130">2024</text>
+              <g fill="#B4485A">
+                <path d="M690 546 c-18 0 -30 -14 -30 -30 s14 -26 30 -26 s30 12 30 26 s-12 30 -30 30z"/>
+                <path d="M756 566 c-15 0 -25 -12 -25 -25 s12 -22 25 -22 s25 10 25 22 s-10 25 -25 25z"/>
+              </g>
+              <g fill="#5E6C40"><path d="M690 490 q12 -16 26 -10 q-8 14 -26 12z"/><path d="M756 519 q10 -14 22 -8 q-7 12 -22 10z"/></g>
+              <rect width="900" height="620" fill="url(#vig)" opacity=".45"/>
+              <rect width="900" height="620" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Bumbling Rosé</h4>
+        <p class="pnote">Strawberry, rhubarb, wildly cheerful. Named for the way the last picker walks home.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 08</span><span>Pét-Nat Rosé</span></div>
+        <div class="fig" style="aspect-ratio:16/11">
+          <div class="inner">
+            <svg viewBox="0 0 900 620" role="img" aria-label="A crown-capped pét-nat rosé on a dusty pink backdrop with a poured glass.">
+              <rect width="900" height="620" fill="#C08E86"/>
+              <rect y="360" width="900" height="260" fill="#CE9E94"/>
+              <ellipse cx="430" cy="592" rx="300" ry="28" fill="#6B4740" opacity=".34" filter="url(#blurS)"/>
+              <path d="M400 578 L860 560 L900 588 L400 604 Z" fill="#7C544C" opacity=".3" filter="url(#blurS)"/>
+              <g style="color:#3E3028"><use href="#bottle" x="330" y="18" width="188" height="580"/></g>
+              <rect x="404" y="18" width="40" height="20" rx="4" fill="#C9A961"/>
+              <rect x="356" y="330" width="136" height="150" fill="#F2E7DC"/>
+              <text x="424" y="378" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="19" letter-spacing="2" fill="#5E2130">HEY DOL</text>
+              <text x="424" y="404" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="19" letter-spacing="2" fill="#5E2130">MERRY</text>
+              <text x="424" y="432" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="7.5" font-weight="700" letter-spacing="2.2" fill="#8A3B45">PÉT-NAT ROSÉ</text>
+              <text x="424" y="460" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="15" letter-spacing="2" fill="#5E2130">2024</text>
+              <g transform="translate(640 340)" style="color:#F4E4DE"><use href="#glass" x="0" y="0" width="130" height="238"/></g>
+              <path d="M670 402 C 670 430 682 452 694 458 L716 458 C 728 452 740 430 740 402 Z" fill="#D98E8E" opacity=".9"/>
+              <rect width="900" height="620" fill="url(#vig)" opacity=".5"/>
+              <rect width="900" height="620" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Hey Dol Merry</h4>
+        <p class="pnote">A bottle that talks back. Open it over a bowl, and mind the ceiling.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- SMALL LOTS -->
+  <div class="band wrap" style="padding-bottom:var(--sec)">
+    <div class="tri lbl rv" style="margin-bottom:26px"><span>Odds &amp; Ends</span><span>Very Small Lots</span><span>Cellar Door Only</span></div>
+    <header class="sechead"><h3 class="d3 split" style="margin:0">Odd Bottles</h3>
+      <p class="cap rv">What happens when a barrel turns out interesting. Never repeated, rarely sensible, occasionally the best thing we make.</p>
+    </header>
+    <div class="grid2">
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 09</span><span>Frizzante</span></div>
+        <div class="fig" style="aspect-ratio:16/11">
+          <div class="inner">
+            <svg viewBox="0 0 900 620" role="img" aria-label="A frizzante bottle in a sunlit doorway with bread and butter.">
+              <rect width="900" height="620" fill="#C8C7A9"/>
+              <rect y="360" width="900" height="260" fill="#DAD8B9"/>
+              <path d="M540 0 L900 0 L900 620 L540 620 Z" fill="#EFE7C6" opacity=".55"/>
+              <ellipse cx="400" cy="590" rx="300" ry="28" fill="#7E7C5C" opacity=".3" filter="url(#blurS)"/>
+              <path d="M370 574 L830 556 L880 584 L370 600 Z" fill="#8A8866" opacity=".28" filter="url(#blurS)"/>
+              <g style="color:#4A5230"><use href="#bottle" x="300" y="20" width="182" height="566"/></g>
+              <rect x="374" y="20" width="36" height="20" rx="4" fill="#B9B08E"/>
+              <rect x="326" y="334" width="132" height="148" fill="#FBF7E6"/>
+              <text x="392" y="378" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="17" letter-spacing="2" fill="#2A2A1C">SECOND</text>
+              <text x="392" y="402" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="17" letter-spacing="2" fill="#2A2A1C">BREAKFAST</text>
+              <text x="392" y="430" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="7.5" font-weight="700" letter-spacing="2.2" fill="#6E7B54">FRIZZANTE</text>
+              <text x="392" y="460" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="15" letter-spacing="2" fill="#2A2A1C">2024</text>
+              <g><path d="M596 566 c-6 -40 22 -66 66 -66 s70 26 64 66z" fill="#C89A5E"/><rect x="590" y="562" width="146" height="14" rx="6" fill="#B8894E"/></g>
+              <rect x="756" y="530" width="66" height="42" fill="#F0E4B8"/><rect x="756" y="530" width="66" height="10" fill="#E4D49E"/>
+              <rect width="900" height="620" fill="url(#vig)" opacity=".45"/>
+              <rect width="900" height="620" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Second Breakfast</h4>
+        <p class="pnote">Half a bubble, all morning. Made expressly to be drunk before eleven with bread and butter.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+      <article class="pcard rv">
+        <div class="plbl lbl lbl-sm"><span>No. 10</span><span>Vin Doux</span></div>
+        <div class="fig" style="aspect-ratio:16/11">
+          <div class="inner">
+            <svg viewBox="0 0 900 620" role="img" aria-label="A small dessert-wine bottle in warm lamplight with honeycomb.">
+              <rect width="900" height="620" fill="#5A4A34"/>
+              <rect y="380" width="900" height="240" fill="#6E5B40"/>
+              <circle cx="640" cy="200" r="260" fill="url(#lamp)" opacity=".5"/>
+              <ellipse cx="400" cy="586" rx="250" ry="26" fill="#2E2417" opacity=".5" filter="url(#blurS)"/>
+              <path d="M380 572 L800 552 L860 580 L380 596 Z" fill="#3A2E1C" opacity=".45" filter="url(#blurS)"/>
+              <g style="color:#3A2A18"><use href="#bottle" x="326" y="150" width="146" height="440"/></g>
+              <rect x="352" y="404" width="96" height="122" fill="#EDE0C0"/>
+              <text x="400" y="446" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="15" letter-spacing="1.6" fill="#3E2A1E">WITHYWINDLE</text>
+              <text x="400" y="468" text-anchor="middle" font-family="Didot,'Bodoni 72',Georgia,serif" font-size="15" letter-spacing="1.6" fill="#3E2A1E">VIN DOUX</text>
+              <text x="400" y="492" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="7" font-weight="700" letter-spacing="2" fill="#8A3B45">HALF BOTTLE · 2020</text>
+              <g fill="#C9A961" opacity=".9">
+                <path d="M626 560 l18 -30 h36 l18 30 l-18 30 h-36z"/>
+                <path d="M662 500 l18 -30 h36 l18 30 l-18 30 h-36z"/>
+                <path d="M698 560 l18 -30 h36 l18 30 l-18 30 h-36z"/>
+              </g>
+              <rect width="900" height="620" fill="url(#vig)" opacity=".65"/>
+              <rect width="900" height="620" filter="url(#grain)" opacity=".22" style="mix-blend-mode:overlay"/>
+            </svg>
+          </div>
+        </div>
+        <h4 class="pname">Withywindle Vin Doux</h4>
+        <p class="pnote">Late-picked, honeyed, a half bottle at most. For the end of a very long table.</p>
+        <span class="pmore lbl lbl-sm">Tasting note</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════  THE LONG TABLE  ═══════════════════════ -->
+<section class="sec wrap on-paper2" id="table">
+  <header class="sechead">
+    <span class="lbl eyebrow rv">Chapter Three</span>
+    <div class="dash rv"></div>
+    <div class="titlestack">
+      <h2 class="d2 split" style="margin:0">The Long Table</h2>
+      <span class="script rv" aria-hidden="true">&amp; second breakfast</span>
+    </div>
+  </header>
+
+  <div class="fig r219 rv" data-par="0.06" style="margin:clamp(66px,8vw,124px) 0 0;width:min(100%,1500px)">
+    <div class="inner">
+      <svg viewBox="0 0 1600 686" role="img" aria-label="A long trestle table laid under a willow at the end of the day, with bread, cheese, plums and poured glasses.">
+        <rect width="1600" height="686" fill="url(#skyEve)"/>
+        <circle cx="1240" cy="180" r="300" fill="url(#sun)" opacity=".75"/>
+        <path d="M0 300 C 240 274 420 292 640 280 C 860 268 1020 246 1240 258 C 1420 268 1520 282 1600 276 L1600 686 L0 686 Z" fill="#5C6749"/>
+        <path d="M0 352 C 260 330 480 344 720 332 C 960 320 1180 306 1400 314 C 1490 318 1550 324 1600 320 L1600 686 L0 686 Z" fill="#48533A"/>
+        <g style="color:#333D2A"><use href="#willow" x="-60" y="-60" width="520" height="700"/></g>
+        <g style="color:#3A452F" opacity=".85"><use href="#tree" x="1400" y="96" width="220" height="280"/></g>
+
+        <!-- string lights -->
+        <g stroke="#8E8666" stroke-width="2.4" fill="none" opacity=".8"><path d="M240 172 Q 800 252 1420 158"/></g>
+        <g fill="#FFE3A8">
+          <circle cx="380" cy="204" r="7"/><circle cx="540" cy="222" r="7"/><circle cx="700" cy="238" r="7"/>
+          <circle cx="860" cy="242" r="7"/><circle cx="1020" cy="230" r="7"/><circle cx="1180" cy="206" r="7"/><circle cx="1330" cy="178" r="7"/>
+        </g>
+        <g fill="#FFE3A8" opacity=".35" filter="url(#blurS)">
+          <circle cx="380" cy="204" r="18"/><circle cx="700" cy="238" r="18"/><circle cx="1020" cy="230" r="18"/><circle cx="1330" cy="178" r="18"/>
+        </g>
+
+        <!-- seated figures behind the table -->
+        <g style="color:#2E3325" opacity=".92">
+          <use href="#fig" x="300" y="330" width="72" height="164"/>
+          <use href="#fig" x="470" y="322" width="76" height="172"/>
+          <use href="#fig" x="700" y="326" width="74" height="168"/>
+          <use href="#fig" x="900" y="320" width="78" height="176"/>
+          <use href="#fig" x="1120" y="330" width="72" height="164"/>
+        </g>
+
+        <!-- table -->
+        <path d="M60 470 L1540 470 L1560 508 L40 508 Z" fill="#F0E6CE"/>
+        <rect x="40" y="508" width="1520" height="18" fill="#C9B896"/>
+        <g fill="#6E6048"><rect x="200" y="526" width="18" height="120"/><rect x="800" y="526" width="18" height="128"/><rect x="1380" y="526" width="18" height="120"/></g>
+        <path d="M120 526 L160 686 L200 686 L168 526 Z" fill="#7C6C50" opacity=".7"/>
+        <path d="M1480 526 L1440 686 L1400 686 L1436 526 Z" fill="#7C6C50" opacity=".7"/>
+
+        <!-- table things -->
+        <g>
+          <path d="M240 470 c-6 -34 20 -56 58 -56 s62 22 56 56z" fill="#C89A5E"/>
+          <rect x="360" y="440" width="70" height="30" fill="#F2E4B4"/>
+          <g fill="#5E2130"><circle cx="500" cy="452" r="14"/><circle cx="524" cy="460" r="12"/><circle cx="480" cy="462" r="11"/></g>
+          <g style="color:#EFE8D4">
+            <use href="#glass" x="600" y="396" width="48" height="86"/>
+            <use href="#glass" x="676" y="392" width="50" height="90"/>
+            <use href="#glass" x="1004" y="394" width="50" height="88"/>
+            <use href="#glass" x="1180" y="396" width="48" height="86"/>
+          </g>
+          <g fill="#8A3B45" opacity=".85">
+            <path d="M610 424 c0 14 6 24 12 28 h4 c6 -4 12 -14 12 -28z"/>
+            <path d="M1014 422 c0 15 6 25 13 29 h4 c7 -4 13 -14 13 -29z"/>
+          </g>
+          <g style="color:#2A1E19"><use href="#bottle" x="760" y="374" width="34" height="106"/></g>
+          <g style="color:#D9A48F"><use href="#bottle" x="1290" y="378" width="32" height="100"/></g>
+          <ellipse cx="900" cy="456" rx="52" ry="15" fill="#E6DCC0"/><ellipse cx="900" cy="450" rx="40" ry="11" fill="#C9A961"/>
+          <ellipse cx="1100" cy="458" rx="46" ry="14" fill="#E6DCC0"/>
+          <g fill="#6E7B54"><ellipse cx="1090" cy="450" rx="16" ry="9"/><ellipse cx="1112" cy="452" rx="14" ry="8"/></g>
+        </g>
+
+        <rect width="1600" height="686" fill="url(#vig)" opacity=".9"/>
+        <rect width="1600" height="686" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="split2" style="margin-top:clamp(46px,6vw,88px)">
+    <div class="rv">
+      <span class="lbl" style="opacity:.5;display:block;margin-bottom:18px">Lunch is at one and runs until it stops</span>
+      <p class="prose">The table under the willow was made from a single elm that came down in the flood of ’71, and it has not been indoors since. We lay it whenever there are more than four of us, which is most days. There is bread from the bakehouse, cheese from up the lane, plums when there are plums, and whatever the garden feels strongly about that week.</p>
+      <p class="prose" style="margin-top:1.1em">Guests are welcome. Bring an appetite and low expectations of punctuality — and yes, second breakfast is a real booking, served at nine with a glass of Frizzante, and nobody here has ever thought that odd.</p>
+    </div>
+    <div class="rv" style="align-self:end">
+      <hr class="rule" style="margin-bottom:18px">
+      <div class="micro" style="opacity:.62;line-height:2">
+        <div style="display:flex;justify-content:space-between"><span>Second Breakfast</span><span>9:00</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Cellar Tasting</span><span>11:00 &amp; 15:00</span></div>
+        <div style="display:flex;justify-content:space-between"><span>The Long Table</span><span>13:00 →</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Lantern Hour</span><span>Dusk</span></div>
+      </div>
+      <hr class="rule" style="margin-top:18px">
+      <a class="lbl" href="#visit-us" style="display:inline-block;margin-top:22px;border-bottom:1px solid currentColor;padding-bottom:5px">Reserve a Seat</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════  STORY  ═════════════════════════════ -->
+<section class="sec wrap" id="story">
+  <header class="sechead">
+    <span class="lbl eyebrow rv">Chapter Four</span>
+    <div class="dash rv"></div>
+    <h2 class="d2 split" style="margin:0">Story</h2>
+    <p class="cap rv">Seventeen generations, one river, and a family archive kept mostly in shoeboxes. What follows is the short version.</p>
+  </header>
+
+  <div class="scatter">
+    <div class="ph fig r43 rv">
+      <div class="inner">
+        <svg viewBox="0 0 400 300" role="img" aria-label="The family gathered on the cellar steps at harvest.">
+          <rect width="400" height="300" fill="#B0AA8C"/>
+          <rect y="182" width="400" height="118" fill="#8E8A6C"/>
+          <g fill="#9C9578"><rect x="40" y="150" width="320" height="16"/><rect x="52" y="166" width="296" height="16"/></g>
+          <path d="M60 150 L60 60 L200 20 L340 60 L340 150 Z" fill="#7E7659"/>
+          <path d="M150 150 L150 78 C150 52 250 52 250 78 L250 150 Z" fill="#3E3728"/>
+          <g style="color:#3A3428">
+            <use href="#fig" x="86" y="98" width="54" height="118"/><use href="#fig" x="136" y="92" width="56" height="124"/>
+            <use href="#fig" x="192" y="96" width="54" height="120"/><use href="#fig" x="244" y="90" width="58" height="126"/>
+            <use href="#fig" x="300" y="100" width="52" height="116"/>
+          </g>
+          <rect width="400" height="300" fill="url(#vig)" opacity=".7"/>
+          <rect width="400" height="300" filter="url(#grain)" opacity=".26" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="ph fig r43 rv">
+      <div class="inner">
+        <svg viewBox="0 0 400 300" role="img" aria-label="Hands pruning a vine in the cold of February.">
+          <rect width="400" height="300" fill="#9EA48A"/>
+          <rect y="200" width="400" height="100" fill="#75805F"/>
+          <path d="M196 300 C 190 240 180 214 168 196 C 158 180 164 166 180 164 C 192 162 198 174 202 190 C 206 170 216 162 228 168 C 242 176 240 194 230 210 C 218 230 212 264 210 300 Z" fill="#4B3A2C"/>
+          <g stroke="#4B3A2C" stroke-width="7" fill="none" stroke-linecap="round"><path d="M204 188 C 176 172 158 148 156 120"/><path d="M218 186 C 246 172 262 148 264 122"/></g>
+          <path d="M262 138 c26 -18 54 -10 62 12 c-24 14 -50 8 -62 -12z" fill="#D8CDB4"/>
+          <rect x="292" y="122" width="72" height="16" rx="8" fill="#6E6450" transform="rotate(-14 292 122)"/>
+          <path d="M256 124 l30 -20 l10 12 l-30 20z" fill="#B9B3A0"/>
+          <rect width="400" height="300" fill="url(#vig)" opacity=".7"/>
+          <rect width="400" height="300" filter="url(#grain)" opacity=".26" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="ph fig r34 rv">
+      <div class="inner">
+        <svg viewBox="0 0 300 400" role="img" aria-label="The old barn and haystack, photographed in black and white.">
+          <rect width="300" height="400" fill="#BCB8A6"/>
+          <rect y="270" width="300" height="130" fill="#8E8A78"/>
+          <path d="M20 270 L20 150 L150 96 L280 150 L280 270 Z" fill="#6E6A5A"/>
+          <path d="M6 156 L150 92 L294 156 L294 172 L150 110 L6 172 Z" fill="#57543F"/>
+          <path d="M112 270 L112 178 L188 178 L188 270 Z" fill="#3A382C"/>
+          <path d="M40 268 c0 -42 26 -66 58 -66 s58 24 58 66z" fill="#A29C86" transform="translate(160 10) scale(.8)"/>
+          <rect width="300" height="400" fill="url(#vig)" opacity=".7"/>
+          <rect width="300" height="400" filter="url(#grain)" opacity=".3" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <p class="bignum split">1583</p>
+
+  <p class="cap rv" style="max-width:min(74ch,88vw);margin:clamp(26px,3vw,40px) auto 0;opacity:.6;text-align:center">
+    A ledger in the parish chest records sixty vines set at Withy Bottom in the spring of 1583, and a dispute about a hedge. The vines survived the dispute. Since then we have made wine through three floods, two fires, one very determined aunt, and four hundred and forty-three autumns — and the hedge is still where it was.
+  </p>
+
+  <div class="tri lbl rv" style="margin-top:clamp(44px,5vw,72px);color:var(--ink)">
+    <span>1583 — First Planting</span><span>1871 — The Great Flood</span><span>2004 — Certified Organic</span>
+  </div>
+</section>
+
+<!-- ═════════════════════════════  VISITS  ═══════════════════════════ -->
+<section class="on-dark" id="visits">
+  <div class="wrap" style="padding-top:var(--sec);padding-bottom:clamp(10px,2vw,28px)">
+    <header class="sechead">
+      <span class="lbl eyebrow rv">Chapter Five</span>
+      <div class="dash rv"></div>
+      <h2 class="d2 split" style="margin:0">Visits</h2>
+      <p class="cap rv">Four ways to spend a day here. All of them are led by somebody who lives on the farm, and all of them end with a glass in your hand.</p>
+    </header>
+  </div>
+
+  <article class="visit wrap">
+    <header class="sechead">
+      <span class="lbl eyebrow rv">Nine o’clock, in the garden</span>
+      <div class="dash rv"></div>
+      <div class="titlestack">
+        <h3 class="d3 split" style="margin:0">Second</h3>
+        <span class="script rv" aria-hidden="true">Breakfast</span>
+      </div>
+    </header>
+    <div class="fig r219 rv">
+      <div class="inner">
+        <svg viewBox="0 0 1600 686" role="img" aria-label="A small breakfast table in the walled garden with morning mist still in the trees.">
+          <rect width="1600" height="686" fill="url(#skyMorn)"/>
+          <circle cx="1280" cy="140" r="240" fill="url(#sun)" opacity=".65"/>
+          <path d="M0 260 C 260 232 460 254 700 240 C 940 226 1160 206 1400 218 C 1490 222 1550 230 1600 226 L1600 686 L0 686 Z" fill="#8E9A78" opacity=".8"/>
+          <rect x="0" y="286" width="1600" height="86" fill="url(#stone)"/>
+          <rect x="0" y="286" width="1600" height="86" fill="url(#masonry)"/>
+          <g style="color:#4E5B3A" opacity=".9"><use href="#tree" x="60" y="98" width="200" height="256"/><use href="#tree" x="1320" y="76" width="230" height="292"/></g>
+          <g class="drift"><rect x="-100" y="200" width="1800" height="150" fill="url(#mist)" filter="url(#blurM)" opacity=".7"/></g>
+          <rect y="372" width="1600" height="314" fill="#7E8A5C"/>
+          <rect y="372" width="1600" height="314" fill="url(#beds)" opacity=".22"/>
+          <ellipse cx="800" cy="600" rx="360" ry="46" fill="#5E6B44" opacity=".45" filter="url(#blurM)"/>
+          <ellipse cx="800" cy="470" rx="230" ry="52" fill="#F1E8D0"/>
+          <rect x="784" y="500" width="32" height="130" fill="#7C6C50"/>
+          <path d="M700 630 L900 630 L880 646 L720 646 Z" fill="#7C6C50"/>
+          <g>
+            <path d="M700 466 c-5 -24 14 -40 42 -40 s46 16 41 40z" fill="#C89A5E"/>
+            <ellipse cx="880" cy="462" rx="46" ry="13" fill="#E8DCC0"/>
+            <g style="color:#EFE8D4"><use href="#glass" x="806" y="404" width="44" height="80"/></g>
+            <path d="M815 430 c0 12 5 21 10 25 h3 c6 -4 10 -13 10 -25z" fill="#E8CF98" opacity=".85"/>
+            <path d="M940 446 c0 -18 14 -28 32 -28 h6 v-8 h10 v8 h6 c18 0 32 10 32 28 z" fill="#D8CFB4"/>
+            <path d="M1026 434 q22 4 22 16 q0 12 -22 14z" fill="#D8CFB4"/>
+          </g>
+          <g style="color:#3A3629" opacity=".9"><use href="#fig" x="1080" y="392" width="80" height="184"/></g>
+          <rect width="1600" height="686" fill="url(#vig)" opacity=".8"/>
+          <rect width="1600" height="686" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+    <p class="vnote just rv">Eggs from the geese, bread from the bakehouse, honey from the hives behind the wall, and a glass of Second Breakfast Frizzante while the mist is still in the trees. Ninety minutes. Twelve seats. Booked more often by people on their second visit than their first.</p>
+  </article>
+
+  <article class="visit wrap">
+    <header class="sechead">
+      <span class="lbl eyebrow rv">An hour along the water</span>
+      <div class="dash rv"></div>
+      <div class="titlestack">
+        <h3 class="d3 split" style="margin:0">Walk</h3>
+        <span class="script rv" aria-hidden="true">the Water-meadow</span>
+      </div>
+    </header>
+    <div class="fig r219 rv">
+      <div class="inner">
+        <svg viewBox="0 0 1600 686" role="img" aria-label="A footpath winding through willows beside the slow river.">
+          <rect width="1600" height="686" fill="url(#skyMorn)"/>
+          <path d="M0 250 C 280 226 500 244 760 232 C 1020 220 1240 200 1480 210 C 1530 212 1570 216 1600 214 L1600 686 L0 686 Z" fill="#7E8B66"/>
+          <path d="M-40 470 C 240 442 420 420 620 396 C 800 374 940 356 1140 348 C 1320 342 1460 348 1640 358 L1640 686 L-40 686 Z" fill="#63704C"/>
+          <path d="M-40 402 C 260 384 460 372 660 354 C 840 338 980 328 1180 322 L1200 300 C 1000 304 850 314 660 332 C 460 352 250 366 -40 384 Z" fill="url(#waterCool)"/>
+          <g opacity=".5" stroke="#F2F0DC" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="M120 384 q140 -12 260 -24"/><path d="M540 342 q160 -14 280 -20"/>
+          </g>
+          <path d="M-40 686 C 200 610 420 556 660 512 C 840 480 980 460 1180 446 L1240 470 C 1040 486 900 508 720 542 C 480 588 220 640 -40 700 Z" fill="#B4AE8E"/>
+          <g style="color:#3F4B32">
+            <use href="#willow" x="40" y="230" width="340" height="450"/>
+            <use href="#willow" x="330" y="256" width="250" height="330"/>
+            <use href="#willow" x="1220" y="200" width="300" height="400"/>
+          </g>
+          <g style="color:#4A5638" opacity=".9"><use href="#tree" x="840" y="230" width="170" height="220"/></g>
+          <g style="color:#3A3629" opacity=".95"><use href="#fig" x="620" y="450" width="76" height="176"/><use href="#fig" x="676" y="458" width="70" height="162"/></g>
+          <rect width="1600" height="686" fill="url(#vig)" opacity=".8"/>
+          <rect width="1600" height="686" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+    <p class="vnote just rv">The old drovers’ path follows the Withywindle from the bottom gate to the weir and back. Kingfishers if you are quiet, otters if you are lucky, and a bottle of Goldberry waiting in the shade at the turn. Bring boots between October and May; the meadow does what it likes.</p>
+  </article>
+
+  <article class="visit wrap">
+    <header class="sechead">
+      <span class="lbl eyebrow rv">Eleven degrees, all year</span>
+      <div class="dash rv"></div>
+      <div class="titlestack">
+        <h3 class="d3 split" style="margin:0">Cellar</h3>
+        <span class="script rv" aria-hidden="true">Hours</span>
+      </div>
+    </header>
+    <div class="fig r219 rv">
+      <div class="inner">
+        <svg viewBox="0 0 1600 686" role="img" aria-label="A vaulted cellar dug into the river bank, lit by a single lantern, lined with old barrels.">
+          <rect width="1600" height="686" fill="#241C14"/>
+          <path d="M0 686 L0 300 C 0 140 240 40 800 40 C 1360 40 1600 140 1600 300 L1600 686 Z" fill="#3A2E20"/>
+          <path d="M180 686 L180 330 C 180 200 400 130 800 130 C 1200 130 1420 200 1420 330 L1420 686 Z" fill="#2C2318"/>
+          <path d="M420 686 L420 380 C 420 290 570 240 800 240 C 1030 240 1180 290 1180 380 L1180 686 Z" fill="#1E1810"/>
+          <circle cx="800" cy="330" r="300" fill="url(#lamp)" opacity=".55"/>
+          <g stroke="#5A4A34" stroke-width="3" fill="none" opacity=".5">
+            <path d="M180 330 C 180 200 400 130 800 130 C 1200 130 1420 200 1420 330"/>
+            <path d="M420 380 C 420 290 570 240 800 240 C 1030 240 1180 290 1180 380"/>
+          </g>
+          <g style="color:#7C5E3E">
+            <use href="#barrel" x="30" y="360" width="290" height="322"/>
+            <use href="#barrel" x="1290" y="352" width="300" height="332"/>
+            <use href="#barrel" x="330" y="446" width="200" height="222"/>
+            <use href="#barrel" x="1080" y="440" width="205" height="228"/>
+          </g>
+          <g style="color:#6E5236" opacity=".85"><use href="#barrel" x="560" y="500" width="150" height="166"/><use href="#barrel" x="900" y="498" width="152" height="168"/></g>
+          <g>
+            <rect x="786" y="248" width="30" height="46" fill="#C9A961" opacity=".9"/>
+            <circle cx="801" cy="270" r="52" fill="url(#lamp)"/>
+            <path d="M801 200 L801 248" stroke="#6E5A3A" stroke-width="3"/>
+          </g>
+          <g style="color:#241C14" opacity=".9"><use href="#fig" x="740" y="430" width="82" height="190"/></g>
+          <rect width="1600" height="686" fill="url(#vig)"/>
+          <rect width="1600" height="686" filter="url(#grain)" opacity=".24" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+    <p class="vnote just rv">Down eleven worn steps into the bank, where the reds sleep in oak that is older than most of the family photographs. We taste straight from the barrel, in the dark, with a lantern — not for atmosphere, but because there has never been a good reason to run a cable down there.</p>
+  </article>
+
+  <article class="visit wrap" style="padding-bottom:var(--sec)">
+    <header class="sechead">
+      <span class="lbl eyebrow rv">Three weeks in September</span>
+      <div class="dash rv"></div>
+      <div class="titlestack">
+        <h3 class="d3 split" style="margin:0">Harvest</h3>
+        <span class="script rv" aria-hidden="true">by Hand</span>
+      </div>
+    </header>
+    <div class="fig r219 rv">
+      <div class="inner">
+        <svg viewBox="0 0 1600 686" role="img" aria-label="Pickers working the vine rows at harvest with crates of grapes in the foreground.">
+          <rect width="1600" height="686" fill="url(#skyEve)"/>
+          <circle cx="300" cy="130" r="260" fill="url(#sun)" opacity=".7"/>
+          <path d="M0 246 C 260 220 460 240 700 226 C 940 212 1160 194 1400 206 C 1490 210 1550 216 1600 212 L1600 686 L0 686 Z" fill="#7C8A62" opacity=".85"/>
+          <path id="hv" d="M-40 330 C 260 304 480 320 740 302 C 980 286 1200 276 1640 292 L1640 686 L-40 686 Z" fill="#5E6C44"/>
+          <clipPath id="hvC"><use href="#hv"/></clipPath>
+          <g clip-path="url(#hvC)"><rect x="-200" y="280" width="2100" height="240" fill="url(#rowsFar)"/></g>
+          <g fill="#4A5636">
+            <path d="M900 356 L-360 686 L-120 686 Z"/><path d="M900 356 L60 686 L250 686 Z"/>
+            <path d="M900 356 L400 686 L540 686 Z"/><path d="M900 356 L700 686 L810 686 Z"/>
+            <path d="M900 356 L1000 686 L1120 686 Z"/><path d="M900 356 L1280 686 L1450 686 Z"/>
+            <path d="M900 356 L1640 686 L1900 686 Z"/>
+          </g>
+          <g fill="#6E7C4E" opacity=".5">
+            <path d="M900 358 L-120 686 L60 686 Z"/><path d="M900 358 L540 686 L700 686 Z"/><path d="M900 358 L1120 686 L1280 686 Z"/>
+          </g>
+          <g style="color:#33392A">
+            <use href="#fig" x="420" y="356" width="60" height="140"/>
+            <use href="#fig" x="600" y="366" width="66" height="152"/>
+            <use href="#fig" x="1080" y="360" width="62" height="144"/>
+            <use href="#fig" x="1220" y="372" width="70" height="160"/>
+          </g>
+          <!-- foreground crates -->
+          <g>
+            <rect x="80" y="520" width="290" height="130" fill="#B08E5E"/>
+            <g fill="#8E7048"><rect x="80" y="520" width="290" height="12"/><rect x="80" y="580" width="290" height="10"/></g>
+            <g fill="#5E3348"><circle cx="140" cy="514" r="26"/><circle cx="196" cy="506" r="28"/><circle cx="256" cy="512" r="26"/><circle cx="312" cy="518" r="24"/><circle cx="170" cy="540" r="22"/><circle cx="228" cy="534" r="24"/><circle cx="288" cy="540" r="22"/></g>
+            <g fill="#7C5C6B" opacity=".55"><circle cx="132" cy="504" r="9"/><circle cx="188" cy="496" r="9"/><circle cx="248" cy="502" r="8"/></g>
+          </g>
+          <rect width="1600" height="686" fill="url(#vig)" opacity=".85"/>
+          <rect width="1600" height="686" filter="url(#grain)" opacity=".2" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+    <p class="vnote just rv">Everything here is picked by hand, into small crates, by whoever turns up. Work a morning on the rows and you eat at the long table with the rest of us — which is not a reward so much as the arrangement. Sign the harvest book at the gate; we will send word when the fruit is ready.</p>
+  </article>
+</section>
+
+<!-- ═════════════════════════════  VISIT US  ═════════════════════════ -->
+<footer class="on-dark-d" id="visit-us">
+  <div class="wrap" style="padding-top:clamp(30px,4vw,52px)">
+    <div class="tri lbl rv" style="opacity:.4"><span>Menu</span><span>Withywindle Winyard</span><span>Contacts</span></div>
+  </div>
+
+  <div class="wrap contact" style="padding-top:clamp(56px,8vw,120px)">
+    <div class="lock">
+      <span class="script rv" aria-hidden="true">Withywindle</span>
+      <h2 class="d2 split" style="margin:0">Visit Us</h2>
+    </div>
+    <p class="cap rv" style="max-width:min(60ch,88vw);margin:26px auto 0;opacity:.6;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;line-height:1.85">
+      Somebody is nearly always in. Write, telephone, or simply come down the lane and follow the smell of woodsmoke.
+    </p>
+
+    <div class="fig r11 rv" style="width:min(196px,46vw);margin:clamp(48px,6vw,88px) auto clamp(26px,3vw,42px)">
+      <div class="inner">
+        <svg viewBox="0 0 400 400" role="img" aria-label="The stone farmhouse and cellar door seen from the lane.">
+          <rect width="400" height="400" fill="url(#skyEve)"/>
+          <rect y="268" width="400" height="132" fill="#6E7B54"/>
+          <path d="M40 268 L40 150 L200 92 L360 150 L360 268 Z" fill="url(#stone)"/>
+          <path d="M40 268 L40 150 L200 92 L360 150 L360 268 Z" fill="url(#masonry)"/>
+          <path d="M24 156 L200 88 L376 156 L376 172 L200 106 L24 172 Z" fill="#6E5D48"/>
+          <rect x="272" y="72" width="26" height="52" fill="#7C6B55"/>
+          <g fill="#3A3225"><rect x="72" y="188" width="34" height="46"/><rect x="132" y="188" width="34" height="46"/><rect x="234" y="188" width="34" height="46"/><rect x="294" y="188" width="34" height="46"/></g>
+          <path d="M176 268 L176 214 C176 192 224 192 224 214 L224 268 Z" fill="#4A3A2A"/>
+          <g fill="#C9A961" opacity=".55"><rect x="72" y="188" width="34" height="46"/><rect x="234" y="188" width="34" height="46"/></g>
+          <g style="color:#4A5638"><use href="#tree" x="300" y="176" width="120" height="150"/><use href="#willow" x="-30" y="150" width="150" height="200"/></g>
+          <path d="M120 400 C 160 330 240 330 280 400 Z" fill="#8E9670" opacity=".6"/>
+          <rect width="400" height="400" fill="url(#vig)" opacity=".85"/>
+          <rect width="400" height="400" filter="url(#grain)" opacity=".24" style="mix-blend-mode:overlay"/>
+        </svg>
+      </div>
+    </div>
+
+    <span class="lbl rv" style="display:block;opacity:.45;margin-bottom:clamp(22px,3vw,36px)">Where we are</span>
+    <p class="bigaddr split">Withy Bottom Lane · Bucklebury</p>
+    <p class="bigaddr rv" style="margin-top:.1em">Nether Marish · WW1 5 83</p>
+  </div>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <div class="wrap cinfo">
+    <div class="rv">
+      <span class="lbl h">Cellar Door</span>
+      <p class="micro" style="max-width:52ch;opacity:.72;line-height:1.9">
+        The door is the low one under the ivy, and it sticks. Tastings run twice a day and the long table is laid at one; both are best booked, though we have never actually turned anyone away. Wines can be collected here, sent by the case, or drunk on the spot — which we recommend.
+      </p>
+      <div class="signup rv" style="margin-top:26px">
+        <label for="em" class="lbl" style="opacity:.45">Post</label>
+        <input id="em" type="email" placeholder="Your email" autocomplete="email" />
+        <button class="lbl" type="button" id="joinBtn">Join the List</button>
+      </div>
+      <p class="lbl lbl-sm" id="joinMsg" style="opacity:0;margin-top:14px;transition:opacity .5s var(--ease)">Thank you — we will write when the vines do something worth mentioning.</p>
+    </div>
+    <div class="rv">
+      <span class="lbl h" style="display:block;text-align:right">Hours</span>
+      <p class="hours">
+        Tuesday to Saturday<br>
+        9:00 — 17:00<br>
+        Sunday, the long table only<br>
+        Closed in January
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <div class="wrap contact" style="padding-block:clamp(52px,7vw,104px)">
+    <span class="lbl rv" style="display:block;opacity:.45;margin-bottom:clamp(24px,3vw,40px)">How to reach us</span>
+    <div class="bigmail rv">
+      <a href="tel:+441583583">T. +44 1583 583</a>
+      <a href="mailto:hullo@withywindlewinyard.com">hullo@withywindlewinyard.com</a>
+      <a href="#" aria-label="Instagram">IG: @withywindlewinyard</a>
+      <a href="#" aria-label="Journal">The Winyard Journal</a>
+    </div>
+  </div>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <div class="wrap foot micro">
+    <div>
+      Withywindle Winyard Ltd · Est. 1583<br>
+      Withy Bottom Lane, Nether Marish<br>
+      Organic Cert. No. 1583-WW · Reg. 04412
+    </div>
+    <div>
+      Grown, picked, pressed and bottled on the farm.<br>
+      Please enjoy our wines slowly, and with company.<br>
+      <span style="opacity:.7">© 2026 — Made by the river</span>
+    </div>
+    <div>
+      <a href="#">Trade &amp; Export</a><br>
+      <a href="#">Privacy</a><br>
+      <a href="#top">Back to the top ↑</a>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<style>
+/* ambient mist drift (kept here so it sits near its only user) */
+.drift{animation:driftx 44s ease-in-out infinite alternate}
+@keyframes driftx{from{transform:translateX(-3%)}to{transform:translateX(3%)}}
+</style>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── word-mask split for display type ─────────────────────────── */
+  document.querySelectorAll(".split").forEach(function(el){
+    var txt = el.textContent.replace(/\s+/g," ").trim();
+    var words = txt.split(" ");
+    el.setAttribute("aria-label", txt);
+    el.innerHTML = words.map(function(w,i){
+      return '<span class="mw"><i style="transition-delay:'+(i*70)+'ms">'+w+"</i></span>";
+    }).join(" ");
+  });
+
+  /* ── reveal on enter ──────────────────────────────────────────── */
+  var targets = document.querySelectorAll(".rv, .split, .fig");
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(function(t){ t.classList.add("in"); });
+  } else {
+    // stagger siblings inside a shared parent
+    var groups = new Map();
+    document.querySelectorAll(".rv").forEach(function(el){
+      var p = el.parentElement;
+      if(!groups.has(p)) groups.set(p, 0);
+      var n = groups.get(p);
+      if (n) el.style.transitionDelay = Math.min(n*80, 320) + "ms";
+      groups.set(p, n+1);
+    });
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.12 });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+
+  /* ── parallax ─────────────────────────────────────────────────── */
+  var pars = [].slice.call(document.querySelectorAll("[data-par]"));
+  var hpars = [].slice.call(document.querySelectorAll("[data-hpar]"));
+  var hero = document.querySelector(".hero");
+  var sides = [].slice.call(document.querySelectorAll(".side"));
+  var ticking = false;
+
+  function frame(){
+    ticking = false;
+    var vh = window.innerHeight || 1;
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+
+    if(!reduce){
+      hpars.forEach(function(p){
+        var k = parseFloat(p.dataset.hpar) || 0;
+        p.style.transform = "translate3d(0," + (y * k).toFixed(2) + "px,0)";
+      });
+      pars.forEach(function(p){
+        var r = p.getBoundingClientRect();
+        var c = (r.top + r.height/2 - vh/2) / vh;
+        var k = parseFloat(p.dataset.par) || 0;
+        p.style.transform = "translate3d(0," + (c * k * 100).toFixed(2) + "px,0)";
+      });
+    }
+
+    var past = hero ? y > hero.offsetHeight * 0.9 : y > 400;
+    sides.forEach(function(s){ s.classList.toggle("show", past); });
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener("scroll", onScroll, { passive:true });
+  window.addEventListener("resize", onScroll);
+  frame();
+
+  /* ── menu overlay ─────────────────────────────────────────────── */
+  var ovl = document.getElementById("ovl");
+  var btn = document.getElementById("menuBtn");
+  var side = document.getElementById("sideMenu");
+  var close = document.getElementById("ovlClose");
+  var links = [].slice.call(ovl.querySelectorAll("nav a"));
+  links.forEach(function(a,i){ a.style.setProperty("--d", (90 + i*62) + "ms"); });
+
+  function openMenu(e){
+    if(e) e.preventDefault();
+    ovl.classList.add("open");
+    ovl.setAttribute("aria-hidden","false");
+    btn.setAttribute("aria-expanded","true");
+    document.body.style.overflow = "hidden";
+  }
+  function closeMenu(){
+    ovl.classList.remove("open");
+    ovl.setAttribute("aria-hidden","true");
+    btn.setAttribute("aria-expanded","false");
+    document.body.style.overflow = "";
+  }
+  btn.addEventListener("click", openMenu);
+  side.addEventListener("click", openMenu);
+  close.addEventListener("click", closeMenu);
+  ovl.querySelectorAll("[data-close]").forEach(function(a){ a.addEventListener("click", closeMenu); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeMenu(); });
+
+  /* ── newsletter (local only) ──────────────────────────────────── */
+  var join = document.getElementById("joinBtn");
+  var msg  = document.getElementById("joinMsg");
+  var em   = document.getElementById("em");
+  if(join){
+    join.addEventListener("click", function(){
+      var ok = em.value && em.value.indexOf("@") > 0;
+      msg.textContent = ok
+        ? "Thank you — we will write when the vines do something worth mentioning."
+        : "A working email, if you would.";
+      msg.style.opacity = "1";
+      if(ok) em.value = "";
+    });
+  }
+})();
+</script>
+</body>
+</html>

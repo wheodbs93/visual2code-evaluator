@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Withywindle Winyard — naturally made red, white, and rosé wines from a vineyard rooted since 1578.">
+<title>Withywindle Winyard</title>
+<style>
+:root {
+  --cream: #f1ebdd;
+  --oat: #d8cfba;
+  --paper: #f7f3e9;
+  --ink: #191a16;
+  --vine: #4a5634;
+  --moss: #788061;
+  --claret: #59182a;
+  --sun: #c49a49;
+  --line: rgba(25,26,22,.28);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--cream);
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
+}
+button, a { color: inherit; }
+a { text-decoration: none; }
+::selection { color: var(--cream); background: var(--claret); }
+
+.utility {
+  font: 600 10px/1.2 Arial, Helvetica, sans-serif;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  color: #fffaf0;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(16,18,8,.38), transparent 38%, rgba(15,15,8,.38)),
+    linear-gradient(117deg, #30351d 0%, #6c713a 30%, #c69d50 61%, #778052 100%);
+}
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  animation: breathe 18s ease-in-out infinite alternate;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(12,15,8,.38), transparent 42%, rgba(9,10,6,.1));
+}
+@keyframes breathe {
+  from { transform: scale(1); }
+  to { transform: scale(1.035); }
+}
+.hero-nav {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  padding: 25px 3.5vw;
+}
+.nav-button {
+  width: max-content;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+}
+.nav-button::after, .nav-link::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 1px;
+  margin-top: 5px;
+  background: currentColor;
+  transition: width .35s ease;
+}
+.nav-button:hover::after, .nav-link:hover::after { width: 100%; }
+.nav-link { justify-self: end; }
+.brand {
+  text-align: center;
+  line-height: .85;
+}
+.brand-mark {
+  display: block;
+  width: 52px;
+  height: 34px;
+  margin: 0 auto 8px;
+}
+.brand-name {
+  font-size: 24px;
+  letter-spacing: .03em;
+}
+.brand-name small {
+  display: block;
+  margin-top: 8px;
+  font: 600 7px Arial, sans-serif;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+}
+.hero-copy {
+  position: absolute;
+  inset: 49% auto auto 50%;
+  width: min(94vw, 1150px);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+.hero-copy h1 {
+  margin: 0;
+  font-size: clamp(72px, 11.2vw, 174px);
+  font-weight: 400;
+  letter-spacing: -.065em;
+  line-height: .72;
+  text-transform: uppercase;
+}
+.hero-copy h1 span {
+  display: block;
+  margin-left: 10vw;
+  font-style: italic;
+  font-weight: 400;
+}
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: clamp(80px, 17vw, 260px);
+  margin: 22px 0 -5px;
+}
+.hero-tagline {
+  margin: 38px auto 0;
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.hero-bottom {
+  position: absolute;
+  right: 2vw;
+  bottom: 0;
+  left: 2vw;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  min-height: 85px;
+  color: var(--ink);
+  background: var(--paper);
+}
+.hero-bottom a {
+  display: grid;
+  place-items: center;
+  transition: color .25s, background .25s;
+}
+.hero-bottom a:hover {
+  color: var(--paper);
+  background: var(--claret);
+}
+
+/* Introduction */
+.intro {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  min-height: 760px;
+  padding: 150px 7vw 110px;
+  background: var(--cream);
+}
+.intro-title {
+  align-self: start;
+  margin: 0;
+  max-width: 840px;
+  font-size: clamp(67px, 9vw, 142px);
+  font-weight: 400;
+  letter-spacing: -.055em;
+  line-height: .83;
+}
+.intro-title em {
+  display: block;
+  color: var(--claret);
+  font-weight: 400;
+}
+.intro-aside {
+  align-self: end;
+  max-width: 390px;
+  margin-left: auto;
+}
+.intro-aside p {
+  margin: 30px 0;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid;
+}
+.text-link span {
+  transition: transform .3s ease;
+}
+.text-link:hover span { transform: translateX(7px); }
+
+/* Origin */
+.origin {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  min-height: 880px;
+  background: var(--vine);
+  color: var(--cream);
+}
+.origin-art {
+  position: relative;
+  overflow: hidden;
+  min-height: 640px;
+}
+.origin-art svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.origin-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 75px 6vw;
+  border-left: 1px solid rgba(255,255,255,.28);
+}
+.origin-copy h2 {
+  margin: 90px 0 40px;
+  font-size: clamp(60px, 7vw, 112px);
+  font-weight: 400;
+  letter-spacing: -.055em;
+  line-height: .8;
+}
+.origin-copy h2 em { display: block; }
+.origin-copy p {
+  max-width: 410px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.year {
+  font-size: clamp(65px, 8vw, 126px);
+  letter-spacing: -.06em;
+}
+
+/* Wines */
+.wines {
+  padding: 140px 4vw 125px;
+  background: var(--paper);
+}
+.section-heading {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  margin-bottom: 85px;
+}
+.section-heading h2 {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(66px, 9vw, 136px);
+  font-weight: 400;
+  letter-spacing: -.06em;
+  line-height: .75;
+}
+.section-heading h2 em {
+  display: block;
+  color: var(--claret);
+  font-size: .55em;
+  font-weight: 400;
+}
+.section-heading > :last-child { justify-self: end; }
+.wine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+.wine-card {
+  position: relative;
+  min-height: 690px;
+  padding: 35px 3vw 30px;
+  text-align: center;
+  border-right: 1px solid var(--line);
+}
+.wine-card:last-child { border-right: 0; }
+.wine-card h3 {
+  margin: 4px 0 0;
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+}
+.wine-card .vintage {
+  display: block;
+  margin-top: 8px;
+}
+.bottle {
+  position: relative;
+  width: 132px;
+  height: 400px;
+  margin: 48px auto 32px;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(17px 25px 18px rgba(30,25,15,.18));
+}
+.wine-card:hover .bottle { transform: translateY(-14px) rotate(1deg); }
+.bottle .neck {
+  position: absolute;
+  top: 0;
+  left: 43px;
+  width: 46px;
+  height: 117px;
+  border-radius: 8px 8px 3px 3px;
+  background: var(--glass);
+}
+.bottle .cap {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  z-index: 2;
+  width: 52px;
+  height: 31px;
+  border-radius: 4px 4px 1px 1px;
+  background: var(--cap);
+}
+.bottle .body {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 306px;
+  border-radius: 48px 48px 20px 20px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.3), transparent 20%, transparent 75%, rgba(0,0,0,.25)),
+    var(--glass);
+}
+.bottle .label {
+  position: absolute;
+  z-index: 3;
+  top: 195px;
+  left: 14px;
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 126px;
+  padding: 8px;
+  color: var(--ink);
+  background: #eee6d2;
+  border: 1px solid rgba(20,20,10,.18);
+  font-size: 13px;
+  line-height: 1;
+}
+.bottle .label::before {
+  content: "W";
+  display: block;
+  margin-bottom: 8px;
+  color: var(--claret);
+  font-size: 36px;
+  font-style: italic;
+}
+.bottle.red { --glass: #351619; --cap: #651c2e; }
+.bottle.white { --glass: #8b9159; --cap: #d2bd83; }
+.bottle.rose { --glass: #bf7f6f; --cap: #e0c5ad; }
+.wine-note {
+  max-width: 260px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Table */
+.table-section {
+  position: relative;
+  min-height: 900px;
+  overflow: hidden;
+  color: var(--paper);
+  background: #462319;
+}
+.table-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.table-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(22,14,8,.72), rgba(24,15,8,.08) 65%);
+}
+.table-copy {
+  position: relative;
+  z-index: 2;
+  width: min(700px, 80vw);
+  padding: 150px 0 120px 7vw;
+}
+.table-copy h2 {
+  margin: 65px 0 40px;
+  font-size: clamp(72px, 10vw, 145px);
+  font-weight: 400;
+  letter-spacing: -.065em;
+  line-height: .75;
+}
+.table-copy h2 em {
+  display: block;
+  margin-left: 11vw;
+}
+.table-copy p {
+  max-width: 430px;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+/* Methods */
+.methods {
+  display: grid;
+  grid-template-columns: .75fr 1.25fr;
+  padding: 145px 7vw;
+  background: var(--oat);
+}
+.methods aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.methods-number {
+  color: var(--claret);
+  font-size: 120px;
+  line-height: 1;
+}
+.methods-main h2 {
+  margin: 0 0 90px;
+  font-size: clamp(70px, 9vw, 140px);
+  font-weight: 400;
+  letter-spacing: -.06em;
+  line-height: .82;
+}
+.method-list { border-top: 1px solid var(--line); }
+.method {
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr;
+  gap: 25px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.method h3 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 400;
+}
+.method p {
+  max-width: 330px;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Visit */
+.visit {
+  min-height: 850px;
+  padding: 70px 4vw 35px;
+  color: var(--cream);
+  background: var(--ink);
+}
+.visit-brand {
+  text-align: center;
+  font-size: 22px;
+}
+.visit h2 {
+  margin: 85px auto 20px;
+  text-align: center;
+  font-size: clamp(70px, 10vw, 150px);
+  font-weight: 400;
+  letter-spacing: -.06em;
+  line-height: .75;
+}
+.visit h2 em {
+  display: block;
+  font-size: .55em;
+}
+.visit-intro {
+  max-width: 460px;
+  margin: 35px auto 75px;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.visit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  border-top: 1px solid rgba(255,255,255,.35);
+  border-bottom: 1px solid rgba(255,255,255,.35);
+}
+.visit-cell {
+  min-height: 225px;
+  padding: 40px;
+  border-right: 1px solid rgba(255,255,255,.35);
+}
+.visit-cell:last-child { border: 0; }
+.visit-cell strong {
+  display: block;
+  margin: 26px 0 7px;
+  font-size: 28px;
+  font-weight: 400;
+}
+.visit-cell p { line-height: 1.5; }
+.visit-cell a { color: #d5bb78; }
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  padding-top: 36px;
+}
+.footer p {
+  max-width: 500px;
+  margin: 0;
+  font-size: 9px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* Menu */
+.menu-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  color: var(--cream);
+  background: var(--claret);
+  transform: translateY(-102%);
+  transition: transform .75s cubic-bezier(.75,0,.2,1);
+}
+.menu-panel.open { transform: translateY(0); }
+.menu-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 35px 5vw 60px;
+}
+.menu-close {
+  width: max-content;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+}
+.menu-links a {
+  display: block;
+  width: max-content;
+  font-size: clamp(52px, 7vw, 110px);
+  letter-spacing: -.05em;
+  line-height: .9;
+}
+.menu-links a:hover { font-style: italic; }
+.menu-illustration {
+  display: grid;
+  place-items: center;
+  background: #7a805c;
+}
+.menu-illustration svg { width: 80%; max-width: 500px; }
+
+@media (max-width: 800px) {
+  .hero-nav { padding: 20px; }
+  .hero-copy { top: 45%; }
+  .hero-copy h1 { font-size: clamp(64px, 20vw, 100px); line-height: .78; }
+  .hero-copy h1 span { margin: 0; }
+  .hero-meta { gap: 50px; }
+  .hero-tagline { padding: 0 25px; }
+  .hero-bottom {
+    right: 0;
+    left: 0;
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 72px;
+  }
+  .hero-bottom a:nth-child(2), .hero-bottom a:nth-child(4) { display: none; }
+  .intro, .origin, .methods, .menu-panel { grid-template-columns: 1fr; }
+  .intro { min-height: auto; gap: 100px; padding: 100px 25px; }
+  .intro-aside { margin: 0; }
+  .origin-copy { min-height: 650px; padding: 65px 28px; border: 0; }
+  .wine-grid { grid-template-columns: 1fr; }
+  .wine-card { min-height: 640px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .section-heading { grid-template-columns: 1fr; gap: 35px; }
+  .section-heading > :first-child, .section-heading > :last-child { justify-self: center; }
+  .table-copy { padding-left: 25px; }
+  .methods { gap: 60px; padding: 100px 25px; }
+  .methods aside { flex-direction: row; align-items: start; }
+  .method { grid-template-columns: 40px 1fr; }
+  .method p { grid-column: 2; }
+  .visit { padding-right: 20px; padding-left: 20px; }
+  .visit-grid { grid-template-columns: 1fr; }
+  .visit-cell { min-height: auto; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.35); }
+  .footer { align-items: start; flex-direction: column; }
+  .menu-illustration { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="menu-panel" id="menu" aria-hidden="true">
+  <div class="menu-inner">
+    <button class="menu-close utility" type="button">Close menu</button>
+    <nav class="menu-links" aria-label="Main menu">
+      <a href="#roots">Our roots</a>
+      <a href="#wines">The wines</a>
+      <a href="#ways">Our ways</a>
+      <a href="#table">At table</a>
+      <a href="#visit">Come visit</a>
+    </nav>
+    <span class="utility">Withywindle Winyard · Rooted since 1578</span>
+  </div>
+  <div class="menu-illustration" aria-hidden="true">
+    <svg viewBox="0 0 500 620">
+      <path d="M70 540C142 434 104 301 221 220c63-44 93-111 100-174" fill="none" stroke="#eee5d2" stroke-width="3"/>
+      <path d="M290 102c-73 7-108 45-112 105 62-3 105-35 112-105ZM312 165c72 3 111 38 121 97-62 4-108-24-121-97ZM195 268c-71 8-105 47-108 107 62-4 103-37 108-107ZM242 345c76 2 117 38 127 100-66 4-113-26-127-100Z" fill="#eee5d2"/>
+      <circle cx="288" cy="113" r="10" fill="#c69b48"/>
+      <circle cx="305" cy="127" r="11" fill="#c69b48"/>
+      <circle cx="282" cy="136" r="12" fill="#c69b48"/>
+      <circle cx="304" cy="150" r="10" fill="#c69b48"/>
+    </svg>
+  </div>
+</div>
+
+<header class="hero" id="home">
+  <svg class="hero-scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A warm vineyard landscape beneath hanging grapevines">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#9da173"/>
+        <stop offset=".48" stop-color="#dfc481"/>
+        <stop offset="1" stop-color="#6d733f"/>
+      </linearGradient>
+      <linearGradient id="hill" x1="0" x2="1">
+        <stop stop-color="#6c713b"/>
+        <stop offset="1" stop-color="#343b25"/>
+      </linearGradient>
+      <radialGradient id="sun">
+        <stop stop-color="#fff5c2"/>
+        <stop offset=".25" stop-color="#ecc36d" stop-opacity=".8"/>
+        <stop offset="1" stop-color="#d9a54c" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+    </defs>
+    <rect width="1600" height="1000" fill="url(#sky)"/>
+    <circle cx="320" cy="520" r="300" fill="url(#sun)" filter="url(#blur)"/>
+    <path d="M0 610Q240 500 430 590T830 555T1240 560T1600 470V1000H0Z" fill="#74784c"/>
+    <path d="M0 690Q280 555 530 650T970 590T1600 535V1000H0Z" fill="url(#hill)"/>
+    <g opacity=".55" stroke="#c0a85d" stroke-width="10">
+      <path d="M-100 980 570 610"/><path d="M90 1000 665 620"/>
+      <path d="M310 1000 770 625"/><path d="M540 1000 885 620"/>
+      <path d="M810 1000 1020 604"/><path d="M1100 1000 1190 575"/>
+    </g>
+    <path d="M1180 525h260v300h-260z" fill="#b39769"/>
+    <path d="m1135 535 174-127 182 127z" fill="#4b3023"/>
+    <rect x="1284" y="625" width="73" height="200" fill="#332317"/>
+    <path d="M0 0h1600v135C1333 85 1120 186 904 118 667 43 450 176 0 120Z" fill="#252b18"/>
+    <g fill="#485326">
+      <ellipse cx="145" cy="112" rx="180" ry="130"/>
+      <ellipse cx="445" cy="73" rx="210" ry="120"/>
+      <ellipse cx="775" cy="64" rx="225" ry="135"/>
+      <ellipse cx="1120" cy="87" rx="220" ry="135"/>
+      <ellipse cx="1480" cy="70" rx="210" ry="140"/>
+    </g>
+    <g fill="#b8aa58" stroke="#766d32" stroke-width="2">
+      <g transform="translate(250 100)">
+        <circle cx="0" cy="0" r="25"/><circle cx="35" cy="9" r="27"/><circle cx="68" cy="22" r="24"/>
+        <circle cx="18" cy="39" r="26"/><circle cx="53" cy="52" r="25"/><circle cx="34" cy="82" r="23"/>
+      </g>
+      <g transform="translate(970 75)">
+        <circle cx="0" cy="0" r="25"/><circle cx="35" cy="9" r="27"/><circle cx="68" cy="22" r="24"/>
+        <circle cx="18" cy="39" r="26"/><circle cx="53" cy="52" r="25"/><circle cx="34" cy="82" r="23"/>
+      </g>
+      <g transform="translate(1390 90)">
+        <circle cx="0" cy="0" r="23"/><circle cx="31" cy="14" r="25"/><circle cx="60" cy="28" r="22"/>
+        <circle cx="13" cy="43" r="24"/><circle cx="43" cy="57" r="23"/><circle cx="29" cy="83" r="20"/>
+      </g>
+    </g>
+    <path d="M0 870Q380 780 720 890T1600 830V1000H0Z" fill="#303720"/>
+    <g fill="#eee0b5" opacity=".65">
+      <circle cx="1180" cy="795" r="5"/><circle cx="1210" cy="820" r="4"/><circle cx="1090" cy="840" r="5"/>
+      <circle cx="1410" cy="875" r="4"/><circle cx="920" cy="885" r="5"/><circle cx="1300" cy="785" r="4"/>
+    </g>
+  </svg>
+
+  <nav class="hero-nav" aria-label="Primary navigation">
+    <button class="nav-button utility menu-open" type="button">Menu</button>
+    <a class="brand" href="#home" aria-label="Withywindle Winyard home">
+      <svg class="brand-mark" viewBox="0 0 80 48" aria-hidden="true">
+        <path d="M9 42h62M16 39V22h10v17M31 39V12h18v27M54 39V20h10v19M36 12V4h8v8" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M21 16c7-9 31-9 38 0" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span class="brand-name">Withywindle<small>Winyard</small></span>
+    </a>
+    <a class="nav-link utility" href="#visit">Come visit</a>
+  </nav>
+
+  <div class="hero-copy">
+    <div class="hero-meta utility"><span>11 generations</span><span>Since 1578</span></div>
+    <h1>Rooted in <span>good cheer</span></h1>
+    <p class="hero-tagline">Naturally made wines from an old green bend in the river, best opened whenever friends arrive.</p>
+  </div>
+
+  <nav class="hero-bottom utility" aria-label="Page sections">
+    <a href="#roots">Roots</a>
+    <a href="#ways">Our ways</a>
+    <a href="#wines">The wines</a>
+    <a href="#table">At table</a>
+    <a href="#visit">Visit</a>
+  </nav>
+</header>
+
+<main>
+  <section class="intro" id="roots">
+    <h2 class="intro-title reveal">Old vines.<br>Open doors.<em>Long lunches.</em></h2>
+    <div class="intro-aside reveal">
+      <span class="eyebrow utility">Withywindle, since 1578</span>
+      <p>For nearly four and a half centuries, our family has tended this sunny fold of earth with a simple conviction: give the vine what it needs, take no more than it offers, and always set another place at the table.</p>
+      <a class="text-link utility" href="#ways">Read our story <span>→</span></a>
+    </div>
+  </section>
+
+  <section class="origin" aria-label="Our origins">
+    <div class="origin-art">
+      <svg viewBox="0 0 900 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated old vineyard garden">
+        <rect width="900" height="900" fill="#7d8263"/>
+        <circle cx="710" cy="160" r="95" fill="#d5b660"/>
+        <path d="M0 490Q185 355 386 485T900 390V900H0Z" fill="#596344"/>
+        <path d="M0 620Q250 475 475 610T900 510V900H0Z" fill="#424d34"/>
+        <path d="M390 900C422 734 497 626 616 540" fill="none" stroke="#c9bfa4" stroke-width="130"/>
+        <path d="M390 900C422 734 497 626 616 540" fill="none" stroke="#ad9f82" stroke-width="4" stroke-dasharray="12 18"/>
+        <path d="M130 544h235v218H130z" fill="#a58a65"/>
+        <path d="m91 550 153-116 160 116z" fill="#523528"/>
+        <rect x="215" y="633" width="64" height="129" fill="#3b291d"/>
+        <g stroke="#bbc190" stroke-width="6" opacity=".7">
+          <path d="M0 670 380 475"/><path d="M0 760 450 495"/><path d="M0 860 520 510"/>
+        </g>
+        <g fill="#d6c881">
+          <circle cx="680" cy="665" r="7"/><circle cx="705" cy="690" r="6"/><circle cx="742" cy="650" r="8"/>
+          <circle cx="625" cy="735" r="6"/><circle cx="780" cy="720" r="7"/><circle cx="835" cy="670" r="6"/>
+        </g>
+      </svg>
+    </div>
+    <div class="origin-copy">
+      <span class="eyebrow utility">A bend in the river</span>
+      <div class="reveal">
+        <h2>Where time<br><em>takes its time.</em></h2>
+        <p>Our name remembers a wandering river and the merriest keeper of the old wood. Our methods are less mysterious: healthy soil, patient hands, native grasses, and grapes picked when they taste exactly right.</p>
+      </div>
+      <div class="year">1578</div>
+    </div>
+  </section>
+
+  <section class="wines" id="wines">
+    <div class="section-heading reveal">
+      <span class="eyebrow utility">The current release</span>
+      <h2>Three good<em>reasons to linger</em></h2>
+      <a class="text-link utility" href="#visit">Find our wines <span>→</span></a>
+    </div>
+
+    <div class="wine-grid">
+      <article class="wine-card reveal">
+        <span class="utility">Red · Field blend</span>
+        <h3>Riverbank Red</h3>
+        <span class="vintage utility">Vintage 2022</span>
+        <div class="bottle red" aria-label="Riverbank Red bottle">
+          <span class="cap"></span><span class="neck"></span><span class="body"></span>
+          <span class="label">WITHYWINDLE<br>RIVERBANK<br>RED</span>
+        </div>
+        <p class="wine-note">Black cherry, hedgerow herbs and a quiet curl of woodsmoke.</p>
+      </article>
+
+      <article class="wine-card reveal">
+        <span class="utility">White · Old vine</span>
+        <h3>Goldberry White</h3>
+        <span class="vintage utility">Vintage 2024</span>
+        <div class="bottle white" aria-label="Goldberry White bottle">
+          <span class="cap"></span><span class="neck"></span><span class="body"></span>
+          <span class="label">WITHYWINDLE<br>GOLDBERRY<br>WHITE</span>
+        </div>
+        <p class="wine-note">Quince, meadow flowers and the clean brightness of river stone.</p>
+      </article>
+
+      <article class="wine-card reveal">
+        <span class="utility">Rosé · Dry</span>
+        <h3>Midsummer Rosé</h3>
+        <span class="vintage utility">Vintage 2024</span>
+        <div class="bottle rose" aria-label="Midsummer Rosé bottle">
+          <span class="cap"></span><span class="neck"></span><span class="body"></span>
+          <span class="label">WITHYWINDLE<br>MIDSUMMER<br>ROSÉ</span>
+        </div>
+        <p class="wine-note">Wild strawberry, pink pepper and a fresh, savory finish.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="table-section" id="table">
+    <svg class="table-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An abundant table set in the vineyard">
+      <defs>
+        <linearGradient id="evening" x1="0" y1="0" x2="1" y2="1">
+          <stop stop-color="#24180f"/>
+          <stop offset=".45" stop-color="#76553b"/>
+          <stop offset="1" stop-color="#29321d"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#evening)"/>
+      <g fill="#25301c" opacity=".86">
+        <circle cx="1400" cy="120" r="240"/><circle cx="1150" cy="70" r="170"/>
+        <circle cx="1530" cy="370" r="210"/><circle cx="270" cy="90" r="180"/>
+      </g>
+      <path d="M620 410 1600 560 1460 900 410 700Z" fill="#c7af82"/>
+      <path d="M620 410 1600 560" stroke="#efe0bf" stroke-width="9"/>
+      <g>
+        <ellipse cx="900" cy="580" rx="135" ry="46" fill="#eee4cf"/>
+        <ellipse cx="900" cy="568" rx="96" ry="28" fill="#8f572e"/>
+        <circle cx="860" cy="555" r="22" fill="#be8d3f"/><circle cx="905" cy="563" r="19" fill="#6b753a"/>
+        <circle cx="945" cy="551" r="24" fill="#a64632"/>
+        <ellipse cx="1250" cy="665" rx="140" ry="50" fill="#ece1cb"/>
+        <path d="M1140 663q110-105 220 8" fill="#a66d37"/>
+        <rect x="1080" y="430" width="54" height="204" rx="18" fill="#2d211b"/>
+        <rect x="1092" y="382" width="30" height="68" fill="#2d211b"/>
+        <rect x="1084" y="505" width="46" height="65" fill="#eee4cf"/>
+        <path d="M730 455v118M690 455q40 55 80 0" fill="none" stroke="#f6ead2" stroke-width="7"/>
+        <path d="M1450 570v132M1408 570q42 58 84 0" fill="none" stroke="#f6ead2" stroke-width="7"/>
+      </g>
+      <g fill="#d9a753">
+        <circle cx="580" cy="215" r="5"/><circle cx="670" cy="190" r="4"/><circle cx="760" cy="230" r="5"/>
+        <circle cx="855" cy="180" r="4"/><circle cx="950" cy="220" r="5"/><circle cx="1050" cy="175" r="4"/>
+      </g>
+      <path d="M500 170Q830 240 1120 160" fill="none" stroke="#40301e" stroke-width="5"/>
+    </svg>
+    <div class="table-copy reveal">
+      <span class="eyebrow utility">Life at the long table</span>
+      <h2>Pour well.<em>Pass it on.</em></h2>
+      <p>Lunch begins with whatever the garden gives us and has been known to wander happily into supper. Tastings include bread, local cheese, and—when the hour calls for it—a perfectly sensible second breakfast.</p>
+      <a class="text-link utility" href="#visit">Reserve a place <span>→</span></a>
+    </div>
+  </section>
+
+  <section class="methods" id="ways">
+    <aside>
+      <span class="eyebrow utility">Our ways</span>
+      <span class="methods-number">03</span>
+    </aside>
+    <div class="methods-main">
+      <h2 class="reveal">Nature does<br>the clever bit.</h2>
+      <div class="method-list">
+        <article class="method reveal">
+          <span class="utility">01</span>
+          <h3>Living soil</h3>
+          <p>Cover crops, compost, grazing sheep and no synthetic herbicides keep our vineyard lively beneath the surface.</p>
+        </article>
+        <article class="method reveal">
+          <span class="utility">02</span>
+          <h3>Light hands</h3>
+          <p>Fruit is picked by hand, fermented with native yeasts and guided gently rather than engineered.</p>
+        </article>
+        <article class="method reveal">
+          <span class="utility">03</span>
+          <h3>Long view</h3>
+          <p>We farm for the next eleven generations: conserving water, restoring habitat and tending every old vine as an inheritance.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="visit" id="visit">
+  <div class="visit-brand">
+    <svg class="brand-mark" viewBox="0 0 80 48" aria-hidden="true">
+      <path d="M9 42h62M16 39V22h10v17M31 39V12h18v27M54 39V20h10v19M36 12V4h8v8" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M21 16c7-9 31-9 38 0" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    Withywindle
+  </div>
+  <h2 class="reveal"><em>Come find</em>the river bend.</h2>
+  <p class="visit-intro">The cellar door is open for unhurried tastings, garden lunches and long walks among the vines.</p>
+
+  <div class="visit-grid">
+    <div class="visit-cell">
+      <span class="utility">Where we are</span>
+      <strong>17 Riverbend Lane</strong>
+      <p>Willowbank Valley<br>Beyond the old stone bridge</p>
+    </div>
+    <div class="visit-cell">
+      <span class="utility">Cellar door</span>
+      <strong>Thursday—Sunday</strong>
+      <p>10:00 in the morning until 6:00 in the evening.<br>Lunches by reservation.</p>
+    </div>
+    <div class="visit-cell">
+      <span class="utility">Say hello</span>
+      <strong><a href="mailto:hello@withywindle.wine">Write to us</a></strong>
+      <p>+1 555 1578 1100<br>@withywindlewinyard</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Withywindle Winyard. Naturally grown and patiently made. Please enjoy wine thoughtfully, in good company, and preferably with something delicious on the table.</p>
+    <span class="utility">© 2026 · Rooted since 1578</span>
+    <a class="utility" href="#home">Back to the top ↑</a>
+  </div>
+</footer>
+
+<script>
+const menu = document.getElementById('menu');
+const openButton = document.querySelector('.menu-open');
+const closeButton = document.querySelector('.menu-close');
+
+function setMenu(open) {
+  menu.classList.toggle('open', open);
+  menu.setAttribute('aria-hidden', String(!open));
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+openButton.addEventListener('click', () => setMenu(true));
+closeButton.addEventListener('click', () => setMenu(false));
+menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') setMenu(false);
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+
+document.querySelectorAll('.reveal').forEach((element, index) => {
+  element.style.transitionDelay = `${Math.min(index % 3, 2) * 90}ms`;
+  observer.observe(element);
+});
+</script>
+</body>
+</html>
