@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roasty — Sourced High. Roasted Light. Flown Fresh.</title>
+<meta name="description" content="Roasty is a modern twist on coffee. Light to dark roasts, green coffee flown from Cuba, Argentina and beyond, and hangar cafés built from modern airplane structure.">
+
+<!--
+================================================================================
+ design.md — Roasty design direction
+================================================================================
+
+ BRIEF
+ A new landing page for Roasty, a modern coffee company. Beans sourced worldwide,
+ most notably from Cuba and Argentina. Roasts run light to dark. Every retail
+ location is built around an aviation theme drawn from modern airplane structure.
+
+ REFERENCE READ (visual direction only — no source code inspected or used)
+ The inspiration materials are a Scandinavian specialty-roaster site built on a
+ warm bone/cream page field, interrupted by full-bleed blocks of saturated earth
+ color (terracotta, burnt amber, deep forest, muted mauve) and edge-to-edge
+ photography. The UI is extremely restrained: hairline 1px rules, near-square
+ corners, tiny uppercase letterspaced micro-labels, outline buttons, and a
+ three-zone navigation with the wordmark centered. The page is long and slowly
+ paced: product grid -> color/photo split -> product grid -> color/photo split ->
+ editorial two-column -> newsletter band -> location row -> deep footer.
+ The goal is to keep that defining character and rebuild the brand, copy,
+ products, imagery and composition around Roasty.
+
+ 1. COLOR
+ Neutral, warm, low-key, but with the reference's color RELATIONSHIPS intact: a
+ light bone field carrying a small number of full-bleed mid-saturation earth
+ blocks, plus one dark block for contrast.
+   --bone   #F1ECE3   primary page field, every quiet section
+   --paper  #FBF8F2   lifted cards, inputs, alternating band
+   --ink    #16150F   headlines, wordmark, ticker strip
+   --ink-2  #57524A   body copy, secondary
+   --line   rgba(22,21,15,.13)  hairline borders, dividers, card outlines
+   --clay   #A75C3E   the terracotta block: hero accent, featured panel
+   --amber  #C4762C   the burnt-orange split panel, used exactly once
+   --slate  #2C312D   the dark block: subscription split, footer top
+   --taupe  #8A7A6E   muted mauve band: newsletter
+   --cream  #E7DED0   card media tint behind product silhouettes
+ Saturation sits one notch below the reference so the palette reads neutral,
+ while the light-field / earth-block / dark-block rhythm stays identical.
+ No blues, no pure white, no pure black.
+
+ 2. TYPOGRAPHY
+ Display: system grotesk at weight 800, horizontally compressed via scaleX(.9)
+ with tightened tracking, recovering the squared, slightly condensed character
+ of the reference wordmark and hero. All-caps for hero and wordmark only.
+ Section headings: 42-56px, weight 450-500, sentence case, -0.02em, lots of air.
+ Micro-label: 10px uppercase .16em tracking. The workhorse element, carrying
+ origin, gate, roast, dates and column titles.
+ Body: 14-15px / 1.65, max ~62ch measure.
+ Wordmark: ROASTY with a hairline contrail rule trailing the final letter — the
+ single aviation gesture permitted inside the logotype.
+
+ 3. AVIATION, APPLIED WITH RESTRAINT
+ The theme lives in structure and labels, never in cartoon airplanes.
+   - Boarding-pass cards: hairline seam with two perforation notches, a GATE 0X
+     micro-label top-left of the media panel, small jet glyph top-right.
+   - Altimeter roast meter: five-segment tick bar filled left to right; reads as
+     an instrument gauge and does real work (light -> dark).
+   - Rib treatment: dividers and hangar illustrations use evenly spaced
+     converging ribs borrowed from fuselage stringers and wing spars.
+   - HUD corner ticks framing the hero composition.
+   - Departure ticker: hairline ink strip above the nav running the current
+     release like a flight-status board.
+   - Route diagram instead of a map: named nodes joined by dashed arcs with
+     altitude annotations.
+   - Buttons: rectangular, 1px, radius 2px, trailing arrow that translates on
+     hover. Takeoff, not bounce.
+
+ 4. IMAGERY
+ No external files are permitted, so all imagery is generated in-document.
+   - Procedural canvas fields (seeded PRNG, film-grain tile, vignette) for the
+     photographic moments: roasted-bean macro, coffee cherries on the branch, an
+     altitude cloud deck, espresso crema, a brew still-life. These carry the
+     reference's photographic weight and warm, slightly dark tonality.
+   - Inline SVG symbols for objects: pouch, dripper, kettle, hand grinder,
+     tumbler, scale, hangar interior, jet glyph. Flat, two to three tones,
+     tinted per section via CSS custom properties.
+   Photography is always full-bleed to the section edge, never inset.
+
+ 5. PAGE RHYTHM  (mirrors the reference beat for beat, with Roasty content)
+   1  Departure ticker + three-zone nav
+   2  Full-bleed dark hero, condensed caps headline, notes left, one button right
+   3  Selected coffees — 4-up boarding-pass grid, roast filters, VIEW ALL
+   4  Flight Plan subscription — dark slate 50/50 split
+   5  Selected equipment — 4-up grid, VIEW ALL
+   6  Featured split — cherry photo left / amber block right
+   7  Sourced at altitude — editorial two-column + full-width route diagram
+   8  From the flight deck — 3-up dated editorial row
+   9  Wholesale — two-column checklist with outline button
+  10  Newsletter band in taupe
+  11  Visit our hangars — 5-across location row
+  12  Deep footer — four link columns, inline field, oversized wordmark
+
+ 6. MOTION & BEHAVIOR
+ Quiet and mechanical. Fade-and-rise reveal on scroll (12px / 600ms, staggered),
+ nav hairline on scroll, constant-speed ticker, roast filter reflows the grid,
+ cart counter ticks. Everything collapses under prefers-reduced-motion: reduce.
+
+ 7. NON-GOALS
+ No rounded app cards, drop shadows, gradient buttons or glassmorphism.
+ No literal clip-art aircraft, propellers or cockpit chrome.
+ No second display typeface, no third accent beyond the four earth blocks.
+================================================================================
+-->
+
+<style>
+/* ─────────────────────────────────────────────────────────  tokens  ───────── */
+:root{
+  --bone:#F1ECE3;
+  --paper:#FBF8F2;
+  --ink:#16150F;
+  --ink-2:#57524A;
+  --ink-3:#8A8378;
+  --line:rgba(22,21,15,.13);
+  --line-2:rgba(22,21,15,.07);
+  --clay:#A75C3E;
+  --amber:#C4762C;
+  --slate:#2C312D;
+  --taupe:#8A7A6E;
+  --cream:#E7DED0;
+
+  --sans:"Helvetica Neue",Helvetica,"Segoe UI",Arial,"Liberation Sans",sans-serif;
+  --gut:clamp(18px,2.4vw,34px);
+  --pad:clamp(64px,8.5vw,128px);
+  --edge:clamp(18px,3.2vw,44px);
+  --maxw:1560px;
+  --ticker-h:30px;
+  --nav-h:62px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bone);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input{font:inherit}
+h1,h2,h3,h4,p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+::selection{background:var(--clay);color:#fff}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:999;background:var(--ink);color:var(--bone);padding:10px 16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.skip:focus{left:8px;top:8px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--edge);padding-right:var(--edge)}
+
+/* ─────────────────────────────────────────────────  primitives  ───────── */
+.micro{
+  display:inline-block;font-size:10px;line-height:1.4;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-2);font-weight:500;
+}
+.micro-b{color:var(--ink);font-weight:600}
+.h-sec{
+  font-size:clamp(28px,3.5vw,50px);font-weight:500;letter-spacing:-.025em;
+  line-height:1.05;
+}
+.h-sub{font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.lede{font-size:clamp(14px,1.05vw,16px);color:var(--ink-2);line-height:1.7;max-width:62ch}
+
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+.btn{
+  --bd:var(--line);--fg:var(--ink);--bg:transparent;
+  display:inline-flex;align-items:center;gap:.7em;
+  border:1px solid var(--bd);color:var(--fg);background:var(--bg);
+  border-radius:2px;padding:0 22px;height:44px;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  transition:background .35s ease,color .35s ease,border-color .35s ease;
+  white-space:nowrap;
+}
+.btn .arw{display:inline-block;transition:transform .35s cubic-bezier(.2,.7,.3,1)}
+.btn:hover .arw{transform:translateX(5px)}
+.btn:hover{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+.btn-solid{--bg:var(--paper);--bd:var(--paper);--fg:var(--ink)}
+.btn-solid:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn-inv{--bd:rgba(241,236,227,.42);--fg:#F1ECE3}
+.btn-inv:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-sm{height:36px;padding:0 15px;font-size:9.5px;letter-spacing:.14em}
+
+.viewall{display:flex;justify-content:center;padding-top:clamp(34px,4vw,58px)}
+.viewall a{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  border-bottom:1px solid var(--ink);padding-bottom:4px;
+  transition:opacity .3s ease,letter-spacing .3s ease;
+}
+.viewall a:hover{opacity:.55;letter-spacing:.22em}
+
+.sec{padding-top:var(--pad);padding-bottom:var(--pad)}
+.sec-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,3.6vw,54px);
+}
+
+/* reveal */
+[data-rv]{opacity:0;transform:translateY(13px);transition:opacity .75s cubic-bezier(.2,.7,.3,1),transform .75s cubic-bezier(.2,.7,.3,1)}
+[data-rv].in{opacity:1;transform:none}
+
+/* ─────────────────────────────────────────────────────  ticker  ───────── */
+.ticker{
+  position:relative;z-index:60;background:var(--ink);color:#EFEAE0;
+  height:var(--ticker-h);display:flex;align-items:center;overflow:hidden;
+}
+.ticker-track{display:flex;gap:0;white-space:nowrap;animation:slide 44s linear infinite;will-change:transform}
+.ticker-track span{
+  padding:0 26px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:12px;opacity:.9;
+}
+.ticker-track span::after{content:"";width:4px;height:4px;background:var(--clay);border-radius:50%;display:inline-block}
+.ticker svg{width:11px;height:11px;fill:currentColor;opacity:.75}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ────────────────────────────────────────────────────────  nav  ───────── */
+.nav{
+  position:sticky;top:0;z-index:50;background:var(--bone);
+  border-bottom:1px solid transparent;transition:border-color .4s ease,background .4s ease;
+}
+.nav.stuck{border-bottom-color:var(--line);background:rgba(241,236,227,.94);backdrop-filter:saturate(1.1) blur(9px)}
+.nav-in{
+  height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
+  max-width:var(--maxw);margin:0 auto;padding:0 var(--edge);
+}
+.nav-l,.nav-r{display:flex;align-items:center;gap:clamp(14px,1.5vw,26px)}
+.nav-r{justify-content:flex-end}
+.nav a.nl{
+  font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;font-weight:600;color:var(--ink);
+  position:relative;padding-bottom:2px;
+}
+.nav a.nl::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:currentColor;transition:right .38s cubic-bezier(.2,.7,.3,1)}
+.nav a.nl:hover::after{right:0}
+.nav-r .muted{color:var(--ink-2)}
+
+.mark{display:flex;align-items:center;gap:8px;justify-self:center}
+.mark b{
+  font-weight:800;font-size:clamp(17px,1.5vw,21px);letter-spacing:.005em;
+  text-transform:uppercase;display:inline-block;transform:scaleX(.92);transform-origin:center;
+}
+.mark i{display:block;width:22px;height:1.5px;background:var(--ink);opacity:.85}
+@media(max-width:900px){.mark i{width:14px}}
+
+.cart{display:inline-flex;align-items:center;gap:6px}
+.cart .n{
+  min-width:17px;height:17px;border:1px solid var(--line);border-radius:2px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.02em;
+  transition:background .3s ease,color .3s ease,border-color .3s ease;
+}
+.cart.pop .n{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+
+.burger{display:none;width:34px;height:34px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:2px}
+.burger span{display:block;width:15px;height:1px;background:var(--ink);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:15px;height:1px;background:var(--ink)}
+.burger span::before{top:-4.5px}.burger span::after{top:4.5px}
+
+.mobile{display:none;border-top:1px solid var(--line);background:var(--bone)}
+.mobile.open{display:block}
+.mobile ul{padding:10px var(--edge) 22px}
+.mobile li{border-bottom:1px solid var(--line-2)}
+.mobile a{display:block;padding:13px 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+
+@media(max-width:1020px){
+  .nav-l a.nl:nth-child(n+4),.nav-r a.nl:nth-child(-n+1){display:none}
+}
+@media(max-width:760px){
+  .nav-in{grid-template-columns:auto 1fr auto}
+  .nav-l a.nl{display:none}
+  .burger{display:inline-flex}
+  .mark{justify-self:center}
+  .nav-r a.nl{display:none}
+  .nav-r .cart{display:inline-flex}
+}
+
+/* ───────────────────────────────────────────────────────  hero  ───────── */
+.hero{position:relative;min-height:min(94vh,880px);display:flex;overflow:hidden;background:#1A130D}
+@media(max-width:760px){.hero{min-height:660px}}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-veil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right,rgba(16,11,7,.72) 0%,rgba(16,11,7,.34) 46%,rgba(16,11,7,.12) 74%,rgba(16,11,7,.4) 100%),
+    linear-gradient(to bottom,rgba(16,11,7,.5) 0%,rgba(16,11,7,0) 34%,rgba(16,11,7,.62) 100%);
+}
+.hero-in{
+  position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;
+  padding:calc(var(--nav-h) + 26px) var(--edge) clamp(26px,3.2vw,44px);
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hero-top{position:absolute;top:clamp(22px,3vw,42px);left:var(--edge);right:var(--edge);display:flex;justify-content:space-between;gap:16px}
+.hero-top .micro{color:rgba(241,236,227,.72)}
+.hero h1{
+  font-weight:800;text-transform:uppercase;color:#F4F0E7;
+  font-size:clamp(38px,7.6vw,112px);line-height:.92;letter-spacing:-.018em;
+  transform:scaleX(.9);transform-origin:left center;max-width:14ch;
+}
+.hero h1 em{font-style:normal;color:#E3B893}
+.hero-foot{
+  margin-top:clamp(26px,3vw,46px);display:flex;align-items:flex-end;justify-content:space-between;
+  gap:26px;flex-wrap:wrap;
+}
+.hero-notes{max-width:46ch;color:rgba(241,236,227,.82);font-size:13px;line-height:1.6}
+.hero-notes .micro{color:rgba(241,236,227,.6);display:block;margin-bottom:8px}
+.hero-bag{
+  position:absolute;right:clamp(-10px,4vw,90px);top:50%;transform:translateY(-52%) rotate(-4deg);
+  width:clamp(150px,20vw,300px);z-index:2;
+  filter:drop-shadow(0 34px 46px rgba(0,0,0,.42));
+}
+@media(max-width:900px){.hero-bag{opacity:.9;right:-26px;width:170px;transform:translateY(-58%) rotate(-4deg)}}
+@media(max-width:560px){.hero-bag{display:none}}
+
+/* HUD corner ticks */
+.hud{position:absolute;inset:clamp(14px,2vw,26px);pointer-events:none;z-index:4}
+.hud i{position:absolute;width:16px;height:16px;border:0 solid rgba(241,236,227,.45)}
+.hud i:nth-child(1){top:0;left:0;border-top-width:1px;border-left-width:1px}
+.hud i:nth-child(2){top:0;right:0;border-top-width:1px;border-right-width:1px}
+.hud i:nth-child(3){bottom:0;left:0;border-bottom-width:1px;border-left-width:1px}
+.hud i:nth-child(4){bottom:0;right:0;border-bottom-width:1px;border-right-width:1px}
+
+/* ──────────────────────────────────────────────  product grid  ───────── */
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{
+  border:1px solid var(--line);border-radius:2px;padding:7px 14px;
+  font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--ink-2);
+  transition:.3s ease;
+}
+.filters button:hover{color:var(--ink);border-color:rgba(22,21,15,.3)}
+.filters button.on{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut)}
+.grid-5{grid-template-columns:repeat(5,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1180px){.grid,.grid-5{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.grid,.grid-5,.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid,.grid-5,.grid-3{grid-template-columns:1fr}}
+
+.card{
+  border:1px solid var(--line);border-radius:3px;background:var(--paper);
+  display:flex;flex-direction:column;overflow:hidden;position:relative;
+  transition:border-color .4s ease,transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.card:hover{border-color:rgba(22,21,15,.28);transform:translateY(-3px)}
+.card.hide{display:none}
+.card-media{
+  position:relative;background:var(--tint,var(--cream));aspect-ratio:1/1.06;
+  display:flex;align-items:center;justify-content:center;padding:16% 20%;
+  border-bottom:1px dashed var(--line);
+}
+.card-media::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 50% 8%,rgba(255,255,255,.5),rgba(255,255,255,0) 62%);
+}
+.card-media .bag,.card-media .obj{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.card:hover .bag,.card:hover .obj{transform:translateY(-5px)}
+.card-gate{position:absolute;top:12px;left:13px;font-size:9px;letter-spacing:.16em;color:rgba(22,21,15,.5)}
+.ico-jet{position:absolute;top:11px;right:12px;width:15px;height:15px;fill:rgba(22,21,15,.34)}
+.perf{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--bone);border:1px solid var(--line);bottom:-6px}
+.perf-l{left:-6px;clip-path:inset(0 0 0 45%)}
+.perf-r{right:-6px;clip-path:inset(0 45% 0 0)}
+
+.card-body{padding:16px 17px 17px;display:flex;flex-direction:column;gap:7px;flex:1}
+.card-body h3{font-size:16px;font-weight:600;letter-spacing:-.015em;line-height:1.2}
+.card-body p.n{font-size:12.5px;color:var(--ink-2);line-height:1.5;min-height:2.9em}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line-2)}
+.price{font-size:12.5px;font-weight:600;letter-spacing:.01em}
+
+.meter{display:flex;gap:3px;align-items:center}
+.meter i{display:block;width:14px;height:4px;border-radius:1px;background:rgba(22,21,15,.13)}
+.meter[data-level="1"] i:nth-child(-n+1),
+.meter[data-level="2"] i:nth-child(-n+2),
+.meter[data-level="3"] i:nth-child(-n+3),
+.meter[data-level="4"] i:nth-child(-n+4),
+.meter[data-level="5"] i:nth-child(-n+5){background:var(--clay)}
+.meter em{font-style:normal;margin-left:7px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ─────────────────────────────────────────────────────  splits  ───────── */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:min(78vh,660px)}
+.split.rev>.split-media{order:-1}
+@media(max-width:860px){.split{grid-template-columns:1fr}.split.rev>.split-media{order:0}}
+.split-media{position:relative;overflow:hidden;min-height:320px;background:#2A2620}
+.split-media canvas{position:absolute;inset:0;width:100%;height:100%}
+.split-panel{
+  position:relative;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(34px,5.2vw,86px);gap:20px;
+}
+.split-panel.dark{background:var(--slate);color:#EDE8DE}
+.split-panel.dark .micro{color:rgba(237,232,222,.62)}
+.split-panel.dark .lede{color:rgba(237,232,222,.76)}
+.split-panel.amber{background:var(--amber);color:#221708}
+.split-panel.amber .micro{color:rgba(34,23,8,.6)}
+.corner-wing{position:absolute;top:clamp(20px,2.6vw,34px);right:clamp(20px,2.6vw,34px);width:26px;height:26px;opacity:.55}
+
+.checks{display:flex;flex-direction:column;gap:11px;margin:4px 0 6px}
+.checks li{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.55}
+.checks svg{flex:0 0 auto;width:13px;height:13px;margin-top:5px;fill:currentColor;opacity:.7}
+.split-panel.dark .checks li{color:rgba(237,232,222,.84)}
+
+/* featured product tile inside amber panel */
+.feat-tile{
+  background:var(--paper);border:1px solid rgba(34,23,8,.16);border-radius:3px;
+  padding:26px 26px 20px;max-width:290px;position:relative;
+}
+.feat-tile .bag{width:100%;height:auto}
+.feat-tile .perf{background:var(--amber);border-color:rgba(34,23,8,.2)}
+.feat-meta{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.feat-meta strong{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.panel-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;flex-wrap:wrap;margin-top:10px}
+
+/* ───────────────────────────────────────────────────  editorial  ───────── */
+.two-col{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(26px,5vw,90px);align-items:start}
+@media(max-width:860px){.two-col{grid-template-columns:1fr;gap:24px}}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);margin-top:clamp(34px,4vw,58px)}
+@media(max-width:700px){.stats{grid-template-columns:1fr}}
+.stats div{padding:22px 26px 22px 0;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+@media(max-width:700px){.stats div{border-right:0;border-bottom:1px solid var(--line)}}
+.stats b{display:block;font-size:clamp(24px,2.6vw,34px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:6px}
+
+/* route diagram */
+.routeband{position:relative;margin-top:clamp(40px,5vw,74px);border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#DCD5C7}
+.routeband canvas{position:absolute;inset:0;width:100%;height:100%}
+.routeband .rsvg{position:relative;width:100%;height:auto;display:block}
+.routeband .rlabel{position:absolute;top:14px;left:16px;z-index:3}
+.routeband .rlabel .micro{color:rgba(22,21,15,.55)}
+
+/* journal */
+.jcard{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.jthumb{position:relative;aspect-ratio:4/3;overflow:hidden;background:#2A2620;border-radius:2px}
+.jthumb canvas{position:absolute;inset:0;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.jcard:hover .jthumb canvas{transform:scale(1.045)}
+.jcard h3{font-size:19px;font-weight:600;letter-spacing:-.02em;line-height:1.22}
+.jcard p{font-size:13px;color:var(--ink-2);line-height:1.6}
+.jlink{font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;font-weight:600;border-bottom:1px solid var(--ink);align-self:flex-start;padding-bottom:3px}
+
+/* wholesale */
+.wholesale{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* newsletter band */
+.news{background:var(--taupe);color:#F5F1EA;text-align:center}
+.news .inner{padding:clamp(64px,8vw,120px) var(--edge);display:flex;flex-direction:column;align-items:center;gap:16px}
+.news .micro{color:rgba(245,241,234,.7)}
+.news h2{color:#F7F3EC}
+.news p{max-width:52ch;color:rgba(245,241,234,.85);font-size:14px;line-height:1.7}
+
+/* hangars */
+.loc{display:flex;flex-direction:column;gap:12px}
+.loc .pic{border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--cream)}
+.loc .pic svg{width:100%;height:auto;display:block;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
+.loc:hover .pic svg{transform:scale(1.03)}
+.loc h3{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.loc p{font-size:12px;color:var(--ink-2);line-height:1.55}
+.loc .hrs{font-size:11px;color:var(--ink-3);letter-spacing:.02em}
+
+/* ───────────────────────────────────────────────────────  footer  ───────── */
+footer{background:var(--slate);color:#DDD7CB}
+footer .micro{color:rgba(221,215,203,.55)}
+.f-top{display:grid;grid-template-columns:repeat(4,1fr) minmax(240px,1.25fr);gap:clamp(22px,3vw,48px);padding:clamp(56px,6.5vw,96px) 0 clamp(40px,4.6vw,66px)}
+@media(max-width:1100px){.f-top{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.f-top{grid-template-columns:1fr}}
+.f-col h4{margin-bottom:14px}
+.f-col li{margin-bottom:9px}
+.f-col a{font-size:13px;color:rgba(221,215,203,.82);transition:color .3s ease}
+.f-col a:hover{color:#fff}
+.f-news p{font-size:13px;color:rgba(221,215,203,.72);line-height:1.6;margin:12px 0 16px;max-width:34ch}
+.field{display:flex;border:1px solid rgba(221,215,203,.3);border-radius:2px;overflow:hidden;background:transparent}
+.field input{
+  flex:1;min-width:0;background:transparent;border:0;outline:0;color:#EFEAE0;
+  padding:0 14px;height:44px;font-size:13px;
+}
+.field input::placeholder{color:rgba(221,215,203,.45)}
+.field button{
+  padding:0 18px;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  border-left:1px solid rgba(221,215,203,.3);transition:background .3s ease,color .3s ease;
+}
+.field button:hover{background:#EFEAE0;color:var(--slate)}
+.f-note{font-size:11px;color:rgba(221,215,203,.45);margin-top:10px;min-height:1.2em}
+
+.f-mark{border-top:1px solid rgba(221,215,203,.16);padding:clamp(30px,3.4vw,48px) 0 clamp(22px,2.6vw,34px)}
+.f-mark .big{
+  display:flex;align-items:center;gap:clamp(10px,1.4vw,20px);
+  font-weight:800;text-transform:uppercase;letter-spacing:-.005em;
+  font-size:clamp(42px,12.4vw,190px);line-height:.86;color:#EAE4D8;
+}
+.f-mark .big span{display:inline-block;transform:scaleX(.9);transform-origin:left center}
+.f-mark .big i{flex:1;height:2px;background:rgba(234,228,216,.5);display:block;min-width:24px}
+.f-legal{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-bottom:clamp(26px,3vw,44px)}
+.f-legal a{margin-left:18px}
+@media(max-width:640px){.f-legal a{margin:0 16px 0 0}}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  [data-rv]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ══════════════════════════ SVG symbol library ══════════════════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="sym-jet" viewBox="0 0 24 24">
+      <path d="M23.1 12 14.6 13.2 11.1 20.4H9.2l1.7-6.9-6.1.8L3.1 17H1.7l1-5-1-5h1.4l1.7 2.7 6.1.8L9.2 3.6h1.9l3.5 7.2z"/>
+    </symbol>
+
+    <symbol id="sym-wing" viewBox="0 0 24 24">
+      <path d="M1 20 23 4v3.4L8.6 20z" opacity=".9"/>
+      <path d="M9.4 20 23 9.6V13L16 20z" opacity=".55"/>
+    </symbol>
+
+    <symbol id="sym-check" viewBox="0 0 16 16">
+      <path d="M6.2 12.6 1.6 8l1.5-1.5 3.1 3.1 7-7L14.7 4z"/>
+    </symbol>
+
+    <!-- coffee pouch -->
+    <symbol id="sym-bag" viewBox="0 0 200 268">
+      <path d="M34 60 58 42h84l24 18z" fill="var(--bagTop,#6E5039)"/>
+      <path d="M34 60h132v176a10 10 0 0 1-10 10H44a10 10 0 0 1-10-10z" fill="var(--bag,#8E6A4C)"/>
+      <path d="M34 60h26v186H44a10 10 0 0 1-10-10z" fill="#000" opacity=".09"/>
+      <path d="M140 60h26v176a10 10 0 0 1-10 10h-16z" fill="#fff" opacity=".07"/>
+      <rect x="58" y="32" width="84" height="13" rx="2" fill="var(--bagTop,#6E5039)"/>
+      <rect x="58" y="94" width="84" height="112" rx="2" fill="var(--label,#F6F1E8)"/>
+      <rect x="58" y="94" width="84" height="23" fill="var(--band,#A75C3E)"/>
+      <rect x="66" y="102" width="30" height="6" rx="1" fill="#fff" opacity=".85"/>
+      <rect x="66" y="132" width="66" height="6" rx="2" fill="#16150F" opacity=".85"/>
+      <rect x="66" y="145" width="42" height="6" rx="2" fill="#16150F" opacity=".34"/>
+      <rect x="66" y="170" width="30" height="3" rx="1.5" fill="#16150F" opacity=".24"/>
+      <rect x="66" y="178" width="52" height="3" rx="1.5" fill="#16150F" opacity=".24"/>
+      <rect x="66" y="186" width="40" height="3" rx="1.5" fill="#16150F" opacity=".24"/>
+      <path d="M132 173.5 118 169l2.6 4.5-2.6 4.5z" fill="var(--band,#A75C3E)"/>
+      <rect x="58" y="216" width="84" height="1" fill="#000" opacity=".14"/>
+    </symbol>
+
+    <!-- pour-over dripper -->
+    <symbol id="sym-dripper" viewBox="0 0 200 220">
+      <path d="M40 62h120l-40 88H80z" fill="var(--o1,#A75C3E)"/>
+      <g stroke="var(--o2,#7C4229)" stroke-width="2" opacity=".38">
+        <path d="M62 68 84 148M82 68l6 80M118 68l-6 80M138 68l-22 80"/>
+      </g>
+      <rect x="33" y="54" width="134" height="13" rx="6.5" fill="var(--o2,#7C4229)"/>
+      <rect x="82" y="149" width="36" height="13" fill="var(--o2,#7C4229)"/>
+      <path d="M68 162h64l-6 30H74z" fill="var(--o1,#A75C3E)"/>
+      <rect x="64" y="190" width="72" height="11" rx="5.5" fill="var(--o2,#7C4229)"/>
+      <path d="M160 74q32 22-4 58" stroke="var(--o2,#7C4229)" stroke-width="11" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- gooseneck kettle -->
+    <symbol id="sym-kettle" viewBox="0 0 200 220">
+      <path d="M56 110h84a12 12 0 0 1 12 12v40a28 28 0 0 1-28 28H72a28 28 0 0 1-28-28v-40a12 12 0 0 1 12-12z" fill="var(--o1,#8A7A6E)"/>
+      <path d="M56 110h30v80H72a28 28 0 0 1-28-28v-40a12 12 0 0 1 12-12z" fill="#000" opacity=".1"/>
+      <rect x="80" y="96" width="40" height="15" rx="4" fill="var(--o2,#5C5049)"/>
+      <circle cx="100" cy="91" r="6.5" fill="var(--o2,#5C5049)"/>
+      <path d="M150 128q30-10 30-44 0-20-16-28" stroke="var(--o1,#8A7A6E)" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M60 116q-32-40 34-46" stroke="var(--o2,#5C5049)" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <rect x="56" y="150" width="96" height="1.6" fill="#fff" opacity=".22"/>
+    </symbol>
+
+    <!-- hand grinder -->
+    <symbol id="sym-grinder" viewBox="0 0 200 220">
+      <rect x="68" y="88" width="64" height="66" rx="7" fill="var(--o1,#6E5039)"/>
+      <rect x="66" y="152" width="68" height="42" rx="8" fill="var(--o2,#3C332B)"/>
+      <g stroke="#fff" stroke-width="1.5" opacity=".14">
+        <path d="M82 90v62M100 90v62M118 90v62"/>
+      </g>
+      <rect x="80" y="76" width="40" height="14" rx="4" fill="var(--o2,#3C332B)"/>
+      <path d="M100 76V46h38" stroke="var(--o2,#3C332B)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="132" y="38" width="12" height="18" rx="6" fill="var(--o1,#6E5039)"/>
+      <rect x="66" y="168" width="68" height="1.6" fill="#fff" opacity=".16"/>
+    </symbol>
+
+    <!-- travel tumbler -->
+    <symbol id="sym-tumbler" viewBox="0 0 200 220">
+      <path d="M74 96h52l-7 100a10 10 0 0 1-10 9H91a10 10 0 0 1-10-9z" fill="var(--o1,#2C312D)"/>
+      <path d="M74 96h20l-6 109h-1a10 10 0 0 1-10-9z" fill="#fff" opacity=".1"/>
+      <rect x="68" y="78" width="64" height="19" rx="6" fill="var(--o2,#8A7A6E)"/>
+      <rect x="110" y="70" width="22" height="10" rx="5" fill="var(--o2,#8A7A6E)"/>
+      <rect x="79" y="132" width="42" height="15" rx="1" fill="var(--o2,#8A7A6E)" opacity=".65"/>
+      <path d="M108 138.5 96 135l2.2 3.5-2.2 3.5z" fill="var(--o1,#2C312D)"/>
+    </symbol>
+
+    <!-- brew scale -->
+    <symbol id="sym-scale" viewBox="0 0 200 220">
+      <rect x="40" y="118" width="120" height="54" rx="9" fill="var(--o1,#3C332B)"/>
+      <rect x="40" y="118" width="120" height="14" rx="9" fill="#fff" opacity=".08"/>
+      <rect x="56" y="136" width="56" height="21" rx="3" fill="var(--o2,#C4762C)"/>
+      <circle cx="136" cy="146" r="8" fill="var(--o2,#C4762C)" opacity=".8"/>
+      <rect x="50" y="174" width="100" height="8" rx="4" fill="var(--o1,#3C332B)" opacity=".45"/>
+    </symbol>
+
+    <!-- hangar interior -->
+    <symbol id="sym-hangar" viewBox="0 0 320 210">
+      <rect width="320" height="210" fill="var(--sky,#E7DED0)"/>
+      <path d="M10 200V100a150 96 0 0 1 300 0v100z" fill="var(--wall,#D3C8B6)"/>
+      <g fill="none" stroke="var(--rib,rgba(22,21,15,.22))" stroke-width="1.2">
+        <path d="M34 200V104a126 82 0 0 1 252 0v96"/>
+        <path d="M58 200V110a102 70 0 0 1 204 0v90"/>
+        <path d="M82 200V116a78 58 0 0 1 156 0v84"/>
+        <path d="M106 200V122a54 46 0 0 1 108 0v78"/>
+      </g>
+      <path d="M126 200v-72a34 32 0 0 1 68 0v72z" fill="var(--open,#3B3A33)"/>
+      <path d="M137 200v-64a23 22 0 0 1 46 0v64z" fill="var(--glow,#8A7A6E)" opacity=".55"/>
+      <path d="M144 186h32l-6-13h-20z" fill="var(--open,#3B3A33)" opacity=".85"/>
+      <path d="M132 172h56l-28-9z" fill="var(--open,#3B3A33)" opacity=".7"/>
+      <rect y="198" width="320" height="12" fill="var(--floor,#BCB09C)"/>
+      <rect y="198" width="320" height="1" fill="rgba(22,21,15,.2)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ══════════════════════════════ ticker ══════════════════════════════ -->
+<div class="ticker" role="status" aria-label="Current release status">
+  <div class="ticker-track" id="tick">
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg> Roasty 07 — Sierra Maestra, Cuba — now boarding</span>
+    <span>Free shipping over $45</span>
+    <span>Salta Ridge micro-lot — 240 bags flown in</span>
+    <span>Hangar One, Portland — open daily 7:00</span>
+    <span>Green coffee to cup in 14 days</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg> Roasty 07 — Sierra Maestra, Cuba — now boarding</span>
+    <span>Free shipping over $45</span>
+    <span>Salta Ridge micro-lot — 240 bags flown in</span>
+    <span>Hangar One, Portland — open daily 7:00</span>
+    <span>Green coffee to cup in 14 days</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ nav ══════════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <nav class="nav-l" aria-label="Primary">
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+      <a class="nl" href="#coffees">Shop</a>
+      <a class="nl" href="#plan">Subscription</a>
+      <a class="nl" href="#origins">Origins</a>
+      <a class="nl" href="#deck">Brew School</a>
+      <a class="nl" href="#wholesale">Wholesale</a>
+    </nav>
+
+    <a class="mark" href="#top" aria-label="Roasty, home">
+      <b>Roasty</b><i></i>
+    </a>
+
+    <nav class="nav-r" aria-label="Utility">
+      <a class="nl muted" href="#hangars">Hangars</a>
+      <a class="nl muted" href="#news">Log in</a>
+      <a class="nl cart" href="#coffees" id="cartLink" aria-label="Cart, 0 items">Cart <span class="n" id="cartN">0</span></a>
+    </nav>
+  </div>
+  <div class="mobile" id="mobileMenu">
+    <ul>
+      <li><a href="#coffees">Shop coffee</a></li>
+      <li><a href="#plan">Subscription</a></li>
+      <li><a href="#equipment">Equipment</a></li>
+      <li><a href="#origins">Origins</a></li>
+      <li><a href="#deck">Brew school</a></li>
+      <li><a href="#wholesale">Wholesale</a></li>
+      <li><a href="#hangars">Hangars</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+<a id="top"></a>
+
+<!-- ══════════════════════════════ hero ══════════════════════════════ -->
+<section class="hero">
+  <canvas data-scene="beans" aria-hidden="true"></canvas>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+  <svg class="hero-bag" viewBox="0 0 200 268" role="img" aria-label="Roasty 07 Sierra Maestra coffee pouch"
+       style="--bag:#B3987C;--bagTop:#8E7256;--label:#F6F1E8;--band:#A75C3E">
+    <use href="#sym-bag"/>
+  </svg>
+
+  <div class="hero-in">
+    <div class="hero-top">
+      <span class="micro">Roasty · Release 07</span>
+      <span class="micro">Havana → PDX · 1,450 masl</span>
+    </div>
+
+    <h1 data-rv>Sourced high.<br>Roasted light.<br><em>Flown fresh.</em></h1>
+
+    <div class="hero-foot">
+      <div class="hero-notes" data-rv>
+        <span class="micro">Sierra Maestra · Cuba · Washed</span>
+        Picked at 1,450 metres in the Sierra Maestra, rested nine days, and roasted the
+        morning it clears customs. Notes of cocoa nib, dried fig and cane sugar.
+      </div>
+      <a class="btn btn-solid" href="#coffees">Buy — $22 <span class="arw">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ selected coffees ══════════════════════════ -->
+<section class="sec" id="coffees">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:14px">Manifest 01 — In the hold</span>
+        <h2 class="h-sec">Selected coffees</h2>
+      </div>
+      <div class="filters" role="group" aria-label="Filter by roast">
+        <button class="on" data-filter="all">All</button>
+        <button data-filter="light">Light</button>
+        <button data-filter="medium">Medium</button>
+        <button data-filter="dark">Dark</button>
+      </div>
+    </div>
+
+    <div class="grid" id="coffeeGrid">
+
+      <article class="card" data-roast="medium" data-rv>
+        <div class="card-media" style="--tint:#E7DED0">
+          <span class="micro card-gate">Gate 04</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Sierra Maestra pouch"
+               style="--bag:#8E6A4C;--bagTop:#6E5039;--label:#F6F1E8;--band:#A75C3E"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Cuba · Sierra Maestra</span>
+          <h3>Sierra Maestra</h3>
+          <p class="n">Cocoa nib, dried fig, cane sugar</p>
+          <div class="meter" data-level="3" aria-label="Roast level 3 of 5"><i></i><i></i><i></i><i></i><i></i><em>Medium</em></div>
+          <div class="card-foot"><span class="price">$22</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Sierra Maestra">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-roast="light" data-rv>
+        <div class="card-media" style="--tint:#E4E1D4">
+          <span class="micro card-gate">Gate 11</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Salta Ridge pouch"
+               style="--bag:#C8B79A;--bagTop:#A79madeup;--label:#FBF8F2;--band:#C4762C"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Argentina · Salta</span>
+          <h3>Salta Ridge</h3>
+          <p class="n">White peach, jasmine, wildflower honey</p>
+          <div class="meter" data-level="1" aria-label="Roast level 1 of 5"><i></i><i></i><i></i><i></i><i></i><em>Light</em></div>
+          <div class="card-foot"><span class="price">$24</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Salta Ridge">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-roast="dark" data-rv>
+        <div class="card-media" style="--tint:#DCD3C4">
+          <span class="micro card-gate">Gate 02</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Turquino Pass pouch"
+               style="--bag:#4A3B30;--bagTop:#332821;--label:#EFE9DD;--band:#8A7A6E"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Cuba · Turquino</span>
+          <h3>Turquino Pass</h3>
+          <p class="n">Dark chocolate, walnut, molasses</p>
+          <div class="meter" data-level="5" aria-label="Roast level 5 of 5"><i></i><i></i><i></i><i></i><i></i><em>Dark</em></div>
+          <div class="card-foot"><span class="price">$21</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Turquino Pass">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-roast="medium" data-rv>
+        <div class="card-media" style="--tint:#E9E0D0">
+          <span class="micro card-gate">Gate 07</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Mendoza Field pouch"
+               style="--bag:#A5764F;--bagTop:#805A3B;--label:#FBF8F2;--band:#2C312D"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Argentina · Mendoza</span>
+          <h3>Mendoza Field</h3>
+          <p class="n">Red plum, toasted almond, malt</p>
+          <div class="meter" data-level="3" aria-label="Roast level 3 of 5"><i></i><i></i><i></i><i></i><i></i><em>Medium</em></div>
+          <div class="card-foot"><span class="price">$23</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Mendoza Field">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-roast="light" data-rv>
+        <div class="card-media" style="--tint:#E2E2D8">
+          <span class="micro card-gate">Gate 12</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Cordillera Twelve pouch"
+               style="--bag:#D6C7AC;--bagTop:#B6A385;--label:#FBF8F2;--band:#A75C3E"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Argentina · Jujuy</span>
+          <h3>Cordillera 12</h3>
+          <p class="n">Lime blossom, nectarine, black tea</p>
+          <div class="meter" data-level="1" aria-label="Roast level 1 of 5"><i></i><i></i><i></i><i></i><i></i><em>Light</em></div>
+          <div class="card-foot"><span class="price">$25</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Cordillera 12">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-roast="medium" data-rv>
+        <div class="card-media" style="--tint:#E7DED0">
+          <span class="micro card-gate">Gate 03</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Contrail No. 3 pouch"
+               style="--bag:#8A7A6E;--bagTop:#6A5C52;--label:#FBF8F2;--band:#C4762C"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">House blend · Rotating</span>
+          <h3>Contrail No. 3</h3>
+          <p class="n">Toffee, cacao, baked apple</p>
+          <div class="meter" data-level="4" aria-label="Roast level 4 of 5"><i></i><i></i><i></i><i></i><i></i><em>Med-dark</em></div>
+          <div class="card-foot"><span class="price">$19</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Contrail No. 3">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-roast="dark" data-rv>
+        <div class="card-media" style="--tint:#D9D2C6">
+          <span class="micro card-gate">Gate 09</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Nightflight pouch"
+               style="--bag:#2F3330;--bagTop:#1F2320;--label:#EFE9DD;--band:#A75C3E"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Sumatra · Aceh</span>
+          <h3>Nightflight</h3>
+          <p class="n">Cedar, cocoa, tobacco leaf</p>
+          <div class="meter" data-level="5" aria-label="Roast level 5 of 5"><i></i><i></i><i></i><i></i><i></i><em>Dark</em></div>
+          <div class="card-foot"><span class="price">$20</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Nightflight">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-roast="light" data-rv>
+        <div class="card-media" style="--tint:#EAE4D6">
+          <span class="micro card-gate">Gate 00</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Tailwind Decaf pouch"
+               style="--bag:#BFAE92;--bagTop:#9B8A6F;--label:#FBF8F2;--band:#2C312D"><use href="#sym-bag"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Ethiopia · Sugarcane decaf</span>
+          <h3>Tailwind Decaf</h3>
+          <p class="n">Apricot, cocoa, orange peel</p>
+          <div class="meter" data-level="2" aria-label="Roast level 2 of 5"><i></i><i></i><i></i><i></i><i></i><em>Light-med</em></div>
+          <div class="card-foot"><span class="price">$21</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Tailwind Decaf">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="viewall"><a href="#coffees">View all coffees</a></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ subscription split ══════════════════════════ -->
+<section class="split" id="plan">
+  <div class="split-panel dark">
+    <svg class="corner-wing" viewBox="0 0 24 24" aria-hidden="true" style="fill:#EDE8DE"><use href="#sym-wing"/></svg>
+    <span class="micro">Subscription</span>
+    <h2 class="h-sec" style="color:#F2EDE3;max-width:16ch">What you get with a Roasty flight plan</h2>
+    <ul class="checks">
+      <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> A rotating selection of coffees, dispatched every two or four weeks</li>
+      <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> First access to micro-lots and single-hangar releases</li>
+      <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Free shipping on every manifest, worldwide</li>
+      <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Member pricing on equipment and brew school</li>
+      <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Reroute, pause or cancel from your seat, any time</li>
+    </ul>
+    <div><a class="btn btn-inv" href="#plan">Subscribe <span class="arw">→</span></a></div>
+  </div>
+  <div class="split-media">
+    <canvas data-scene="brew" aria-hidden="true"></canvas>
+  </div>
+</section>
+
+<!-- ══════════════════════════ selected equipment ══════════════════════════ -->
+<section class="sec" id="equipment">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:14px">Manifest 02 — Cabin kit</span>
+        <h2 class="h-sec">Selected equipment</h2>
+      </div>
+      <p class="lede" style="max-width:38ch;font-size:13.5px">Built with the roastery, tested on the bar, and pared back to
+        the parts that actually change the cup.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card" data-rv>
+        <div class="card-media" style="--tint:#E7DED0">
+          <span class="micro card-gate">Kit 01</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="obj" viewBox="0 0 200 220" role="img" aria-label="Ribcage ceramic dripper" style="--o1:#A75C3E;--o2:#7C4229"><use href="#sym-dripper"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Ceramic · 1–2 cup</span>
+          <h3>Ribcage Dripper</h3>
+          <p class="n">Fluted like a wing rib for an even, unhurried drawdown.</p>
+          <div class="card-foot"><span class="price">$46</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Ribcage Dripper">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-rv>
+        <div class="card-media" style="--tint:#E2E2D8">
+          <span class="micro card-gate">Kit 02</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="obj" viewBox="0 0 200 220" role="img" aria-label="Altimeter gooseneck kettle" style="--o1:#9AA0A0;--o2:#5C5049"><use href="#sym-kettle"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Brushed steel · 0.9 L</span>
+          <h3>Altimeter Kettle</h3>
+          <p class="n">Gooseneck pour, dial to the degree, holds it for twenty minutes.</p>
+          <div class="card-foot"><span class="price">$128</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Altimeter Kettle">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-rv>
+        <div class="card-media" style="--tint:#DCD3C4">
+          <span class="micro card-gate">Kit 03</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="obj" viewBox="0 0 200 220" role="img" aria-label="Turbine hand grinder" style="--o1:#6E5039;--o2:#3C332B"><use href="#sym-grinder"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Steel burr · 38 mm</span>
+          <h3>Turbine Grinder</h3>
+          <p class="n">Aluminium body, machined burrs, forty clicks of adjustment.</p>
+          <div class="card-foot"><span class="price">$195</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Turbine Grinder">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+
+      <article class="card" data-rv>
+        <div class="card-media" style="--tint:#E9E0D0">
+          <span class="micro card-gate">Kit 04</span>
+          <svg class="ico-jet" viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-jet"/></svg>
+          <svg class="obj" viewBox="0 0 200 220" role="img" aria-label="Cabin travel tumbler" style="--o1:#2C312D;--o2:#8A7A6E"><use href="#sym-tumbler"/></svg>
+          <span class="perf perf-l"></span><span class="perf perf-r"></span>
+        </div>
+        <div class="card-body">
+          <span class="micro">Vacuum · 350 ml</span>
+          <h3>Cabin Tumbler</h3>
+          <p class="n">Sized to the seat-back pocket. Six hours hot, no rattle.</p>
+          <div class="card-foot"><span class="price">$38</span>
+            <button class="btn btn-ghost btn-sm add" type="button" data-name="Cabin Tumbler">Add <span class="arw">→</span></button></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="viewall"><a href="#equipment">View all equipment</a></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ featured split (amber) ══════════════════════════ -->
+<section class="split rev" id="featured">
+  <div class="split-media">
+    <canvas data-scene="cherries" aria-hidden="true"></canvas>
+  </div>
+  <div class="split-panel amber">
+    <svg class="corner-wing" viewBox="0 0 24 24" aria-hidden="true" style="fill:#221708"><use href="#sym-wing"/></svg>
+    <span class="micro">Release 08 · Micro-lot</span>
+    <h2 class="h-sec" style="max-width:12ch">Sweet, aerated and bright</h2>
+    <p class="lede" style="color:rgba(34,23,8,.8);max-width:40ch">
+      Ninety-six kilos from a single terrace above Salta, fermented in sealed tanks for
+      sixty hours and dried on raised beds. It drinks like stone fruit in cold air.
+    </p>
+
+    <div class="feat-tile" data-rv>
+      <svg class="bag" viewBox="0 0 200 268" role="img" aria-label="Salta Ridge micro-lot pouch"
+           style="--bag:#D6C7AC;--bagTop:#B6A385;--label:#FBF8F2;--band:#A75C3E"><use href="#sym-bag"/></svg>
+      <span class="perf perf-l"></span><span class="perf perf-r"></span>
+      <div class="feat-meta">
+        <div>
+          <span class="micro" style="display:block;margin-bottom:4px">Argentina · Salta</span>
+          <strong>Salta Ridge — Lot 08</strong>
+        </div>
+        <span class="price">$24</span>
+      </div>
+    </div>
+
+    <div class="panel-foot">
+      <div class="hero-notes" style="color:rgba(34,23,8,.78);max-width:34ch">
+        <span class="micro" style="display:block;margin-bottom:6px;color:rgba(34,23,8,.55)">Notes</span>
+        White peach, jasmine, wildflower honey. Best as filter, 1:16, 94°C.
+      </div>
+      <button class="btn add" type="button" data-name="Salta Ridge — Lot 08"
+              style="--bd:rgba(34,23,8,.4);--fg:#221708">Buy — $24 <span class="arw">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ origins editorial ══════════════════════════ -->
+<section class="sec" id="origins">
+  <div class="wrap">
+    <div class="two-col">
+      <div data-rv>
+        <span class="micro" style="display:block;margin-bottom:14px">Sourcing</span>
+        <h2 class="h-sec" style="max-width:13ch">Sourced at altitude, flown without a layover</h2>
+      </div>
+      <div data-rv>
+        <p class="lede">
+          Roasty buys green coffee from eleven countries, but two do most of the talking. In Cuba we
+          work the Sierra Maestra and the Turquino pass, where old bourbon and typica grow slowly in
+          thin mountain air. In Argentina we are early to a young growing region — Salta and Jujuy,
+          terraces between 1,600 and 1,900 metres that were planting vines a decade ago.
+        </p>
+        <p class="lede" style="margin-top:16px">
+          Every lot travels under one manifest: bought at the farm gate, palletised, and in the
+          roastery within fourteen days of leaving the mill. We publish what we paid, what we
+          shipped, and the day it was roasted on the back of every bag.
+        </p>
+        <a class="btn" style="margin-top:26px" href="#origins">Read the sourcing report <span class="arw">→</span></a>
+      </div>
+    </div>
+
+    <div class="stats" data-rv>
+      <div>
+        <span class="micro" style="display:block;margin-bottom:12px">Flagship origins</span>
+        <b>Cuba &amp; Argentina</b>
+        <span class="micro" style="letter-spacing:.06em;text-transform:none;font-size:12px">Nine producing partners across four regions</span>
+      </div>
+      <div style="padding-left:26px">
+        <span class="micro" style="display:block;margin-bottom:12px">Growing altitude</span>
+        <b>1,450–1,900 m</b>
+        <span class="micro" style="letter-spacing:.06em;text-transform:none;font-size:12px">Slow cherry development, denser beans, more sugar</span>
+      </div>
+      <div style="padding-left:26px">
+        <span class="micro" style="display:block;margin-bottom:12px">Mill to roastery</span>
+        <b>14 days</b>
+        <span class="micro" style="letter-spacing:.06em;text-transform:none;font-size:12px">Air freight on every micro-lot, sea freight offset in full</span>
+      </div>
+    </div>
+
+    <!-- route diagram -->
+    <div class="routeband" data-rv>
+      <canvas data-scene="clouds" aria-hidden="true"></canvas>
+      <div class="rlabel">
+        <span class="micro">Route map · 2026 harvest manifest</span>
+      </div>
+      <svg class="rsvg" viewBox="0 0 1200 300" role="img" aria-label="Route diagram from Havana, Salta and Mendoza to Hangar One in Portland">
+        <g stroke="rgba(22,21,15,.16)" stroke-width="1">
+          <path d="M0 90h1200M0 160h1200M0 230h1200"/>
+        </g>
+        <g fill="rgba(22,21,15,.42)" font-family="Helvetica Neue,Arial,sans-serif" font-size="9" letter-spacing="1.6">
+          <text x="16" y="84">FL 380</text>
+          <text x="16" y="154">FL 260</text>
+          <text x="16" y="224">FL 140</text>
+        </g>
+
+        <path id="rt1" d="M150 214C300 96 470 92 560 168" fill="none" stroke="#16150F" stroke-width="1.3" stroke-dasharray="7 6" opacity=".62"/>
+        <path id="rt2" d="M560 168C660 240 720 236 830 176" fill="none" stroke="#16150F" stroke-width="1.3" stroke-dasharray="7 6" opacity=".62"/>
+        <path id="rt3" d="M830 176C930 108 990 100 1070 132" fill="none" stroke="#A75C3E" stroke-width="1.6" stroke-dasharray="7 6"/>
+
+        <g id="nodes" fill="#16150F" font-family="Helvetica Neue,Arial,sans-serif">
+          <g>
+            <circle cx="150" cy="214" r="5.5"/><circle cx="150" cy="214" r="12" fill="none" stroke="#16150F" stroke-width="1" opacity=".4"/>
+            <text x="150" y="248" text-anchor="middle" font-size="14" font-weight="600">Havana</text>
+            <text x="150" y="266" text-anchor="middle" font-size="9" letter-spacing="1.8" fill="rgba(22,21,15,.55)">CUBA · 1,450 M</text>
+          </g>
+          <g>
+            <circle cx="560" cy="168" r="5.5"/><circle cx="560" cy="168" r="12" fill="none" stroke="#16150F" stroke-width="1" opacity=".4"/>
+            <text x="560" y="202" text-anchor="middle" font-size="14" font-weight="600">Salta</text>
+            <text x="560" y="220" text-anchor="middle" font-size="9" letter-spacing="1.8" fill="rgba(22,21,15,.55)">ARGENTINA · 1,900 M</text>
+          </g>
+          <g>
+            <circle cx="830" cy="176" r="5.5"/><circle cx="830" cy="176" r="12" fill="none" stroke="#16150F" stroke-width="1" opacity=".4"/>
+            <text x="830" y="210" text-anchor="middle" font-size="14" font-weight="600">Mendoza</text>
+            <text x="830" y="228" text-anchor="middle" font-size="9" letter-spacing="1.8" fill="rgba(22,21,15,.55)">ARGENTINA · 1,610 M</text>
+          </g>
+          <g>
+            <rect x="1058" y="120" width="24" height="24" fill="#A75C3E"/>
+            <path d="M1064 138v-9a6 6 0 0 1 12 0v9z" fill="#F1ECE3"/>
+            <text x="1070" y="168" text-anchor="middle" font-size="14" font-weight="600">Hangar One</text>
+            <text x="1070" y="186" text-anchor="middle" font-size="9" letter-spacing="1.8" fill="rgba(22,21,15,.55)">PORTLAND · ROASTERY</text>
+          </g>
+        </g>
+
+        <g id="flyer" fill="#16150F">
+          <use href="#sym-jet" width="20" height="20" x="-10" y="-10"/>
+          <animateMotion dur="9s" repeatCount="indefinite" rotate="auto"
+            path="M150 214C300 96 470 92 560 168C660 240 720 236 830 176C930 108 990 100 1070 132"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ flight deck / journal ══════════════════════════ -->
+<section class="sec" id="deck" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:14px">Journal &amp; brew school</span>
+        <h2 class="h-sec">From the flight deck</h2>
+      </div>
+      <a class="btn" href="#deck">All entries <span class="arw">→</span></a>
+    </div>
+
+    <div class="grid grid-3">
+      <article class="jcard" data-rv>
+        <div class="jthumb"><canvas data-scene="crema" aria-hidden="true"></canvas></div>
+        <span class="micro">Brew school · 04 Mar 2026</span>
+        <h3>A flight plan for the V60</h3>
+        <p>Three pours, one target weight, and the only two variables worth touching before you
+          start changing the coffee.</p>
+        <a class="jlink" href="#deck">Read</a>
+      </article>
+
+      <article class="jcard" data-rv>
+        <div class="jthumb"><canvas data-scene="cherries" aria-hidden="true"></canvas></div>
+        <span class="micro">Origin · 19 Feb 2026</span>
+        <h3>Two weeks in the Sierra Maestra</h3>
+        <p>What changed at the mill this harvest, why the fig note arrived early, and the
+          nine producers now on the manifest.</p>
+        <a class="jlink" href="#deck">Read</a>
+      </article>
+
+      <article class="jcard" data-rv>
+        <div class="jthumb"><canvas data-scene="clouds" aria-hidden="true"></canvas></div>
+        <span class="micro">Roastery · 28 Jan 2026</span>
+        <h3>Why we roast to a curve, not a colour</h3>
+        <p>Our head roaster on development time, the first crack window, and the profile we
+          keep for every light lot out of Salta.</p>
+        <a class="jlink" href="#deck">Read</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ wholesale ══════════════════════════ -->
+<section class="sec" id="wholesale">
+  <div class="wrap two-col">
+    <div data-rv>
+      <span class="micro" style="display:block;margin-bottom:14px">Trade</span>
+      <h2 class="h-sec" style="max-width:12ch">Become a Roasty wholesale partner</h2>
+      <p class="lede" style="margin-top:20px">
+        We work with cafés, bakeries, offices and hotels who want the same coffee we serve in the
+        hangars — with training, service and pricing that holds steady through the year.
+      </p>
+      <a class="btn" style="margin-top:26px" href="#wholesale">Get in touch <span class="arw">→</span></a>
+    </div>
+
+    <div data-rv>
+      <span class="micro" style="display:block;margin-bottom:18px">You get access to</span>
+      <ul class="checks" style="gap:14px">
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Wholesale-exclusive lots and seasonal espresso blends</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Curated menus built for your bar, with dial-in support on site</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Directly traded coffee, with farm-gate prices published</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Free delivery on standing orders across the mainland</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Equipment financing, servicing and loan machines</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#sym-check"/></svg> Two seats per quarter at Roasty brew school</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ newsletter band ══════════════════════════ -->
+<section class="news" id="news">
+  <div class="inner">
+    <span class="micro">Boarding pass</span>
+    <h2 class="h-sec" data-rv>Join the manifest</h2>
+    <p data-rv>Early access to micro-lots, brew notes from the roastery, and the occasional
+      invitation to a tasting in one of the hangars. Two emails a month, never more.</p>
+    <a class="btn btn-inv" href="#footNews" style="margin-top:10px">Sign up <span class="arw">→</span></a>
+  </div>
+</section>
+
+<!-- ══════════════════════════ hangars ══════════════════════════ -->
+<section class="sec" id="hangars">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:14px">Five locations</span>
+        <h2 class="h-sec">Visit our hangars</h2>
+      </div>
+      <p class="lede" style="max-width:38ch;font-size:13.5px">Every Roasty is built around one arched
+        span, exposed ribs and a single open bay — modern airframe structure, at room scale.</p>
+    </div>
+
+    <div class="grid grid-5">
+      <article class="loc" data-rv>
+        <div class="pic"><svg viewBox="0 0 320 210" role="img" aria-label="Hangar One, Portland" style="--sky:#E7DED0;--wall:#D3C8B6;--open:#3B3A33;--glow:#A75C3E;--floor:#BCB09C"><use href="#sym-hangar"/></svg></div>
+        <span class="micro">Bay 01 · Roastery</span>
+        <h3>Hangar One</h3>
+        <p>1420 NW Marshall St<br>Portland, OR</p>
+        <span class="hrs">Mon–Sun 07:00–18:00</span>
+      </article>
+
+      <article class="loc" data-rv>
+        <div class="pic"><svg viewBox="0 0 320 210" role="img" aria-label="Terminal C, Brooklyn" style="--sky:#E4E1D4;--wall:#CFC7B7;--open:#33372F;--glow:#C4762C;--floor:#B7AE9B"><use href="#sym-hangar"/></svg></div>
+        <span class="micro">Bay 02 · Café</span>
+        <h3>Terminal C</h3>
+        <p>88 Wythe Avenue<br>Brooklyn, NY</p>
+        <span class="hrs">Mon–Sun 07:30–19:00</span>
+      </article>
+
+      <article class="loc" data-rv>
+        <div class="pic"><svg viewBox="0 0 320 210" role="img" aria-label="The Jetway, Austin" style="--sky:#EAE4D6;--wall:#D6CBB8;--open:#3A3630;--glow:#8A7A6E;--floor:#C0B5A1"><use href="#sym-hangar"/></svg></div>
+        <span class="micro">Bay 03 · Café &amp; bar</span>
+        <h3>The Jetway</h3>
+        <p>301 E 5th Street<br>Austin, TX</p>
+        <span class="hrs">Mon–Sun 07:00–20:00</span>
+      </article>
+
+      <article class="loc" data-rv>
+        <div class="pic"><svg viewBox="0 0 320 210" role="img" aria-label="Concourse 9, Chicago" style="--sky:#E2E2D8;--wall:#CCC7B7;--open:#2E322D;--glow:#A75C3E;--floor:#B4AE9D"><use href="#sym-hangar"/></svg></div>
+        <span class="micro">Bay 04 · Café</span>
+        <h3>Concourse 9</h3>
+        <p>217 N Milwaukee Ave<br>Chicago, IL</p>
+        <span class="hrs">Mon–Fri 06:30–17:00</span>
+      </article>
+
+      <article class="loc" data-rv>
+        <div class="pic"><svg viewBox="0 0 320 210" role="img" aria-label="Airside, Los Angeles" style="--sky:#E9E0D0;--wall:#D8CCB6;--open:#38352E;--glow:#C4762C;--floor:#C2B69F"><use href="#sym-hangar"/></svg></div>
+        <span class="micro">Bay 05 · Café &amp; school</span>
+        <h3>Airside</h3>
+        <p>640 Mateo Street<br>Los Angeles, CA</p>
+        <span class="hrs">Mon–Sun 07:00–18:30</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════ footer ══════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-col">
+        <h4 class="micro">Company</h4>
+        <ul>
+          <li><a href="#origins">Our story</a></li>
+          <li><a href="#hangars">Hangars</a></li>
+          <li><a href="#origins">Sourcing report</a></li>
+          <li><a href="#deck">Journal</a></li>
+          <li><a href="#news">Careers</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4 class="micro">Customer support</h4>
+        <ul>
+          <li><a href="#news">Contact us</a></li>
+          <li><a href="#news">Shipping</a></li>
+          <li><a href="#news">Returns</a></li>
+          <li><a href="#plan">Subscription help</a></li>
+          <li><a href="#deck">Brew guides</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4 class="micro">Trade</h4>
+        <ul>
+          <li><a href="#wholesale">Wholesale</a></li>
+          <li><a href="#wholesale">Cafés &amp; bakeries</a></li>
+          <li><a href="#wholesale">Offices</a></li>
+          <li><a href="#wholesale">Green coffee</a></li>
+          <li><a href="#news">Partner log in</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4 class="micro">Hangars</h4>
+        <ul>
+          <li><a href="#hangars">Portland</a></li>
+          <li><a href="#hangars">Brooklyn</a></li>
+          <li><a href="#hangars">Austin</a></li>
+          <li><a href="#hangars">Chicago</a></li>
+          <li><a href="#hangars">Los Angeles</a></li>
+        </ul>
+      </div>
+      <div class="f-news" id="footNews">
+        <h4 class="micro">Newsletter</h4>
+        <p>Release notes, brew school dates and the odd tasting invitation.</p>
+        <form class="field" id="nlForm" novalidate>
+          <label class="skip" for="nlEmail">Email address</label>
+          <input id="nlEmail" type="email" placeholder="Your email" autocomplete="email">
+          <button type="submit">Sign up</button>
+        </form>
+        <div class="f-note" id="nlNote" role="status"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap f-mark">
+    <div class="big"><span>Roasty</span><i></i></div>
+  </div>
+
+  <div class="wrap f-legal">
+    <span class="micro">© 2026 Roasty Coffee Co. — Portland, Oregon</span>
+    <span class="micro">
+      <a href="#news">Privacy</a><a href="#news">Terms</a><a href="#news">Cookies</a><a href="#news">Instagram</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── seeded PRNG ─────────────────────────────────────────────── */
+  function mulberry32(a){
+    return function(){
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  /* ── film grain tile (built once, reused) ────────────────────── */
+  var grainTile = null;
+  function getGrain(){
+    if (grainTile) return grainTile;
+    var c = document.createElement("canvas"); c.width = c.height = 128;
+    var g = c.getContext("2d"), img = g.createImageData(128,128), d = img.data, r = mulberry32(7);
+    for (var i=0;i<d.length;i+=4){
+      var v = 118 + (r()*76 - 38);
+      d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255;
+    }
+    g.putImageData(img,0,0);
+    grainTile = c; return c;
+  }
+  function grain(ctx,w,h,alpha){
+    var p = ctx.createPattern(getGrain(),"repeat");
+    ctx.save();
+    ctx.globalCompositeOperation = "overlay";
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = p; ctx.fillRect(0,0,w,h);
+    ctx.restore();
+  }
+  function vignette(ctx,w,h,strength){
+    var g = ctx.createRadialGradient(w*.5,h*.46,Math.min(w,h)*.16,w*.5,h*.5,Math.max(w,h)*.78);
+    g.addColorStop(0,"rgba(0,0,0,0)");
+    g.addColorStop(1,"rgba(8,5,3,"+strength+")");
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+  }
+  function blur(ctx,px){ try{ ctx.filter = px ? "blur("+px+"px)" : "none"; }catch(e){} }
+
+  /* ── scene painters ──────────────────────────────────────────── */
+  var scenes = {};
+
+  // Roasted-bean macro — the hero.
+  scenes.beans = function(ctx,w,h){
+    var r = mulberry32(1848);
+    var bg = ctx.createLinearGradient(0,0,w*.5,h);
+    bg.addColorStop(0,"#2A1B11"); bg.addColorStop(.55,"#1B120B"); bg.addColorStop(1,"#0E0906");
+    ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+
+    var body = ["#4A2E1C","#3A2314","#5A3A22","#2E1C11","#6B472A","#40281a"];
+    var unit = Math.max(w,h) / 15;
+    var n = Math.ceil((w*h) / (unit*unit*0.42));
+
+    for (var i=0;i<n;i++){
+      var x = r()*w*1.06 - w*.03;
+      var y = r()*h*1.06 - h*.03;
+      var s = unit*(0.34 + r()*0.42);
+      var a = r()*Math.PI;
+      var col = body[(r()*body.length)|0];
+
+      ctx.save();
+      ctx.translate(x,y); ctx.rotate(a);
+
+      // bean body
+      ctx.beginPath();
+      ctx.ellipse(0,0,s,s*0.74,0,0,Math.PI*2);
+      ctx.fillStyle = col; ctx.fill();
+
+      // rim light from upper-left
+      ctx.beginPath();
+      ctx.ellipse(-s*0.16,-s*0.18,s*0.78,s*0.5,-0.35,Math.PI*0.95,Math.PI*1.95);
+      ctx.strokeStyle = "rgba(226,178,124,"+(0.10+r()*0.22)+")";
+      ctx.lineWidth = Math.max(1,s*0.11); ctx.stroke();
+
+      // centre crease
+      ctx.beginPath();
+      ctx.moveTo(-s*0.82,0);
+      ctx.quadraticCurveTo(0,-s*0.26, s*0.82,0);
+      ctx.strokeStyle = "rgba(12,7,4,0.62)";
+      ctx.lineWidth = Math.max(1,s*0.13); ctx.stroke();
+
+      // contact shadow
+      ctx.beginPath();
+      ctx.ellipse(s*0.12,s*0.3,s*0.86,s*0.6,0,0,Math.PI*2);
+      ctx.fillStyle = "rgba(0,0,0,0.10)"; ctx.fill();
+
+      ctx.restore();
+    }
+
+    // depth: a few big, soft, out-of-focus beans in front
+    blur(ctx, Math.max(6, unit*0.34));
+    for (var j=0;j<11;j++){
+      var bx = r()*w, by = h*(0.55 + r()*0.55), bs = unit*(0.8+r()*0.8);
+      ctx.save(); ctx.translate(bx,by); ctx.rotate(r()*Math.PI);
+      ctx.beginPath(); ctx.ellipse(0,0,bs,bs*0.74,0,0,Math.PI*2);
+      ctx.fillStyle = "rgba(40,24,14,0.9)"; ctx.fill();
+      ctx.restore();
+    }
+    blur(ctx,0);
+
+    // warm key light, upper right
+    var k = ctx.createRadialGradient(w*.72,h*.16,0,w*.72,h*.16,Math.max(w,h)*.72);
+    k.addColorStop(0,"rgba(214,150,88,0.24)");
+    k.addColorStop(1,"rgba(214,150,88,0)");
+    ctx.fillStyle = k; ctx.fillRect(0,0,w,h);
+
+    vignette(ctx,w,h,0.62);
+    grain(ctx,w,h,0.13);
+  };
+
+  // Coffee cherries on the branch.
+  scenes.cherries = function(ctx,w,h){
+    var r = mulberry32(4021);
+    var bg = ctx.createLinearGradient(0,0,0,h);
+    bg.addColorStop(0,"#3A4230"); bg.addColorStop(.6,"#2A3123"); bg.addColorStop(1,"#1C2018");
+    ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+
+    var unit = Math.max(w,h)/16;
+
+    // leaves
+    blur(ctx, unit*0.06);
+    for (var i=0;i<130;i++){
+      var x=r()*w, y=r()*h, L=unit*(0.5+r()*1.1), a=r()*Math.PI;
+      ctx.save(); ctx.translate(x,y); ctx.rotate(a);
+      ctx.beginPath(); ctx.ellipse(0,0,L,L*0.3,0,0,Math.PI*2);
+      var g=["#3E4A31","#4E5B3B","#33402A","#5A6844"][(r()*4)|0];
+      ctx.fillStyle=g; ctx.globalAlpha=.72+r()*.28; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-L,0); ctx.lineTo(L,0);
+      ctx.strokeStyle="rgba(18,24,14,.35)"; ctx.lineWidth=Math.max(1,L*.035); ctx.stroke();
+      ctx.restore();
+    }
+    blur(ctx,0);
+    ctx.globalAlpha = 1;
+
+    // cherries in clusters
+    var reds=["#9E3324","#B4442A","#8A2A20","#C4562E","#732018"];
+    for (var c=0;c<26;c++){
+      var cx=r()*w, cy=r()*h, cn=3+((r()*5)|0);
+      for (var k=0;k<cn;k++){
+        var rad=unit*(0.2+r()*0.16);
+        var px=cx+(r()-.5)*unit*1.5, py=cy+(r()-.5)*unit*1.2;
+        ctx.beginPath(); ctx.arc(px+rad*.14,py+rad*.2,rad,0,Math.PI*2);
+        ctx.fillStyle="rgba(0,0,0,.22)"; ctx.fill();
+        ctx.beginPath(); ctx.arc(px,py,rad,0,Math.PI*2);
+        ctx.fillStyle=reds[(r()*reds.length)|0]; ctx.fill();
+        ctx.beginPath(); ctx.arc(px-rad*.3,py-rad*.34,rad*.24,0,Math.PI*2);
+        ctx.fillStyle="rgba(255,225,196,"+(0.3+r()*0.34)+")"; ctx.fill();
+      }
+    }
+
+    // foreground bokeh
+    blur(ctx, unit*0.5);
+    for (var b=0;b<14;b++){
+      ctx.beginPath();
+      ctx.arc(r()*w, r()*h, unit*(0.3+r()*0.5), 0, Math.PI*2);
+      ctx.fillStyle = r()>.45 ? "rgba(160,60,40,.5)" : "rgba(90,110,66,.45)";
+      ctx.fill();
+    }
+    blur(ctx,0);
+
+    var k2 = ctx.createRadialGradient(w*.28,h*.22,0,w*.28,h*.22,Math.max(w,h)*.8);
+    k2.addColorStop(0,"rgba(240,214,168,0.18)"); k2.addColorStop(1,"rgba(240,214,168,0)");
+    ctx.fillStyle=k2; ctx.fillRect(0,0,w,h);
+
+    vignette(ctx,w,h,0.46);
+    grain(ctx,w,h,0.11);
+  };
+
+  // Altitude cloud deck.
+  scenes.clouds = function(ctx,w,h){
+    var r = mulberry32(9110);
+    var sky = ctx.createLinearGradient(0,0,0,h);
+    sky.addColorStop(0,"#7C8078"); sky.addColorStop(.42,"#B4AE9E");
+    sky.addColorStop(.74,"#DCD3C2"); sky.addColorStop(1,"#EDE5D6");
+    ctx.fillStyle = sky; ctx.fillRect(0,0,w,h);
+
+    var unit = Math.max(w,h)/10;
+    // cloud bands, back to front
+    for (var band=0; band<5; band++){
+      var by = h*(0.34 + band*0.15);
+      var scale = 0.45 + band*0.22;
+      var alpha = 0.16 + band*0.11;
+      blur(ctx, unit*0.24*scale);
+      for (var i=0;i<26;i++){
+        var x = r()*w*1.2 - w*.1;
+        var y = by + (r()-.5)*h*0.1;
+        var rw = unit*scale*(0.7+r()*1.5), rh = unit*scale*(0.16+r()*0.24);
+        ctx.beginPath(); ctx.ellipse(x,y,rw,rh,0,0,Math.PI*2);
+        ctx.fillStyle = "rgba(250,246,238,"+alpha+")"; ctx.fill();
+      }
+      blur(ctx,0);
+    }
+
+    // low sun glow at the horizon
+    var g = ctx.createRadialGradient(w*.76,h*.86,0,w*.76,h*.86,Math.max(w,h)*.7);
+    g.addColorStop(0,"rgba(230,186,132,0.34)"); g.addColorStop(1,"rgba(230,186,132,0)");
+    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+
+    grain(ctx,w,h,0.09);
+  };
+
+  // Espresso crema, top-down.
+  scenes.crema = function(ctx,w,h){
+    var r = mulberry32(555);
+    ctx.fillStyle = "#2A1D12"; ctx.fillRect(0,0,w,h);
+    var cx=w*.5, cy=h*.5, R=Math.max(w,h)*.72;
+    var g = ctx.createRadialGradient(cx*.86,cy*.8,0,cx,cy,R);
+    g.addColorStop(0,"#D6A059"); g.addColorStop(.42,"#B87E3E"); g.addColorStop(.8,"#7E4E22"); g.addColorStop(1,"#432612");
+    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+
+    // swirl
+    blur(ctx, Math.max(w,h)*0.012);
+    for (var i=0;i<9;i++){
+      ctx.beginPath();
+      var rr = R*(0.12+i*0.075);
+      ctx.arc(cx + (r()-.5)*w*.07, cy + (r()-.5)*h*.07, rr, r()*6, r()*6+2.4);
+      ctx.strokeStyle = "rgba(60,34,16,"+(0.10+r()*0.16)+")";
+      ctx.lineWidth = Math.max(2, R*0.035); ctx.stroke();
+    }
+    blur(ctx,0);
+
+    // fine speckle
+    for (var s=0;s<900;s++){
+      var a=r()*Math.PI*2, d=Math.sqrt(r())*R*0.9;
+      ctx.beginPath();
+      ctx.arc(cx+Math.cos(a)*d, cy+Math.sin(a)*d, Math.max(.5,R*0.0035*r()), 0, Math.PI*2);
+      ctx.fillStyle = r()>.5 ? "rgba(60,34,16,.34)" : "rgba(240,206,158,.3)";
+      ctx.fill();
+    }
+    vignette(ctx,w,h,0.5);
+    grain(ctx,w,h,0.12);
+  };
+
+  // Brew still life — carafe, cup, warm surface.
+  scenes.brew = function(ctx,w,h){
+    var r = mulberry32(2077);
+    var bg = ctx.createLinearGradient(0,0,w*.7,h);
+    bg.addColorStop(0,"#D9CDB9"); bg.addColorStop(.55,"#C6B79F"); bg.addColorStop(1,"#9F9080");
+    ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+
+    var u = Math.min(w,h);
+    var baseY = h*0.72;
+
+    // window light wash
+    var lw = ctx.createLinearGradient(w*.05,0,w*.65,h*.9);
+    lw.addColorStop(0,"rgba(255,246,228,.5)"); lw.addColorStop(1,"rgba(255,246,228,0)");
+    ctx.fillStyle=lw; ctx.fillRect(0,0,w,h);
+
+    // a paper / book, back left
+    ctx.save();
+    ctx.translate(w*.2,baseY-u*.02); ctx.rotate(-0.08);
+    ctx.fillStyle="rgba(60,42,26,.13)"; ctx.fillRect(-u*.24,-u*.02,u*.5,u*.06);
+    ctx.fillStyle="#EFE6D4"; ctx.fillRect(-u*.24,-u*.06,u*.48,u*.06);
+    ctx.fillStyle="#A75C3E"; ctx.fillRect(-u*.24,-u*.06,u*.48,u*.014);
+    ctx.restore();
+
+    function shadow(x,y,rx,ry,a){
+      ctx.save(); blur(ctx,u*0.028);
+      ctx.beginPath(); ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);
+      ctx.fillStyle="rgba(52,36,22,"+a+")"; ctx.fill();
+      blur(ctx,0); ctx.restore();
+    }
+
+    // glass carafe, centre right
+    var gx = w*.62, gTop = baseY-u*.42, gBot = baseY;
+    shadow(gx+u*.05, gBot+u*.012, u*.20, u*.035, .3);
+    ctx.beginPath();
+    ctx.moveTo(gx-u*.10,gTop);
+    ctx.bezierCurveTo(gx-u*.115,gTop+u*.2, gx-u*.155,gTop+u*.24, gx-u*.15,gBot-u*.03);
+    ctx.quadraticCurveTo(gx-u*.148,gBot, gx-u*.11,gBot);
+    ctx.lineTo(gx+u*.11,gBot);
+    ctx.quadraticCurveTo(gx+u*.148,gBot, gx+u*.15,gBot-u*.03);
+    ctx.bezierCurveTo(gx+u*.155,gTop+u*.24, gx+u*.115,gTop+u*.2, gx+u*.10,gTop);
+    ctx.closePath();
+    ctx.fillStyle="rgba(238,232,220,.34)"; ctx.fill();
+    ctx.strokeStyle="rgba(255,252,244,.5)"; ctx.lineWidth=Math.max(1,u*.005); ctx.stroke();
+
+    // coffee inside
+    ctx.save(); ctx.clip();
+    var cg = ctx.createLinearGradient(0,baseY-u*.24,0,gBot);
+    cg.addColorStop(0,"#8B4C22"); cg.addColorStop(1,"#3A1E0C");
+    ctx.fillStyle=cg; ctx.fillRect(gx-u*.2, baseY-u*.24, u*.4, u*.26);
+    ctx.beginPath(); ctx.ellipse(gx,baseY-u*.24,u*.14,u*.022,0,0,Math.PI*2);
+    ctx.fillStyle="#A55F2C"; ctx.fill();
+    ctx.restore();
+    // highlight
+    ctx.beginPath();
+    ctx.moveTo(gx-u*.085,gTop+u*.03); ctx.lineTo(gx-u*.115,gBot-u*.04);
+    ctx.strokeStyle="rgba(255,252,246,.42)"; ctx.lineWidth=Math.max(1.5,u*.011); ctx.stroke();
+
+    // ceramic cup, front left
+    var cx=w*.32, cy=baseY+u*.03, cr=u*.13;
+    shadow(cx+u*.03, cy+cr*.42, cr*1.25, cr*.34, .3);
+    ctx.beginPath(); ctx.ellipse(cx,cy,cr,cr*.72,0,0,Math.PI*2);
+    ctx.fillStyle="#E4D8C4"; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx,cy,cr*.82,cr*.58,0,0,Math.PI*2);
+    ctx.fillStyle="#C9BAA3"; ctx.fill();
+    var lg = ctx.createRadialGradient(cx-cr*.24,cy-cr*.18,0,cx,cy,cr*.82);
+    lg.addColorStop(0,"#6E3E1B"); lg.addColorStop(1,"#2A1608");
+    ctx.beginPath(); ctx.ellipse(cx,cy,cr*.76,cr*.53,0,0,Math.PI*2);
+    ctx.fillStyle=lg; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx-cr*.26,cy-cr*.2,cr*.2,cr*.08,-0.3,0,Math.PI*2);
+    ctx.fillStyle="rgba(255,240,214,.2)"; ctx.fill();
+
+    // scattered beans on the surface
+    for (var i=0;i<16;i++){
+      var bx=r()*w, by=baseY+u*.12+r()*(h-baseY)*.8, bs=u*(0.014+r()*0.012);
+      ctx.save(); ctx.translate(bx,by); ctx.rotate(r()*Math.PI);
+      ctx.beginPath(); ctx.ellipse(0,0,bs,bs*.72,0,0,Math.PI*2);
+      ctx.fillStyle="#4A2E1C"; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-bs*.8,0); ctx.quadraticCurveTo(0,-bs*.24,bs*.8,0);
+      ctx.strokeStyle="rgba(16,9,5,.6)"; ctx.lineWidth=Math.max(.8,bs*.16); ctx.stroke();
+      ctx.restore();
+    }
+
+    vignette(ctx,w,h,0.42);
+    grain(ctx,w,h,0.11);
+  };
+
+  /* ── canvas sizing / painting ────────────────────────────────── */
+  function paint(cv){
+    var kind = cv.getAttribute("data-scene");
+    var fn = scenes[kind];
+    if (!fn) return;
+    var rect = cv.getBoundingClientRect();
+    var w = Math.max(1, Math.round(rect.width));
+    var h = Math.max(1, Math.round(rect.height));
+    if (!w || !h) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (cv.width === Math.round(w*dpr) && cv.height === Math.round(h*dpr) && cv.dataset.done === "1") return;
+    cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
+    var ctx = cv.getContext("2d");
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+    fn(ctx,w,h);
+    cv.dataset.done = "1";
+  }
+
+  var canvases = Array.prototype.slice.call(document.querySelectorAll("canvas[data-scene]"));
+
+  function paintVisible(){
+    canvases.forEach(function(cv){
+      var r = cv.getBoundingClientRect();
+      if (r.bottom > -500 && r.top < window.innerHeight + 800) paint(cv);
+    });
+  }
+
+  // Paint eagerly so a screenshot at load has everything.
+  canvases.forEach(paint);
+
+  var rTimer;
+  window.addEventListener("resize", function(){
+    clearTimeout(rTimer);
+    rTimer = setTimeout(function(){
+      canvases.forEach(function(cv){ cv.dataset.done = "0"; });
+      canvases.forEach(paint);
+    }, 220);
+  }, {passive:true});
+  window.addEventListener("scroll", paintVisible, {passive:true});
+
+  /* ── nav ─────────────────────────────────────────────────────── */
+  var nav = document.getElementById("nav");
+  function onScroll(){
+    if (window.scrollY > 8) nav.classList.add("stuck"); else nav.classList.remove("stuck");
+  }
+  onScroll();
+  window.addEventListener("scroll", onScroll, {passive:true});
+
+  var burger = document.getElementById("burger");
+  var menu = document.getElementById("mobileMenu");
+  if (burger){
+    burger.addEventListener("click", function(){
+      var open = menu.classList.toggle("open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    menu.addEventListener("click", function(e){
+      if (e.target.tagName === "A"){ menu.classList.remove("open"); burger.setAttribute("aria-expanded","false"); }
+    });
+  }
+
+  /* ── roast filter ────────────────────────────────────────────── */
+  var filterBtns = document.querySelectorAll(".filters button");
+  var cards = document.querySelectorAll("#coffeeGrid .card");
+  Array.prototype.forEach.call(filterBtns, function(b){
+    b.addEventListener("click", function(){
+      Array.prototype.forEach.call(filterBtns, function(x){ x.classList.remove("on"); });
+      b.classList.add("on");
+      var f = b.getAttribute("data-filter");
+      Array.prototype.forEach.call(cards, function(c){
+        var show = (f === "all") || (c.getAttribute("data-roast") === f);
+        c.classList.toggle("hide", !show);
+      });
+    });
+  });
+
+  /* ── cart ────────────────────────────────────────────────────── */
+  var count = 0;
+  var cartN = document.getElementById("cartN");
+  var cartLink = document.getElementById("cartLink");
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".add") : null;
+    if (!btn) return;
+    e.preventDefault();
+    count++;
+    cartN.textContent = String(count);
+    cartLink.setAttribute("aria-label", "Cart, " + count + " item" + (count === 1 ? "" : "s"));
+    cartLink.classList.add("pop");
+    setTimeout(function(){ cartLink.classList.remove("pop"); }, 620);
+    var label = btn.querySelector(".arw");
+    var prev = btn.firstChild.nodeValue;
+    btn.firstChild.nodeValue = "Added ";
+    if (label) label.textContent = "✓";
+    setTimeout(function(){
+      btn.firstChild.nodeValue = prev;
+      if (label) label.textContent = "→";
+    }, 1300);
+  });
+
+  /* ── newsletter ──────────────────────────────────────────────── */
+  var form = document.getElementById("nlForm");
+  if (form){
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var v = document.getElementById("nlEmail").value.trim();
+      var note = document.getElementById("nlNote");
+      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+      note.textContent = ok
+        ? "You're on the manifest. Check your inbox for confirmation."
+        : "Please enter a valid email address.";
+      if (ok) form.reset();
+    });
+  }
+
+  /* ── reveal ──────────────────────────────────────────────────── */
+  var rv = document.querySelectorAll("[data-rv]");
+  if (reduce || !("IntersectionObserver" in window)){
+    Array.prototype.forEach.call(rv, function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en, i){
+        if (en.isIntersecting){
+          var el = en.target;
+          setTimeout(function(){ el.classList.add("in"); }, (i % 6) * 65);
+          io.unobserve(el);
+        }
+      });
+    }, {rootMargin:"0px 0px -8% 0px", threshold:0.08});
+    Array.prototype.forEach.call(rv, function(el){ io.observe(el); });
+  }
+
+  /* ── reduced motion: stop the marquee and the route flyer ────── */
+  if (reduce){
+    var t = document.getElementById("tick");
+    if (t) t.style.animation = "none";
+    var flyer = document.getElementById("flyer");
+    if (flyer) flyer.parentNode.removeChild(flyer);
+  }
+
+  /* ── smooth in-page scroll ───────────────────────────────────── */
+  document.addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var id = a.getAttribute("href");
+    if (!id || id === "#") return;
+    var target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    var top = target.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({top: top, behavior: reduce ? "auto" : "smooth"});
+  });
+})();
+</script>
+</body>
+</html>
