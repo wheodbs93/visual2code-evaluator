@@ -305,6 +305,11 @@ select{
     </div>
   </div>
 
+  <div id="progressPanel" class="card">
+    <h2>Evaluation Progress</h2>
+    <div id="progressTable">Loading progress...</div>
+  </div>
+
   <div id="app">Loading...</div>
 </div>
 
@@ -699,7 +704,54 @@ function renderEvaluatorGate(){
 }
 
 
+
+async function loadProgress(){
+  const data = await getJSON("/api/progress");
+
+  const rows = data.map(x => {
+    let statusClass = "";
+
+    if(x.status === "COMPLETE") statusClass = "color:#2f6b3b";
+    else if(x.status === "IN PROGRESS") statusClass = "color:#8a641e";
+    else statusClass = "color:#666";
+
+    return `
+      <tr>
+        <td style="padding:10px 8px;border-bottom:1px solid #e8e8e4">
+          <strong>${esc(x.pair_id)}</strong>
+        </td>
+        <td style="padding:10px 8px;border-bottom:1px solid #e8e8e4;text-align:center">
+          <strong>${x.evaluation_count} / ${x.evaluation_limit}</strong>
+        </td>
+        <td style="padding:10px 8px;border-bottom:1px solid #e8e8e4;${statusClass}">
+          ${esc(x.status)}
+        </td>
+      </tr>
+    `;
+  }).join("");
+
+  document.getElementById("progressTable").innerHTML = `
+    <table style="width:100%;border-collapse:collapse">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:8px">Pair</th>
+          <th style="text-align:center;padding:8px">Evaluations</th>
+          <th style="text-align:left;padding:8px">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  `;
+}
+
 async function load(){
+  loadProgress().catch(err => {
+    const el = document.getElementById("progressTable");
+    if(el) el.textContent = "Unable to load progress.";
+  });
+
   const evaluatorId = getStoredEvaluatorId();
 
   if(!evaluatorId){
@@ -874,6 +926,40 @@ class Handler(SimpleHTTPRequestHandler):
 
             result["evaluation_count"] = count
             result["evaluation_limit"] = 5
+
+            return self.send_json(result)
+
+        if parsed.path == "/api/progress":
+            from .store import export_evaluations
+
+            pairs = load_pairs()
+            rows = export_evaluations()
+
+            counts = {}
+
+            for row in rows:
+                pair_id = row.get("pair_id", "")
+                if pair_id:
+                    counts[pair_id] = counts.get(pair_id, 0) + 1
+
+            result = []
+
+            for pair in pairs.values():
+                count = min(counts.get(pair.pair_id, 0), 5)
+
+                if count >= 5:
+                    status = "COMPLETE"
+                elif count > 0:
+                    status = "IN PROGRESS"
+                else:
+                    status = "NOT STARTED"
+
+                result.append({
+                    "pair_id": pair.pair_id,
+                    "evaluation_count": count,
+                    "evaluation_limit": 5,
+                    "status": status,
+                })
 
             return self.send_json(result)
 
