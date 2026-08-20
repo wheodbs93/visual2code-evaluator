@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Habito Studio</title>
+<style>
+:root{--paper:#f2f2f0;--gray:#d5d5d5;--ink:#0d0d0d;--teal:#006664;--lime:#c8f326}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.hero{height:900px;background:#d4d4d4;padding:42px 47px;position:relative}
+.nav{display:grid;grid-template-columns:270px 1fr auto;align-items:center;font-size:15px}
+.brand{font-size:28px;letter-spacing:-1.5px}
+.navlinks{display:flex;gap:48px;align-items:center}
+.navlinks a{position:relative}
+.navlinks a:after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:1px;background:#111;transition:.25s}
+.navlinks a:hover:after{right:0}
+.showreel{position:absolute;left:24.5%;top:128px;width:25%;max-width:335px}
+.reelbox{height:188px;background:#b5b2a5;display:grid;place-items:center}
+.reelmark{font-weight:900;font-size:52px;letter-spacing:-9px;transform:skew(-8deg)}
+.reelcaption{font-size:13px;margin-top:16px}
+.hero-title{position:absolute;top:115px;right:4.5%;width:39%;font-size:72px;line-height:.86;letter-spacing:-5px;font-weight:900}
+.hero-copy{position:absolute;left:48px;bottom:-14px;width:470px;font-size:39px;line-height:1.02;letter-spacing:-2.4px}
+.marquee{height:205px;background:var(--teal);color:white;display:flex;align-items:flex-start;overflow:hidden}
+.marquee-track{white-space:nowrap;font-size:133px;line-height:1;font-weight:900;letter-spacing:-7px;animation:move 13s linear infinite}
+@keyframes move{to{transform:translateX(-50%)}}
+.about{height:1040px;background:var(--teal);color:white;position:relative}
+.about-copy{position:absolute;width:49%;right:4.5%;bottom:130px;font-size:16px;line-height:1.65}
+.about-copy p{margin:0 0 34px}
+.about-copy strong{font-weight:800}
+.works{background:var(--lime);padding:0 47px 85px}
+.works-title{height:1250px;display:flex;justify-content:center;align-items:flex-start;padding-top:175px;text-align:center;font-size:80px;line-height:.9;letter-spacing:-5px;font-weight:900}
+.grid{display:grid;grid-template-columns:1fr 1fr 2.05fr;gap:30px}
+.project{min-width:0}
+.label{display:flex;justify-content:space-between;font-size:15px;margin:0 0 13px}
+.art{height:350px;position:relative;overflow:hidden;background:#ddd}
+.project.large .art{height:700px}
+.bag{background:linear-gradient(120deg,#8ed9f3,#cdeeff)}
+.bag:before{content:"";position:absolute;width:72%;height:43%;left:14%;top:14%;background:#188be0;border-radius:3px;box-shadow:0 135px 0 -55px #fff}
+.bag:after{content:"SMOOTH, AROMATIC, AND\A CRAFTED FOR YOUR PERFECT CUP";white-space:pre;text-align:center;color:#fff;font-weight:bold;font-size:11px;position:absolute;left:29%;top:28%}
+.sale{background:#f1a900}
+.sale:before{content:"ENJOY\A 18% OFF!";white-space:pre;position:absolute;inset:-30px;background:repeating-linear-gradient(28deg,transparent 0 90px,#16110b 91px 160px,transparent 161px 245px);color:#f2a900;font-weight:900;font-size:37px;padding:100px 35px;transform:rotate(-6deg)}
+.card{background:linear-gradient(140deg,#312ae0 0 48%,#171cb9 48% 100%)}
+.card:before{content:"Smarter Spending\A Starts Here";white-space:pre;position:absolute;color:#fff;font-size:54px;line-height:.95;left:60px;top:75px;transform:rotate(-8deg)}
+.card:after{content:"Tusteel";position:absolute;right:74px;bottom:48px;color:#111;background:#eee;width:54%;height:29%;font-size:42px;font-weight:bold;padding:70px 35px 0;transform:rotate(-8deg);border-radius:13px}
+.second-row{grid-template-columns:2.05fr 1fr 1fr;margin-top:80px}
+.padel{background:linear-gradient(150deg,#064e68,#2e8ba3 52%,#f2f2e8 53% 61%,#202020 62%)}
+.padel:after{content:"Padelhub";font-family:Georgia,serif;font-size:53px;font-style:italic;position:absolute;right:14%;bottom:19%;transform:rotate(-8deg);color:#0b5367}
+.drink{background:linear-gradient(160deg,#1aa5c4 0 65%,#e3b77e 66%)}
+.drink:before{content:"OUIKA";position:absolute;width:125px;height:205px;right:35%;top:17%;background:#f39b19;border-radius:13px;color:white;font-weight:900;font-size:34px;padding-top:110px;text-align:center;transform:rotate(-15deg)}
+.drink:after{content:"";position:absolute;width:230px;height:100px;right:10%;top:20%;border-radius:60%;background:#e0ae80;transform:rotate(23deg)}
+.beauty{background:linear-gradient(90deg,#b38269,#dfbfac 35%,#55413b 36% 68%,#d9a68e 69%)}
+.beauty:before{content:"Arvela";position:absolute;left:10%;right:10%;top:29%;height:42%;display:grid;place-items:center;background:#817955;color:white;font:66px Georgia,serif}
+.beauty:after{content:"ALBERT HENGKY";position:absolute;left:28%;right:9%;top:66%;background:#eee;padding:12px;text-align:center;font-size:13px}
+.pitch{height:1900px;background:#101010;padding:170px 28px 0}
+.pitch-card{height:920px;background:#f5f5f3;display:flex;justify-content:center;align-items:flex-start;padding-top:155px;text-align:center}
+.pitch-title{font-size:75px;line-height:.88;letter-spacing:-5px;font-weight:900}
+.mini{display:inline-block;width:96px;height:48px;background:linear-gradient(160deg,#ff3e1d,#090909);vertical-align:middle;margin:0 6px;position:relative}
+.mini:after{content:"CELERO";color:white;font-size:10px;position:absolute;right:7px;top:18px}
+.reasons{background:#f5f5f3;display:grid;grid-template-columns:1fr 1fr;padding:0 47px 190px;gap:0 16px}
+.reason{min-height:180px;border-bottom:1px solid #ddd;padding:20px 0 30px;display:grid;grid-template-columns:85px 1fr;column-gap:22px}
+.reason:nth-last-child(-n+2){border-bottom:0}
+.num{font-size:14px}
+.reason h3{font-size:15px;line-height:1.35;margin:0 0 23px}
+.reason p{grid-column:2;color:#747474;font-size:15px;line-height:1.75;margin:0}
+.services{height:1290px;background:#f5f5f3;position:relative;overflow:hidden;padding:200px 47px}
+.services-bg{position:absolute;left:-50px;top:420px;font-weight:900;font-size:180px;letter-spacing:-10px;white-space:nowrap}
+.service-card{position:absolute;background:white;width:31%;min-height:545px;padding:42px 30px}
+.service-card.one{left:3.5%;top:260px}
+.service-card.two{left:35.3%;top:330px}
+.service-card.three{right:2.5%;top:438px}
+.service-card h2{font-size:37px;line-height:1.05;letter-spacing:-2px;margin:0 0 43px;font-weight:400}
+.service-card ul{list-style:none;margin:0;padding:0}
+.service-card li{font-size:15px;margin:0 0 22px;display:flex;align-items:center;gap:18px}
+.check{width:21px;height:21px;border-radius:50%;background:var(--teal);color:var(--lime);display:grid;place-items:center;font-size:11px;font-weight:bold;flex:none}
+.burst{position:absolute;right:-65px;top:355px;width:180px;height:180px;background:repeating-conic-gradient(var(--lime) 0 13deg,#92d600 14deg 25deg);clip-path:polygon(50% 0,60% 34%,79% 8%,73% 39%,100% 28%,76% 51%,100% 68%,70% 62%,79% 100%,57% 69%,43% 100%,43% 69%,11% 91%,29% 60%,0 54%,31% 45%,5% 20%,40% 36%)}
+@media(max-width:800px){
+.hero{height:760px;padding:25px 20px}.nav{grid-template-columns:1fr auto}.navlinks{display:none}.showreel{left:20px;top:110px;width:42%}.reelbox{height:120px}.hero-title{top:112px;right:18px;width:52%;font-size:40px;letter-spacing:-3px}.hero-copy{left:20px;width:330px;font-size:28px}.marquee{height:110px}.marquee-track{font-size:69px}.about{height:680px}.about-copy{width:auto;left:20px;right:20px;bottom:70px}.works{padding:0 16px 45px}.works-title{height:660px;padding-top:100px;font-size:52px}.grid,.second-row{grid-template-columns:1fr 1fr}.project.large{grid-column:1/-1}.project.large .art{height:420px}.art{height:260px}.pitch{height:1060px;padding:80px 14px}.pitch-card{height:630px;padding-top:100px}.pitch-title{font-size:43px}.reasons{grid-template-columns:1fr;padding:0 20px 90px}.reason:nth-last-child(2){border-bottom:1px solid #ddd}.services{height:auto;padding:100px 16px}.services-bg{display:none}.service-card{position:relative!important;top:auto!important;left:auto!important;right:auto!important;width:100%;min-height:0;margin-bottom:18px}.burst{display:none}
+}
+</style>
+</head>
+<body>
+<section class="hero">
+  <nav class="nav">
+    <a class="brand" href="#">Habito</a>
+    <div></div>
+    <div class="navlinks">
+      <a href="#about">About</a><a href="#works">Works</a><a href="#services">Services</a><a href="#">Careers</a><a href="#">Pricing</a>
+    </div>
+  </nav>
+  <div class="showreel">
+    <div class="reelbox"><div class="reelmark">ArO</div></div>
+    <div class="reelcaption">Habito Showreels</div>
+  </div>
+  <div class="hero-title">WE BUILD<br>SEAMLESS<br>IDENTITY</div>
+  <div class="hero-copy">Choose a plan, send in your<br>request, and your design<br>journey starts tomorrow.</div>
+</section>
+
+<div class="marquee"><div class="marquee-track">HABITO STUDIO HABITO STUDIO HABITO STUDIO HABITO STUDIO&nbsp;</div></div>
+
+<section class="about" id="about">
+  <div class="about-copy">
+    <p>About Us</p>
+    <p>At Habito Studio, we’re not just a design team — we’re your creative partners. We help brands grow with smart, consistent, and purpose-driven design. From startups to scale-ups, our subscription-based model gives you the flexibility to get top-tier branding without the traditional agency fuss.</p>
+    <p>Our idealist</p>
+    <p>We believe great design is not just about how it looks — it’s about how it works. That’s why we take the time to understand your business, your goals, and your audience, delivering visual systems that are as strategic as they are stunning. <strong>Build for brands that move fast, think big, and value thoughtful design.</strong></p>
+  </div>
+</section>
+
+<section class="works" id="works">
+  <div class="works-title">SELECTED<br>WORKS<br>(2023-2026)</div>
+  <div class="grid">
+    <article class="project"><div class="label"><span>Kopvie</span><span>2026</span></div><div class="art bag"></div></article>
+    <article class="project"><div class="label"><span>Krosan</span><span>2026</span></div><div class="art sale"></div></article>
+    <article class="project large"><div class="label"><span>Tustee</span><span>2025</span></div><div class="art card"></div></article>
+  </div>
+  <div class="grid second-row">
+    <article class="project large"><div class="label"><span>Padelhub</span><span>2026</span></div><div class="art padel"></div></article>
+    <article class="project"><div class="label"><span>Osuka</span><span>2026</span></div><div class="art drink"></div></article>
+    <article class="project"><div class="label"><span>Arvela</span><span>2026</span></div><div class="art beauty"></div></article>
+  </div>
+</section>
+
+<section class="pitch">
+  <div class="pitch-card">
+    <div class="pitch-title">WE BUILD<br>BRANDING<span class="mini"></span>FOR<br>YOUR MVP</div>
+  </div>
+</section>
+
+<section class="reasons">
+  <article class="reason"><div class="num">(01)</div><div><h3>FAST-TRACK YOUR MVP WITH SEAMLESS BRANDING</h3></div><p>We help you launch with a strong visual identity from day one. Logo, UI/UX, and brand elements are crafted to reflect your product’s essence. Quick execution without sacrificing quality.</p></article>
+  <article class="reason"><div class="num">(02)</div><div><h3>DESIGNED FOR STARTUPS, BUILT TO<br>SCALE</h3></div><p>Our branding approach grows with you—from MVP to full-scale launch. With flexible plans and scalable design systems, your brand is never boxed in by early limitations.</p></article>
+  <article class="reason"><div class="num">(03)</div><div><h3>ALL-IN-ONE CREATIVE PARTNER FOR YOUR MVP</h3></div><p>Logo, UI/UX, motion, and illustration—all done by one unified team. No need to manage multiple freelancers or vendors. You focus on the product, we handle the visuals.</p></article>
+  <article class="reason"><div class="num">(04)</div><div><h3>FAST TURNAROUND, ON YOUR TIMELINE</h3></div><p>We understand startup timelines—our Business Plan guarantees execution within a month. Get investor-ready designs and presentation-friendly assets to confidently pitch your MVP.</p></article>
+</section>
+
+<section class="services" id="services">
+  <div class="services-bg">OUR SERVICES</div><div class="burst"></div>
+  <div class="service-card one">
+    <h2>Graphic &amp;<br>Branding Design</h2>
+    <ul>
+      <li><span class="check">✓</span>Logo Design</li><li><span class="check">✓</span>Brand Guidelines</li><li><span class="check">✓</span>Brand Implementation</li><li><span class="check">✓</span>Stationary Design</li><li><span class="check">✓</span>Pitch Deck Design</li><li><span class="check">✓</span>Icon Design</li><li><span class="check">✓</span>Infographic Design</li><li><span class="check">✓</span>Social Media Design</li><li><span class="check">✓</span>Print Design</li>
+    </ul>
+  </div>
+  <div class="service-card two">
+    <h2>Illustration &amp;<br>Motion Graphic</h2>
+    <ul>
+      <li><span class="check">✓</span>2D Illustration</li><li><span class="check">✓</span>Character Design</li><li><span class="check">✓</span>Mascot Design</li><li><span class="check">✓</span>Isometric Illustration</li><li><span class="check">✓</span>Digital Painting</li><li><span class="check">✓</span>Logo Animation</li><li><span class="check">✓</span>2D Animation</li><li><span class="check">✓</span>Digital Media Animation</li><li><span class="check">✓</span>Pitch Deck Animation</li>
+    </ul>
+  </div>
+  <div class="service-card three">
+    <h2>UIUX<br>Design</h2>
+    <ul>
+      <li><span class="check">✓</span>Mobile App Design</li><li><span class="check">✓</span>Website Design</li><li><span class="check">✓</span>Dashboard Design</li><li><span class="check">✓</span>Responsive Design</li><li><span class="check">✓</span>Design System</li><li><span class="check">✓</span>UX Design</li><li><span class="check">✓</span>Information Architecture</li>
+    </ul>
+  </div>
+</section>
+<script>
+const marquee=document.querySelector('.marquee-track');
+marquee.innerHTML+=marquee.innerHTML;
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const target=document.querySelector(a.getAttribute('href'));
+  if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}
+}));
+</script>
+</body>
+</html>

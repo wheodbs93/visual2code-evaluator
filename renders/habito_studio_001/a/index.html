@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habito Studio — We Build Seamless Identity</title>
+<style>
+:root{
+  --ink:#0B0B0B;
+  --paper:#F3F3F1;
+  --hero:#E6E6E2;
+  --teal:#10504D;
+  --lime:#C8EF3F;
+  --line:#E2E2DE;
+  --muted:#8A8A84;
+  --pad:clamp(18px,3.1vw,46px);
+  --display:"Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --text:"Helvetica Neue",Helvetica,Arial,"Segoe UI",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{
+  font-family:var(--text);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.45;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--lime);color:#0B0B0B}
+
+/* ---------------- HEADER ---------------- */
+.site-head{
+  position:fixed;top:0;left:0;width:100%;z-index:200;
+  padding:clamp(16px,1.9vw,30px) var(--pad);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:transform .45s cubic-bezier(.22,.61,.36,1), color .35s ease;
+  mix-blend-mode:normal;
+}
+.site-head.hidden{transform:translateY(-108%)}
+.site-head.on-dark{color:#fff}
+.logo{
+  font-family:var(--display);
+  font-size:clamp(21px,2vw,30px);
+  letter-spacing:-.035em;
+  line-height:1;
+  position:relative;
+  font-weight:900;
+}
+.logo sup{font-size:.28em;vertical-align:super;letter-spacing:0;font-family:var(--text);font-weight:400;opacity:.9}
+.main-nav{display:flex;gap:clamp(20px,3.4vw,58px)}
+.main-nav a{
+  font-size:clamp(12px,1.02vw,15px);
+  letter-spacing:-.01em;
+  position:relative;padding-bottom:3px;
+}
+.main-nav a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:currentColor;
+  transition:width .32s cubic-bezier(.22,.61,.36,1);
+}
+.main-nav a:hover::after,.main-nav a.active::after{width:100%}
+.nav-toggle{display:none;background:none;border:0;color:inherit;font:inherit;cursor:pointer}
+
+/* ---------------- HERO ---------------- */
+.hero{
+  background:var(--hero);
+  min-height:100vh;
+  padding:calc(var(--pad) + clamp(90px,10.5vw,150px)) var(--pad) clamp(34px,3.6vw,54px);
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.hero-top{
+  display:grid;
+  grid-template-columns:minmax(0,.86fr) minmax(0,1.28fr) minmax(0,1.5fr);
+  align-items:start;
+  gap:clamp(16px,2.4vw,40px);
+  flex:1;
+}
+.reel{grid-column:2;align-self:start;padding-top:clamp(4px,1.4vw,26px)}
+.reel-frame{
+  position:relative;width:100%;aspect-ratio:20/8.6;
+  background:linear-gradient(150deg,#a9a99c 0%,#93938a 45%,#7f7f76 100%);
+  border-radius:3px;overflow:hidden;display:grid;place-items:center;cursor:pointer;
+}
+.reel-frame::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.24),transparent 62%);
+  mix-blend-mode:screen;
+}
+.reel-mark{width:clamp(74px,10vw,140px);opacity:.92;position:relative;z-index:2}
+.reel-sheen{
+  position:absolute;top:0;left:-60%;width:45%;height:100%;z-index:3;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+  animation:sheen 5.6s ease-in-out infinite;
+}
+@keyframes sheen{0%{left:-60%}55%{left:120%}100%{left:120%}}
+.reel-cap{
+  margin-top:9px;text-align:center;font-size:clamp(9px,.78vw,11px);
+  letter-spacing:.02em;color:#5C5C55;
+}
+.hero-title{
+  grid-column:3;
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(40px,8.15vw,122px);
+  line-height:.865;letter-spacing:-.042em;
+  text-transform:uppercase;
+}
+.hero-bottom{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.55fr) minmax(0,.55fr);
+  align-items:end;gap:clamp(16px,3vw,40px);
+  padding-top:clamp(30px,5vw,80px);
+}
+.hero-lede{
+  font-size:clamp(19px,2.42vw,35px);
+  line-height:1.16;letter-spacing:-.03em;max-width:14ch;
+}
+.arrow-link{
+  display:inline-flex;align-items:center;gap:26px;justify-content:space-between;
+  font-size:clamp(11px,.94vw,14px);letter-spacing:-.01em;
+  border-bottom:1px solid currentColor;padding-bottom:5px;min-width:112px;
+}
+.arrow-link svg{width:13px;flex:none;transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.arrow-link:hover svg{transform:translateX(5px)}
+.hero-bottom .arrow-link{margin-bottom:6px}
+.hb-c{justify-self:end}
+
+/* ---------------- MARQUEE ---------------- */
+.mq{display:flex;width:max-content;will-change:transform}
+.mq-track{overflow:hidden;display:flex}
+.mq-item{
+  font-family:var(--display);font-weight:900;
+  letter-spacing:-.045em;line-height:.86;white-space:nowrap;
+  display:flex;align-items:center;
+}
+.anim-l{animation:mql 26s linear infinite}
+.anim-r{animation:mqr 26s linear infinite}
+@keyframes mql{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes mqr{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+
+/* ---------------- TEAL / ABOUT ---------------- */
+.teal{background:var(--teal);color:#fff;position:relative;z-index:3}
+.teal .mq-track{padding:clamp(6px,1vw,16px) 0}
+.teal .mq-item{font-size:clamp(58px,12.4vw,188px);color:#fff;padding-right:.06em}
+.about-wrap{
+  padding:clamp(64px,10vw,150px) var(--pad) clamp(80px,12vw,180px);
+  display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,1.6vw,24px);
+}
+.about-col{grid-column:7/span 5;max-width:560px}
+.about-block+.about-block{margin-top:clamp(26px,3vw,44px)}
+.about-label{font-size:clamp(11px,.85vw,13px);margin-bottom:12px;letter-spacing:-.01em}
+.about-copy{font-size:clamp(11px,.92vw,14px);line-height:1.72;color:rgba(255,255,255,.9)}
+.about-copy b{font-weight:700;color:#fff}
+
+/* ---------------- WORKS ---------------- */
+.works{background:var(--lime);color:var(--ink);position:relative;z-index:4;padding-bottom:clamp(60px,8vw,120px)}
+.works-pin{padding:clamp(70px,10vw,150px) var(--pad) clamp(190px,26vw,420px)}
+.works-title-wrap{position:sticky;top:22vh}
+.works-title{
+  font-family:var(--display);font-weight:900;text-align:center;
+  font-size:clamp(38px,7.2vw,104px);line-height:.9;letter-spacing:-.045em;text-transform:uppercase;
+}
+.works-grid{padding:0 var(--pad);display:flex;flex-direction:column;gap:clamp(38px,4.6vw,70px)}
+.wrow{display:grid;gap:clamp(12px,1.4vw,26px)}
+.wrow-1{grid-template-columns:1.06fr .82fr 1.88fr}
+.wrow-2{grid-template-columns:1.62fr .8fr 1.02fr}
+.wcard{display:block}
+.wmeta{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:clamp(9px,.8vw,12px);letter-spacing:-.01em;
+  padding-bottom:10px;margin-bottom:12px;border-top:1px solid rgba(0,0,0,.22);padding-top:9px;
+}
+.wshot{
+  width:100%;border-radius:2px;overflow:hidden;background:#ddd;
+  transition:transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.wcard:hover .wshot{transform:scale(.985)}
+.wshot svg{width:100%;height:100%;display:block}
+.r1a{aspect-ratio:356/330}.r1b{aspect-ratio:274/348}.r1c{aspect-ratio:630/594}
+.r2a{aspect-ratio:540/348}.r2b{aspect-ratio:266/348}.r2c{aspect-ratio:336/322}
+
+/* ---------------- MVP (BLACK) ---------------- */
+.mvp{background:#0A0A0A;color:#fff;padding:clamp(14px,1.4vw,22px) 0 clamp(70px,9vw,130px);position:relative;z-index:5}
+.mvp-panel{
+  margin:0 var(--pad);background:#fff;color:var(--ink);border-radius:4px;
+  padding:clamp(46px,6.4vw,96px) var(--pad) clamp(120px,20vw,340px);
+  transform-origin:center top;
+}
+.mvp-h{
+  font-family:var(--display);font-weight:900;text-align:center;
+  font-size:clamp(30px,5.9vw,86px);line-height:.94;letter-spacing:-.045em;text-transform:uppercase;
+  max-width:16ch;margin:0 auto;
+}
+.chip{
+  display:inline-block;width:1.42em;height:.72em;border-radius:.13em;vertical-align:.02em;
+  margin:0 .07em;overflow:hidden;position:relative;
+  background:linear-gradient(115deg,#1b1b1b 0%,#3a3a3a 38%,#c0392b 39%,#c0392b 62%,#f2f2f2 63%,#dcdcdc 100%);
+}
+.mvp-points{
+  margin-top:clamp(48px,6vw,92px);padding:0 var(--pad);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,3.4vw,54px) clamp(30px,5vw,90px);
+}
+.pt{display:grid;grid-template-columns:44px 1fr;gap:clamp(10px,1.6vw,26px);padding-top:18px;border-top:1px solid rgba(255,255,255,.2)}
+.pt-n{font-size:clamp(9px,.76vw,11px);color:rgba(255,255,255,.55)}
+.pt-t{font-size:clamp(10px,.83vw,12.5px);font-weight:700;letter-spacing:.005em;text-transform:uppercase;line-height:1.4}
+.pt-d{font-size:clamp(10px,.8vw,12px);line-height:1.65;color:rgba(255,255,255,.62);margin-top:12px;max-width:46ch}
+
+/* ---------------- SERVICES ---------------- */
+.services{background:var(--paper);position:relative;z-index:6;padding:clamp(60px,8vw,120px) 0 clamp(70px,9vw,130px);overflow:hidden}
+.services .mq-item{font-size:clamp(72px,16vw,250px);color:var(--ink);padding-right:.08em;gap:.16em}
+.services .mq-track{position:absolute;left:0;right:0;top:clamp(120px,17vw,270px);opacity:.96;pointer-events:none}
+.svc-clover{width:.62em;height:.62em;flex:none}
+.svc-cards{
+  position:relative;z-index:2;padding:clamp(40px,7vw,120px) var(--pad) 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,28px);align-items:start;
+}
+.svc{
+  background:#fff;border-radius:4px;padding:clamp(20px,1.9vw,30px);
+  box-shadow:0 20px 50px -34px rgba(0,0,0,.28);
+}
+.svc:nth-child(2){margin-top:clamp(30px,4.4vw,72px)}
+.svc:nth-child(3){margin-top:clamp(60px,8.6vw,144px)}
+.svc h3{font-size:clamp(17px,1.62vw,25px);line-height:1.12;letter-spacing:-.032em;font-weight:400;margin-bottom:clamp(18px,2vw,30px)}
+.svc ul{list-style:none;display:flex;flex-direction:column;gap:clamp(9px,.85vw,13px)}
+.svc li{display:flex;align-items:center;gap:11px;font-size:clamp(10px,.82vw,12.5px);letter-spacing:-.005em}
+.tick{width:14px;height:14px;flex:none}
+
+/* ---------------- POWER ---------------- */
+.power{background:var(--paper);padding:clamp(70px,9vw,140px) var(--pad) clamp(60px,8vw,120px);position:relative;z-index:6}
+.power h2{
+  font-family:var(--display);font-weight:900;text-align:center;
+  font-size:clamp(30px,5.2vw,74px);line-height:.96;letter-spacing:-.045em;text-transform:uppercase;
+  max-width:19ch;margin:0 auto clamp(36px,4.4vw,70px);
+}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.1vw,18px)}
+.pcard{
+  background:#fff;border:1px solid var(--line);border-radius:5px;
+  padding:clamp(20px,1.9vw,30px);min-height:clamp(230px,25vw,340px);
+  display:flex;flex-direction:column;position:relative;overflow:hidden;
+}
+.pcard::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,var(--tint) 0%,rgba(255,255,255,0) 62%);
+}
+.pcard-ico{height:clamp(78px,8.4vw,124px);position:relative;z-index:2;display:flex;align-items:flex-start;justify-content:center;margin-bottom:auto}
+.pcard-ico svg{height:100%;width:auto}
+.pcard h4{position:relative;z-index:2;font-size:clamp(17px,1.55vw,24px);font-weight:400;letter-spacing:-.032em;line-height:1.14;margin-bottom:10px}
+.pcard p{position:relative;z-index:2;font-size:clamp(9.5px,.76vw,11.5px);line-height:1.62;color:#77776F;max-width:34ch}
+
+/* ---------------- PARTNER ---------------- */
+.partner{background:var(--paper);padding:clamp(60px,7.6vw,120px) var(--pad) clamp(70px,9vw,140px)}
+.partner h2{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(34px,6.4vw,92px);letter-spacing:-.045em;line-height:.94;
+  text-transform:uppercase;margin-bottom:clamp(30px,4vw,60px);
+}
+.acc-row{border-top:1px solid var(--line)}
+.acc-row:last-child{border-bottom:1px solid var(--line)}
+.acc-head{
+  display:grid;grid-template-columns:64px 1.15fr 1.15fr .5fr 46px;
+  align-items:center;gap:14px;padding:clamp(16px,1.5vw,24px) 0;
+  cursor:pointer;background:none;border:0;width:100%;text-align:left;font:inherit;color:inherit;
+}
+.acc-num{font-size:clamp(9px,.76vw,11.5px);color:var(--muted)}
+.acc-name{font-size:clamp(11px,.92vw,14px);display:flex;align-items:center;gap:12px}
+.acc-comp{font-size:clamp(11px,.92vw,14px);display:flex;align-items:center;gap:10px}
+.acc-year{font-size:clamp(10px,.8vw,12.5px);justify-self:end}
+.acc-btn{
+  width:clamp(30px,2.6vw,40px);height:clamp(30px,2.6vw,40px);border-radius:50%;
+  border:1px solid #CFCFC9;display:grid;place-items:center;justify-self:end;transition:.3s;
+}
+.acc-row.open .acc-btn{background:var(--ink);border-color:var(--ink);color:#fff}
+.acc-btn svg{width:13px;transition:transform .35s}
+.acc-row.open .acc-btn svg{transform:rotate(180deg)}
+.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.22,.61,.36,1)}
+.acc-row.open .acc-body{grid-template-rows:1fr}
+.acc-inner{overflow:hidden}
+.acc-cols{
+  display:grid;grid-template-columns:64px 1.15fr 1.15fr .5fr 46px;gap:14px;
+  padding:0 0 clamp(22px,2.4vw,38px);
+}
+.acc-cols .c2{grid-column:2}
+.acc-cols .c3{grid-column:3}
+.acc-sub{font-size:clamp(10px,.8vw,12px);margin-bottom:14px}
+.acc-quote{font-size:clamp(10.5px,.86vw,13px);line-height:1.68;max-width:42ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;max-width:330px}
+.tag{border:1px solid #CFCFC9;border-radius:40px;padding:6px 15px;font-size:clamp(9px,.72vw,11px)}
+.dot{width:19px;height:19px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:9px;color:#fff;font-weight:700}
+
+/* ---------------- LOGOS ---------------- */
+.logos{background:var(--paper);padding-bottom:clamp(40px,5vw,80px);overflow:hidden}
+.logo-row{display:flex;width:max-content}
+.logo-cell{
+  width:clamp(120px,13.4vw,196px);height:clamp(74px,7.8vw,116px);flex:none;
+  background:#fff;border:1px solid var(--line);margin-right:-1px;
+  display:grid;place-items:center;
+}
+.logo-cell svg{width:64%;height:auto}
+.logo-strip+.logo-strip{margin-top:-1px}
+
+/* ---------------- FOOTER ---------------- */
+.foot{background:var(--paper);padding-top:clamp(24px,3vw,48px);overflow:hidden}
+.foot .mq-item{font-size:clamp(64px,14.6vw,228px);color:var(--ink);gap:.15em;padding-right:.1em}
+.foot-main{
+  padding:clamp(44px,5.6vw,88px) var(--pad) clamp(30px,3.4vw,52px);
+  display:grid;grid-template-columns:1.1fr 1.15fr;gap:clamp(28px,4vw,60px);
+}
+.foot-cta{font-size:clamp(19px,2.42vw,35px);line-height:1.16;letter-spacing:-.03em;max-width:15ch;margin-bottom:clamp(20px,2.4vw,36px)}
+.foot-right{display:flex;flex-direction:column;align-items:flex-start}
+.foot-links{display:grid;grid-template-columns:repeat(3,minmax(0,148px));gap:11px clamp(10px,1vw,18px)}
+.foot-links a{font-size:clamp(10px,.85vw,13px);transition:opacity .25s}
+.foot-links a:hover{opacity:.55}
+.foot-right .arrow-link{margin-top:clamp(26px,3.2vw,50px)}
+.badge{margin:clamp(26px,3.4vw,54px) auto 0;width:clamp(60px,5.6vw,84px);align-self:center}
+.foot-bar{
+  border-top:1px solid var(--line);
+  padding:clamp(14px,1.5vw,24px) var(--pad);
+  display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;
+  font-size:clamp(9.5px,.78vw,12px);
+}
+.foot-bar .mid{text-align:center;color:#6E6E68}
+.foot-bar .rt{text-align:right;color:#6E6E68}
+.deck{display:flex;align-items:center;gap:10px;font-weight:700}
+.deck-ico{width:clamp(18px,1.5vw,23px);height:clamp(18px,1.5vw,23px);border-radius:50%;background:var(--lime);display:grid;place-items:center}
+.deck-ico svg{width:9px}
+
+/* ---------------- REVEAL ---------------- */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}.rv-d3{transition-delay:.24s}
+.rv-d4{transition-delay:.32s}.rv-d5{transition-delay:.4s}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:1000px){
+  .hero-top{grid-template-columns:1fr;gap:clamp(26px,6vw,50px)}
+  .reel{grid-column:1;max-width:440px}
+  .hero-title{grid-column:1;font-size:clamp(44px,10.4vw,86px)}
+  .hero-bottom{grid-template-columns:1fr;gap:22px;align-items:start}
+  .hb-c{justify-self:start}
+  .about-col{grid-column:1/-1;max-width:none}
+  .about-copy{font-size:13px}
+  .wrow-1,.wrow-2{grid-template-columns:1fr 1fr}
+  .mvp-points{grid-template-columns:1fr}
+  .svc-cards{grid-template-columns:1fr}
+  .svc:nth-child(2),.svc:nth-child(3){margin-top:0}
+  .pgrid{grid-template-columns:1fr 1fr}
+  .foot-main{grid-template-columns:1fr}
+  .acc-head,.acc-cols{grid-template-columns:44px 1fr 44px}
+  .acc-comp,.acc-year{display:none}
+  .acc-cols .c2,.acc-cols .c3{grid-column:2}
+  .acc-cols .c3{margin-top:22px}
+}
+@media (max-width:680px){
+  .main-nav{display:none}
+  .nav-toggle{display:block;font-size:12px;letter-spacing:.02em}
+  .wrow-1,.wrow-2{grid-template-columns:1fr}
+  .pgrid{grid-template-columns:1fr}
+  .foot-links{grid-template-columns:1fr 1fr}
+  .foot-bar{grid-template-columns:1fr;gap:8px;text-align:center}
+  .foot-bar .mid,.foot-bar .rt{text-align:center}
+  .deck{justify-content:center}
+  .r1a,.r1b,.r1c,.r2a,.r2b,.r2c{aspect-ratio:4/3}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none}
+  .anim-l,.anim-r,.reel-sheen{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== SVG DEFS ===================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <radialGradient id="gClover" cx="34%" cy="26%" r="86%">
+    <stop offset="0" stop-color="#E9FF92"/><stop offset="48%" stop-color="#BFE839"/><stop offset="100%" stop-color="#7EA714"/>
+  </radialGradient>
+  <linearGradient id="gLimeIco" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#E7FF8C"/><stop offset="45%" stop-color="#BEE83B"/><stop offset="100%" stop-color="#7FA915"/>
+  </linearGradient>
+  <linearGradient id="gOrangeIco" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFD48A"/><stop offset="45%" stop-color="#F79B33"/><stop offset="100%" stop-color="#D2691A"/>
+  </linearGradient>
+</defs>
+</svg>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-head" id="head">
+  <a href="#top" class="logo">Habito<sup>®</sup></a>
+  <nav class="main-nav">
+    <a href="#about">About</a>
+    <a href="#works">Works</a>
+    <a href="#services">Services</a>
+    <a href="#careers">Careers</a>
+    <a href="#pricing">Pricing</a>
+  </nav>
+  <button class="nav-toggle" aria-label="Menu">Menu</button>
+</header>
+
+<main id="top">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" data-nav="light">
+  <div class="hero-top">
+    <div class="reel rv">
+      <div class="reel-frame">
+        <span class="reel-sheen"></span>
+        <svg class="reel-mark" viewBox="0 0 200 62" fill="none" aria-label="Aro">
+          <path d="M6 54 33.6 9.6c1.6-2.6 5.4-2.6 7 0L68 54h-13.4l-4.9-8.6H24.4L19.6 54H6Zm24.2-19.3h14.4L37.4 21 30.2 34.7Z" fill="#151512"/>
+          <path d="M74 54V13h22.6c9.9 0 16.1 5 16.1 13 0 6-3.4 10.1-9.2 11.8L114 54H99.8l-9-14.1h-4.2V54H74Zm12.6-23.2h8.4c3.4 0 5.4-1.6 5.4-4.3s-2-4.3-5.4-4.3h-8.4v8.6Z" fill="#151512"/>
+          <path d="M147.6 55.6c-14.1 0-24.4-9.5-24.4-22.1S133.5 11.4 147.6 11.4 172 20.9 172 33.5s-10.3 22.1-24.4 22.1Zm0-11.4c6.6 0 11.4-4.4 11.4-10.7s-4.8-10.7-11.4-10.7-11.4 4.4-11.4 10.7 4.8 10.7 11.4 10.7Z" fill="#151512"/>
+          <path d="M178 30.6h18v6.6h-18z" fill="#151512"/>
+          <path d="M186.6 22.2h1.6v23.4h-1.6z" fill="#151512" opacity=".0"/>
+        </svg>
+      </div>
+      <div class="reel-cap">Habito Showreels</div>
+    </div>
+    <h1 class="hero-title rv rv-d1">We build<br>seamless<br>identity</h1>
+  </div>
+
+  <div class="hero-bottom">
+    <p class="hero-lede rv rv-d2">Choose a plan, send in your request, and your design journey starts tomorrow.</p>
+    <a class="arrow-link rv rv-d3" href="#about">About us
+      <svg viewBox="0 0 18 12" fill="none"><path d="M0 6h16M11 1l5 5-5 5" stroke="currentColor" stroke-width="1.2"/></svg>
+    </a>
+    <a class="arrow-link hb-c rv rv-d4" href="#pricing">Explore Plans
+      <svg viewBox="0 0 18 12" fill="none"><path d="M0 6h16M11 1l5 5-5 5" stroke="currentColor" stroke-width="1.2"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== TEAL BAND + ABOUT ===================== -->
+<section class="teal" id="about" data-nav="dark">
+  <div class="mq-track">
+    <div class="mq anim-l">
+      <span class="mq-item">HABITOSTUDIOHABITOSTUDIOHABITOSTUDIO</span>
+      <span class="mq-item">HABITOSTUDIOHABITOSTUDIOHABITOSTUDIO</span>
+    </div>
+  </div>
+
+  <div class="about-wrap">
+    <div class="about-col">
+      <div class="about-block rv">
+        <div class="about-label">About Us</div>
+        <p class="about-copy">At Habito Studio, we're not just a design team — we're your creative partners. We help brands grow with smart, consistent, and purpose-driven design. From startups to scale-ups, our subscription-based model gives you the flexibility to get top-tier branding without the traditional agency fuss.</p>
+      </div>
+      <div class="about-block rv rv-d1">
+        <div class="about-label">Our Mission</div>
+        <p class="about-copy">We believe great design is not just about how it looks — it's about how it works. That's why we take the time to understand your business, your goals, and your audience, delivering visual systems that are as strategic as they are stunning. <b>Build for brands that move fast, think big, and value thoughtful design.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SELECTED WORKS ===================== -->
+<section class="works" id="works" data-nav="light">
+  <div class="works-pin">
+    <div class="works-title-wrap">
+      <h2 class="works-title rv">Selected works<br>(2023&ndash;2026)</h2>
+    </div>
+  </div>
+
+  <div class="works-grid">
+    <div class="wrow wrow-1">
+      <!-- Hapvel -->
+      <a class="wcard rv" href="#works">
+        <div class="wmeta"><span>Hapvel</span><span>(2026)</span></div>
+        <div class="wshot r1a">
+          <svg viewBox="0 0 356 330" preserveAspectRatio="xMidYMid slice">
+            <rect width="356" height="330" fill="#2A45DF"/>
+            <ellipse cx="178" cy="300" rx="200" ry="80" fill="#1F35B8" opacity=".6"/>
+            <rect x="96" y="92" width="164" height="176" rx="6" fill="#3C5BF2"/>
+            <rect x="96" y="92" width="164" height="176" rx="6" fill="url(#hapShade)"/>
+            <linearGradient id="hapShade" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ffffff" stop-opacity=".16"/><stop offset="46%" stop-color="#ffffff" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#000000" stop-opacity=".18"/>
+            </linearGradient>
+            <path d="M96 92h164v14H96z" fill="#1B2FA8" opacity=".55"/>
+            <g fill="#fff">
+              <path d="M132 168c0-9.4 7.2-16.6 16.4-16.6s16.4 7.2 16.4 16.6-7.2 16.6-16.4 16.6S132 177.4 132 168Zm10.4 0c0 3.6 2.6 6.2 6 6.2s6-2.6 6-6.2-2.6-6.2-6-6.2-6 2.6-6 6.2Z"/>
+              <path d="M170 151.9h9.8v3.4c2.1-2.6 5.2-4 8.9-4 8.6 0 14.8 7 14.8 16.7 0 9.7-6.2 16.7-14.8 16.7-3.5 0-6.5-1.3-8.6-3.6v14.8H170v-44Zm10 16.1c0 3.7 2.5 6.3 6 6.3s6-2.6 6-6.3-2.5-6.3-6-6.3-6 2.6-6 6.3Z"/>
+              <path d="M206.4 151.9h10.9l6.1 19.1 6.1-19.1h10.7l-12.7 34.6h-8.5l-12.6-34.6Z"/>
+            </g>
+            <g fill="#E8B48E">
+              <path d="M52 232c14-22 34-30 52-24l10 30-40 34c-14-10-26-24-22-40Z"/>
+              <path d="M258 116c18-14 42-12 52 4l-22 30-38-10 8-24Z" opacity=".95"/>
+            </g>
+            <path d="M62 246c10-8 22-12 34-10" stroke="#C9895D" stroke-width="3" fill="none" opacity=".5"/>
+          </svg>
+        </div>
+      </a>
+      <!-- Kruspi -->
+      <a class="wcard rv rv-d1" href="#works">
+        <div class="wmeta"><span>Kruspi</span><span>(2026)</span></div>
+        <div class="wshot r1b">
+          <svg viewBox="0 0 274 348" preserveAspectRatio="xMidYMid slice">
+            <rect width="274" height="348" fill="#F3E7D4"/>
+            <rect x="-20" y="18" width="150" height="120" rx="4" fill="#F07C1E" transform="rotate(-7 55 78)"/>
+            <rect x="118" y="8" width="130" height="112" rx="4" fill="#1C1A17" transform="rotate(5 183 64)"/>
+            <text x="150" y="70" font-family="Arial Black, Arial" font-size="26" fill="#F5C77E" transform="rotate(5 183 64)">Kruspi</text>
+            <rect x="10" y="140" width="118" height="112" rx="4" fill="#FFF6E7" transform="rotate(4 69 196)"/>
+            <text x="26" y="200" font-family="Arial Black, Arial" font-size="22" fill="#F07C1E" transform="rotate(4 69 196)">Kru</text>
+            <rect x="140" y="128" width="128" height="128" rx="4" fill="#D9541B" transform="rotate(-6 204 192)"/>
+            <circle cx="204" cy="192" r="34" fill="#F9D9A8" transform="rotate(-6 204 192)"/>
+            <rect x="-6" y="256" width="140" height="106" rx="4" fill="#2C2A25" transform="rotate(-4 64 309)"/>
+            <rect x="150" y="266" width="124" height="98" rx="4" fill="#F5B733" transform="rotate(6 212 315)"/>
+            <g opacity=".85">
+              <circle cx="66" cy="308" r="20" fill="#F07C1E"/>
+              <path d="M46 308h40M66 288v40" stroke="#2C2A25" stroke-width="3"/>
+            </g>
+            <rect x="86" y="118" width="96" height="70" rx="3" fill="#fff" transform="rotate(-14 134 153)"/>
+            <text x="98" y="160" font-family="Georgia, serif" font-size="17" fill="#1C1A17" transform="rotate(-14 134 153)">crisp.</text>
+          </svg>
+        </div>
+      </a>
+      <!-- Tustee -->
+      <a class="wcard rv rv-d2" href="#works">
+        <div class="wmeta"><span>Tustee</span><span>(2025)</span></div>
+        <div class="wshot r1c">
+          <svg viewBox="0 0 630 594" preserveAspectRatio="xMidYMid slice">
+            <rect width="630" height="594" fill="#2B3FE0"/>
+            <rect y="0" width="630" height="594" fill="url(#tuBg)"/>
+            <linearGradient id="tuBg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#3A50F0"/><stop offset="100%" stop-color="#1C2BB4"/>
+            </linearGradient>
+            <text x="300" y="130" font-family="Helvetica Neue, Arial" font-size="42" fill="#fff" letter-spacing="-1.6">Smarter Spending</text>
+            <text x="300" y="180" font-family="Helvetica Neue, Arial" font-size="42" fill="#fff" letter-spacing="-1.6">Starts Here</text>
+            <text x="556" y="126" font-family="Helvetica Neue, Arial" font-size="19" fill="#fff" opacity=".85">Tustee</text>
+            <g>
+              <path d="M60 300 330 250v250L60 560Z" fill="#4258F5"/>
+              <path d="M330 250l240 44v238l-240-32Z" fill="#2233C8"/>
+              <path d="M330 250l240 44-40 10-200-38Z" fill="#5A6DFF" opacity=".55"/>
+              <rect x="110" y="330" width="180" height="112" rx="10" fill="#EDEFFF" transform="skewY(-4.2)"/>
+              <rect x="126" y="356" width="42" height="30" rx="5" fill="#C9CFF7" transform="skewY(-4.2)"/>
+              <rect x="126" y="404" width="106" height="9" rx="4" fill="#B9C0EE" transform="skewY(-4.2)"/>
+              <text x="228" y="418" font-family="Helvetica Neue, Arial" font-size="17" font-style="italic" font-weight="bold" fill="#2B3FE0" transform="skewY(-4.2)">VISA</text>
+              <text x="380" y="470" font-family="Arial Black, Arial" font-size="46" fill="#EDEFFF" transform="rotate(4 380 470)">Tustee</text>
+            </g>
+            <circle cx="566" cy="486" r="120" fill="#5A6DFF" opacity=".18"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+
+    <div class="wrow wrow-2">
+      <!-- Padelhub -->
+      <a class="wcard rv" href="#works">
+        <div class="wmeta"><span>Padelhub</span><span>(2026)</span></div>
+        <div class="wshot r2a">
+          <svg viewBox="0 0 540 348" preserveAspectRatio="xMidYMid slice">
+            <rect width="540" height="348" fill="#24404E"/>
+            <rect width="540" height="348" fill="url(#pdG)"/>
+            <linearGradient id="pdG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#33566A"/><stop offset="100%" stop-color="#1B303C"/>
+            </linearGradient>
+            <g stroke="#8FA6B2" stroke-width="1" opacity=".42">
+              <path d="M0 210h540M0 236h540M0 262h540M0 288h540M0 314h540M0 340h540"/>
+              <path d="M40 196v160M80 196v160M120 196v160M160 196v160M200 196v160M240 196v160M280 196v160M320 196v160M360 196v160M400 196v160M440 196v160M480 196v160M520 196v160"/>
+            </g>
+            <rect x="0" y="190" width="540" height="4" fill="#DCE6EA" opacity=".85"/>
+            <text x="150" y="128" font-family="Georgia, serif" font-style="italic" font-size="52" fill="#F2F6F7">Padelhub</text>
+            <path d="M150 142c60 10 190 10 246 0" stroke="#F2F6F7" stroke-width="2" fill="none" opacity=".7"/>
+            <circle cx="470" cy="86" r="26" fill="#C8EF3F" opacity=".9"/>
+            <path d="M456 86c8-9 20-9 28 0M456 86c8 9 20 9 28 0" stroke="#24404E" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      </a>
+      <!-- Osuka -->
+      <a class="wcard rv rv-d1" href="#works">
+        <div class="wmeta"><span>Osuka</span><span>(2026)</span></div>
+        <div class="wshot r2b">
+          <svg viewBox="0 0 266 348" preserveAspectRatio="xMidYMid slice">
+            <rect width="266" height="348" fill="#7FB2E8"/>
+            <rect width="266" height="348" fill="url(#osG)"/>
+            <linearGradient id="osG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#9CCBF5"/><stop offset="100%" stop-color="#5C93D6"/>
+            </linearGradient>
+            <ellipse cx="120" cy="330" rx="150" ry="120" fill="#E9C9A6"/>
+            <path d="M64 348c0-64 26-108 68-108s68 44 68 108Z" fill="#2E2A26"/>
+            <ellipse cx="132" cy="212" rx="46" ry="52" fill="#C98F63"/>
+            <path d="M86 196c4-34 26-52 46-52s42 18 46 52c-14-14-30-20-46-20s-32 6-46 20Z" fill="#231F1C"/>
+            <rect x="176" y="150" width="52" height="112" rx="10" fill="#F2801F"/>
+            <rect x="176" y="150" width="52" height="30" rx="10" fill="#FFB04D"/>
+            <rect x="186" y="196" width="32" height="42" rx="4" fill="#FFF0DC" opacity=".9"/>
+            <text x="192" y="222" font-family="Arial Black, Arial" font-size="11" fill="#F2801F">OSU</text>
+            <path d="M170 232c22 10 34 26 34 44" stroke="#C98F63" stroke-width="16" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </a>
+      <!-- Arvela -->
+      <a class="wcard rv rv-d2" href="#works">
+        <div class="wmeta"><span>Arvela</span><span>(2026)</span></div>
+        <div class="wshot r2c">
+          <svg viewBox="0 0 336 322" preserveAspectRatio="xMidYMid slice">
+            <rect width="336" height="322" fill="#E4DCCE"/>
+            <ellipse cx="168" cy="330" rx="220" ry="150" fill="#D6CBB8"/>
+            <path d="M40 322c0-70 30-116 74-116s74 46 74 116Z" fill="#3C3A36"/>
+            <ellipse cx="114" cy="176" rx="42" ry="48" fill="#C79E7C"/>
+            <path d="M72 162c2-32 22-50 42-50s40 18 42 50c-12-16-26-22-42-22s-30 6-42 22Z" fill="#26231F"/>
+            <path d="M160 322c0-64 28-106 68-106s68 42 68 106Z" fill="#8F8474"/>
+            <ellipse cx="228" cy="188" rx="38" ry="44" fill="#DDB894"/>
+            <path d="M190 176c2-30 20-46 38-46s36 16 38 46c-10-14-24-20-38-20s-28 6-38 20Z" fill="#4A3A2C"/>
+            <text x="132" y="88" font-family="Georgia, serif" font-style="italic" font-size="42" fill="#2A2723">Arvela</text>
+            <text x="140" y="108" font-family="Helvetica Neue, Arial" font-size="9" letter-spacing="2.6" fill="#2A2723">ALBERT HENSKY</text>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MVP (BLACK) ===================== -->
+<section class="mvp" data-nav="dark">
+  <div class="mvp-panel" id="mvpPanel">
+    <h2 class="mvp-h rv">We build branding <span class="chip"></span> for your MVP</h2>
+  </div>
+
+  <div class="mvp-points">
+    <div class="pt rv">
+      <div class="pt-n">(01)</div>
+      <div>
+        <div class="pt-t">Fast-track your MVP with seamless branding</div>
+        <p class="pt-d">We help you launch with a strong visual identity from day one. Logo, UI/UX, and brand elements are crafted to reflect your product's essence. Quick execution without sacrificing quality.</p>
+      </div>
+    </div>
+    <div class="pt rv rv-d1">
+      <div class="pt-n">(02)</div>
+      <div>
+        <div class="pt-t">Designed for startups, built to scale</div>
+        <p class="pt-d">Our branding approach grows with you — from MVP to full-scale launch. With flexible plans and scalable design systems, your brand is never boxed in by early limitations.</p>
+      </div>
+    </div>
+    <div class="pt rv rv-d2">
+      <div class="pt-n">(03)</div>
+      <div>
+        <div class="pt-t">All-in-one creative partner for your MVP</div>
+        <p class="pt-d">Logo, UI/UX, motion, and illustration — all done by one unified team. No need to manage multiple freelancers or vendors. You focus on the product, we handle the visuals.</p>
+      </div>
+    </div>
+    <div class="pt rv rv-d3">
+      <div class="pt-n">(04)</div>
+      <div>
+        <div class="pt-t">Fast turnaround, on your timeline</div>
+        <p class="pt-d">We understand startup timelines — our Business Plan guarantees execution within a month. Get investor-ready designs and presentation-friendly assets to confidently pitch your MVP.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="services" id="services" data-nav="light">
+  <div class="mq-track">
+    <div class="mq anim-r">
+      <span class="mq-item">SERVICES
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+      <span class="mq-item">SERVICES
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+      <span class="mq-item">SERVICES
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+      <span class="mq-item">SERVICES
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+    </div>
+  </div>
+
+  <div class="svc-cards">
+    <div class="svc rv">
+      <h3>Graphic &amp;<br>Branding Design</h3>
+      <ul>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Logo Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Brand Guidelines</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Brand Implementation</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Stationary Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Pitch Deck Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Icon Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Infographic Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Social Media Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Print Design</li>
+      </ul>
+    </div>
+
+    <div class="svc rv rv-d1">
+      <h3>Illustration &amp;<br>Motion Graphic</h3>
+      <ul>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>2D Illustration</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Character Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Mascot Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Isometric Illustration</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Digital Painting</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Logo Animation</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>2D Animation</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Digital Media Animation</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Pitch Deck Animation</li>
+      </ul>
+    </div>
+
+    <div class="svc rv rv-d2">
+      <h3>UIUX<br>Design</h3>
+      <ul>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Mobile App Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Dashboard Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Responsive Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Design System</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>UX Design</li>
+        <li><svg class="tick" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#C8EF3F"/><path d="M5.6 10.3l2.9 2.9 5.9-5.9" stroke="#0B0B0B" stroke-width="1.6" fill="none"/></svg>Information Architecture</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== UNLOCKING THE POWER ===================== -->
+<section class="power" id="pricing" data-nav="light">
+  <h2 class="rv">Unlocking the power of design for your business</h2>
+  <div class="pgrid">
+    <div class="pcard rv" style="--tint:rgba(200,239,63,.19)">
+      <div class="pcard-ico">
+        <svg viewBox="0 0 120 130"><path d="M70 6 24 72h30l-12 52 54-72H64l6-46Z" fill="url(#gLimeIco)"/><path d="M70 6 24 72h30" fill="none"/></svg>
+      </div>
+      <h4>Powerful<br>Design Teams</h4>
+      <p>We are always motivated to learn, adapt, and innovate. Driven to continue moving forward together to explore design further.</p>
+    </div>
+    <div class="pcard rv rv-d1" style="--tint:rgba(247,155,51,.19)">
+      <div class="pcard-ico">
+        <svg viewBox="0 0 120 130"><path d="M22 100c22-8 8-38 30-46s16-40 42-44" stroke="url(#gOrangeIco)" stroke-width="24" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Unlimited<br>Design Request</h4>
+      <p>Access a continuous flow of creativity without limits, ensuring your brand always has fresh and engaging designs.</p>
+    </div>
+    <div class="pcard rv rv-d2" style="--tint:rgba(200,239,63,.19)">
+      <div class="pcard-ico">
+        <svg viewBox="0 0 120 130"><path d="M20 24h78L54 116" stroke="url(#gLimeIco)" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Unlimited<br>Revisions</h4>
+      <p>Refine your vision until it's perfect — our commitment to unlimited revisions means your satisfaction is guaranteed.</p>
+    </div>
+    <div class="pcard rv" style="--tint:rgba(247,155,51,.19)">
+      <div class="pcard-ico">
+        <svg viewBox="0 0 120 130"><path d="M46 12h28v34h34v28H74v34H46V74H12V46h34V12Z" fill="url(#gOrangeIco)"/></svg>
+      </div>
+      <h4>Easy<br>Communication</h4>
+      <p>Stay connected with our team effortlessly, ensuring your ideas and feedback are always heard and implemented.</p>
+    </div>
+    <div class="pcard rv rv-d1" style="--tint:rgba(200,239,63,.19)">
+      <div class="pcard-ico">
+        <svg viewBox="0 0 120 130"><g stroke="url(#gLimeIco)" stroke-width="20" stroke-linecap="round"><path d="M60 16v98M18 40l84 50M102 40l-84 50"/></g></svg>
+      </div>
+      <h4>No Contract,<br>No Fuss</h4>
+      <p>Enjoy flexibility with our straightforward approach — no long-term commitments or complicated agreements.</p>
+    </div>
+    <div class="pcard rv rv-d2" style="--tint:rgba(247,155,51,.19)">
+      <div class="pcard-ico">
+        <svg viewBox="0 0 120 130"><g fill="url(#gOrangeIco)"><circle cx="60" cy="36" r="28"/><circle cx="60" cy="92" r="28"/><circle cx="32" cy="64" r="28"/><circle cx="88" cy="64" r="28"/></g></svg>
+      </div>
+      <h4>Fixed Monthly<br>Rates</h4>
+      <p>Predictable pricing that allows you to budget effectively while accessing unlimited design services.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OUR PARTNER SAYS ===================== -->
+<section class="partner" data-nav="light">
+  <h2 class="rv">Our Partner Says</h2>
+  <div class="acc" id="acc">
+
+    <div class="acc-row open">
+      <button class="acc-head">
+        <span class="acc-num">(01)</span>
+        <span class="acc-name"><span class="dot" style="background:#5B3BD6">B</span>Hugo Cortez</span>
+        <span class="acc-comp">Blomer</span>
+        <span class="acc-year">2023</span>
+        <span class="acc-btn"><svg viewBox="0 0 18 18" fill="none"><path d="M9 15V3M3.6 8.4 9 3l5.4 5.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-cols">
+        <div class="c2">
+          <div class="acc-sub">Feedback</div>
+          <p class="acc-quote">Working with Habito Studio has elevated our projects to a whole new level. Their expertise in Branding and UX/UI Design is unparalleled. They have a unique ability to bring a brand's vision to life, creating intuitive and aesthetically pleasing designs that resonate with our audience. Their dedication and attention to detail have made every collaboration a success.</p>
+        </div>
+        <div class="c3">
+          <div class="acc-sub">Services</div>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Pitch Deck</span><span class="tag">Website</span><span class="tag">Development</span></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-row">
+      <button class="acc-head">
+        <span class="acc-num">(02)</span>
+        <span class="acc-name">Antonio R.</span>
+        <span class="acc-comp">Solventlife</span>
+        <span class="acc-year">2025</span>
+        <span class="acc-btn"><svg viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3.6 9.6 9 15l5.4-5.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-cols">
+        <div class="c2">
+          <div class="acc-sub">Feedback</div>
+          <p class="acc-quote">The team translated a complex product into a clear, confident brand system. Every deliverable arrived on time and the quality never dipped across the engagement.</p>
+        </div>
+        <div class="c3">
+          <div class="acc-sub">Services</div>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Design System</span><span class="tag">Website</span></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-row">
+      <button class="acc-head">
+        <span class="acc-num">(03)</span>
+        <span class="acc-name">Fazil</span>
+        <span class="acc-comp">Uneek Clothing</span>
+        <span class="acc-year">2024</span>
+        <span class="acc-btn"><svg viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3.6 9.6 9 15l5.4-5.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-cols">
+        <div class="c2">
+          <div class="acc-sub">Feedback</div>
+          <p class="acc-quote">Habito gave our label an identity that finally matches the product. The rollout across packaging and social was seamless, and the revisions were genuinely unlimited.</p>
+        </div>
+        <div class="c3">
+          <div class="acc-sub">Services</div>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Print Design</span><span class="tag">Social Media</span></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-row">
+      <button class="acc-head">
+        <span class="acc-num">(04)</span>
+        <span class="acc-name">Rico</span>
+        <span class="acc-comp">Melanin Doctor</span>
+        <span class="acc-year">2023</span>
+        <span class="acc-btn"><svg viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3.6 9.6 9 15l5.4-5.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-cols">
+        <div class="c2">
+          <div class="acc-sub">Feedback</div>
+          <p class="acc-quote">A calm, structured process from kickoff to handoff. The brand guidelines they delivered are still the single source of truth for our whole team.</p>
+        </div>
+        <div class="c3">
+          <div class="acc-sub">Services</div>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Brand Guidelines</span><span class="tag">Illustration</span></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-row">
+      <button class="acc-head">
+        <span class="acc-num">(05)</span>
+        <span class="acc-name">Jonathan</span>
+        <span class="acc-comp">Hexadaya Solution</span>
+        <span class="acc-year">2023</span>
+        <span class="acc-btn"><svg viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3.6 9.6 9 15l5.4-5.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-cols">
+        <div class="c2">
+          <div class="acc-sub">Feedback</div>
+          <p class="acc-quote">We needed investor-ready material fast. Habito turned a rough deck into a story that closed our round — sharp, considered, and completely on brand.</p>
+        </div>
+        <div class="c3">
+          <div class="acc-sub">Services</div>
+          <div class="tags"><span class="tag">Pitch Deck</span><span class="tag">Branding</span><span class="tag">Website</span></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-row">
+      <button class="acc-head">
+        <span class="acc-num">(06)</span>
+        <span class="acc-name">Wael Amor</span>
+        <span class="acc-comp">Al furqon</span>
+        <span class="acc-year">2023</span>
+        <span class="acc-btn"><svg viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3.6 9.6 9 15l5.4-5.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-cols">
+        <div class="c2">
+          <div class="acc-sub">Feedback</div>
+          <p class="acc-quote">Thoughtful designers who ask the right questions first. The identity feels timeless and it works just as well in print as it does on screen.</p>
+        </div>
+        <div class="c3">
+          <div class="acc-sub">Services</div>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Icon Design</span><span class="tag">Print Design</span></div>
+        </div>
+      </div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== LOGO MARQUEE ===================== -->
+<section class="logos" data-nav="light">
+  <div class="logo-strip">
+    <div class="logo-row anim-l" id="logoRowA"></div>
+  </div>
+  <div class="logo-strip">
+    <div class="logo-row anim-r" id="logoRowB"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot" id="careers" data-nav="light">
+  <div class="mq-track">
+    <div class="mq anim-l">
+      <span class="mq-item">HABITOSTUDIO
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+      <span class="mq-item">HABITOSTUDIO
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+      <span class="mq-item">HABITOSTUDIO
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+      <span class="mq-item">HABITOSTUDIO
+        <svg class="svc-clover" viewBox="0 0 100 100"><g fill="url(#gClover)"><circle cx="50" cy="27" r="24"/><circle cx="50" cy="73" r="24"/><circle cx="27" cy="50" r="24"/><circle cx="73" cy="50" r="24"/></g></svg>
+      </span>
+    </div>
+  </div>
+
+  <div class="foot-main">
+    <div>
+      <p class="foot-cta">Choose a plan, send in your request, and your design journey starts tomorrow.</p>
+      <a class="arrow-link" href="#pricing">Explore Plans
+        <svg viewBox="0 0 18 12" fill="none"><path d="M0 6h16M11 1l5 5-5 5" stroke="currentColor" stroke-width="1.2"/></svg>
+      </a>
+    </div>
+    <div class="foot-right">
+      <div class="foot-links">
+        <a href="#top">Home</a><a href="#services">How it works</a><a href="#">Social Media</a>
+        <a href="#about">About</a><a href="#pricing">Pricing</a><a href="#">Dribbble</a>
+        <a href="#works">Our Works</a><a href="#">Privacy Policy</a><a href="#">Behance</a>
+        <a href="#services">Services</a><a href="#">Terms &amp; Condition</a><a href="#">Instagram</a>
+      </div>
+      <a class="arrow-link" href="#top" id="toTop">Back to Top
+        <svg viewBox="0 0 12 18" fill="none" style="width:11px"><path d="M6 17V2M1 7l5-5 5 5" stroke="currentColor" stroke-width="1.2"/></svg>
+      </a>
+      <svg class="badge" viewBox="0 0 100 128" fill="none">
+        <path d="M4 4h92v92L50 124 4 96V4Z" fill="#0B0B0B"/>
+        <circle cx="50" cy="24" r="7" stroke="#fff" stroke-width="1.4"/>
+        <path d="M44 24c4 1 9 4 12 8M50 17c-2 4-3 10-2 15" stroke="#fff" stroke-width="1"/>
+        <text x="50" y="62" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="21" fill="#fff">Dribbble</text>
+        <rect x="30" y="74" width="40" height="16" rx="2" fill="#fff"/>
+        <text x="50" y="86" text-anchor="middle" font-family="Helvetica Neue, Arial" font-size="9" letter-spacing="1.4" fill="#0B0B0B">SELECT</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="foot-bar">
+    <a class="deck" href="#">Company Deck
+      <span class="deck-ico"><svg viewBox="0 0 12 14" fill="none"><path d="M6 1v10M2 7.5 6 11.5 10 7.5" stroke="#0B0B0B" stroke-width="1.3"/></svg></span>
+    </a>
+    <div class="mid">All right reserved by Habito Studio, 2024</div>
+    <div class="rt">Powered by Hatypo Studio</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- CLIENT LOGO MARQUEE ---------- */
+  var LOGOS_A = [
+    '<svg viewBox="0 0 150 34"><circle cx="14" cy="17" r="11" fill="#111"/><path d="M9 15h10M9 19h7" stroke="#fff" stroke-width="1.6"/><text x="32" y="24" font-family="Georgia, serif" font-size="19" fill="#111">Hyllo</text></svg>',
+    '<svg viewBox="0 0 150 34"><text x="12" y="25" font-family="Arial Black, Arial" font-size="21" letter-spacing="-1" fill="#111">uneek</text></svg>',
+    '<svg viewBox="0 0 150 34"><rect x="10" y="8" width="18" height="18" rx="3" fill="#111"/><path d="M15 8v18M22 8v18M10 15h18" stroke="#fff" stroke-width="1.4"/><text x="36" y="25" font-family="Helvetica Neue, Arial" font-size="19" font-weight="bold" letter-spacing="-.8" fill="#111">bridge</text></svg>',
+    '<svg viewBox="0 0 150 34"><path d="M20 6c-8 4-11 12-8 18 5 4 13 1 16-6 2-6-1-11-8-12Z" fill="#111"/><text x="40" y="24" font-family="Helvetica Neue, Arial" font-size="16" font-weight="bold" letter-spacing="1" fill="#111">SAHLAH</text></svg>',
+    '<svg viewBox="0 0 150 34"><circle cx="18" cy="17" r="11" fill="#5B3BD6"/><text x="13" y="23" font-family="Arial Black, Arial" font-size="14" fill="#fff">B</text><text x="36" y="24" font-family="Georgia, serif" font-size="19" fill="#111">Blomer</text></svg>',
+    '<svg viewBox="0 0 150 34"><path d="M8 26a10 10 0 0 1 20 0Z" fill="#111"/><circle cx="18" cy="10" r="5" fill="#111"/><text x="36" y="24" font-family="Helvetica Neue, Arial" font-size="19" font-weight="bold" letter-spacing="-.6" fill="#111">hamlet</text></svg>',
+    '<svg viewBox="0 0 150 34"><circle cx="17" cy="17" r="11" fill="#111"/><circle cx="17" cy="17" r="4" fill="#fff"/><text x="36" y="24" font-family="Helvetica Neue, Arial" font-size="19" font-weight="bold" letter-spacing="-.6" fill="#111">Omoc</text></svg>'
+  ];
+  var LOGOS_B = [
+    '<svg viewBox="0 0 150 34"><text x="8" y="24" font-family="Georgia, serif" font-size="17" fill="#111">Melanin Doctor</text></svg>',
+    '<svg viewBox="0 0 150 34"><path d="M18 6c8 0 12 6 12 11s-5 11-12 11S6 22 6 17" stroke="#111" stroke-width="2.4" fill="none"/><text x="38" y="24" font-family="Helvetica Neue, Arial" font-size="18" font-weight="bold" letter-spacing="1" fill="#111">HDS</text></svg>',
+    '<svg viewBox="0 0 150 34"><rect x="8" y="9" width="16" height="16" rx="4" fill="#111"/><path d="M12 17h8M16 13v8" stroke="#fff" stroke-width="1.6"/><text x="30" y="24" font-family="Helvetica Neue, Arial" font-size="15" font-weight="bold" letter-spacing="-.4" fill="#111">axcel.partners</text></svg>',
+    '<svg viewBox="0 0 150 34"><path d="M12 26a10 10 0 0 1 20 0Z" fill="#111"/><circle cx="22" cy="10" r="5" fill="#111"/><text x="40" y="24" font-family="Helvetica Neue, Arial" font-size="19" font-weight="bold" letter-spacing="-.6" fill="#111">hamlet</text></svg>',
+    '<svg viewBox="0 0 150 34"><circle cx="17" cy="17" r="11" fill="#111"/><path d="M12 17h10" stroke="#fff" stroke-width="1.8"/><text x="36" y="23" font-family="Georgia, serif" font-size="15" fill="#111">SolventLife</text></svg>',
+    '<svg viewBox="0 0 150 34"><circle cx="17" cy="17" r="11" fill="#111"/><circle cx="17" cy="17" r="4" fill="#fff"/><text x="36" y="24" font-family="Helvetica Neue, Arial" font-size="19" font-weight="bold" letter-spacing="-.6" fill="#111">Omoc</text></svg>',
+    '<svg viewBox="0 0 150 34"><circle cx="14" cy="17" r="11" fill="#111"/><path d="M9 15h10M9 19h7" stroke="#fff" stroke-width="1.6"/><text x="32" y="24" font-family="Georgia, serif" font-size="19" fill="#111">Hyllo</text></svg>'
+  ];
+  function fillRow(el, list, reps){
+    if(!el) return;
+    var html = "";
+    for(var r=0;r<reps;r++){
+      for(var i=0;i<list.length;i++){
+        html += '<div class="logo-cell">'+list[i]+'</div>';
+      }
+    }
+    /* duplicated once more for a seamless -50% loop */
+    el.innerHTML = html + html;
+  }
+  fillRow(document.getElementById('logoRowA'), LOGOS_A, 2);
+  fillRow(document.getElementById('logoRowB'), LOGOS_B, 2);
+
+  /* ---------- REVEAL ON SCROLL ---------- */
+  var reveals = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{rootMargin:'0px 0px -9% 0px',threshold:0.06});
+    for(var i=0;i<reveals.length;i++) io.observe(reveals[i]);
+  } else {
+    for(var j=0;j<reveals.length;j++) reveals[j].classList.add('in');
+  }
+
+  /* ---------- HEADER: HIDE ON SCROLL DOWN + THEME SWITCH ---------- */
+  var head = document.getElementById('head');
+  var last = 0, ticking = false;
+  var themed = document.querySelectorAll('[data-nav]');
+
+  function currentTheme(){
+    var y = window.scrollY + 46;
+    var theme = 'light';
+    for(var k=0;k<themed.length;k++){
+      var r = themed[k].getBoundingClientRect();
+      var top = r.top + window.scrollY;
+      if(y >= top && y < top + r.height){ theme = themed[k].getAttribute('data-nav'); }
+    }
+    return theme;
+  }
+
+  function onScroll(){
+    var y = window.scrollY;
+    if(y > last && y > 220){ head.classList.add('hidden'); }
+    else { head.classList.remove('hidden'); }
+    last = y;
+    if(currentTheme() === 'dark'){ head.classList.add('on-dark'); }
+    else { head.classList.remove('on-dark'); }
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+  }, {passive:true});
+  onScroll();
+
+  /* ---------- MVP PANEL SCROLL SCRUB ---------- */
+  var panel = document.getElementById('mvpPanel');
+  function scrub(){
+    if(!panel) return;
+    var r = panel.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var p = 1 - Math.min(Math.max((r.top) / vh, 0), 1);   /* 0 -> 1 as it enters */
+    var s = 0.955 + (0.045 * p);
+    panel.style.transform = 'scale(' + s.toFixed(4) + ')';
+  }
+  window.addEventListener('scroll', function(){ window.requestAnimationFrame(scrub); }, {passive:true});
+  window.addEventListener('resize', scrub);
+  scrub();
+
+  /* ---------- ACCORDION ---------- */
+  var acc = document.getElementById('acc');
+  if(acc){
+    acc.addEventListener('click', function(ev){
+      var btn = ev.target.closest('.acc-head');
+      if(!btn) return;
+      var row = btn.parentNode;
+      var isOpen = row.classList.contains('open');
+      var rows = acc.querySelectorAll('.acc-row');
+      for(var i=0;i<rows.length;i++){
+        rows[i].classList.remove('open');
+        var ic = rows[i].querySelector('.acc-btn svg path');
+        if(ic) ic.setAttribute('d','M9 3v12M3.6 9.6 9 15l5.4-5.4');
+      }
+      if(!isOpen){
+        row.classList.add('open');
+        var icon = row.querySelector('.acc-btn svg path');
+        if(icon) icon.setAttribute('d','M9 15V3M3.6 8.4 9 3l5.4 5.4');
+      }
+    });
+  }
+
+  /* ---------- SMOOTH ANCHORS ---------- */
+  document.addEventListener('click', function(ev){
+    var a = ev.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id = a.getAttribute('href');
+    if(id === '#' ) return;
+    var t = document.querySelector(id);
+    if(!t) return;
+    ev.preventDefault();
+    window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY, behavior:'smooth'});
+  });
+
+})();
+</script>
+</body>
+</html>
