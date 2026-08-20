@@ -165,6 +165,97 @@ def run_pair(pair_id: str, models=("claude", "codex"), prompt_path=None):
     return pair
 
 
+def run_side(pair_id: str, model: str):
+    pairs = load_pairs(ROOT / "data/prompts/pairs.json")
+
+    if pair_id not in pairs:
+        raise KeyError(pair_id)
+
+    if model not in ("claude", "codex"):
+        raise ValueError("model must be claude or codex")
+
+    pair = pairs[pair_id]
+
+    key = "A" if model == "claude" else "B"
+    out = pair.outputs[key]
+
+    workspace = WORKSPACE_ROOT / pair_id / key
+
+    # Preserve the opposite side completely.
+    if workspace.exists():
+        shutil.rmtree(workspace)
+
+    workspace.mkdir(parents=True)
+
+    prompt_file = workspace / "prompt.md"
+    prompt_file.write_text(pair.prompt, encoding="utf-8")
+
+    input_root = ROOT / "data/inputs" / pair.reference_input_dir
+
+    if not input_root.exists():
+        raise RuntimeError(
+            f"Missing reference input directory: {input_root}"
+        )
+
+    staged = workspace / "reference_inputs"
+    shutil.copytree(input_root, staged, dirs_exist_ok=True)
+
+    manifest = {
+        "pair_id": pair_id,
+        "prompt_file": "prompt.md",
+        "reference_root": "reference_inputs",
+        "source_reference_dir": str(input_root),
+        "files": [
+            {
+                "filename": f.name,
+                "size_bytes": f.stat().st_size,
+            }
+            for f in sorted(staged.iterdir())
+            if f.is_file()
+        ],
+    }
+
+    (workspace / "input_manifest.json").write_text(
+        json.dumps(manifest, indent=2),
+        encoding="utf-8",
+    )
+
+    out.workspace = str(workspace)
+
+    adapter = get_adapter(model)
+
+    if not adapter.available():
+        out.status = "MODEL_UNAVAILABLE"
+        save_pairs(pairs)
+        return pair
+
+    try:
+        adapter.generate(pair.prompt, workspace, prompt_file)
+        detect_and_build(workspace)
+
+        render_dir = publish_static(
+            pair_id,
+            key.lower(),
+            workspace,
+        )
+
+        out.source_path = str(render_dir)
+        out.render_url = f"/renders/{pair_id}/{key.lower()}/"
+        out.status = "READY_FOR_EVALUATION"
+        out.build_log = ""
+
+    except GenerationError as e:
+        out.status = "GENERATION_FAILED"
+        out.build_log = str(e)
+
+    except Exception as e:
+        out.status = "RENDER_FAILED"
+        out.build_log = str(e)
+
+    save_pairs(pairs)
+    return pair
+
+
 def demo():
     return run_pair(
         "sample_fluxboard_001",

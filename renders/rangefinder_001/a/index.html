@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rangefinder — For the miles between pictures</title>
+<meta name="description" content="Rangefinder makes camera bags, straps, rucksacks, outdoor apparel, albums and landscape prints for people who drive a long way in the dark to be somewhere at first light.">
+<!--
+DESIGN.MD — RANGEFINDER · "For the miles between pictures."
+BORROWED FROM REFERENCE: heavy uppercase serif display + tiny wide-tracked sans utility;
+uppercase headlines interrupted by a lowercase italic word ("CARRIED, not CURATED");
+desaturated field-olive / paper-cream / warm-black palette with one brass accent;
+editorial asymmetry (5/7 splits, bone cards hung off photographs, staggered grids);
+UI restraint (1px hairlines, ghost buttons, "label + detached arrow tile", underline tabs,
+no radius, no shadow); torn/deckle band edges; photography-first pacing; slow motion.
+COLOR ink #12130E · field #33351F · paper #EFE8DA · bone #FAF7F1 · brass #8A7C4E ·
+rust #9A5A33 (marginalia only: pins, coordinates, handwriting — never a button).
+TYPE display Hoefler Text/Georgia serif, uppercase, lh .95–1.06; italic accent lowercase
+.86em; body Iowan Old Style/Georgia 16–17px/1.62; utility Helvetica Neue uppercase
+10–11px / .2em; marginalia Bradley Hand in rust, rotated 2–3°.
+GRID max 1560, gutter clamp(20px,5vw,88px), splits 5/7 · 7/5 · 4·4·4 · 6·6 staggered,
+section padding clamp(80px,11vw,180px), cards overlap photos by -56 to -96px.
+PHOTOGRAPHY all imagery is originally composed inline SVG on one shared grain + grade
+filter stack. Subjects: loading the truck before dawn, thermos and fogged glass, pulled
+over on the shoulder, a rucksack on a guardrail, the 5:40 ferry in bad weather, an empty
+basalt road, a ridge at dawn with a tripod, coming home on headlights, an album open on
+the hood with a map, a contact sheet, buckle and webbing detail. Two grades: blue-hour
+marine and low warm amber. Products are IN the scene and worn; only the shop rail floats
+them, on a paper plate. Ephemera: contour maps, dashed routes, rust pins, coordinates,
+taped handwritten notes, deckled edges, sprocket strips.
+MOTION cubic-bezier(.22,.61,.36,1), 600–1200ms. Ken-burns 1.00→1.075/15s · 1400ms
+crossfade · clip-path headline reveal with line stagger · IntersectionObserver fade-up
+950ms/70ms stagger · rAF image parallax · hover scale 1.045 · sliding tab underline ·
+accordion 420ms · one 72s coordinate marquee. prefers-reduced-motion kills all of it.
+PAGE strip → nav → 3-slide hero → deckle → dark band + tabs → photo strip → deckle →
+cream "CARRIED, not CURATED" + staggered gear grid → full-bleed ferry + bone overlay card
+→ Field Notes → Coordinates → dark Print Room rail → Expeditions → quote → Dispatch →
+FAQ → footer.
+-->
+<style>
+:root{--ink:#12130E;--field:#33351F;--paper:#EFE8DA;--paper-2:#E4DCCB;--bone:#FAF7F1;--brass:#8A7C4E;--rust:#9A5A33;--slate:#5B6560;--bi:#4C4A40;--rule:rgba(18,19,14,.16);--rule2:rgba(18,19,14,.09);--rd:rgba(250,247,241,.18);--rd2:rgba(250,247,241,.09);--serif:"Hoefler Text","Playfair Display",Georgia,"Times New Roman",serif;--body:"Iowan Old Style",Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Inter,-apple-system,system-ui,Arial,sans-serif;--hand:"Bradley Hand","Segoe Script","Snell Roundhand","Apple Chancery",cursive;--gut:clamp(20px,5vw,88px);--max:1560px;--e:cubic-bezier(.22,.61,.36,1);--sec:clamp(80px,11vw,180px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--brass);color:var(--bone)}
+.dsp{font-family:var(--serif);font-weight:700;text-transform:uppercase;line-height:1;letter-spacing:.004em;margin:0}
+.dsp em{font-style:italic;text-transform:lowercase;font-weight:400;font-size:.86em}
+.h1{font-size:clamp(3rem,8.2vw,8.4rem);line-height:.95;letter-spacing:-.012em}
+.h2{font-size:clamp(2.1rem,4.6vw,4.3rem);line-height:1}
+.h3{font-size:clamp(1.5rem,2.5vw,2.4rem);line-height:1.06}
+.h4{font-size:clamp(1.02rem,1.35vw,1.42rem);line-height:1.14}
+.ov{font-family:var(--sans);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.26em;color:var(--slate);margin:0 0 22px}
+.ovd{color:rgba(250,247,241,.55)}.ovr{color:var(--rust)}
+.lede{font-size:clamp(1.02rem,1.28vw,1.22rem);line-height:1.62;color:var(--bi);margin:0}
+.p{font-size:16.2px;line-height:1.66;color:var(--bi);margin:0 0 18px}.p:last-child{margin-bottom:0}
+.pd{color:rgba(250,247,241,.66)}
+.meta{font-family:var(--sans);font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--slate)}
+.metad{color:rgba(250,247,241,.48)}
+.hand{font-family:var(--hand);color:var(--rust);font-size:17px;line-height:1.3}
+.coord{font-family:var(--sans);font-size:10px;letter-spacing:.16em;color:var(--rust);font-weight:600}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.sec{padding:var(--sec) 0;position:relative}
+.grid{display:grid;gap:clamp(24px,3vw,48px)}
+.g57{grid-template-columns:5fr 7fr}.g75{grid-template-columns:7fr 5fr}
+.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.dark{background:var(--ink);color:var(--bone)}.olive{background:var(--field);color:var(--bone)}
+hr.r{height:1px;background:var(--rule);border:0;margin:0}
+hr.rd{height:1px;background:var(--rd);border:0;margin:0}
+.frame{position:relative;overflow:hidden;background:#0d1116}
+.frame>svg{width:100%;height:100%;position:absolute;inset:0}
+.frame.par>svg{height:120%;top:-10%;will-change:transform}
+.r32{aspect-ratio:3/2}.r43{aspect-ratio:4/3}.r11{aspect-ratio:1/1}.r811{aspect-ratio:8/11}.r169{aspect-ratio:16/9}.r219{aspect-ratio:21/9}
+.scrim{position:absolute;inset:0;pointer-events:none}
+.sb{background:linear-gradient(to top,rgba(8,10,7,.76),rgba(8,10,7,.3) 36%,rgba(8,10,7,0) 68%)}
+.st{background:linear-gradient(to bottom,rgba(8,10,7,.48),rgba(8,10,7,0) 42%)}
+.zm svg{transition:transform 1200ms var(--e)}.zm:hover svg{transform:scale(1.045)}
+.btn{display:inline-flex;align-items:stretch;gap:6px;font-family:var(--sans)}
+.btn>.lb{position:relative;overflow:hidden;border:1px solid var(--rule);padding:14px 26px;font-size:10.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;line-height:1;display:flex;align-items:center;transition:color .38s var(--e),border-color .38s var(--e)}
+.btn>.lb span{position:relative;z-index:2}
+.btn>.lb:before{content:"";position:absolute;inset:0;background:var(--field);transform:scaleX(0);transform-origin:left;transition:transform .46s var(--e)}
+.btn>.ar{width:44px;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;transition:transform .46s var(--e),background .38s var(--e),border-color .38s var(--e)}
+.btn>.ar svg{width:13px;height:13px}
+.btn:hover>.lb{color:var(--bone);border-color:var(--field)}.btn:hover>.lb:before{transform:scaleX(1)}.btn:hover>.ar{transform:translateX(4px)}
+.bs>.lb{background:var(--field);color:var(--bone);border-color:var(--field)}.bs>.lb:before{background:var(--brass)}
+.bs>.ar{background:var(--field);border-color:var(--field);color:var(--bone)}.bs:hover>.ar{background:var(--brass);border-color:var(--brass)}
+.bl>.lb,.bl>.ar{border-color:var(--rd);color:var(--bone)}.bl>.lb:before{background:var(--bone)}
+.bl:hover>.lb{color:var(--ink);border-color:var(--bone)}.bl:hover>.ar{border-color:var(--bone)}
+.sm>.lb{padding:11px 20px;font-size:9.5px;letter-spacing:.2em}.sm>.ar{width:36px}.sm>.ar svg{width:11px;height:11px}
+.strip{background:var(--field);color:rgba(250,247,241,.8);font-family:var(--sans);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;height:32px;display:flex;align-items:center;justify-content:center;position:relative;z-index:60}
+.strip a{display:inline-flex;align-items:center;gap:10px}.strip svg{width:10px;height:10px}
+.nav{position:fixed;top:32px;left:0;right:0;z-index:50;border-bottom:1px solid transparent;transition:background .5s var(--e),border-color .5s var(--e),transform .5s var(--e)}
+.nav.solid{background:var(--ink);border-bottom-color:var(--rd2)}.nav.up{transform:translateY(-100%)}
+.navin{max-width:var(--max);margin:0 auto;padding:0 var(--gut);height:64px;display:flex;align-items:center;gap:clamp(18px,2.6vw,40px);color:var(--bone)}
+.mark{display:flex;align-items:center;gap:9px;flex:none}.mark svg{width:17px;height:17px}
+.mark b{font-family:var(--serif);font-weight:700;font-size:14.5px;letter-spacing:.17em;text-transform:uppercase}
+.nl{display:flex;gap:clamp(14px,1.9vw,30px);align-items:center}
+.nl a{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.19em;text-transform:uppercase;position:relative;padding:6px 0;color:rgba(250,247,241,.86);transition:color .3s var(--e)}
+.nl a:after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--bone);transform:scaleX(0);transform-origin:left;transition:transform .32s var(--e)}
+.nl a:hover{color:var(--bone)}.nl a:hover:after{transform:scaleX(1)}
+.nr{margin-left:auto;display:flex;align-items:center}
+.sep{width:1px;height:64px;background:var(--rd2)}
+.nsr{display:flex;align-items:center;gap:9px;padding:0 22px 0 0;color:rgba(250,247,241,.7);font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.nsr svg{width:12px;height:12px}
+.ncta{display:flex;align-items:center;gap:9px;padding:0 20px;height:64px;font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;line-height:1.25;transition:background .38s var(--e)}
+.ncta:hover{background:var(--brass)}.ncta svg{width:11px;height:11px;flex:none}
+.nic{width:52px;height:64px;display:flex;align-items:center;justify-content:center;color:rgba(250,247,241,.8);transition:color .3s var(--e)}
+.nic:hover{color:var(--bone)}.nic svg{width:14px;height:14px}
+.bg{display:none;width:40px;height:64px;align-items:center;justify-content:center}
+.bg i{display:block;width:19px;height:1px;background:var(--bone);position:relative}
+.bg i:before,.bg i:after{content:"";position:absolute;left:0;width:19px;height:1px;background:var(--bone)}
+.bg i:before{top:-6px}.bg i:after{top:6px}
+.hero{position:relative;height:100vh;min-height:640px;background:#0a0e12;overflow:hidden}
+.sl{position:absolute;inset:0;opacity:0;transition:opacity 1.4s var(--e)}.sl.on{opacity:1}
+.kb{position:absolute;inset:0}.sl.on .kb{animation:kb 15s linear forwards}
+@keyframes kb{from{transform:scale(1.001)}to{transform:scale(1.075)}}
+.hc{position:absolute;left:0;right:0;bottom:clamp(96px,13vh,150px);z-index:5}
+.hin{max-width:min(980px,76vw)}
+.hov{font-family:var(--sans);font-size:9.5px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,247,241,.72);margin:0 0 22px;display:flex;align-items:center;gap:14px}
+.hov b{color:#9D8F5D}.hov i{display:block;width:34px;height:1px;background:rgba(250,247,241,.45)}
+.hh{color:var(--bone);margin:0 0 26px}
+.hh .ln{display:block;overflow:hidden}
+.hh .ln>span{display:block;transform:translateY(102%);transition:transform 1s var(--e)}
+.sl.on .hh .ln>span{transform:translateY(0)}.sl.on .hh .ln:nth-child(2)>span{transition-delay:80ms}
+.hd{max-width:520px;color:rgba(250,247,241,.78);font-size:16.2px;line-height:1.62;margin:0 0 34px;opacity:0;transform:translateY(16px);transition:opacity .9s var(--e) .32s,transform .9s var(--e) .32s}
+.sl.on .hd{opacity:1;transform:none}
+.ha{opacity:0;transform:translateY(16px);transition:opacity .9s var(--e) .44s,transform .9s var(--e) .44s}
+.sl.on .ha{opacity:1;transform:none}
+.hui{position:absolute;left:0;right:0;bottom:38px;z-index:6}
+.hui .wrap{display:flex;align-items:center;gap:26px}
+.dots{display:flex;gap:8px}
+.dot{width:28px;height:2px;background:rgba(250,247,241,.28);position:relative;overflow:hidden}
+.dot i{position:absolute;inset:0;background:var(--bone);transform:scaleX(0);transform-origin:left;display:block}
+.dot.on i{animation:fl 7s linear forwards}@keyframes fl{to{transform:scaleX(1)}}
+.hcn{font-family:var(--sans);font-size:9.5px;letter-spacing:.22em;color:rgba(250,247,241,.6);font-weight:600}
+.harr{margin-left:auto;display:flex;gap:8px}
+.harr button{width:40px;height:40px;border:1px solid var(--rd);color:var(--bone);display:flex;align-items:center;justify-content:center;transition:background .34s var(--e),color .34s var(--e),border-color .34s var(--e)}
+.harr button:hover{background:var(--bone);color:var(--ink);border-color:var(--bone)}.harr svg{width:12px;height:12px}
+.hside{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:right center;z-index:6;font-family:var(--sans);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,247,241,.5);font-weight:600;white-space:nowrap}
+.dk{position:absolute;left:0;right:0;width:100%;height:32px;z-index:3;display:block}
+.dkt{top:-1px}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .95s var(--e),transform .95s var(--e)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:70ms}.d2{transition-delay:140ms}.d3{transition-delay:210ms}.d4{transition-delay:280ms}.d5{transition-delay:350ms}
+.tabs{display:flex;justify-content:center;gap:clamp(18px,3vw,44px);position:relative;padding-bottom:14px;flex-wrap:wrap}
+.tab{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(250,247,241,.45);padding:4px 2px;transition:color .32s var(--e)}
+.tab.on,.tab:hover{color:var(--bone)}
+.tbar{position:absolute;bottom:0;height:1px;background:var(--bone);transition:left .34s var(--e),width .34s var(--e)}
+.pane{display:none;opacity:0;transition:opacity .34s var(--e)}.pane.on{display:block}.pane.vis{opacity:1}
+.gal{display:grid;grid-template-columns:repeat(5,1fr)}
+.cell{position:relative;overflow:hidden;aspect-ratio:5/8;background:#0d1116}
+.cell svg{position:absolute;inset:0;width:100%;height:100%;transition:transform 1.3s var(--e)}
+.cell:hover svg{transform:scale(1.07)}
+.cap{position:absolute;left:12px;bottom:12px;z-index:2;color:var(--bone);font-family:var(--sans);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;opacity:0;transform:translateY(8px);transition:opacity .5s var(--e),transform .5s var(--e)}
+.cell:hover .cap{opacity:1;transform:none}
+.card .frame{margin-bottom:18px}
+.cm{display:flex;gap:14px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.cm span{position:relative}.cm span+span:before{content:"/";position:absolute;left:-9px;opacity:.45}
+.card h3{margin:0 0 10px}.card .p{margin-bottom:20px;font-size:15.4px}
+.tg{display:inline-block;border:1px solid var(--rule);padding:5px 10px;margin:0 5px 5px 0;font-family:var(--sans);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--slate)}
+.panel{background:var(--bone);color:var(--ink);padding:clamp(22px,2.4vw,34px);border:1px solid rgba(18,19,14,.1)}
+.pr{display:flex;align-items:center;gap:10px;margin:0 0 6px}.pr svg{width:12px;height:12px;color:var(--field);flex:none}
+.pdv{height:1px;background:var(--rule2);margin:18px 0}
+.pf{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.price{font-family:var(--sans);font-size:11px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+.rh{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,56px)}
+.rail{display:flex;gap:clamp(14px,1.6vw,26px);overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:6px;cursor:grab}
+.rail::-webkit-scrollbar{display:none}.rail.drag{cursor:grabbing}
+.prod{flex:0 0 clamp(230px,20vw,300px)}
+.plate{background:var(--paper-2);position:relative;overflow:hidden;aspect-ratio:4/5;margin-bottom:16px}
+.plate svg{position:absolute;inset:0;width:100%;height:100%;transition:transform 1.1s var(--e)}
+.prod:hover .plate svg{transform:scale(1.04)}
+.badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--field);color:var(--bone);font-family:var(--sans);font-size:8px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:5px 9px}
+.prod h4{margin:0 0 7px;color:var(--bone)}
+.pm{font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:rgba(250,247,241,.5);margin:0}
+.rn{display:flex;gap:8px}
+.rn button{width:42px;height:42px;border:1px solid var(--rd);color:var(--bone);display:flex;align-items:center;justify-content:center;transition:background .34s var(--e),color .34s var(--e),opacity .34s var(--e),border-color .34s var(--e)}
+.rn button:hover{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.rn button[disabled]{opacity:.28;pointer-events:none}.rn svg{width:12px;height:12px}
+.mapband{background:var(--paper-2);position:relative;overflow:hidden}
+.mapbg{position:absolute;inset:0;width:100%;height:100%}
+.pw{position:absolute;transform:translate(-50%,-100%)}
+.pin{display:flex;flex-direction:column;align-items:center;gap:4px}
+.pin svg{width:15px;height:19px;color:var(--rust)}
+.pin b{font-family:var(--sans);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--rust);font-weight:700;white-space:nowrap}
+.note{background:var(--bone);border:1px solid rgba(18,19,14,.1);padding:16px 18px 18px;position:relative;max-width:250px}
+.note:before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-2deg);width:64px;height:17px;background:rgba(154,90,51,.16)}
+.sprock{display:flex;align-items:center;background:var(--ink);padding:9px 0;overflow:hidden}
+.fr{flex:0 0 auto;width:clamp(110px,11vw,150px);aspect-ratio:3/2;margin:0 5px;position:relative;overflow:hidden}
+.fr svg{position:absolute;inset:0;width:100%;height:100%}
+.holes{display:flex;gap:9px;padding:0 6px}
+.holes i{width:9px;height:6px;background:var(--paper-2);display:block;flex:none}
+.marq{overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:15px 0;background:var(--paper)}
+.mi{display:flex;gap:56px;white-space:nowrap;animation:mq 72s linear infinite;will-change:transform}
+.marq:hover .mi{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mi span{font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--slate);font-weight:600;display:inline-flex;gap:14px}
+.mi b{color:var(--rust);font-weight:600}
+.quote{position:relative;min-height:80vh;display:flex;align-items:center;overflow:hidden;background:#0d1013}
+.quote .frame{position:absolute;inset:0}
+.qi{position:relative;z-index:3;text-align:center;margin:0 auto;max-width:1000px}
+.field{display:flex;border:1px solid var(--rule);background:var(--bone);max-width:470px}
+.field input{flex:1;border:0;background:transparent;padding:15px 18px;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);outline:none;min-width:0}
+.field input::placeholder{color:rgba(18,19,14,.38)}
+.field button{background:var(--brass);color:var(--bone);padding:0 24px;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:background .38s var(--e)}
+.field button:hover{background:var(--field)}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)}
+.tier{background:var(--bone);padding:26px 24px 28px}
+.tier h4{margin:0 0 4px}
+.ts{font-family:var(--sans);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);font-weight:600;margin:0 0 18px}
+.tp{font-family:var(--serif);font-size:34px;font-weight:700;line-height:1;margin:0}
+.tier ul{list-style:none;margin:18px 0 0;padding:0}
+.tier li{display:flex;gap:10px;font-size:14.4px;line-height:1.5;color:var(--bi);margin-bottom:11px}
+.tier li svg{width:11px;height:11px;flex:none;margin-top:5px;color:var(--brass)}
+.acc{border-top:1px solid var(--rule)}.ai{border-bottom:1px solid var(--rule)}
+.ab{width:100%;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 4px;font-family:var(--body);font-size:16.2px;transition:color .3s var(--e)}
+.ab:hover{color:var(--brass)}
+.ab svg{width:13px;height:13px;flex:none;transition:transform .42s var(--e);color:var(--slate)}
+.ai.on .ab svg{transform:rotate(180deg)}
+.ap{max-height:0;overflow:hidden;opacity:0;transition:max-height .46s var(--e),opacity .42s var(--e)}
+.ai.on .ap{opacity:1}
+.ap div{padding:0 4px 24px;max-width:760px}
+.foot{background:var(--ink);color:var(--bone);padding:clamp(60px,7vw,100px) 0 0}
+.fg{display:grid;grid-template-columns:2.1fr 1fr 1fr 1fr 1fr;gap:clamp(24px,3vw,44px)}
+.foot h5{font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin:0 0 20px}
+.foot ul{list-style:none;margin:0;padding:0}.foot li{margin-bottom:11px}
+.foot li a{font-family:var(--sans);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,247,241,.52);font-weight:500;transition:color .3s var(--e)}
+.foot li a:hover{color:var(--bone)}
+.fm{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;margin:0 0 20px}
+.fb{font-size:14.4px;line-height:1.62;color:rgba(250,247,241,.46);max-width:330px;margin:0 0 26px}
+.soc{display:flex;gap:16px}.soc a{color:rgba(250,247,241,.55);transition:color .3s var(--e)}
+.soc a:hover{color:var(--bone)}.soc svg{width:15px;height:15px}
+.fbar{margin-top:clamp(46px,6vw,80px);border-top:1px solid var(--rd2);padding:22px 0 30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,241,.34);font-weight:500}
+@media(max-width:1180px){.nl{display:none}.bg{display:flex}.fg{grid-template-columns:1fr 1fr 1fr}.gal{grid-template-columns:repeat(4,1fr)}.cell:nth-child(5){display:none}}
+@media(max-width:900px){.g57,.g75,.g3{grid-template-columns:1fr}.tiers{grid-template-columns:1fr}.nsr span{display:none}.ncta{padding:0 14px}.hside{display:none}.off{margin-top:0!important}}
+@media(max-width:640px){body{font-size:16px}.g2{grid-template-columns:1fr}.gal{grid-template-columns:repeat(2,1fr)}.cell:nth-child(n+3){display:none}.fg{grid-template-columns:1fr 1fr}.strip{font-size:8px;letter-spacing:.14em}.hui .wrap{gap:14px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:1ms!important}.rv{opacity:1;transform:none}.hh .ln>span{transform:none!important}.hd,.ha{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="gr" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+<filter id="gr2" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+<filter id="hz" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="34"/></filter>
+<filter id="hz2" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+<filter id="hz3" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+<symbol id="ia" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="il" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="ip" viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12A7 7 0 1 0 5 10c0 4.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></symbol>
+<symbol id="ic" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 10h17M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+<symbol id="iv" viewBox="0 0 24 24"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+<symbol id="ik" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.6" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="is" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+<symbol id="ib" viewBox="0 0 24 24"><path d="M4.5 7.5h15L18.5 21h-13z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.6 10V6.6a3.4 3.4 0 0 1 6.8 0V10" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+<symbol id="iu" viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.6 20.5c1.1-4 3.9-6 7.4-6s6.3 2 7.4 6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+<symbol id="iy" viewBox="0 0 24 24"><path d="M8 5.5l11 6.5-11 6.5z" fill="currentColor"/></symbol>
+<symbol id="ig" viewBox="0 0 24 24"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></symbol>
+<symbol id="it" viewBox="0 0 24 24"><rect x="2.2" y="5.4" width="19.6" height="13.2" rx="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 9.4l5.2 2.6-5.2 2.6z" fill="currentColor"/></symbol>
+</defs></svg>
+
+<div class="strip"><a href="#dispatch"><svg><use href="#ia"/></svg> Field Notes No. 07 — “The Island Road” ships this week to Dispatch members</a></div>
+
+<header class="nav" id="nav"><div class="navin">
+<a class="mark" href="#top" aria-label="Rangefinder home"><svg viewBox="0 0 32 32" fill="none"><rect x="1" y="6" width="20" height="20" stroke="currentColor" stroke-width="1.7"/><rect x="11" y="6" width="20" height="20" stroke="currentColor" stroke-width="1.7" opacity=".5"/><circle cx="16" cy="16" r="3" fill="currentColor"/></svg><b>Rangefinder</b></a>
+<nav class="nl" aria-label="Primary"><a href="#kit">Field Kit</a><a href="#gear">Apparel</a><a href="#printroom">Print Room</a><a href="#printroom">Albums</a><a href="#notes">Field Notes</a><a href="#exp">Expeditions</a><a href="#printroom">Shop</a></nav>
+<div class="nr"><span class="sep"></span><button class="nsr" aria-label="Search"><svg><use href="#is"/></svg><span>Search</span></button><span class="sep"></span><a class="ncta" href="#dispatch"><svg><use href="#ia"/></svg><span>The<br>Dispatch</span></a><span class="sep"></span><a class="nic" href="#printroom" aria-label="Bag"><svg><use href="#ib"/></svg></a><a class="nic" href="#dispatch" aria-label="Account"><svg><use href="#iu"/></svg></a><button class="bg" aria-label="Menu"><i></i></button></div>
+</div></header>
+
+<main id="top">
+<section class="hero" id="hero">
+
+<div class="sl on" data-s="0"><div class="kb">
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%" role="img" aria-label="A pickup truck loaded with camera bags on a roadside before dawn">
+<defs><linearGradient id="s1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#080e17"/><stop offset=".34" stop-color="#132436"/><stop offset=".6" stop-color="#2c4658"/><stop offset=".78" stop-color="#6a6f6c"/><stop offset=".9" stop-color="#a97f57"/><stop offset="1" stop-color="#cf9857"/></linearGradient>
+<linearGradient id="s1b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffe9c0" stop-opacity=".5"/><stop offset="1" stop-color="#ffe9c0" stop-opacity="0"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#s1)"/>
+<g fill="#fff" opacity=".5"><circle cx="180" cy="90" r="1.6"/><circle cx="410" cy="52" r="1.2"/><circle cx="640" cy="128" r="1.5"/><circle cx="900" cy="70" r="1.1"/><circle cx="1180" cy="112" r="1.6"/><circle cx="1390" cy="60" r="1.3"/></g>
+<ellipse cx="1290" cy="700" rx="470" ry="140" fill="#e9a95f" opacity=".2" filter="url(#hz)"/>
+<path d="M0 640 L280 622 L560 604 L840 610 L1180 600 L1600 606 L1600 700 L0 700Z" fill="#13202b"/>
+<path d="M0 668 L390 664 L820 668 L1290 670 L1600 642 L1600 720 L0 720Z" fill="#0c151c"/>
+<ellipse cx="700" cy="654" rx="620" ry="42" fill="#8fa2ac" opacity=".26" filter="url(#hz)"/>
+<rect x="0" y="694" width="1600" height="206" fill="#0a0f13"/>
+<g fill="#8b8f8c" opacity=".4"><rect x="700" y="742" width="150" height="4"/><rect x="960" y="792" width="190" height="5"/><rect x="1290" y="856" width="230" height="6"/></g>
+<ellipse cx="420" cy="800" rx="230" ry="26" fill="#c48f52" opacity=".3" filter="url(#hz2)"/>
+<g fill="#0a0f13"><rect x="1080" y="620" width="520" height="9"/><rect x="1140" y="629" width="9" height="52"/><rect x="1300" y="629" width="9" height="50"/><rect x="1470" y="629" width="9" height="48"/></g>
+<g fill="#05070a"><path d="M232 700 L232 556 L600 556 L622 486 L768 480 L812 556 L944 560 L952 612 L946 702Z"/><rect x="150" y="556" width="86" height="9"/><path d="M150 565 L236 565 L236 592 L150 588Z"/><circle cx="330" cy="700" r="60"/><circle cx="852" cy="700" r="60"/></g>
+<g fill="#3d3125"><path d="M268 556 L268 502 q0 -12 12 -12 l86 0 q12 0 12 12 l0 54Z"/><path d="M396 556 L396 516 q0 -10 10 -10 l72 0 q10 0 10 10 l0 40Z"/></g>
+<g stroke="#241d15" stroke-width="4" fill="none"><path d="M282 494 q40 -22 78 0"/><path d="M410 510 q32 -16 62 0"/><path d="M480 556 q6 26 -8 42"/></g>
+<path d="M120 700 L120 610 q0 -18 14 -22 l6 -2 q-14 -16 -2 -28 q14 -12 26 2 q8 10 0 24 l10 4 q14 6 14 22 l0 34 l-10 0 l0 66Z" fill="#04060a"/>
+<path d="M158 606 q30 -16 66 -20 l4 16 q-38 6 -64 20Z" fill="#04060a"/>
+<path d="M958 586 L1600 470 L1600 736 L958 626Z" fill="url(#s1b)"/>
+<ellipse cx="954" cy="600" rx="26" ry="12" fill="#ffe9c0" opacity=".85" filter="url(#hz3)"/>
+<ellipse cx="954" cy="600" rx="120" ry="46" fill="#ffdca0" opacity=".2" filter="url(#hz2)"/>
+<ellipse cx="228" cy="602" rx="14" ry="9" fill="#c0442c" opacity=".8" filter="url(#hz3)"/>
+<g stroke="#0a1014" stroke-width="3" fill="none"><path d="M40 700 l6 -30M52 700 l0 -36M64 700 l-6 -28M1040 690 l7 -26M1054 690 l1 -30"/></g>
+<rect width="1600" height="900" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div class="scrim sb"></div><div class="scrim st"></div>
+<div class="hc"><div class="wrap"><div class="hin">
+<p class="hov"><b>Rangefinder</b><i></i>Chapter One — The Island Road</p>
+<h1 class="dsp h1 hh"><span class="ln"><span>THE ROAD <em>before</em></span></span><span class="ln"><span>FIRST LIGHT</span></span></h1>
+<p class="hd">Four hours of dark road, a cold tailgate, and a thermos that never stays hot. We make the bags, straps and layers for everything that happens before the picture.</p>
+<div class="ha"><a class="btn bl" href="#notes"><span class="lb"><span>Watch the film</span></span><span class="ar"><svg><use href="#iy"/></svg></span></a></div>
+</div></div></div></div>
+
+<div class="sl" data-s="1"><div class="kb">
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%" role="img" aria-label="Waiting on a wet slipway for the ferry in bad weather">
+<defs><linearGradient id="s2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3c464a"/><stop offset=".45" stop-color="#687374"/><stop offset=".72" stop-color="#8c9492"/><stop offset="1" stop-color="#6f7a78"/></linearGradient>
+<linearGradient id="s2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#54615f"/><stop offset="1" stop-color="#2b3634"/></linearGradient>
+<linearGradient id="s2r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#464e4d"/><stop offset="1" stop-color="#20272a"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#s2)"/>
+<g filter="url(#hz)" opacity=".7"><ellipse cx="300" cy="180" rx="440" ry="110" fill="#2f393c"/><ellipse cx="1080" cy="120" rx="520" ry="98" fill="#394346"/><ellipse cx="760" cy="300" rx="700" ry="70" fill="#9aa3a1" opacity=".5"/></g>
+<path d="M0 452 L400 448 L900 450 L1420 452 L1600 434 L1600 500 L0 500Z" fill="#3b4746"/>
+<rect x="0" y="486" width="1600" height="414" fill="url(#s2s)"/>
+<g opacity=".26" stroke="#cfd8d6" stroke-width="2"><path d="M60 540 h180M340 556 h140M600 532 h210M900 566 h160M1200 542 h190M180 598 h230M700 610 h180M1120 620 h240"/></g>
+<path d="M900 476 L1420 476 L1392 528 L928 528Z" fill="#1d2528"/>
+<rect x="962" y="418" width="300" height="60" fill="#222b2e"/><rect x="1030" y="382" width="150" height="38" fill="#283134"/><rect x="1108" y="330" width="16" height="54" fill="#283134"/>
+<g fill="#d8a256"><rect x="986" y="436" width="16" height="12"/><rect x="1018" y="436" width="16" height="12"/><rect x="1178" y="436" width="16" height="12"/><rect x="1210" y="436" width="16" height="12"/><rect x="1052" y="394" width="14" height="11"/></g>
+<ellipse cx="1120" cy="470" rx="260" ry="40" fill="#9aa3a1" opacity=".25" filter="url(#hz2)"/>
+<path d="M0 900 L0 640 L820 542 L900 900Z" fill="url(#s2r)"/>
+<g stroke="#5c6564" stroke-width="3" opacity=".3" fill="none"><path d="M60 900 L500 566"/><path d="M300 900 L636 556"/><path d="M560 900 L760 548"/></g>
+<g fill="#161d1f"><rect x="1252" y="500" width="20" height="400"/><rect x="1340" y="518" width="18" height="382"/><rect x="1444" y="494" width="22" height="406"/><rect x="1544" y="522" width="18" height="378"/><rect x="1240" y="560" width="336" height="11"/><rect x="1240" y="640" width="336" height="9"/></g>
+<path d="M330 900 L330 726 q0 -30 22 -40 q-20 -26 0 -46 q22 -22 44 0 q18 20 0 44 q26 10 26 42 l0 78 l-14 0 l0 -32 l-8 122Z" fill="#141b1e"/>
+<path d="M356 660 q28 -16 56 0 l6 22 q-34 -14 -66 0Z" fill="#1b2427"/>
+<path d="M394 704 q46 -6 62 22 q14 30 -2 62 q-8 16 -30 12 l-34 -8Z" fill="#3b3323"/>
+<g stroke="#e3ebe9" stroke-width="1.4" opacity=".2"><path d="M40 0 l-26 120M240 -20 l-26 120M430 10 l-26 120M610 60 l-26 120M790 110 l-26 120M970 150 l-26 120M1150 10 l-26 120M1330 50 l-26 120M1510 90 l-26 120M90 300 l-26 120M470 290 l-26 120M850 310 l-26 120M1230 300 l-26 120M120 560 l-26 120M760 570 l-26 120M1400 580 l-26 120"/></g>
+<rect width="1600" height="900" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div class="scrim sb"></div><div class="scrim st"></div>
+<div class="hc"><div class="wrap"><div class="hin">
+<p class="hov"><b>Rangefinder</b><i></i>Ferry terminal, Sound of Kellach</p>
+<h1 class="dsp h1 hh"><span class="ln"><span>WEATHER IS <em>part of</em></span></span><span class="ln"><span>THE ITINERARY</span></span></h1>
+<p class="hd">The 5:40 runs whether or not you slept. Waxed cotton, taped seams, and a rucksack you can set down in six inches of standing water without thinking about it.</p>
+<div class="ha"><a class="btn bl" href="#gear"><span class="lb"><span>Shop foul weather</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div></div></div></div>
+
+<div class="sl" data-s="2"><div class="kb">
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%" role="img" aria-label="A photographer with a tripod on a ridge at sunrise">
+<defs><linearGradient id="s3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#243247"/><stop offset=".32" stop-color="#5b5a63"/><stop offset=".56" stop-color="#a4805f"/><stop offset=".76" stop-color="#dfa365"/><stop offset="1" stop-color="#f3c88c"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#s3)"/>
+<circle cx="1150" cy="614" r="62" fill="#ffe2ac" filter="url(#hz3)"/>
+<circle cx="1150" cy="614" r="200" fill="#ffcf8d" opacity=".28" filter="url(#hz)"/>
+<g opacity=".32" fill="#fff3dd" filter="url(#hz2)"><ellipse cx="500" cy="330" rx="380" ry="26"/><ellipse cx="1120" cy="270" rx="420" ry="20"/><ellipse cx="820" cy="420" rx="600" ry="18"/></g>
+<path d="M0 660 L340 630 L700 620 L1080 626 L1470 622 L1600 592 L1600 700 L0 700Z" fill="#b18f76" opacity=".5"/>
+<ellipse cx="800" cy="676" rx="900" ry="40" fill="#ffdca8" opacity=".35" filter="url(#hz)"/>
+<path d="M0 716 L420 700 L860 696 L1330 694 L1600 656 L1600 780 L0 780Z" fill="#7a6459"/>
+<ellipse cx="700" cy="744" rx="900" ry="34" fill="#f0c497" opacity=".28" filter="url(#hz)"/>
+<path d="M0 790 L520 784 L1040 780 L1600 776 L1600 900 L0 900Z" fill="#3f3937"/>
+<path d="M0 900 L0 852 L480 856 L1020 852 L1600 848 L1600 900Z" fill="#1c1a19"/>
+<g fill="#100f0e"><path d="M1046 838 L1046 786 q0 -12 9 -16 q-9 -11 -1 -19 q9 -9 17 1 q6 8 0 17 l7 3 q9 4 9 15 l0 22 l-6 0 l0 34 l-9 0 l-2 -30 l-4 30Z"/><path d="M1092 796 l40 -6 l2 8 l-40 6Z"/><path d="M1128 780 l30 0 l0 12 l-30 0Z"/><path d="M1132 792 l-16 46 l5 2 l17 -46Z"/><path d="M1148 792 l14 46 l-5 2 l-15 -46Z"/><path d="M1142 792 l0 48 l4 0 l0 -48Z"/></g>
+<g stroke="#100f0e" stroke-width="3" fill="none"><path d="M180 852 l8 -34M198 856 l2 -40M214 850 l-7 -30M1420 846 l9 -32M1440 850 l1 -38"/></g>
+<rect width="1600" height="900" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div class="scrim sb"></div><div class="scrim st"></div>
+<div class="hc"><div class="wrap"><div class="hin">
+<p class="hov"><b>Rangefinder</b><i></i>Cape Nolan — 05:51, forty seconds of it</p>
+<h1 class="dsp h1 hh"><span class="ln"><span>CARRY IT <em>all the</em></span></span><span class="ln"><span>WAY UP THERE</span></span></h1>
+<p class="hd">Bellows 24 in olive waxed canvas. Two bodies, three lenses, a filter wallet, and enough room left for a sandwich you will forget to eat.</p>
+<div class="ha"><a class="btn bl" href="#kit"><span class="lb"><span>The Bellows 24</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div></div></div></div>
+
+<div class="hui"><div class="wrap">
+<div class="dots" id="dots"><button class="dot on" data-go="0" aria-label="Slide 1"><i></i></button><button class="dot" data-go="1" aria-label="Slide 2"><i></i></button><button class="dot" data-go="2" aria-label="Slide 3"><i></i></button></div>
+<span class="hcn" id="hcn">01 / 03</span>
+<div class="harr"><button id="hp" aria-label="Previous"><svg><use href="#il"/></svg></button><button id="hn" aria-label="Next"><svg><use href="#ia"/></svg></button></div>
+</div></div>
+<div class="hside">Scroll — 64°09′N 21°56′W</div>
+</section>
+
+<!-- DARK EDITORIAL BAND -->
+<section class="sec dark" id="kit">
+<svg class="dk dkt" viewBox="0 0 1600 32" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L1600 0 L1600 11 q-44 9 -88 3 q-52 -7 -100 4 q-46 10 -94 1 q-56 -11 -106 5 q-50 14 -100 2 q-52 -13 -102 3 q-48 14 -98 2 q-56 -13 -106 4 q-48 15 -96 1 q-54 -15 -104 2 q-46 15 -94 3 q-54 -13 -100 2 q-44 13 -86 4 q-30 -6 -58 -3 L0 11Z" fill="#12130E"/></svg>
+<div class="wrap">
+<div style="text-align:center;max-width:1080px;margin:0 auto clamp(34px,4vw,56px)">
+<p class="ov ovd rv" style="letter-spacing:.3em">Rangefinder Supply — Est. Cape Nolan</p>
+<h2 class="dsp h2 rv d1" style="margin-bottom:26px">MADE FOR THE MILES<br><em>between</em> PICTURES</h2>
+<p class="lede rv d2" style="color:rgba(250,247,241,.66);max-width:620px;margin:0 auto">Everything we make is designed backwards from the moment the light arrives — so that the four hours before it are boring, dry and uneventful.</p>
+</div>
+<div class="rv d3" style="max-width:820px;margin:0 auto clamp(40px,5vw,70px)">
+<div class="tabs" id="tabs"><button class="tab on" data-p="p1">Field Kit</button><button class="tab" data-p="p2">Apparel</button><button class="tab" data-p="p3">Albums &amp; Log</button><button class="tab" data-p="p4">Prints</button><span class="tbar" id="tbar"></span></div>
+</div>
+<div class="rv d4">
+
+<div class="pane on vis" id="p1"><div class="grid g75" style="align-items:center">
+<div class="frame r169 zm par" data-par>
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An open camera rucksack on a tailgate with lenses and a map">
+<defs><linearGradient id="k1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2f33"/><stop offset="1" stop-color="#0e1113"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#k1)"/>
+<ellipse cx="380" cy="120" rx="520" ry="300" fill="#e6bd7f" opacity=".16" filter="url(#hz)"/>
+<path d="M0 560 L1600 500 L1600 900 L0 900Z" fill="#1a1d1f"/><path d="M0 560 L1600 500 L1600 522 L0 582Z" fill="#33383a"/>
+<g opacity=".2" stroke="#8d949a" stroke-width="2"><path d="M0 640 L1600 582M0 720 L1600 664M0 800 L1600 744"/></g>
+<g transform="rotate(-4 1180 720)"><rect x="980" y="600" width="520" height="290" fill="#e2d8bf"/>
+<g stroke="#a89a76" stroke-width="1.6" fill="none"><path d="M1000 700 q90 -46 180 -12 q90 34 176 -18 q60 -36 128 -10"/><path d="M1000 748 q94 -42 184 -8 q92 34 178 -20 q56 -32 122 -6"/><path d="M1000 796 q96 -38 188 -4 q94 34 180 -22 q52 -30 116 -2"/><path d="M1000 844 q98 -34 192 0 q96 34 182 -24"/></g>
+<path d="M1030 862 L1120 780 L1250 812 L1370 700 L1470 662" stroke="#9A5A33" stroke-width="2.6" stroke-dasharray="9 7" fill="none"/><circle cx="1250" cy="812" r="5" fill="#9A5A33"/><circle cx="1470" cy="662" r="5" fill="#9A5A33"/></g>
+<path d="M250 880 L212 620 q-6 -42 34 -54 l236 -34 q42 -6 52 36 l60 258Z" fill="#3d3a26"/>
+<path d="M250 880 L232 758 l330 -46 l32 168Z" fill="#332f1f"/>
+<path d="M212 620 q-6 -42 34 -54 l236 -34 q42 -6 52 36 l-14 6 q-14 -34 -46 -28 l-224 32 q-32 6 -26 40Z" fill="#4a4630"/>
+<path d="M300 566 q-40 -66 20 -100 q60 -34 96 22" fill="none" stroke="#4a4630" stroke-width="14"/>
+<rect x="266" y="694" width="120" height="72" fill="#20211a" transform="rotate(-8 326 730)"/><rect x="404" y="668" width="106" height="64" fill="#24261d" transform="rotate(-8 457 700)"/>
+<circle cx="326" cy="730" r="22" fill="#0e0f0c"/><circle cx="457" cy="700" r="18" fill="#0e0f0c"/>
+<g fill="#8A7C4E"><rect x="286" y="600" width="34" height="16"/><rect x="430" y="580" width="34" height="16"/></g>
+<path d="M240 852 q120 -30 300 -46" stroke="#241f14" stroke-width="5" fill="none" opacity=".7"/>
+<rect x="700" y="756" width="104" height="112" rx="4" fill="#15171a"/><rect x="700" y="756" width="104" height="14" fill="#2a2e33"/>
+<circle cx="752" cy="820" r="34" fill="#0a0c0e"/><circle cx="752" cy="820" r="24" fill="#1b3a45"/><circle cx="744" cy="810" r="8" fill="#7fb0bd" opacity=".6"/>
+<rect x="836" y="790" width="84" height="80" rx="4" fill="#15171a"/><circle cx="878" cy="832" r="26" fill="#0a0c0e"/><circle cx="878" cy="832" r="17" fill="#2a1f16"/>
+<rect width="1600" height="900" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div>
+<p class="ov ovd">01 — The carry system</p>
+<h3 class="dsp h3" style="margin:0 0 20px">BELLOWS 24<br><em>camera</em> RUCKSACK</h3>
+<p class="p pd">Olive waxed canvas over a 1000d base, with a full clamshell so you are not digging blind at the tailgate. Removable divider cells, a tripod cradle that folds flat when it is empty, and a rain flap you can deploy one-handed with a glove on.</p>
+<div style="display:flex;gap:36px;margin:26px 0 30px;flex-wrap:wrap">
+<div><p class="meta metad" style="margin:0 0 6px">Volume</p><p class="dsp" style="font-size:22px">24 L</p></div>
+<div><p class="meta metad" style="margin:0 0 6px">Weight</p><p class="dsp" style="font-size:22px">1.4 KG</p></div>
+<div><p class="meta metad" style="margin:0 0 6px">Shell</p><p class="dsp" style="font-size:22px">18 OZ WAX</p></div></div>
+<a class="btn bl" href="#printroom"><span class="lb"><span>$385 — Shop the kit</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</div></div></div>
+
+<div class="pane" id="p2"><div class="grid g75" style="align-items:center">
+<div class="frame r169 zm">
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A photographer in a waxed anorak in wind and rain">
+<defs><linearGradient id="k2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d565a"/><stop offset=".6" stop-color="#79817f"/><stop offset="1" stop-color="#4b5453"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#k2)"/>
+<g filter="url(#hz)" opacity=".65"><ellipse cx="1200" cy="200" rx="520" ry="120" fill="#39423f"/><ellipse cx="400" cy="300" rx="480" ry="100" fill="#8d9491"/></g>
+<path d="M0 520 L560 512 L1180 508 L1600 462 L1600 620 L0 620Z" fill="#3d4746"/>
+<rect x="0" y="600" width="1600" height="300" fill="#2b3331"/>
+<g opacity=".28" stroke="#aeb6b3" stroke-width="2" fill="none"><path d="M0 700 q200 -22 400 0 q200 22 400 0 q200 -22 400 0 q200 22 400 0"/><path d="M0 790 q200 -18 400 0 q200 18 400 0 q200 -18 400 0 q200 18 400 0"/></g>
+<path d="M600 900 L604 640 q0 -46 40 -60 q-30 -46 8 -74 q44 -32 84 4 q30 30 4 70 q46 14 48 62 l6 130 l-26 0 l-4 -70 l-18 198Z" fill="#3a3e30"/>
+<path d="M652 566 q40 -30 84 4 q22 24 8 54 q-46 -34 -96 -6 q-8 -30 4 -52Z" fill="#4a4f3d"/>
+<path d="M604 664 q80 -34 172 6 l6 30 q-92 -44 -180 -8Z" fill="#454a39"/>
+<path d="M700 726 l0 78 l52 0 l0 -78Z" fill="#2f3327" opacity=".7"/>
+<path d="M660 640 q40 -12 76 0" stroke="#8A7C4E" stroke-width="5" fill="none"/>
+<g fill="#14161a"><rect x="774" y="700" width="70" height="46" rx="4"/><circle cx="812" cy="723" r="17" fill="#0a0c0e"/><circle cx="812" cy="723" r="10" fill="#31505b"/></g>
+<g stroke="#dfe6e3" stroke-width="1.4" opacity=".18"><path d="M100 0 l-30 130M300 60 l-30 130M500 0 l-30 130M700 100 l-30 130M900 20 l-30 130M1100 120 l-30 130M1300 40 l-30 130M1500 140 l-30 130M200 340 l-30 130M600 400 l-30 130M1000 350 l-30 130M1400 420 l-30 130"/></g>
+<rect width="1600" height="900" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div>
+<p class="ov ovd">02 — Layers</p>
+<h3 class="dsp h3" style="margin:0 0 20px">LONGSHORE<br><em>waxed</em> ANORAK</h3>
+<p class="p pd">Cut long over the hips so it still covers you when you are crouched at ground level. A chest pouch sized for two filters and a cloth, storm cuffs, and a hood that turns with your head instead of against it.</p>
+<div style="margin:26px 0 30px"><span class="tg" style="color:rgba(250,247,241,.6);border-color:rgba(250,247,241,.2)">18 oz waxed cotton</span><span class="tg" style="color:rgba(250,247,241,.6);border-color:rgba(250,247,241,.2)">Taped seams</span><span class="tg" style="color:rgba(250,247,241,.6);border-color:rgba(250,247,241,.2)">Re-waxable</span></div>
+<a class="btn bl" href="#printroom"><span class="lb"><span>$298 — Shop apparel</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</div></div></div>
+
+<div class="pane" id="p3"><div class="grid g75" style="align-items:center">
+<div class="frame r169 zm">
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An open linen album on a truck hood with a map and a pencil">
+<defs><linearGradient id="k3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a3d3e"/><stop offset="1" stop-color="#171a1b"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#k3)"/>
+<ellipse cx="1300" cy="80" rx="480" ry="260" fill="#f0c88e" opacity=".2" filter="url(#hz)"/>
+<path d="M0 300 L1600 240 L1600 900 L0 900Z" fill="#4c5152"/><path d="M0 300 L1600 240 L1600 268 L0 328Z" fill="#6c7274"/>
+<g opacity=".18" stroke="#c9d0d2" stroke-width="3"><path d="M0 460 L1600 402M0 640 L1600 580"/></g>
+<g transform="rotate(-3 800 620)">
+<rect x="392" y="392" width="820" height="428" fill="#d9d0bb"/><rect x="392" y="392" width="410" height="428" fill="#cec5af"/><rect x="798" y="392" width="8" height="428" fill="#b6ad97"/>
+<rect x="436" y="436" width="322" height="230" fill="#1b2a33"/><path d="M436 600 L520 528 L586 578 L676 496 L758 552 L758 666 L436 666Z" fill="#0d151b"/><circle cx="700" cy="486" r="20" fill="#e8bf85"/>
+<rect x="436" y="694" width="180" height="8" fill="#9b937f"/><rect x="436" y="716" width="240" height="6" fill="#b3ab96"/>
+<rect x="846" y="436" width="150" height="112" fill="#2c3a2a"/><rect x="1018" y="436" width="150" height="112" fill="#4a3c2c"/><rect x="846" y="572" width="150" height="112" fill="#33414a"/><rect x="1018" y="572" width="150" height="112" fill="#5b4a3a"/>
+<g stroke="#9A5A33" stroke-width="2.4" fill="none"><path d="M850 720 q26 -14 44 2 q18 16 44 -2 q26 -18 50 0"/><path d="M850 752 q30 -12 56 2 q26 14 56 -4"/></g></g>
+<g transform="rotate(16 1330 760)"><rect x="1240" y="754" width="200" height="11" fill="#c8a75f"/><path d="M1440 754 l30 6 l-30 5Z" fill="#e8dcc2"/><rect x="1240" y="754" width="26" height="11" fill="#9A5A33"/></g>
+<g transform="rotate(6 300 760)"><rect x="180" y="660" width="250" height="200" fill="#efe9dc"/><rect x="196" y="676" width="218" height="140" fill="#3d5560"/><path d="M196 780 L250 736 L296 766 L352 716 L414 754 L414 816 L196 816Z" fill="#22323a"/></g>
+<rect width="1600" height="900" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div>
+<p class="ov ovd">03 — After the trip</p>
+<h3 class="dsp h3" style="margin:0 0 20px">THE VOLUME<br>ALBUM <em>in linen</em></h3>
+<p class="p pd">Forty archival leaves, lay-flat binding, and a linen board that takes a thumbprint and keeps it. Sold with paper corners and a pencil, because the caption is half the picture and nobody writes it later.</p>
+<div style="display:flex;gap:36px;margin:26px 0 30px;flex-wrap:wrap">
+<div><p class="meta metad" style="margin:0 0 6px">Format</p><p class="dsp" style="font-size:22px">11 × 14</p></div>
+<div><p class="meta metad" style="margin:0 0 6px">Leaves</p><p class="dsp" style="font-size:22px">40</p></div>
+<div><p class="meta metad" style="margin:0 0 6px">Binding</p><p class="dsp" style="font-size:22px">LAY-FLAT</p></div></div>
+<a class="btn bl" href="#printroom"><span class="lb"><span>$140 — Albums &amp; log</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</div></div></div>
+
+<div class="pane" id="p4"><div class="grid g75" style="align-items:center">
+<div class="frame r169 zm">
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A framed landscape print leaning against a plaster wall">
+<defs><linearGradient id="k4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d2c4"/><stop offset="1" stop-color="#b6ae9d"/></linearGradient>
+<linearGradient id="k4p" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c3f4e"/><stop offset=".55" stop-color="#7d8b8b"/><stop offset="1" stop-color="#c9a97e"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#k4)"/>
+<ellipse cx="260" cy="120" rx="520" ry="380" fill="#fff6e6" opacity=".5" filter="url(#hz)"/>
+<rect x="0" y="742" width="1600" height="158" fill="#8d8474"/><rect x="0" y="742" width="1600" height="10" fill="#a49a88"/>
+<g transform="rotate(-1.6 820 470)"><rect x="440" y="180" width="770" height="580" fill="#1b1b18"/><rect x="462" y="202" width="726" height="536" fill="#f6f2e9"/>
+<rect x="520" y="260" width="610" height="420" fill="url(#k4p)"/>
+<path d="M520 520 L640 448 L740 496 L880 406 L1000 470 L1130 414 L1130 680 L520 680Z" fill="#3c4b4c"/>
+<path d="M520 596 L680 542 L830 588 L980 530 L1130 578 L1130 680 L520 680Z" fill="#232d31"/>
+<circle cx="960" cy="352" r="26" fill="#ffe6bb"/><ellipse cx="800" cy="470" rx="330" ry="14" fill="#fff" opacity=".35" filter="url(#hz2)"/></g>
+<g transform="rotate(3 220 690)"><rect x="90" y="560" width="230" height="290" fill="#100f0d"/><rect x="104" y="574" width="202" height="262" fill="#efe9dd"/><rect x="126" y="596" width="158" height="200" fill="#54606a"/><path d="M126 720 L176 678 L216 706 L284 656 L284 796 L126 796Z" fill="#2f3a40"/></g>
+<rect width="1600" height="900" filter="url(#gr2)" opacity=".22" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div>
+<p class="ov ovd">04 — The Print Room</p>
+<h3 class="dsp h3" style="margin:0 0 20px">CAPE NOLAN,<br><em>five fifty</em> ONE</h3>
+<p class="p pd">Pigment on 310gsm cotton rag, printed in an edition of forty and signed on the verso with the coordinates and the time on the meter. Framed in blackened ash, or rolled in a tube with a note about the morning it happened.</p>
+<div style="margin:26px 0 30px"><p class="coord" style="margin:0 0 6px">64°09′14″N — 21°56′03″W · 05:51 · 1/60 f8</p><p class="meta metad">Edition of 40 · 16 × 20 and 24 × 30</p></div>
+<a class="btn bl" href="#printroom"><span class="lb"><span>From $190 — Print Room</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</div></div></div>
+
+</div></div></section>
+
+<!-- PHOTO STRIP -->
+<section class="gal" aria-label="From the roll">
+<div class="cell">
+<svg viewBox="0 0 500 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A thermos and a fogged windshield before dawn">
+<defs><linearGradient id="c1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2a38"/><stop offset=".55" stop-color="#39424a"/><stop offset="1" stop-color="#14181c"/></linearGradient></defs>
+<rect width="500" height="800" fill="url(#c1)"/><rect x="40" y="60" width="420" height="380" fill="#4a5a68" opacity=".55"/>
+<ellipse cx="250" cy="240" rx="220" ry="150" fill="#b9c7d1" opacity=".45" filter="url(#hz2)"/>
+<g stroke="#dbe6ee" stroke-width="3" opacity=".5" fill="none"><path d="M120 160 q26 40 0 80 q-26 40 0 80"/><path d="M300 130 q30 46 0 92"/></g>
+<rect x="0" y="470" width="500" height="330" fill="#101418"/>
+<rect x="150" y="470" width="120" height="230" rx="6" fill="#2b2f22"/><rect x="150" y="470" width="120" height="34" rx="6" fill="#8A7C4E"/><rect x="176" y="520" width="68" height="10" fill="#1a1c14"/>
+<ellipse cx="356" cy="592" rx="52" ry="14" fill="#d8cfba"/><path d="M304 592 l10 92 q2 16 42 16 q40 0 42 -16 l10 -92Z" fill="#e6ddc8"/><ellipse cx="356" cy="592" rx="42" ry="10" fill="#3f2d1d"/>
+<ellipse cx="356" cy="558" rx="40" ry="26" fill="#cfd8dd" opacity=".22" filter="url(#hz2)"/>
+<rect width="500" height="800" filter="url(#gr)" opacity=".34" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div><span class="cap">04:12 — Thermos, fogged glass</span></div>
+<div class="cell">
+<svg viewBox="0 0 500 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Boots on a gravel shoulder">
+<defs><linearGradient id="c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b8577"/><stop offset="1" stop-color="#4a463c"/></linearGradient></defs>
+<rect width="500" height="800" fill="url(#c2)"/>
+<g fill="#3a362d" opacity=".6"><circle cx="70" cy="120" r="14"/><circle cx="180" cy="70" r="9"/><circle cx="300" cy="150" r="16"/><circle cx="420" cy="90" r="11"/><circle cx="120" cy="260" r="12"/><circle cx="260" cy="300" r="18"/><circle cx="400" cy="250" r="10"/><circle cx="60" cy="640" r="15"/><circle cx="200" cy="700" r="12"/><circle cx="330" cy="660" r="19"/><circle cx="450" cy="720" r="13"/><circle cx="150" cy="770" r="10"/></g>
+<g fill="#231f18"><path d="M130 380 q10 -60 60 -58 q46 2 48 56 l6 60 q2 30 -34 32 l-52 2 q-34 0 -32 -30Z"/><path d="M250 400 q10 -58 60 -56 q46 2 48 56 l6 60 q2 30 -34 32 l-52 2 q-34 0 -32 -30Z"/></g>
+<g fill="#141210"><path d="M124 460 l134 -4 l4 34 l-140 4Z"/><path d="M244 480 l134 -4 l4 34 l-140 4Z"/></g>
+<g stroke="#8A7C4E" stroke-width="4" fill="none"><path d="M148 386 l64 -6M152 410 l64 -6M268 406 l64 -6M272 430 l64 -6"/></g>
+<rect width="500" height="800" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div><span class="cap">Shoulder of the 41</span></div>
+<div class="cell">
+<svg viewBox="0 0 500 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A contact sheet and a loupe">
+<rect width="500" height="800" fill="#c9c1ae"/><rect x="44" y="60" width="412" height="680" fill="#f4efe4"/>
+<g fill="#2c3740"><rect x="70" y="90" width="112" height="76"/><rect x="194" y="90" width="112" height="76"/><rect x="318" y="90" width="112" height="76"/><rect x="70" y="182" width="112" height="76"/><rect x="194" y="182" width="112" height="76"/><rect x="318" y="182" width="112" height="76"/><rect x="70" y="274" width="112" height="76"/><rect x="194" y="274" width="112" height="76"/><rect x="318" y="274" width="112" height="76"/><rect x="70" y="366" width="112" height="76"/><rect x="194" y="366" width="112" height="76"/><rect x="318" y="366" width="112" height="76"/><rect x="70" y="458" width="112" height="76"/><rect x="194" y="458" width="112" height="76"/><rect x="318" y="458" width="112" height="76"/><rect x="70" y="550" width="112" height="76"/><rect x="194" y="550" width="112" height="76"/><rect x="318" y="550" width="112" height="76"/></g>
+<g fill="#657481" opacity=".8"><rect x="70" y="128" width="112" height="38"/><rect x="194" y="220" width="112" height="38"/><rect x="318" y="312" width="112" height="38"/><rect x="70" y="496" width="112" height="38"/><rect x="194" y="588" width="112" height="38"/></g>
+<g stroke="#9A5A33" stroke-width="3" fill="none"><rect x="190" y="270" width="120" height="84"/><path d="M312 268 l34 -22"/></g>
+<circle cx="368" cy="672" r="58" fill="#1b1d19" opacity=".85"/><circle cx="368" cy="672" r="44" fill="#cfd8d2" opacity=".35"/><circle cx="352" cy="656" r="14" fill="#fff" opacity=".4"/>
+<rect width="500" height="800" filter="url(#gr2)" opacity=".24" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div><span class="cap">Roll 14 — Contact sheet</span></div>
+<div class="cell">
+<svg viewBox="0 0 500 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A rucksack set down against a roadside guardrail">
+<defs><linearGradient id="c4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa39d"/><stop offset=".5" stop-color="#6f7a74"/><stop offset="1" stop-color="#3f4640"/></linearGradient></defs>
+<rect width="500" height="800" fill="url(#c4)"/>
+<path d="M0 300 L250 296 L380 262 L500 292 L500 360 L0 360Z" fill="#4e5750"/><rect x="0" y="352" width="500" height="448" fill="#3a4039"/>
+<g fill="#22271f"><rect x="0" y="330" width="500" height="16"/><rect x="80" y="346" width="15" height="90"/><rect x="360" y="346" width="15" height="88"/></g>
+<path d="M170 780 L146 520 q-4 -40 34 -46 l120 -18 q38 -6 44 34 l30 290Z" fill="#3f3c28"/>
+<path d="M170 780 L158 660 l208 -28 l14 148Z" fill="#35321f"/>
+<path d="M200 466 q-26 -56 26 -78 q52 -22 76 30" fill="none" stroke="#4b4831" stroke-width="16"/>
+<rect x="196" y="596" width="120" height="16" fill="#8A7C4E"/>
+<path d="M176 748 q90 -22 190 -32" stroke="#221e13" stroke-width="6" fill="none" opacity=".6"/>
+<g stroke="#2b3128" stroke-width="4" fill="none"><path d="M30 780 l8 -46M46 786 l2 -52M420 776 l9 -42M440 782 l1 -48"/></g>
+<rect width="500" height="800" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div><span class="cap">Ridgeline 40, five seasons in</span></div>
+<div class="cell">
+<svg viewBox="0 0 500 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An empty basalt road running to the horizon">
+<defs><linearGradient id="c5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5c6b7a"/><stop offset=".45" stop-color="#98a3a6"/><stop offset=".62" stop-color="#c3a887"/><stop offset="1" stop-color="#5d5346"/></linearGradient></defs>
+<rect width="500" height="800" fill="url(#c5)"/>
+<path d="M0 430 L240 424 L370 388 L500 420 L500 470 L0 470Z" fill="#4d4a48"/>
+<rect x="0" y="462" width="500" height="338" fill="#31302e"/>
+<path d="M212 462 L288 462 L400 800 L100 800Z" fill="#3e3d3b"/>
+<g fill="#d8cfbb" opacity=".8"><rect x="244" y="500" width="9" height="30"/><rect x="242" y="560" width="11" height="40"/><rect x="239" y="640" width="14" height="52"/><rect x="235" y="726" width="18" height="66"/></g>
+<rect width="500" height="800" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div><span class="cap">Route 41 — nothing for 60 km</span></div>
+</section>
+
+<!-- CREAM — CARRIED, NOT CURATED -->
+<section class="sec" id="gear">
+<div class="wrap">
+<div class="grid g57" style="align-items:start;margin-bottom:clamp(48px,6vw,92px)">
+<div class="rv"><p class="ov">The Rangefinder line</p><h2 class="dsp h2">CARRIED,<br><em>not</em> CURATED</h2></div>
+<div class="rv d1" style="max-width:560px;margin-left:auto">
+<p class="p">We do not photograph our bags on white paper. We photograph them where they live: on a wet tailgate, jammed under a seat, in the footwell with a coffee lid balanced on top. Everything on this page has been through at least two winters and one ferry crossing that should have been cancelled.</p>
+<p class="p">Waxed cotton, solid brass, bar-tacked webbing, and a repair address printed inside the lid. If it fails in the field, send it back and we will fix it.</p>
+<div style="margin-top:28px"><a class="btn" href="#printroom"><span class="lb"><span>Browse the whole line</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div></div>
+
+<div class="grid g3" style="margin-bottom:clamp(30px,4vw,60px)">
+<article class="card rv">
+<div class="frame r811 zm">
+<svg viewBox="0 0 800 1100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A shoulder bag worn across the body on a wet dock">
+<defs><linearGradient id="d1g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e6a6d"/><stop offset=".5" stop-color="#8b9491"/><stop offset="1" stop-color="#3d4644"/></linearGradient></defs>
+<rect width="800" height="1100" fill="url(#d1g)"/>
+<ellipse cx="600" cy="160" rx="380" ry="120" fill="#41494a" opacity=".55" filter="url(#hz)"/>
+<path d="M0 500 L400 500 L620 464 L800 494 L800 590 L0 590Z" fill="#3f4a49"/>
+<rect x="0" y="576" width="800" height="524" fill="#2c3634"/>
+<g stroke="#a8b2af" stroke-width="3" opacity=".2"><path d="M0 700 h800M0 810 h800M0 920 h800"/></g>
+<g fill="#131a1c"><rect x="60" y="576" width="22" height="524"/><rect x="700" y="576" width="20" height="524"/></g>
+<path d="M250 1100 L246 620 q0 -50 46 -62 l180 -34 q52 -8 60 46 l40 550Z" fill="#2f3327"/>
+<path d="M300 570 q60 -30 130 -8 l10 34 q-70 -26 -134 4Z" fill="#3a3f30"/>
+<path d="M292 588 l260 350" stroke="#4b4830" stroke-width="26" fill="none"/>
+<g transform="rotate(-6 470 880)"><rect x="330" y="780" width="290" height="200" fill="#3f3c27"/><rect x="330" y="760" width="290" height="70" fill="#4a4731"/><rect x="430" y="820" width="90" height="26" fill="#8A7C4E"/><rect x="452" y="826" width="46" height="14" fill="#2a281c"/><path d="M348 962 q120 -22 254 -8" stroke="#211e13" stroke-width="6" fill="none" opacity=".55"/></g>
+<g stroke="#dfe6e3" stroke-width="1.3" opacity=".14"><path d="M60 0 l-24 110M220 60 l-24 110M380 0 l-24 110M540 90 l-24 110M700 30 l-24 110M140 320 l-24 110M460 360 l-24 110M760 300 l-24 110"/></g>
+<rect width="800" height="1100" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>Field Kit</span><span>Waxed olive</span></div>
+<h3 class="dsp h4">HALYARD 12 <em>shoulder</em> BAG</h3>
+<p class="p">One body, two lenses and a notebook. Sits behind the hip when you walk and swings forward when you need it. Brass slider, cotton webbing, no logo on the outside.</p>
+<a class="btn sm" href="#printroom"><span class="lb"><span>$245</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+
+<article class="card rv d1 off" style="margin-top:clamp(0px,5vw,72px)">
+<div class="frame r811 zm">
+<svg viewBox="0 0 800 1100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Close detail of a strap buckle and webbing">
+<defs><linearGradient id="d2g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6a6250"/><stop offset="1" stop-color="#28241c"/></linearGradient></defs>
+<rect width="800" height="1100" fill="url(#d2g)"/>
+<ellipse cx="140" cy="120" rx="420" ry="300" fill="#f3d7a4" opacity=".22" filter="url(#hz)"/>
+<g transform="rotate(-14 400 550)">
+<rect x="150" y="120" width="180" height="880" fill="#463f2c"/>
+<g stroke="#2c2a1c" stroke-width="3"><path d="M164 120 v880M316 120 v880"/></g>
+<g stroke="#5d5940" stroke-width="2" opacity=".5"><path d="M150 200 h180M150 260 h180M150 320 h180M150 380 h180M150 440 h180M150 500 h180M150 560 h180M150 620 h180M150 680 h180M150 740 h180M150 800 h180M150 860 h180"/></g>
+<rect x="118" y="470" width="244" height="150" fill="#8A7C4E"/><rect x="146" y="498" width="188" height="94" fill="#2b2820"/><rect x="228" y="470" width="26" height="150" fill="#9D8F5D"/>
+<g stroke="#1f1d14" stroke-width="5"><path d="M176 660 h128M176 676 h128M176 692 h128M176 400 h128M176 384 h128"/></g>
+<rect x="150" y="960" width="180" height="16" fill="#26241a"/>
+<rect x="330" y="120" width="60" height="880" fill="#100e0a" opacity=".5"/></g>
+<rect width="800" height="1100" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>Field Kit</span><span>Solid brass</span></div>
+<h3 class="dsp h4">TETHER STRAP <em>no.</em> 2</h3>
+<p class="p">38 mm cotton webbing, leather ends, cast brass hardware that goes dull in about a month and stays that way. Adjustable one-handed, chest to hip.</p>
+<a class="btn sm" href="#printroom"><span class="lb"><span>$78</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+
+<article class="card rv d2">
+<div class="frame r811 zm">
+<svg viewBox="0 0 800 1100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A fleece and a watch cap in a truck cab at first light">
+<defs><linearGradient id="d3g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3038"/><stop offset=".42" stop-color="#5d5f5c"/><stop offset="1" stop-color="#191c1e"/></linearGradient></defs>
+<rect width="800" height="1100" fill="url(#d3g)"/>
+<rect x="60" y="60" width="680" height="470" fill="#7d8f9c" opacity=".65"/>
+<path d="M60 380 L200 320 L330 372 L470 300 L610 366 L740 318 L740 530 L60 530Z" fill="#3a4348"/>
+<circle cx="600" cy="250" r="46" fill="#ffd9a0" opacity=".8" filter="url(#hz3)"/>
+<ellipse cx="400" cy="330" rx="380" ry="60" fill="#e9c79a" opacity=".3" filter="url(#hz2)"/>
+<rect x="0" y="520" width="800" height="580" fill="#171a1c"/><rect x="0" y="520" width="800" height="24" fill="#2a2f31"/>
+<path d="M110 1100 L120 760 q6 -60 70 -74 l210 -46 q66 -12 84 52 l84 408Z" fill="#4a4a3c"/>
+<g stroke="#5b5b4a" stroke-width="3" opacity=".6" fill="none"><path d="M140 800 q100 -30 220 -46M146 860 q110 -32 236 -50M154 920 q116 -32 246 -52M162 980 q120 -32 254 -52"/></g>
+<path d="M188 730 q80 -46 176 -20 l14 42 q-96 -32 -178 14Z" fill="#3c3c30"/>
+<rect x="300" y="820" width="140" height="18" fill="#8A7C4E" transform="rotate(-11 370 829)"/>
+<g transform="rotate(8 620 640)"><path d="M540 640 q0 -80 84 -80 q84 0 84 80 l0 34 l-168 0Z" fill="#33351f"/><rect x="530" y="668" width="188" height="40" rx="6" fill="#3f4227"/><g stroke="#4c4f2f" stroke-width="3"><path d="M556 600 v70M596 586 v84M636 584 v86M676 596 v74"/></g></g>
+<rect width="800" height="1100" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>Apparel</span><span>Undyed wool</span></div>
+<h3 class="dsp h4">HEADLAND FLEECE <em>&amp;</em> WATCH CAP</h3>
+<p class="p">A high-pile fleece that goes on over everything at the trailhead and comes off in the truck. The cap is undyed lambswool from a mill four valleys over.</p>
+<a class="btn sm" href="#printroom"><span class="lb"><span>$168 / $46</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+</div>
+
+<div class="grid g2">
+<article class="card rv">
+<div class="frame r43 zm">
+<svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Gear laid out on a truck bed before departure">
+<defs><linearGradient id="d4g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f3538"/><stop offset="1" stop-color="#131618"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#d4g)"/>
+<ellipse cx="900" cy="0" rx="600" ry="340" fill="#e8c894" opacity=".18" filter="url(#hz)"/>
+<rect x="0" y="120" width="1200" height="780" fill="#22282a"/>
+<g stroke="#59636a" stroke-width="3" opacity=".22"><path d="M0 240 h1200M0 400 h1200M0 560 h1200M0 720 h1200"/></g>
+<rect x="70" y="240" width="330" height="420" fill="#3f3c28"/><rect x="70" y="240" width="330" height="86" fill="#4a4731"/><rect x="200" y="300" width="76" height="26" fill="#8A7C4E"/>
+<path d="M86 630 q160 -26 300 -12" stroke="#211e13" stroke-width="6" fill="none" opacity=".6"/>
+<rect x="450" y="300" width="170" height="180" rx="6" fill="#15171a"/><circle cx="535" cy="392" r="56" fill="#0a0c0e"/><circle cx="535" cy="392" r="40" fill="#1f4550"/><circle cx="516" cy="374" r="13" fill="#8ec0cc" opacity=".5"/><rect x="470" y="270" width="80" height="34" rx="5" fill="#1b1e21"/>
+<g fill="#191b1e"><rect x="660" y="330" width="94" height="150" rx="5"/><circle cx="707" cy="410" r="30" fill="#0a0c0e"/><rect x="786" y="360" width="80" height="120" rx="5"/><circle cx="826" cy="420" r="26" fill="#0a0c0e"/></g>
+<g transform="rotate(-5 960 660)"><rect x="820" y="560" width="300" height="200" fill="#ddd2b8"/>
+<g stroke="#a2957a" stroke-width="1.6" fill="none"><path d="M834 620 q60 -30 120 -6 q60 24 152 -14"/><path d="M834 660 q64 -26 126 -2 q62 24 146 -18"/><path d="M834 700 q68 -22 132 2 q64 24 140 -22"/></g>
+<path d="M850 730 L920 682 L1010 706 L1092 638" stroke="#9A5A33" stroke-width="2.4" stroke-dasharray="8 6" fill="none"/></g>
+<rect x="480" y="580" width="240" height="180" fill="#2b2f22"/><rect x="480" y="580" width="240" height="30" fill="#8A7C4E"/>
+<rect width="1200" height="900" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>The kit list</span><span>Free shipping over $200</span></div>
+<h3 class="dsp h4">WHAT ACTUALLY <em>goes in</em> THE TRUCK</h3>
+<p class="p">Our own packing list for a three-day coastal shoot, down to the number of spare batteries and which pocket the ferry ticket goes in. Print it, tape it inside the lid.</p>
+<a class="btn sm" href="#notes"><span class="lb"><span>Read the list</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+<article class="card rv d1">
+<div class="frame r43 zm">
+<svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A repair bench with waxed canvas, thread and brass hardware">
+<defs><linearGradient id="d5g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a7f6b"/><stop offset="1" stop-color="#403a2e"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#d5g)"/>
+<ellipse cx="200" cy="60" rx="520" ry="300" fill="#ffe6bd" opacity=".28" filter="url(#hz)"/>
+<g stroke="#6a6151" stroke-width="4" opacity=".32"><path d="M0 180 h1200M0 420 h1200M0 660 h1200"/></g>
+<g transform="rotate(-3 450 460)"><rect x="140" y="180" width="620" height="560" fill="#3f3c28"/>
+<path d="M300 300 q120 -40 240 0" stroke="#8A7C4E" stroke-width="8" fill="none"/>
+<g stroke="#d8cdaa" stroke-width="3" stroke-dasharray="14 10"><path d="M220 480 h460M220 540 h460"/></g>
+<rect x="360" y="600" width="150" height="40" fill="#8A7C4E"/></g>
+<circle cx="920" cy="300" r="86" fill="#b9ad8c"/><circle cx="920" cy="300" r="30" fill="#4d4736"/><path d="M920 214 a86 86 0 0 1 0 172" fill="#cdc09c"/><path d="M1006 300 l150 90" stroke="#cdc09c" stroke-width="5" fill="none"/>
+<g fill="#8A7C4E"><rect x="880" y="600" width="70" height="46"/><rect x="970" y="620" width="70" height="46"/><rect x="920" y="676" width="70" height="46"/></g>
+<rect width="1200" height="900" filter="url(#gr2)" opacity=".26" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>Service</span><span>Lifetime</span></div>
+<h3 class="dsp h4">THE REPAIR BENCH — <em>send it</em> BACK</h3>
+<p class="p">Blown zip, torn corner, webbing chewed through by a tailgate latch. We re-stitch, re-wax and return it, and we photograph the damage first, because the wear is the interesting part.</p>
+<a class="btn sm" href="#faq"><span class="lb"><span>How repairs work</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+</div>
+</div></section>
+
+<!-- FEATURE -->
+<section aria-label="Feature">
+<div class="frame r219 par" data-par style="min-height:520px">
+<svg viewBox="0 0 1900 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The car deck of a ferry crossing in bad weather">
+<defs><linearGradient id="f1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#39434a"/><stop offset=".5" stop-color="#6a747a"/><stop offset="1" stop-color="#7f8887"/></linearGradient>
+<linearGradient id="f1d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5354"/><stop offset="1" stop-color="#1e2426"/></linearGradient></defs>
+<rect width="1900" height="800" fill="url(#f1)"/>
+<g filter="url(#hz)" opacity=".7"><ellipse cx="500" cy="120" rx="620" ry="120" fill="#333b40"/><ellipse cx="1500" cy="180" rx="560" ry="110" fill="#3d464a"/></g>
+<path d="M0 372 L560 374 L1240 376 L1900 372 L1900 420 L0 420Z" fill="#4a5654" opacity=".8"/>
+<rect x="0" y="404" width="1900" height="170" fill="#3d4a49"/>
+<g opacity=".24" stroke="#c6d0cd" stroke-width="2"><path d="M100 440 h240M480 466 h180M820 434 h260M1240 470 h200M1600 442 h230"/></g>
+<rect x="0" y="560" width="1900" height="240" fill="url(#f1d)"/>
+<g stroke="#8f9998" stroke-width="3" opacity=".2"><path d="M0 640 h1900M0 720 h1900"/></g>
+<g fill="#141b1d"><rect x="0" y="520" width="1900" height="12"/><rect x="0" y="574" width="1900" height="9"/><rect x="180" y="520" width="13" height="120"/><rect x="520" y="520" width="13" height="120"/><rect x="880" y="520" width="13" height="120"/><rect x="1240" y="520" width="13" height="120"/><rect x="1600" y="520" width="13" height="120"/></g>
+<path d="M1320 800 L1322 640 q0 -34 30 -44 q-22 -30 4 -50 q30 -22 54 2 q22 22 2 48 q34 10 36 46 l4 92 l-18 0 l-4 -46 l-12 152Z" fill="#232b23"/>
+<path d="M1358 552 q34 -22 66 2 l6 22 q-40 -22 -78 2Z" fill="#2d3629"/>
+<path d="M1480 800 L1482 660 q0 -30 26 -38 q-18 -26 2 -44 q26 -20 48 2 q18 20 0 42 q30 10 32 40 l4 82 l-16 0 l-4 -40 l-10 136Z" fill="#1c2224"/>
+<path d="M1400 660 q42 -8 58 20 q12 28 -4 54 q-8 14 -28 10 l-30 -8Z" fill="#3f3c28"/>
+<g stroke="#dfe6e3" stroke-width="1.4" opacity=".17"><path d="M60 0 l-28 120M220 60 l-28 120M380 0 l-28 120M540 90 l-28 120M700 20 l-28 120M860 110 l-28 120M1020 40 l-28 120M1180 130 l-28 120M1340 10 l-28 120M1500 100 l-28 120M1660 30 l-28 120M1820 120 l-28 120M140 300 l-28 120M460 340 l-28 120M780 300 l-28 120M1100 350 l-28 120M1420 310 l-28 120M1740 360 l-28 120"/></g>
+<rect width="1900" height="800" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="wrap" style="position:relative">
+<div class="panel rv" style="max-width:480px;margin-top:clamp(-96px,-7vw,-56px);position:relative;z-index:4">
+<p class="ov" style="margin-bottom:14px">Field Notes No. 07 — Chapter Two</p>
+<h3 class="dsp h3" style="margin:0 0 14px">THE 5:40, <em>in</em> RAIN</h3>
+<p class="p" style="font-size:15.4px">Two hours on a car deck with nothing to do and nothing dry to sit on. This is the part nobody photographs, so we did.</p>
+<div class="pdv"></div>
+<div class="pr meta" style="color:var(--field)"><svg><use href="#ip"/></svg> Sound of Kellach — Slipway 2</div>
+<div class="pr meta" style="color:var(--field)"><svg><use href="#ic"/></svg> 05:40 departure · Force 6 · 11 °C</div>
+<div class="pdv"></div>
+<div><span class="tg">Longshore Anorak</span><span class="tg">Bellows 24</span><span class="tg">Ferry Watch Cap</span></div>
+<div class="pdv"></div>
+<div class="pf"><span class="price">18 min read</span><a class="btn sm bs" href="#notes"><span class="lb"><span>Read the chapter</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div></div>
+</section>
+
+<!-- FIELD NOTES -->
+<section class="sec" id="notes" style="padding-top:clamp(60px,7vw,110px)">
+<div class="wrap">
+<div class="rh rv"><div><p class="ov">The journal</p><h2 class="dsp h2">FIELD NOTES</h2></div>
+<a class="btn" href="#notes"><span class="lb"><span>All entries</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+<hr class="r" style="margin-bottom:clamp(34px,4vw,58px)">
+<div class="grid g75 rv" style="align-items:center;margin-bottom:clamp(48px,6vw,86px)">
+<div class="frame r32 zm par" data-par>
+<svg viewBox="0 0 1400 933" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Headlights on an empty road at night on the way home">
+<defs><linearGradient id="n1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060a10"/><stop offset=".5" stop-color="#0d1620"/><stop offset="1" stop-color="#05080b"/></linearGradient>
+<linearGradient id="n1b" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffe6bb" stop-opacity=".55"/><stop offset="1" stop-color="#ffe6bb" stop-opacity="0"/></linearGradient></defs>
+<rect width="1400" height="933" fill="url(#n1)"/>
+<g fill="#fff" opacity=".5"><circle cx="180" cy="90" r="1.4"/><circle cx="520" cy="60" r="1.1"/><circle cx="900" cy="110" r="1.5"/><circle cx="1240" cy="70" r="1.2"/><circle cx="360" cy="180" r="1"/></g>
+<path d="M0 480 L420 476 L880 478 L1400 474 L1400 540 L0 540Z" fill="#0a1219"/>
+<rect x="0" y="524" width="1400" height="409" fill="#080b0e"/>
+<path d="M560 524 L680 524 L980 933 L260 933Z" fill="#12171b"/>
+<g fill="#cdd6d8" opacity=".55"><rect x="612" y="560" width="8" height="26"/><rect x="608" y="620" width="10" height="34"/><rect x="602" y="700" width="13" height="44"/><rect x="594" y="800" width="17" height="58"/></g>
+<path d="M0 933 L620 500 L680 500 L1400 933Z" fill="url(#n1b)" opacity=".26"/>
+<ellipse cx="646" cy="512" rx="30" ry="12" fill="#fff2d6" opacity=".9" filter="url(#hz3)"/>
+<ellipse cx="646" cy="516" rx="160" ry="52" fill="#ffdfae" opacity=".2" filter="url(#hz2)"/>
+<g stroke="#0d1418" stroke-width="4" fill="none"><path d="M120 560 l10 -40M144 566 l2 -46M1240 556 l11 -38M1266 562 l2 -44"/></g>
+<rect width="1400" height="933" filter="url(#gr)" opacity=".34" style="mix-blend-mode:overlay"/>
+</svg></div>
+<div>
+<div class="cm meta"><span>Story</span><span>12 min read</span><span>Chapter Four</span></div>
+<h3 class="dsp h3" style="margin:0 0 16px">COMING BACK<br><em>after</em> DARK</h3>
+<p class="p">Nobody talks about the drive home. Two hundred kilometres of black road, one bar of radio, and a card full of frames you will not look at until Tuesday. We shot the return leg of the Island Road trip entirely from inside the cab.</p>
+<p class="p">Words and pictures by Ilse Vantoren, on the 41 between Kellach and the Nolan turn-off, in weather that never once improved.</p>
+<a class="btn sm" href="#notes"><span class="lb"><span>Keep reading</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</div></div>
+
+<div class="grid g3">
+<article class="card rv">
+<div class="frame r43 zm">
+<svg viewBox="0 0 1000 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Coffee poured on a tailgate before sunrise">
+<defs><linearGradient id="e1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2531"/><stop offset=".55" stop-color="#4a4a44"/><stop offset="1" stop-color="#15181a"/></linearGradient></defs>
+<rect width="1000" height="750" fill="url(#e1)"/>
+<ellipse cx="820" cy="240" rx="360" ry="120" fill="#e6a761" opacity=".3" filter="url(#hz)"/>
+<path d="M0 300 L420 296 L640 258 L1000 268 L1000 360 L0 360Z" fill="#171e24"/>
+<rect x="0" y="344" width="1000" height="406" fill="#171a1c"/><rect x="0" y="344" width="1000" height="16" fill="#2b3033"/>
+<rect x="140" y="400" width="150" height="260" rx="8" fill="#2b2f22"/><rect x="140" y="400" width="150" height="40" rx="8" fill="#8A7C4E"/>
+<path d="M400 470 l14 150 q2 20 56 20 q54 0 56 -20 l14 -150Z" fill="#e6ddc8"/><ellipse cx="470" cy="470" rx="70" ry="18" fill="#3a2718"/>
+<path d="M540 500 q40 6 38 40 q-2 34 -40 30" fill="none" stroke="#e6ddc8" stroke-width="12"/>
+<g opacity=".42" filter="url(#hz2)"><ellipse cx="470" cy="420" rx="46" ry="34" fill="#cfd8dd"/><ellipse cx="486" cy="374" rx="30" ry="24" fill="#cfd8dd"/></g>
+<path d="M700 470 q60 -30 130 -6 q60 22 62 90 q2 60 -60 74 l-100 12 q-46 2 -48 -44 q-2 -84 16 -126Z" fill="#0f1113"/>
+<rect width="1000" height="750" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>Story</span><span>6 min read</span></div>
+<h3 class="dsp h4">FOUR AM <em>is a</em> LOCATION</h3>
+<p class="p">In praise of the hour when nothing is open, nothing is decided, and the whole day is still theoretically going well.</p>
+<a class="btn sm" href="#notes"><span class="lb"><span>Keep reading</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+<article class="card rv d1">
+<div class="frame r43 zm">
+<svg viewBox="0 0 1000 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A car pulled over with hazards on beside a fjord">
+<defs><linearGradient id="e2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6a78"/><stop offset=".45" stop-color="#98a2a2"/><stop offset="1" stop-color="#454c48"/></linearGradient></defs>
+<rect width="1000" height="750" fill="url(#e2)"/>
+<ellipse cx="300" cy="120" rx="400" ry="90" fill="#4e5a62" opacity=".55" filter="url(#hz)"/>
+<path d="M0 330 L320 314 L500 244 L680 306 L1000 300 L1000 400 L0 400Z" fill="#4c5654"/>
+<path d="M0 386 L420 382 L880 380 L1000 358 L1000 430 L0 430Z" fill="#39413e"/>
+<rect x="0" y="418" width="1000" height="120" fill="#5a6360" opacity=".7"/>
+<rect x="0" y="520" width="1000" height="230" fill="#33383a"/><rect x="0" y="520" width="1000" height="10" fill="#6b716f"/>
+<g fill="#d9d2c2" opacity=".7"><rect x="60" y="640" width="120" height="8"/><rect x="320" y="640" width="120" height="8"/><rect x="580" y="640" width="120" height="8"/><rect x="840" y="640" width="120" height="8"/></g>
+<g fill="#161a1c"><path d="M320 560 L340 490 q6 -22 34 -24 l180 -6 q28 0 40 22 l32 78Z"/><rect x="310" y="556" width="360" height="44" rx="8"/><circle cx="382" cy="600" r="26"/><circle cx="606" cy="600" r="26"/></g>
+<rect x="366" y="500" width="150" height="40" fill="#6d7b82" opacity=".6"/>
+<circle cx="322" cy="572" r="9" fill="#e58a2c"/><circle cx="662" cy="572" r="9" fill="#e58a2c"/><circle cx="322" cy="572" r="22" fill="#e58a2c" opacity=".26" filter="url(#hz3)"/>
+<path d="M740 750 L742 628 q0 -22 20 -28 q-14 -18 2 -30 q18 -14 32 2 q12 14 0 28 q22 6 22 28 l2 60 l-12 0 l-2 -30 l-8 100Z" fill="#121618"/>
+<rect width="1000" height="750" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>Story</span><span>9 min read</span></div>
+<h3 class="dsp h4">PULLED OVER <em>on the</em> 41</h3>
+<p class="p">A defence of the unplanned stop, the hazard lights, and the picture that was not on anybody's shot list.</p>
+<a class="btn sm" href="#notes"><span class="lb"><span>Keep reading</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+<article class="card rv d2">
+<div class="frame r43 zm">
+<svg viewBox="0 0 1000 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Handwritten field log pages beside a map corner">
+<rect width="1000" height="750" fill="#c4bba6"/>
+<ellipse cx="180" cy="60" rx="440" ry="260" fill="#fff2da" opacity=".45" filter="url(#hz)"/>
+<g transform="rotate(-2 500 400)">
+<rect x="120" y="90" width="760" height="600" fill="#efe8d8"/><rect x="120" y="90" width="30" height="600" fill="#ddd4c0"/>
+<g stroke="#b9b09a" stroke-width="1.4"><path d="M190 180 h640M190 230 h640M190 280 h640M190 330 h640M190 380 h640M190 430 h640M190 480 h640M190 530 h640M190 580 h640M190 630 h640"/></g>
+<g stroke="#9A5A33" stroke-width="2.6" fill="none"><path d="M200 168 q30 -18 52 2 q22 20 50 -4 q28 -22 60 2 q26 22 54 -2 q28 -24 60 0"/><path d="M200 218 q34 -14 62 4 q28 18 58 -6 q30 -22 66 2"/><path d="M200 318 q30 -20 56 0 q26 20 56 -4 q30 -24 64 2 q28 24 58 -4"/><path d="M200 368 q36 -12 66 6 q30 18 62 -8"/><path d="M200 468 q28 -18 52 2 q24 20 52 -4 q28 -22 58 2 q26 22 52 -2"/><path d="M200 518 q32 -14 60 4 q28 18 56 -6"/></g>
+<rect x="560" y="400" width="290" height="200" fill="#2c3a44"/>
+<path d="M560 530 L620 486 L668 512 L740 460 L800 494 L850 466 L850 600 L560 600Z" fill="#1b262c"/>
+<path d="M210 640 q140 -30 300 0 q140 30 300 -20" stroke="#9A5A33" stroke-width="2" fill="none" stroke-dasharray="7 6"/><circle cx="810" cy="620" r="6" fill="#9A5A33"/></g>
+<rect width="1000" height="750" filter="url(#gr2)" opacity=".24" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="cm meta"><span>Method</span><span>4 min read</span></div>
+<h3 class="dsp h4">KEEPING <em>a</em> FIELD LOG</h3>
+<p class="p">Time, tide, film stock, and the name of the person who told you where to go. How we caption a trip before we forget it.</p>
+<a class="btn sm" href="#notes"><span class="lb"><span>Keep reading</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+</article>
+</div>
+</div></section>
+
+<!-- COORDINATES -->
+<section class="mapband" aria-label="Coordinates">
+<svg class="mapbg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<rect width="1600" height="1000" fill="#E4DCCB"/>
+<g stroke="#c3b79e" stroke-width="1.5" fill="none">
+<path d="M-40 180 q180 -70 360 -20 q180 50 360 -18 q180 -68 360 -6 q180 62 360 -18 q120 -52 240 -10"/>
+<path d="M-40 260 q180 -66 360 -16 q180 50 360 -14 q180 -64 360 -2 q180 62 360 -14 q120 -48 240 -6"/>
+<path d="M-40 350 q180 -62 360 -12 q180 50 360 -10 q180 -60 360 2 q180 62 360 -10 q120 -44 240 -2"/>
+<path d="M-40 450 q180 -58 360 -8 q180 50 360 -6 q180 -56 360 6 q180 62 360 -6 q120 -40 240 2"/>
+<path d="M-40 560 q180 -54 360 -4 q180 50 360 -2 q180 -52 360 10 q180 62 360 -2 q120 -36 240 6"/>
+<path d="M-40 680 q180 -50 360 0 q180 50 360 2 q180 -48 360 14 q180 62 360 2 q120 -32 240 10"/>
+<path d="M-40 810 q180 -46 360 4 q180 50 360 6 q180 -44 360 18 q180 62 360 6 q120 -28 240 14"/>
+<path d="M-40 940 q180 -42 360 8 q180 50 360 10 q180 -40 360 22 q180 62 360 10 q120 -24 240 18"/></g>
+<g stroke="#cfc4ad" stroke-width="1" fill="none" opacity=".85"><path d="M200 0 v1000M500 0 v1000M800 0 v1000M1100 0 v1000M1400 0 v1000M0 120 h1600M0 440 h1600M0 760 h1600"/></g>
+<path d="M120 900 q160 -170 300 -230 q160 -70 280 -220 q110 -140 300 -190 q180 -46 300 -140" stroke="#9A5A33" stroke-width="2.6" stroke-dasharray="12 9" fill="none" opacity=".8"/>
+<g fill="#b9ac91" opacity=".5"><path d="M1240 640 q80 -50 180 -20 q90 28 140 -30 l0 240 q-140 40 -240 0 q-90 -36 -80 -190Z"/><path d="M120 120 q90 -40 170 -6 q80 34 130 -20 l0 150 q-130 34 -220 -6 q-84 -38 -80 -118Z"/></g>
+<rect width="1600" height="1000" filter="url(#gr2)" opacity=".16" style="mix-blend-mode:multiply"/>
+</svg>
+<div class="wrap" style="position:relative;padding-top:clamp(70px,9vw,140px);padding-bottom:clamp(20px,3vw,44px)">
+<div class="grid g57" style="align-items:start">
+<div class="rv">
+<p class="ov ovr">Collected along the way</p>
+<h2 class="dsp h2" style="margin-bottom:22px">THINGS <em>we picked</em> UP</h2>
+<p class="p" style="max-width:400px">Coordinates, tide tables, ferry stubs, the phone number of a man with a boat. The trip leaves a paper trail and we keep all of it.</p>
+<div style="margin-top:30px"><a class="btn" href="#printroom"><span class="lb"><span>The Print Room</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div>
+<div style="position:relative;min-height:clamp(380px,36vw,520px)">
+<div class="note rv d1" style="position:absolute;left:2%;top:0;transform:rotate(-2.2deg)">
+<p class="coord" style="margin:0 0 8px">64°09′14″N — 21°56′03″W</p>
+<p class="hand" style="margin:0">Cape Nolan. Park by the second cattle grid,<br>walk 20 min NE. Sun clears the ridge at 05:51<br>— you get about forty seconds.</p></div>
+<div class="note rv d3" style="position:absolute;right:4%;top:36%;transform:rotate(2.6deg);max-width:230px">
+<p class="coord" style="margin:0 0 8px">Ferry — Slipway 2</p>
+<p class="hand" style="margin:0">Force 6, sailed anyway.<br>Everything wet by 06:10.<br>Anorak held. Boots did not.</p></div>
+<div class="rv d2" style="position:absolute;left:10%;bottom:0;width:min(320px,54%);transform:rotate(-1.4deg)">
+<div style="background:var(--bone);padding:14px 14px 44px;border:1px solid rgba(18,19,14,.1)">
+<div class="frame r11"><svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><linearGradient id="pl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d5566"/><stop offset=".55" stop-color="#9fa89f"/><stop offset="1" stop-color="#c79a68"/></linearGradient></defs>
+<rect width="600" height="600" fill="url(#pl1)"/>
+<path d="M0 380 L200 366 L320 296 L440 356 L600 340 L600 460 L0 460Z" fill="#4a4f4c"/>
+<path d="M0 452 L300 456 L460 410 L600 448 L600 600 L0 600Z" fill="#26292a"/>
+<circle cx="430" cy="256" r="30" fill="#ffe2ac"/>
+<rect width="600" height="600" filter="url(#gr)" opacity=".28" style="mix-blend-mode:overlay"/></svg></div></div>
+<p class="hand" style="position:absolute;left:20px;bottom:8px;margin:0;font-size:15px">roll 14 / frame 22 — the good one</p></div>
+<div class="pw rv d4" style="left:70%;top:8%"><span class="pin"><svg><use href="#ip"/></svg><b>Cape Nolan</b></span></div>
+<div class="pw rv d5" style="left:44%;top:54%"><span class="pin"><svg><use href="#ip"/></svg><b>Slipway 2</b></span></div>
+</div></div></div>
+<div class="sprock rv">
+<span class="holes"><i></i><i></i><i></i></span>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#4a5b66"/><path d="M0 120 L60 92 L110 116 L170 84 L230 112 L300 90 L300 200 L0 200Z" fill="#232d33"/><circle cx="220" cy="60" r="16" fill="#ffe0ae"/><rect width="300" height="200" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/></svg></div>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#6d6754"/><path d="M0 140 L80 118 L150 142 L220 112 L300 138 L300 200 L0 200Z" fill="#2f2c22"/><rect x="120" y="60" width="60" height="80" fill="#3f3c28"/><rect width="300" height="200" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/></svg></div>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#2b3a46"/><path d="M0 110 L70 84 L140 108 L210 78 L300 104 L300 200 L0 200Z" fill="#161e24"/><ellipse cx="90" cy="52" rx="40" ry="14" fill="#8fa9b5" opacity=".5"/><rect width="300" height="200" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/></svg></div>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#8a7f66"/><rect x="60" y="40" width="180" height="120" fill="#d9d0bb"/><rect x="78" y="58" width="144" height="70" fill="#3c4a52"/><rect width="300" height="200" filter="url(#gr2)" opacity=".24" style="mix-blend-mode:overlay"/></svg></div>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#111820"/><circle cx="150" cy="90" r="46" fill="#0a0c0e"/><circle cx="150" cy="90" r="30" fill="#1f4550"/><circle cx="138" cy="78" r="9" fill="#8ec0cc" opacity=".6"/><rect width="300" height="200" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/></svg></div>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#5b6a6a"/><path d="M0 132 L70 106 L150 130 L230 100 L300 126 L300 200 L0 200Z" fill="#2b3634"/><rect x="200" y="40" width="14" height="92" fill="#161d1f"/><rect width="300" height="200" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/></svg></div>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#3a3f30"/><path d="M60 200 L60 90 q0 -20 24 -24 l90 -14 q22 -4 26 20 l16 128Z" fill="#4a4731"/><rect width="300" height="200" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/></svg></div>
+<div class="fr"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="200" fill="#0d1319"/><path d="M0 150 L80 126 L160 150 L240 122 L300 146 L300 200 L0 200Z" fill="#070a0d"/><ellipse cx="150" cy="120" rx="60" ry="18" fill="#ffdca0" opacity=".5" filter="url(#hz3)"/><rect width="300" height="200" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/></svg></div>
+<span class="holes"><i></i><i></i><i></i></span>
+</div>
+<div class="marq" aria-hidden="true"><div class="mi">
+<span><b>64°09′14″N 21°56′03″W</b> Cape Nolan · 05:51</span><span><b>58°38′02″N 06°12′44″W</b> Slipway 2 · Force 6</span><span><b>Roll 14</b> Frame 22 · 1/60 f8</span><span><b>Route 41</b> 216 km · no fuel after Kellach</span><span><b>Tide</b> Low 06:12 · High 12:40</span><span><b>11 °C</b> Rain, then rain</span>
+<span><b>64°09′14″N 21°56′03″W</b> Cape Nolan · 05:51</span><span><b>58°38′02″N 06°12′44″W</b> Slipway 2 · Force 6</span><span><b>Roll 14</b> Frame 22 · 1/60 f8</span><span><b>Route 41</b> 216 km · no fuel after Kellach</span><span><b>Tide</b> Low 06:12 · High 12:40</span><span><b>11 °C</b> Rain, then rain</span>
+</div></div>
+</section>
+
+<!-- PRINT ROOM RAIL -->
+<section class="sec olive" id="printroom">
+<svg class="dk dkt" viewBox="0 0 1600 32" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L1600 0 L1600 10 q-46 11 -92 4 q-50 -8 -98 5 q-46 12 -94 2 q-54 -12 -102 6 q-50 16 -100 3 q-50 -13 -98 4 q-48 15 -96 3 q-56 -14 -106 5 q-46 16 -94 2 q-54 -14 -102 3 q-46 14 -92 2 q-50 -12 -96 3 q-44 14 -86 5 q-28 -6 -54 -2 L0 10Z" fill="#EFE8DA"/></svg>
+<div class="wrap">
+<div class="rh rv">
+<div style="max-width:640px"><p class="ov ovd">The store</p><h2 class="dsp h2" style="margin-bottom:18px">GOODS <em>that</em><br>HOLD UP</h2><p class="p pd" style="max-width:460px">Small runs, made properly, sold until they run out. Prints are pulled to order and shipped flat.</p></div>
+<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+<a class="btn bl" href="#printroom"><span class="lb"><span>Shop all</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a>
+<div class="rn"><button id="rp" aria-label="Previous products" disabled><svg><use href="#il"/></svg></button><button id="rnx" aria-label="Next products"><svg><use href="#ia"/></svg></button></div>
+</div></div>
+<hr class="rd" style="margin-bottom:clamp(30px,4vw,54px)">
+<div class="rv d1"><div class="rail" id="rail">
+
+<article class="prod"><div class="plate"><span class="badge">New</span>
+<svg viewBox="0 0 600 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bellows 24 camera rucksack">
+<rect width="600" height="750" fill="#E4DCCB"/><ellipse cx="300" cy="700" rx="200" ry="26" fill="#0e0f0c" opacity=".12" filter="url(#hz2)"/>
+<path d="M170 690 L152 300 q-4 -54 48 -60 l200 -22 q52 -6 56 48 l24 424Z" fill="#3f3c28"/>
+<path d="M170 690 L162 520 l300 -26 l18 196Z" fill="#35321f"/>
+<path d="M152 300 q-4 -54 48 -60 l200 -22 q52 -6 56 48 l-18 4 q-6 -36 -42 -32 l-186 20 q-38 4 -36 44Z" fill="#4a4731"/>
+<path d="M228 226 q-30 -74 34 -96 q62 -22 88 44" fill="none" stroke="#4a4731" stroke-width="18"/>
+<rect x="252" y="470" width="110" height="24" fill="#8A7C4E"/><rect x="280" y="476" width="52" height="12" fill="#2a281c"/>
+<g stroke="#241f14" stroke-width="4" fill="none" opacity=".5"><path d="M176 640 q140 -22 286 -14M170 600 q140 -20 288 -12"/></g>
+<rect width="600" height="750" filter="url(#gr2)" opacity=".2" style="mix-blend-mode:multiply"/></svg></div>
+<h4 class="dsp h4">BELLOWS 24 RUCKSACK</h4><p class="pm">$385 · Olive / Slate</p></article>
+
+<article class="prod"><div class="plate">
+<svg viewBox="0 0 600 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Halyard 12 shoulder bag">
+<rect width="600" height="750" fill="#E4DCCB"/><ellipse cx="300" cy="690" rx="190" ry="24" fill="#0e0f0c" opacity=".12" filter="url(#hz2)"/>
+<rect x="130" y="400" width="340" height="270" fill="#3f3c28"/>
+<path d="M130 400 l340 0 l0 -46 q0 -28 -30 -28 l-280 0 q-30 0 -30 28Z" fill="#484530"/>
+<rect x="130" y="374" width="340" height="90" fill="#4a4731"/>
+<rect x="252" y="452" width="96" height="28" fill="#8A7C4E"/><rect x="276" y="458" width="48" height="16" fill="#2a281c"/>
+<path d="M150 374 q-40 -120 60 -160" fill="none" stroke="#4a4731" stroke-width="20"/>
+<path d="M450 374 q40 -120 -60 -160" fill="none" stroke="#4a4731" stroke-width="20"/>
+<path d="M144 640 q156 -18 312 -8" stroke="#241f14" stroke-width="4" fill="none" opacity=".5"/>
+<rect width="600" height="750" filter="url(#gr2)" opacity=".2" style="mix-blend-mode:multiply"/></svg></div>
+<h4 class="dsp h4">HALYARD 12 SHOULDER BAG</h4><p class="pm">$245 · Olive / Black</p></article>
+
+<article class="prod"><div class="plate">
+<svg viewBox="0 0 600 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Tether Strap No. 2">
+<rect width="600" height="750" fill="#E4DCCB"/>
+<path d="M120 90 q180 260 0 570" fill="none" stroke="#3f3c28" stroke-width="54"/>
+<path d="M480 90 q-180 260 0 570" fill="none" stroke="#4a4731" stroke-width="54"/>
+<rect x="230" y="330" width="140" height="90" fill="#8A7C4E"/><rect x="250" y="350" width="100" height="50" fill="#2b2820"/><rect x="292" y="330" width="16" height="90" fill="#b3a473"/>
+<g fill="#4a3a26"><rect x="96" y="620" width="52" height="90" rx="8"/><rect x="452" y="620" width="52" height="90" rx="8"/></g>
+<rect width="600" height="750" filter="url(#gr2)" opacity=".2" style="mix-blend-mode:multiply"/></svg></div>
+<h4 class="dsp h4">TETHER STRAP NO. 2</h4><p class="pm">$78 · Cotton / Brass</p></article>
+
+<article class="prod"><div class="plate"><span class="badge">Edition of 40</span>
+<svg viewBox="0 0 600 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Cape Nolan landscape print">
+<defs><linearGradient id="pr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#39485c"/><stop offset=".5" stop-color="#8e8c86"/><stop offset="1" stop-color="#d0a774"/></linearGradient></defs>
+<rect width="600" height="750" fill="#E4DCCB"/>
+<rect x="70" y="120" width="460" height="510" fill="#f7f3ea" stroke="#c8bfa9" stroke-width="2"/>
+<rect x="118" y="168" width="364" height="414" fill="url(#pr1)"/>
+<path d="M118 420 L200 358 L260 400 L340 330 L420 386 L482 348 L482 582 L118 582Z" fill="#4d4b46"/>
+<path d="M118 492 L220 450 L320 490 L420 444 L482 482 L482 582 L118 582Z" fill="#26262a"/>
+<circle cx="392" cy="286" r="26" fill="#ffe2ac"/>
+<ellipse cx="300" cy="418" rx="200" ry="12" fill="#fff" opacity=".35" filter="url(#hz2)"/>
+<rect width="600" height="750" filter="url(#gr2)" opacity=".2" style="mix-blend-mode:multiply"/></svg></div>
+<h4 class="dsp h4">CAPE NOLAN, 05:51</h4><p class="pm">From $190 · 16×20 / 24×30</p></article>
+
+<article class="prod"><div class="plate">
+<svg viewBox="0 0 600 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The Volume Album in linen">
+<rect width="600" height="750" fill="#E4DCCB"/><ellipse cx="300" cy="640" rx="210" ry="24" fill="#0e0f0c" opacity=".12" filter="url(#hz2)"/>
+<rect x="110" y="180" width="380" height="440" fill="#5c5a48" stroke="#484634" stroke-width="3"/>
+<rect x="110" y="180" width="40" height="440" fill="#4a4838"/>
+<g stroke="#6b6957" stroke-width="1.4" opacity=".8"><path d="M160 200 v400M200 200 v400M240 200 v400M280 200 v400M320 200 v400M360 200 v400M400 200 v400M440 200 v400M110 220 h380M110 300 h380M110 380 h380M110 460 h380M110 540 h380"/></g>
+<rect x="220" y="360" width="160" height="70" fill="#8A7C4E"/><rect x="238" y="382" width="124" height="4" fill="#2b2820"/><rect x="238" y="398" width="80" height="4" fill="#2b2820"/>
+<rect x="490" y="180" width="16" height="440" fill="#efe9dc"/>
+<rect width="600" height="750" filter="url(#gr2)" opacity=".2" style="mix-blend-mode:multiply"/></svg></div>
+<h4 class="dsp h4">THE VOLUME ALBUM</h4><p class="pm">$140 · Linen, 11×14</p></article>
+
+<article class="prod"><div class="plate">
+<svg viewBox="0 0 600 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Longshore waxed anorak">
+<rect width="600" height="750" fill="#E4DCCB"/>
+<path d="M180 660 L166 300 q-2 -50 44 -66 l50 -18 l80 0 l50 18 q46 16 44 66 l-14 360Z" fill="#3a3e30"/>
+<path d="M260 216 q40 -30 80 0 l0 46 q-40 -26 -80 0Z" fill="#4a4f3d"/>
+<path d="M166 300 q-2 -50 44 -66 l24 96Z" fill="#454a39"/><path d="M434 300 q2 -50 -44 -66 l-24 96Z" fill="#454a39"/>
+<rect x="292" y="290" width="16" height="360" fill="#2c3026"/>
+<rect x="230" y="450" width="140" height="90" fill="#333729"/><rect x="230" y="450" width="140" height="16" fill="#8A7C4E"/>
+<path d="M180 620 q120 -16 244 -8" stroke="#2c3026" stroke-width="4" fill="none" opacity=".7"/>
+<rect width="600" height="750" filter="url(#gr2)" opacity=".2" style="mix-blend-mode:multiply"/></svg></div>
+<h4 class="dsp h4">LONGSHORE ANORAK</h4><p class="pm">$298 · Olive / Sand</p></article>
+
+<article class="prod"><div class="plate">
+<svg viewBox="0 0 600 750" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ridgeline 40 rucksack">
+<rect width="600" height="750" fill="#E4DCCB"/><ellipse cx="300" cy="700" rx="190" ry="24" fill="#0e0f0c" opacity=".12" filter="url(#hz2)"/>
+<path d="M190 690 L172 260 q-4 -60 52 -66 l160 -18 q52 -6 56 56 l24 458Z" fill="#4a4731"/>
+<path d="M190 690 L180 540 l282 -24 l16 174Z" fill="#3f3c28"/>
+<path d="M232 190 q-26 -70 42 -84 q64 -14 86 50" fill="none" stroke="#4a4731" stroke-width="16"/>
+<rect x="250" y="430" width="120" height="22" fill="#8A7C4E"/>
+<g stroke="#241f14" stroke-width="4" fill="none" opacity=".5"><path d="M196 620 q130 -18 268 -12M192 570 q132 -18 270 -12"/></g>
+<rect width="600" height="750" filter="url(#gr2)" opacity=".2" style="mix-blend-mode:multiply"/></svg></div>
+<h4 class="dsp h4">RIDGELINE 40 RUCKSACK</h4><p class="pm">$420 · Olive / Sand</p></article>
+
+</div></div>
+</div></section>
+
+<!-- EXPEDITIONS -->
+<section class="sec" id="exp">
+<div class="wrap">
+<div class="rh rv"><div><p class="ov">Small groups, bad weather</p><h2 class="dsp h2">EXPEDITIONS</h2></div>
+<a class="btn" href="#exp"><span class="lb"><span>All departures</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+<hr class="r" style="margin-bottom:clamp(34px,4vw,58px)">
+<div class="grid g2">
+
+<div class="rv" style="position:relative">
+<div class="frame r43 zm">
+<svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A small group photographing a coastal headland at dawn">
+<defs><linearGradient id="x1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33445c"/><stop offset=".4" stop-color="#7b7d80"/><stop offset=".7" stop-color="#c79a6c"/><stop offset="1" stop-color="#e8bd85"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#x1)"/>
+<circle cx="880" cy="512" r="44" fill="#ffe2ac" filter="url(#hz3)"/><circle cx="880" cy="512" r="150" fill="#ffcf8d" opacity=".26" filter="url(#hz)"/>
+<path d="M0 540 L260 506 L520 542 L820 500 L1060 540 L1200 512 L1200 600 L0 600Z" fill="#8b7566" opacity=".7"/>
+<path d="M0 610 L300 586 L620 618 L940 580 L1200 610 L1200 700 L0 700Z" fill="#514741"/>
+<path d="M0 700 L1200 680 L1200 900 L0 900Z" fill="#241f1e"/>
+<ellipse cx="600" cy="640" rx="800" ry="34" fill="#ffd8a4" opacity=".3" filter="url(#hz)"/>
+<g fill="#12100f">
+<path d="M300 830 L302 754 q0 -16 14 -22 q-14 -16 -2 -28 q14 -14 26 2 q10 12 0 26 l12 5 q13 6 13 22 l0 32 l-9 0 l0 50 l-13 0 l-3 -44 l-6 44Z"/>
+<path d="M362 776 l54 -8 l3 11 l-54 8Z"/><path d="M410 756 l40 0 l0 16 l-40 0Z"/><path d="M416 772 l-22 62 l7 3 l23 -62Z"/><path d="M438 772 l19 62 l-7 3 l-20 -62Z"/><path d="M430 772 l0 64 l6 0 l0 -64Z"/>
+<path d="M690 840 L692 768 q0 -14 13 -20 q-13 -14 -2 -26 q13 -13 24 2 q9 11 0 24 l11 5 q12 5 12 20 l0 30 l-8 0 l0 46 l-12 0 l-3 -40 l-5 40Z"/></g>
+<g stroke="#12100f" stroke-width="4" fill="none"><path d="M100 860 l9 -36M120 866 l2 -42M1080 856 l10 -34"/></g>
+<rect width="1200" height="900" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="panel" style="margin:clamp(-72px,-5vw,-40px) 0 0 clamp(0px,3vw,44px);position:relative;z-index:3">
+<p class="ov" style="margin-bottom:10px">4-day workshop</p>
+<h3 class="dsp h4" style="margin:0 0 12px">THE ISLAND ROAD</h3>
+<p class="p" style="font-size:15.4px">Four days on the 41 with six other photographers, two vehicles and no fixed itinerary beyond the ferry booking.</p>
+<div class="pdv"></div>
+<div class="pr meta" style="color:var(--field)"><svg><use href="#ip"/></svg> Kellach → Cape Nolan</div>
+<div class="pr meta" style="color:var(--field)"><svg><use href="#ic"/></svg> Oct 14 — Oct 18</div>
+<div class="pdv"></div>
+<div><span class="tg">Landscape</span><span class="tg">Film &amp; digital</span><span class="tg">Darkroom night</span></div>
+<div class="pdv"></div>
+<div class="pf"><span class="price">From $2,400</span><a class="btn sm bs" href="#exp"><span class="lb"><span>Explore</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div></div>
+
+<div class="rv d1 off" style="position:relative;margin-top:clamp(0px,6vw,110px)">
+<div class="frame r43 zm">
+<svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A darkroom and drying prints on a line">
+<defs><linearGradient id="x2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1f21"/><stop offset="1" stop-color="#120e10"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#x2)"/>
+<ellipse cx="600" cy="120" rx="620" ry="200" fill="#b8452f" opacity=".28" filter="url(#hz)"/>
+<rect x="0" y="640" width="1200" height="260" fill="#1b1416"/><rect x="0" y="640" width="1200" height="12" fill="#3a2c2c"/>
+<path d="M0 300 h1200" stroke="#5c4a44" stroke-width="4"/>
+<g fill="#d8ccb8">
+<rect x="90" y="300" width="180" height="240"/><rect x="330" y="300" width="180" height="240"/><rect x="570" y="300" width="180" height="240"/><rect x="810" y="300" width="180" height="240"/></g>
+<g fill="#4b3a36"><rect x="108" y="322" width="144" height="196"/><rect x="348" y="322" width="144" height="196"/><rect x="588" y="322" width="144" height="196"/><rect x="828" y="322" width="144" height="196"/></g>
+<g fill="#6d5a52"><path d="M108 440 L156 400 L192 424 L252 384 L252 518 L108 518Z"/><path d="M348 456 L400 416 L440 444 L492 404 L492 518 L348 518Z"/><path d="M588 430 L640 396 L684 424 L732 392 L732 518 L588 518Z"/><path d="M828 460 L876 424 L920 450 L972 412 L972 518 L828 518Z"/></g>
+<g fill="#8a6f5f"><rect x="88" y="292" width="16" height="24"/><rect x="328" y="292" width="16" height="24"/><rect x="568" y="292" width="16" height="24"/><rect x="808" y="292" width="16" height="24"/></g>
+<rect x="1020" y="600" width="140" height="60" fill="#2e2426"/><rect x="1020" y="590" width="140" height="12" fill="#4a3a3a"/>
+<rect width="1200" height="900" filter="url(#gr)" opacity=".32" style="mix-blend-mode:overlay"/>
+</svg><div class="scrim sb"></div></div>
+<div class="panel" style="margin:clamp(-72px,-5vw,-40px) clamp(0px,3vw,44px) 0 0;position:relative;z-index:3">
+<p class="ov" style="margin-bottom:10px">2-day intensive</p>
+<h3 class="dsp h4">PRINTING THE TRIP</h3>
+<p class="p" style="font-size:15.4px">Bring one roll and leave with a sequenced, captioned set in a Volume Album. Editing, sequencing, wet printing, and what to throw away.</p>
+<div class="pdv"></div>
+<div class="pr meta" style="color:var(--field)"><svg><use href="#ip"/></svg> The Print Room, Kellach</div>
+<div class="pr meta" style="color:var(--field)"><svg><use href="#ic"/></svg> Nov 8 — Nov 9</div>
+<div class="pdv"></div>
+<div><span class="tg">Editing</span><span class="tg">Wet printing</span><span class="tg">Bookmaking</span></div>
+<div class="pdv"></div>
+<div class="pf"><span class="price">From $680</span><a class="btn sm bs" href="#exp"><span class="lb"><span>Explore</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div></div>
+
+</div></div></section>
+
+<!-- QUOTE -->
+<section class="quote" aria-label="Statement">
+<div class="frame par" data-par>
+<svg viewBox="0 0 1900 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A wide glacial valley under a low sky">
+<defs><linearGradient id="q1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e2a38"/><stop offset=".38" stop-color="#4e5a63"/><stop offset=".62" stop-color="#8b8b83"/><stop offset="1" stop-color="#59544c"/></linearGradient></defs>
+<rect width="1900" height="1000" fill="url(#q1)"/>
+<g filter="url(#hz)" opacity=".55"><ellipse cx="600" cy="220" rx="700" ry="130" fill="#2b3540"/><ellipse cx="1500" cy="300" rx="620" ry="110" fill="#3b4550"/></g>
+<path d="M0 560 L280 470 L520 546 L820 452 L1120 540 L1420 462 L1700 538 L1900 494 L1900 640 L0 640Z" fill="#5f6259" opacity=".8"/>
+<ellipse cx="900" cy="600" rx="1100" ry="46" fill="#c9cfc9" opacity=".3" filter="url(#hz)"/>
+<path d="M0 660 L360 596 L720 664 L1080 592 L1440 660 L1900 606 L1900 760 L0 760Z" fill="#3f443f"/>
+<path d="M0 780 L420 738 L900 786 L1400 736 L1900 780 L1900 1000 L0 1000Z" fill="#22251f"/>
+<g stroke="#8f978d" stroke-width="3" opacity=".22"><path d="M200 900 q300 -40 600 0 q300 40 600 0"/><path d="M100 950 q400 -34 800 0 q400 34 800 0"/></g>
+<rect width="1900" height="1000" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+<rect width="1900" height="1000" fill="#232f33" opacity=".26" style="mix-blend-mode:multiply"/>
+</svg><div class="scrim sb"></div><div class="scrim st"></div></div>
+<div class="wrap qi rv">
+<p class="ov" style="color:rgba(250,247,241,.6)">Rangefinder — the whole idea</p>
+<h2 class="dsp h2" style="color:var(--bone)">YOU DO NOT REMEMBER<br>THE PICTURE. <em>you remember the</em><br>DRIVE THERE.</h2>
+<div style="margin-top:34px;display:flex;justify-content:center"><a class="btn bl" href="#dispatch"><span class="lb"><span>Join the Dispatch</span></span><span class="ar"><svg><use href="#ia"/></svg></span></a></div>
+</div></section>
+
+<!-- DISPATCH -->
+<section class="sec" id="dispatch" style="background:var(--bone)">
+<div class="wrap">
+<div class="grid g57" style="align-items:center;margin-bottom:clamp(50px,6vw,90px)">
+<div class="rv">
+<p class="ov">A dispatch worth receiving</p>
+<h2 class="dsp h2" style="margin-bottom:22px">FIELD NOTES,<br><em>four times a</em> YEAR</h2>
+<p class="p" style="max-width:440px">A printed volume, a set of prints, early access to expeditions, and a members-only rate on everything we make. No weekly email. No sale announcements.</p>
+<form class="field" style="margin-top:28px" onsubmit="return false">
+<input type="email" placeholder="Your email address" aria-label="Email address" required>
+<button type="submit">Subscribe</button>
+</form>
+<p class="meta" style="margin-top:14px">30,000 members · Cancel any time</p>
+</div>
+<div class="rv d1"><div class="frame r43 zm">
+<svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The printed volume open on a desk with a camera and notes">
+<defs><linearGradient id="ds" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b6252"/><stop offset="1" stop-color="#2c2820"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#ds)"/>
+<ellipse cx="240" cy="60" rx="520" ry="300" fill="#ffe9c2" opacity=".3" filter="url(#hz)"/>
+<rect x="0" y="220" width="1200" height="680" fill="#4a4234"/>
+<g stroke="#5f5645" stroke-width="4" opacity=".5"><path d="M0 400 h1200M0 620 h1200"/></g>
+<g transform="rotate(-3 620 560)">
+<rect x="240" y="320" width="760" height="440" fill="#e9e2d2"/><rect x="240" y="320" width="380" height="440" fill="#ded6c4"/><rect x="616" y="320" width="8" height="440" fill="#c2b9a4"/>
+<rect x="286" y="366" width="288" height="212" fill="#2b3f4a"/>
+<path d="M286 500 L360 442 L410 480 L482 424 L574 476 L574 578 L286 578Z" fill="#182831"/>
+<circle cx="500" cy="410" r="18" fill="#ffe0ae"/>
+<g fill="#9e957f"><rect x="286" y="610" width="200" height="8"/><rect x="286" y="636" width="260" height="6"/><rect x="286" y="662" width="150" height="6"/></g>
+<rect x="660" y="366" width="300" height="212" fill="#4b4436"/>
+<g fill="#9e957f"><rect x="660" y="610" width="230" height="8"/><rect x="660" y="636" width="290" height="6"/><rect x="660" y="662" width="180" height="6"/></g></g>
+<g fill="#15171a"><rect x="960" y="200" width="200" height="130" rx="8"/><circle cx="1060" cy="266" r="48" fill="#0a0c0e"/><circle cx="1060" cy="266" r="32" fill="#1f4550"/><circle cx="1044" cy="250" r="11" fill="#8ec0cc" opacity=".55"/></g>
+<g transform="rotate(9 180 780)"><rect x="60" y="720" width="260" height="150" fill="#efe9dc"/>
+<g stroke="#9A5A33" stroke-width="2.4" fill="none"><path d="M84 766 q26 -14 46 2 q20 16 46 -2 q26 -18 52 0"/><path d="M84 802 q30 -12 56 2 q26 14 56 -4"/><path d="M84 838 q28 -12 52 2"/></g></g>
+<rect width="1200" height="900" filter="url(#gr)" opacity=".3" style="mix-blend-mode:overlay"/>
+</svg></div></div>
+</div>
+
+<div class="tiers rv d2">
+<div class="tier">
+<h4 class="dsp h4">SCOUT</h4><p class="ts">Free membership</p>
+<p class="tp">FREE</p>
+<ul><li><svg><use href="#ik"/></svg>The full Field Notes archive online</li><li><svg><use href="#ik"/></svg>Trip reports, kit lists and coordinates</li><li><svg><use href="#ik"/></svg>First look at new products</li></ul>
+</div>
+<div class="tier">
+<h4 class="dsp h4">DISPATCH</h4><p class="ts">Digital membership</p>
+<p class="tp">$36<span class="meta" style="margin-left:8px">/ year</span></p>
+<ul><li><svg><use href="#ik"/></svg>Every volume as a downloadable edition</li><li><svg><use href="#ik"/></svg>10% off everything, always</li><li><svg><use href="#ik"/></svg>Members-only print releases</li><li><svg><use href="#ik"/></svg>Priority on expedition waitlists</li></ul>
+</div>
+<div class="tier">
+<h4 class="dsp h4">PRINT</h4><p class="ts">Premium print membership</p>
+<p class="tp">$96<span class="meta" style="margin-left:8px">/ year</span></p>
+<ul><li><svg><use href="#ik"/></svg>Four printed volumes, shipped</li><li><svg><use href="#ik"/></svg>One open-edition print each year</li><li><svg><use href="#ik"/></svg>20% off everything, always</li><li><svg><use href="#ik"/></svg>Early booking on all expeditions</li><li><svg><use href="#ik"/></svg>Free repairs, no questions</li></ul>
+</div>
+</div>
+</div></section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding-top:0">
+<div class="wrap">
+<div class="rv" style="margin-bottom:clamp(28px,3.4vw,48px)"><p class="ov ov--rule">Before you ask</p><h2 class="dsp h2">QUESTIONS</h2></div>
+<div class="acc rv d1">
+<div class="ai"><button class="ab">How does the lifetime repair work?<svg><use href="#iv"/></svg></button><div class="ap"><div><p class="p">Send it to the bench in Kellach with a note. We re-stitch, replace hardware and re-wax at no charge for the life of the product, and we cover return shipping. If it cannot be saved we will tell you honestly and offer a replacement at cost.</p></div></div></div>
+<div class="ai"><button class="ab">Will the waxed canvas keep water out?<svg><use href="#iv"/></svg></button><div class="ap"><div><p class="p">In sustained rain, yes, for several hours. The shell is 18 oz waxed cotton over a taped inner liner, and every bag ships with a stowed rain flap. It is not a drybag. If you are going to be swimming with it, tell us and we will send a liner.</p></div></div></div>
+<div class="ai"><button class="ab">How are the prints made and shipped?<svg><use href="#iv"/></svg></button><div class="ap"><div><p class="p">Pigment on 310gsm cotton rag, pulled to order in the Print Room, signed on the verso with the coordinates and time. Open editions ship flat in a board sleeve; editions of forty ship framed in blackened ash or rolled, your choice at checkout.</p></div></div></div>
+<div class="ai"><button class="ab">Does the Bellows 24 fit a tripod and a laptop?<svg><use href="#iv"/></svg></button><div class="ap"><div><p class="p">Yes — a full-size tripod in the front cradle, and a 14 inch machine in the back sleeve. With both loaded you lose about one lens cell of camera volume. There is a packing diagram in the product page and in the kit list.</p></div></div></div>
+<div class="ai"><button class="ab">When do expeditions open for booking?<svg><use href="#iv"/></svg></button><div class="ap"><div><p class="p">Print members get the calendar two weeks early, Dispatch members one week, then general release. Groups are capped at eight. Every departure runs rain or shine, which in our case means rain.</p></div></div></div>
+</div>
+</div></section>
+
+<footer class="foot">
+<div class="wrap">
+<div class="fg">
+<div>
+<p class="fm">Rangefinder</p>
+<p class="fb">Rangefinder makes camera bags, straps, rucksacks, apparel, albums and landscape prints for people who drive a long way in the dark to be somewhere at first light. Built in Kellach, repaired for life.</p>
+<div class="soc">
+<a href="#top" aria-label="Instagram"><svg><use href="#ig"/></svg></a>
+<a href="#top" aria-label="Film channel"><svg><use href="#it"/></svg></a>
+<a href="#top" aria-label="Journal"><svg><use href="#ic"/></svg></a>
+</div></div>
+<div><h5>Shop</h5><ul><li><a href="#printroom">Field Kit</a></li><li><a href="#printroom">Apparel</a></li><li><a href="#printroom">Albums &amp; Log</a></li><li><a href="#printroom">Print Room</a></li><li><a href="#printroom">Gift cards</a></li></ul></div>
+<div><h5>Read</h5><ul><li><a href="#notes">Field Notes</a></li><li><a href="#notes">Kit lists</a></li><li><a href="#exp">Expeditions</a></li><li><a href="#notes">Films</a></li><li><a href="#dispatch">Archive</a></li></ul></div>
+<div><h5>Join</h5><ul><li><a href="#dispatch">The Dispatch</a></li><li><a href="#dispatch">Print membership</a></li><li><a href="#exp">Waitlists</a></li><li><a href="#notes">Submissions</a></li><li><a href="#dispatch">Stockists</a></li></ul></div>
+<div><h5>More</h5><ul><li><a href="#faq">Repairs</a></li><li><a href="#faq">Shipping</a></li><li><a href="#faq">Returns</a></li><li><a href="#faq">Materials</a></li><li><a href="#faq">Contact</a></li></ul></div>
+</div>
+<div class="fbar"><span>Kellach — 64°09′N 21°56′W</span><span>© Rangefinder Supply Co. 2026 · All rights reserved</span></div>
+</div></footer>
+</main>
+
+<script>
+(function(){
+var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* nav */
+var nav=document.getElementById('nav'), last=0;
+function onNav(){
+  var y=window.pageYOffset||document.documentElement.scrollTop;
+  nav.classList.toggle('solid', y>120);
+  nav.classList.toggle('up', y>560 && y>last+4);
+  last=y;
+}
+onNav();
+
+/* hero carousel */
+var slides=[].slice.call(document.querySelectorAll('.sl')),
+    dots=[].slice.call(document.querySelectorAll('.dot')),
+    cnt=document.getElementById('hcn'), cur=0, timer=null;
+function go(i){
+  if(i===cur) return;
+  slides[cur].classList.remove('on'); dots[cur].classList.remove('on');
+  cur=(i+slides.length)%slides.length;
+  slides[cur].classList.add('on'); dots[cur].classList.add('on');
+  cnt.textContent='0'+(cur+1)+' / 0'+slides.length;
+  restart();
+}
+function restart(){ if(RM) return; clearInterval(timer); timer=setInterval(function(){go(cur+1);},7000); }
+dots.forEach(function(d){ d.addEventListener('click',function(){ go(+d.getAttribute('data-go')); }); });
+document.getElementById('hn').addEventListener('click',function(){go(cur+1);});
+document.getElementById('hp').addEventListener('click',function(){go(cur-1);});
+restart();
+
+/* reveal */
+var rvs=[].slice.call(document.querySelectorAll('.rv'));
+if('IntersectionObserver' in window && !RM){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -9% 0px',threshold:.08});
+  rvs.forEach(function(el){io.observe(el);});
+} else { rvs.forEach(function(el){el.classList.add('in');}); }
+
+/* tabs */
+var tabs=[].slice.call(document.querySelectorAll('.tab')), bar=document.getElementById('tbar');
+function moveBar(t){ if(!t) return; bar.style.left=t.offsetLeft+'px'; bar.style.width=t.offsetWidth+'px'; }
+tabs.forEach(function(t){
+  t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.classList.remove('on');}); t.classList.add('on'); moveBar(t);
+    var id=t.getAttribute('data-p');
+    [].slice.call(document.querySelectorAll('.pane')).forEach(function(p){
+      if(p.id===id){ p.classList.add('on'); setTimeout(function(){p.classList.add('vis');},20); }
+      else { p.classList.remove('vis'); setTimeout(function(){p.classList.remove('on');},240); }
+    });
+  });
+});
+setTimeout(function(){moveBar(document.querySelector('.tab.on'));},60);
+window.addEventListener('resize',function(){moveBar(document.querySelector('.tab.on'));});
+
+/* rail */
+var rail=document.getElementById('rail'), rp=document.getElementById('rp'), rn=document.getElementById('rnx');
+function step(){ var c=rail.querySelector('.prod'); return c? c.offsetWidth+24 : 300; }
+function rstate(){
+  rp.disabled = rail.scrollLeft < 8;
+  rn.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 8;
+}
+rn.addEventListener('click',function(){ rail.scrollLeft += step()*2; });
+rp.addEventListener('click',function(){ rail.scrollLeft -= step()*2; });
+rail.addEventListener('scroll',rstate);
+var down=false,sx=0,sl=0;
+rail.addEventListener('mousedown',function(e){down=true;sx=e.pageX;sl=rail.scrollLeft;rail.classList.add('drag');});
+window.addEventListener('mouseup',function(){down=false;rail.classList.remove('drag');});
+window.addEventListener('mousemove',function(e){ if(!down)return; e.preventDefault(); rail.scrollLeft = sl-(e.pageX-sx); });
+setTimeout(rstate,80);
+
+/* accordion */
+[].slice.call(document.querySelectorAll('.ai')).forEach(function(it){
+  var b=it.querySelector('.ab'), p=it.querySelector('.ap');
+  b.addEventListener('click',function(){
+    var open=it.classList.contains('on');
+    [].slice.call(document.querySelectorAll('.ai')).forEach(function(o){ o.classList.remove('on'); o.querySelector('.ap').style.maxHeight='0px'; });
+    if(!open){ it.classList.add('on'); p.style.maxHeight=p.scrollHeight+'px'; }
+  });
+});
+
+/* parallax */
+var pars=[].slice.call(document.querySelectorAll('[data-par]')), tick=false;
+function par(){
+  var vh=window.innerHeight;
+  pars.forEach(function(f){
+    var r=f.getBoundingClientRect();
+    if(r.bottom<-100||r.top>vh+100) return;
+    var p=(r.top+r.height/2-vh/2)/vh;
+    var s=f.querySelector('svg');
+    if(s) s.style.transform='translate3d(0,'+(p*-6).toFixed(2)+'%,0)';
+  });
+}
+function onScroll(){
+  onNav();
+  if(RM||tick) return;
+  tick=true;
+  window.requestAnimationFrame(function(){ par(); tick=false; });
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',onScroll);
+if(!RM) par();
+
+/* smooth anchors */
+[].slice.call(document.querySelectorAll('a[href^="#"]')).forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=a.getAttribute('href');
+    if(id.length<2) return;
+    var t=document.querySelector(id);
+    if(!t) return;
+    e.preventDefault();
+    window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-72, behavior: RM?'auto':'smooth'});
+  });
+});
+})();
+</script>
+</body>
+</html>

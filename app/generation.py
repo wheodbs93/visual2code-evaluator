@@ -26,30 +26,55 @@ class Adapter:
 def _strip_code_fence(text: str) -> str:
     text = text.strip()
 
-    match = re.search(
-        r"```(?:html)?\s*(<!DOCTYPE html[\s\S]*?</html>)\s*```",
+    # Normal markdown fenced HTML.
+    fenced = re.search(
+        r"```(?:html|HTML)?\s*([\s\S]*?)```",
         text,
-        flags=re.IGNORECASE,
     )
+    if fenced:
+        candidate = fenced.group(1).strip()
+        if "<html" in candidate.lower():
+            return candidate
 
-    if match:
-        return match.group(1).strip()
-
+    # Normal document response.
     doctype = re.search(
-        r"(<!DOCTYPE html[\s\S]*?</html>)",
+        r"(?is)(<!doctype\s+html[\s\S]*?</html>)",
         text,
-        flags=re.IGNORECASE,
     )
-
     if doctype:
         return doctype.group(1).strip()
 
     html = re.search(
-        r"(<html[\s\S]*?</html>)",
+        r"(?is)(<html[\s\S]*?</html>)",
         text,
-        flags=re.IGNORECASE,
+    )
+    if html:
+        return html.group(1).strip()
+
+    # Some Claude outputs escape angle brackets inside a code-like response.
+    unescaped = (
+        text.replace("\\<", "<")
+            .replace("\\>", ">")
     )
 
+    fenced = re.search(
+        r"```(?:html|HTML)?\s*([\s\S]*?)```",
+        unescaped,
+    )
+    if fenced and "<html" in fenced.group(1).lower():
+        return fenced.group(1).strip()
+
+    doctype = re.search(
+        r"(?is)(<!doctype\s+html[\s\S]*?</html>)",
+        unescaped,
+    )
+    if doctype:
+        return doctype.group(1).strip()
+
+    html = re.search(
+        r"(?is)(<html[\s\S]*?</html>)",
+        unescaped,
+    )
     if html:
         return html.group(1).strip()
 
