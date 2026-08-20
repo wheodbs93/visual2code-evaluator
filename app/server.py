@@ -391,7 +391,7 @@ function renderOutputs(p){
         return `
           <div class="output-card">
             <h2>Output ${k}</h2>
-            <div class="muted">${esc(o.model)} · ${esc(o.status)}</div>
+            <div class="muted">${esc(o.status)}</div>
 
             <div class="output-actions">
               <a class="btn-link" href="${esc(url)}" target="_blank">
