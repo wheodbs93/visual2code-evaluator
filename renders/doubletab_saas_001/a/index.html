@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+================================================================================
+design.md — DoubleTab Brand & Web Design Guidelines
+Derived from the supplied inspiration materials (editorial SaaS reference:
+full-bleed cinematic hero, hairline-ruled modular grid, restrained mono labels,
+alternating light/dark chapters, ↗ affordance markers).
+================================================================================
+
+1. POSITIONING
+   DoubleTab — free, open-source, cloud-based platform centralizing remote
+   teamwork and automating direct communication across teams.
+   Pillars: Tasks & boards · Threaded channels (1:1 + collective) ·
+   Multimedia processing · Open-source cloud core.
+   Voice: plain, declarative, unhurried. Short sentences. Confidence through
+   understatement. Tagline: "Two taps from anywhere to everyone."
+
+2. TYPOGRAPHY
+   One grotesque family for display + body (Helvetica Neue / Inter Tight stack).
+   Hierarchy from size, weight and colour — never a second display face.
+   Monospace ALL-CAPS 11px / .14em tracking for eyebrows, labels, meta, buttons.
+   That mono label is the single decorative typographic device.
+   Scale: display clamp(44,6.4vw,92) · h2 clamp(34,4.2vw,60) ·
+          h3 clamp(22,2.1vw,30) · body 16 (lead 18–19) · small 14 · label 11.
+   Headings: weight 500, tracking -0.025em (-0.035em above 60px), lh 1.02–1.08.
+   Body: 400, lh 1.55, measure ≤58ch (lead ≤44ch). Sentence case only.
+   Headlines break across two lines at the semantic pivot — a signature rhythm.
+
+3. COLOUR  (90 neutral / 8 imagery / 2 accent)
+   --paper #FCFCFB · --paper-2 #F3F4F2 · --ink #0C0D0C · --ink-2 #16181A
+   --muted #6E7370 · --muted-dk #9AA09C
+   --rule #E4E5E2 · --rule-dk rgba(255,255,255,.13)
+   --accent #2F6BFF (signal blue) · --accent-soft rgba(47,107,255,.10)
+   Accent only for: the second tab in the mark, live dots, one arrow per
+   section, focus rings, small badges. Never large fills or full-width bars.
+   Two full-bleed dark chapters per page reset the eye and set page rhythm.
+
+4. SPACING & GRID
+   Container 1360px, gutters clamp(20px,4.5vw,64px). 12 columns, 24px gap.
+   Content sits off-centre: heading cols 1–6, support copy cols 8–12.
+   Hairline rules — not shadows — define structure. Cards: 1px --rule, r=4px,
+   no elevation. Section padding clamp(88px,11vw,176px).
+   Spacing steps: 4·8·12·16·24·32·48·64·96·128·176. Whitespace is the luxury
+   signal: when in doubt add a step, don't subtract one.
+
+5. IMAGERY
+   Sky, cloud strata, atmospheric light, horizon lines — literalising
+   "cloud-based" without a cloud icon. Desaturated, high-key or dusk-toned,
+   long horizontal crops, 4–6% grain, and a fine vertical slat scrim over the
+   hero (echoing the reference's ribbed hero) at ~8%. Full-bleed hero and one
+   full-bleed mid band; elsewhere images span cols 1–7 or 6–12, never a
+   symmetric pair. All imagery here is generated in-document (CSS gradients +
+   SVG turbulence) so the page stays self-contained — stand-ins for
+   commissioned sky photography.
+   Product graphics: flat hairline-outlined mock panels on --paper-2, mono
+   labels, only 1–2 "live" elements each. Icons: inline SVG, 1.25px stroke.
+
+6. UI
+   Nav 64px, transparent over hero → paper + hairline on scroll (200ms).
+   Dropdown = full-width hairline panel, not a floating card.
+   Buttons: primary = ink fill / paper text / 3px radius / mono-caps 11px,
+   hover → accent. Secondary = 1px rule border. Ghost = text + ↗, arrow
+   translates 4px. Cards hover: border darkens + 4px rise, nothing scales.
+   Forms: underline-only inputs, mono floating labels, focus → accent.
+   Every section opens with a mono eyebrow, often indexed (01 / TASKS).
+
+7. MOTION — slow, short-travel, opacity-led; paper settling, not slideshow.
+   Easing (.22,.61,.36,1) standard, (.16,1,.3,1) entrance.
+   150ms micro · 250ms standard · 700ms entrance · 1100ms hero.
+   Scroll reveal: opacity 0→1 + translateY 18px→0, 70ms sibling stagger,
+   IntersectionObserver, fires once. Hero headline wipes line-by-line from
+   below; hero image scales 1.06→1.0 over 1400ms. Parallax 0.85× inside
+   full-bleed bands only. Marquee constant, pauses on hover. Diagram states
+   crossfade at 250ms with fixed container height. Counters tick once, 1200ms.
+   prefers-reduced-motion: transforms off, opacity only, no autoplay.
+
+8. PAGE RHYTHM
+   Hero → trust rule + logo grid → editorial two-up + wide product mock →
+   three-up rule-separated cells → dark interlude I (platform diagram) →
+   asymmetric sky image + numbered capability list → stats band →
+   dark interlude II (two ↗ cards) → open-source pricing → CTA + footer.
+
+9. ACCESSIBILITY & BUILD
+   Semantic landmarks, one h1, 2px accent focus ring at 2px offset, keyboard-
+   operable diagram (roving tabindex, aria-selected), decorative SVG aria-hidden.
+   Single self-contained document: inline style/script/SVG, no external
+   requests. Breakpoints 1200 / 900 / 640; grid 12→6→1; asymmetry flattens to
+   stacked order; dark chapters stay full-bleed at every size.
+================================================================================
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DoubleTab — The open-source hub for distributed teams</title>
+<meta name="description" content="DoubleTab is a free, open-source cloud platform that centralizes remote teamwork — tasks, threaded channels and multimedia — and automates direct communication across teams.">
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root{
+  --paper:#FCFCFB;
+  --paper-2:#F3F4F2;
+  --ink:#0C0D0C;
+  --ink-2:#16181A;
+  --muted:#6E7370;
+  --muted-dk:#9AA09C;
+  --rule:#E4E5E2;
+  --rule-dk:rgba(255,255,255,.13);
+  --accent:#2F6BFF;
+  --accent-soft:rgba(47,107,255,.10);
+
+  --sans:"Inter Tight","Helvetica Neue",Helvetica,Arial,"Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+
+  --fs-display:clamp(44px,6.4vw,92px);
+  --fs-h2:clamp(34px,4.2vw,60px);
+  --fs-h3:clamp(21px,2.1vw,30px);
+  --fs-label:11px;
+
+  --gut:clamp(20px,4.5vw,64px);
+  --sec:clamp(88px,11vw,176px);
+
+  --e-std:cubic-bezier(.22,.61,.36,1);
+  --e-in:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.55;font-weight:400;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4,p{margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+
+/* --------------------------------------------------------------- layout */
+.wrap{max-width:1360px;margin:0 auto;padding:0 var(--gut);width:100%}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.sec{padding:var(--sec) 0;position:relative}
+.ruled{border-top:1px solid var(--rule)}
+.dark{background:var(--ink);color:#fff}
+.dark .lab{color:var(--muted-dk)}
+.dark p{color:var(--muted-dk)}
+
+/* --------------------------------------------------------------- type */
+.lab{
+  font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;
+  letter-spacing:.14em;color:var(--muted);font-weight:400;
+}
+h1,h2,h3{font-weight:500;letter-spacing:-.025em;line-height:1.05}
+h1{font-size:var(--fs-display);letter-spacing:-.035em;line-height:1.02}
+h2{font-size:var(--fs-h2);letter-spacing:-.03em;line-height:1.04}
+h3{font-size:var(--fs-h3);line-height:1.15}
+.lead{font-size:18px;line-height:1.55;color:var(--muted);max-width:44ch}
+.body{color:var(--muted);max-width:58ch}
+.dark .lead,.dark .body{color:var(--muted-dk)}
+
+/* --------------------------------------------------------------- buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;
+  letter-spacing:.12em;padding:13px 22px;border-radius:3px;
+  border:1px solid transparent;transition:background .25s var(--e-std),
+  color .25s var(--e-std),border-color .25s var(--e-std);white-space:nowrap;
+}
+.btn-p{background:var(--ink);color:var(--paper)}
+.btn-p:hover{background:var(--accent)}
+.btn-s{border-color:var(--rule);color:var(--ink)}
+.btn-s:hover{border-color:var(--ink)}
+.on-dark .btn-p,.dark .btn-p{background:var(--paper);color:var(--ink)}
+.on-dark .btn-p:hover,.dark .btn-p:hover{background:var(--accent);color:#fff}
+.on-dark .btn-s,.dark .btn-s{border-color:var(--rule-dk);color:#fff}
+.on-dark .btn-s:hover,.dark .btn-s:hover{border-color:#fff}
+
+.tlink{
+  display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);
+  font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.12em;
+}
+.tlink .ar{transition:transform .3s var(--e-std);color:var(--accent)}
+.tlink:hover .ar{transform:translate(4px,-4px)}
+.dark .tlink .ar{color:var(--accent)}
+
+/* --------------------------------------------------------------- nav */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:80;height:64px;color:#fff;
+  transition:background .3s var(--e-std),color .3s var(--e-std),
+  border-color .3s var(--e-std);border-bottom:1px solid transparent;
+}
+.nav.solid{background:var(--paper);color:var(--ink);border-bottom-color:var(--rule)}
+.nav-in{height:64px;display:flex;align-items:center;gap:36px}
+.mark{display:flex;align-items:center;gap:10px;letter-spacing:-.03em;
+  font-size:17px;font-weight:500}
+.mark svg{width:20px;height:20px;flex:none}
+.nav-links{display:flex;align-items:center;gap:28px;margin-left:10px}
+.nav-links button,.nav-links a{
+  font-size:14px;letter-spacing:-.01em;opacity:.72;
+  transition:opacity .2s var(--e-std);display:inline-flex;align-items:center;gap:5px;
+}
+.nav-links button:hover,.nav-links a:hover,.nav-links button[aria-expanded="true"]{opacity:1}
+.nav-links .chev{width:8px;height:8px;transition:transform .25s var(--e-std)}
+.nav-links button[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav-right a.txt{font-family:var(--mono);font-size:var(--fs-label);
+  text-transform:uppercase;letter-spacing:.12em;opacity:.72}
+.nav-right a.txt:hover{opacity:1}
+.nav .btn-p{background:#fff;color:var(--ink);padding:10px 18px}
+.nav.solid .btn-p{background:var(--ink);color:var(--paper)}
+.nav .btn-p:hover{background:var(--accent);color:#fff}
+.burger{display:none;width:26px;height:12px;position:relative}
+.burger i{position:absolute;left:0;right:0;height:1px;background:currentColor;
+  transition:transform .3s var(--e-std),opacity .2s}
+.burger i:first-child{top:0}.burger i:last-child{bottom:0}
+
+/* mega panel */
+.mega{
+  position:fixed;top:64px;left:0;right:0;z-index:79;background:var(--paper);
+  color:var(--ink);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:opacity .28s var(--e-std),transform .28s var(--e-std),visibility .28s;
+}
+.mega.open{opacity:1;visibility:visible;transform:none}
+.mega-in{padding:44px 0 52px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.mega-col{grid-column:span 3;display:flex;flex-direction:column;gap:18px}
+.mega-col .lab{margin-bottom:2px}
+.mega-item{display:block;padding-bottom:14px;border-bottom:1px solid var(--rule);
+  transition:border-color .25s var(--e-std)}
+.mega-item:hover{border-color:var(--ink)}
+.mega-item strong{display:block;font-weight:500;font-size:15px;letter-spacing:-.015em}
+.mega-item span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+
+/* --------------------------------------------------------------- hero */
+.hero{position:relative;min-height:min(92vh,900px);display:flex;align-items:flex-end;
+  color:#fff;overflow:hidden;background:var(--ink)}
+.hero-media{position:absolute;inset:0;overflow:hidden}
+.hero-media svg{width:100%;height:100%;transform:scale(1.06);
+  animation:heroZoom 1500ms var(--e-in) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.slats{position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.30) 0 2px,rgba(0,0,0,0) 2px 9px);
+  opacity:.55;mix-blend-mode:multiply}
+.vig{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,8,12,.72) 0%,rgba(6,8,12,.12) 34%,
+  rgba(6,8,12,.20) 62%,rgba(6,8,12,.80) 100%)}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.055;mix-blend-mode:overlay}
+.hero-in{position:relative;z-index:2;padding:0 0 clamp(48px,7vw,96px);width:100%}
+.hero-copy{max-width:min(880px,88%)}
+.hero .lab{color:rgba(255,255,255,.66);display:block;margin-bottom:26px}
+.line{display:block;overflow:hidden}
+.line span{display:block;transform:translateY(105%);
+  animation:lineUp 1000ms var(--e-in) forwards}
+.line:nth-child(1) span{animation-delay:.18s}
+.line:nth-child(2) span{animation-delay:.30s}
+@keyframes lineUp{to{transform:none}}
+.hero-sub{margin-top:26px;max-width:50ch;color:rgba(255,255,255,.76);font-size:17px;
+  opacity:0;animation:fadeUp .9s var(--e-in) .58s forwards}
+.hero-cta{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .9s var(--e-in) .70s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-meta{
+  position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.18);
+  margin-top:clamp(40px,6vw,72px);padding-top:18px;display:flex;gap:40px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .9s var(--e-in) .84s forwards
+}
+.hero-meta span{color:rgba(255,255,255,.6)}
+.hero-meta b{color:#fff;font-weight:400}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  display:inline-block;margin-right:8px;vertical-align:1px;
+  box-shadow:0 0 0 0 rgba(47,107,255,.5);animation:pulse 2.6s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(47,107,255,.5)}
+  70%{box-shadow:0 0 0 7px rgba(47,107,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(47,107,255,0)}
+}
+
+/* --------------------------------------------------------------- trust */
+.trust-head{display:flex;justify-content:space-between;align-items:baseline;
+  padding:20px 0;gap:24px;flex-wrap:wrap}
+.logo-grid{display:grid;grid-template-columns:repeat(6,1fr);
+  border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+.logo-cell{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  height:104px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;letter-spacing:-.02em;color:var(--muted);
+  transition:color .3s var(--e-std),background .3s var(--e-std)}
+.logo-cell:hover{color:var(--ink);background:var(--paper-2)}
+
+/* --------------------------------------------------------------- editorial */
+.two-up{align-items:end;row-gap:40px}
+.two-up .h{grid-column:1/7}
+.two-up .p{grid-column:8/13}
+.panel{
+  margin-top:clamp(48px,6vw,80px);background:var(--paper-2);
+  border:1px solid var(--rule);border-radius:4px;padding:clamp(20px,3.4vw,52px);
+  position:relative;overflow:hidden
+}
+.panel-glow{position:absolute;inset:-30% -10% auto -10%;height:120%;
+  background:radial-gradient(60% 60% at 50% 40%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%);
+  pointer-events:none}
+
+/* mock: board */
+.board{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.col{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:14px}
+.col-h{display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:12px;border-bottom:1px solid var(--rule);margin-bottom:12px}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted)}
+.tk{border:1px solid var(--rule);border-radius:3px;padding:11px 12px;margin-bottom:8px;
+  background:#fff;transition:transform .25s var(--e-std),border-color .25s var(--e-std)}
+.tk:hover{transform:translateY(-3px);border-color:rgba(12,13,12,.28)}
+.tk .t{font-size:13.5px;letter-spacing:-.012em;line-height:1.3}
+.tk .m{display:flex;align-items:center;gap:8px;margin-top:9px}
+.av{width:16px;height:16px;border-radius:50%;background:#DFE1DE;flex:none}
+.av.b{background:var(--accent)}
+.bar{height:4px;border-radius:2px;background:var(--rule);flex:1}
+.bar i{display:block;height:100%;border-radius:2px;background:var(--ink);opacity:.35}
+.float{
+  position:absolute;right:clamp(14px,3vw,54px);bottom:clamp(14px,3vw,44px);z-index:3;
+  width:min(330px,72%);background:#fff;border:1px solid var(--rule);border-radius:5px;
+  padding:14px 15px;box-shadow:0 20px 50px -30px rgba(12,13,12,.35)
+}
+.float .fh{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.float .fh .lab{font-size:10px}
+.msg{font-size:13px;line-height:1.45;color:var(--muted)}
+.msg b{color:var(--ink);font-weight:500}
+.typing{display:inline-flex;gap:3px;margin-left:4px;vertical-align:2px}
+.typing i{width:3px;height:3px;border-radius:50%;background:var(--accent);
+  animation:blink 1.3s infinite}
+.typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,60%,100%{opacity:.2}30%{opacity:1}}
+
+/* --------------------------------------------------------------- 3-up */
+.cells{border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr)}
+.cell{padding:40px 32px 44px;border-right:1px solid var(--rule);position:relative;
+  transition:background .35s var(--e-std)}
+.cell:first-child{padding-left:0}
+.cell:last-child{border-right:0;padding-right:0}
+.cell:hover{background:rgba(243,244,242,.6)}
+.cell .plus{position:absolute;top:40px;right:32px;color:var(--muted);
+  transition:transform .35s var(--e-std),color .35s var(--e-std)}
+.cell:last-child .plus{right:0}
+.cell:hover .plus{transform:rotate(90deg);color:var(--accent)}
+.mini{height:150px;border:1px solid var(--rule);border-radius:4px;background:var(--paper-2);
+  margin-bottom:26px;position:relative;overflow:hidden}
+.cell h3{margin-bottom:12px;padding-right:34px}
+.cell .idx{display:block;margin-bottom:18px}
+
+/* --------------------------------------------------------------- diagram */
+.chapter-head{text-align:center;max-width:640px;margin:0 auto}
+.chapter-head .lab{display:block;margin-bottom:22px}
+.chapter-head p{margin:22px auto 0;max-width:46ch}
+.diagram{margin-top:clamp(56px,7vw,96px);display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(24px,4vw,64px);align-items:center}
+.orbit{position:relative;aspect-ratio:1/.78;min-height:340px}
+.orbit svg.rings{position:absolute;inset:0;width:100%;height:100%}
+.node{
+  position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted-dk);padding:9px 13px;border:1px solid var(--rule-dk);border-radius:3px;
+  background:rgba(12,13,12,.55);backdrop-filter:blur(4px);white-space:nowrap;
+  transition:color .25s var(--e-std),border-color .25s var(--e-std),
+  background .25s var(--e-std);cursor:pointer
+}
+.node i{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}
+.node:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.node[aria-selected="true"]{color:#fff;border-color:var(--accent);background:rgba(47,107,255,.16)}
+.node[aria-selected="true"] i{background:var(--accent)}
+.node.core{color:#fff;border-color:rgba(255,255,255,.32);cursor:default;font-size:11px}
+.dpanel{border:1px solid var(--rule-dk);border-radius:4px;padding:clamp(24px,3vw,40px);
+  min-height:262px;display:flex;flex-direction:column;justify-content:center}
+.dstate{display:none;animation:fadeUp .45s var(--e-in)}
+.dstate.on{display:block}
+.dstate .lab{display:block;margin-bottom:16px}
+.dstate h3{margin-bottom:14px}
+.dstate ul{margin:20px 0 0;padding:0;list-style:none}
+.dstate li{border-top:1px solid var(--rule-dk);padding:11px 0;font-size:14px;
+  color:var(--muted-dk);display:flex;gap:12px}
+.dstate li b{color:#fff;font-weight:400;font-family:var(--mono);font-size:10px;
+  letter-spacing:.12em;padding-top:4px}
+
+/* --------------------------------------------------------------- split */
+.split{row-gap:48px;align-items:center}
+.split .img{grid-column:1/7}
+.split .lst{grid-column:8/13}
+.figure{border:1px solid var(--rule);border-radius:4px;overflow:hidden;position:relative;
+  aspect-ratio:4/4.4}
+.figure svg{width:100%;height:100%;object-fit:cover}
+.figure .cap{position:absolute;left:16px;bottom:14px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.acc{border-top:1px solid var(--rule)}
+.acc-item{border-bottom:1px solid var(--rule)}
+.acc-btn{width:100%;display:flex;align-items:flex-start;gap:20px;padding:24px 0;text-align:left}
+.acc-btn .n{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);
+  padding-top:6px;flex:none}
+.acc-btn .t{font-size:19px;letter-spacing:-.02em;flex:1;line-height:1.3}
+.acc-btn .pm{flex:none;color:var(--muted);transition:transform .3s var(--e-std)}
+.acc-item.open .acc-btn .pm{transform:rotate(45deg);color:var(--accent)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s var(--e-std)}
+.acc-body p{padding:0 0 26px 42px;font-size:14.5px;color:var(--muted);max-width:52ch}
+
+/* --------------------------------------------------------------- stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule)}
+.stat{padding:36px 24px 0 0;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:0}
+.stat .v{font-size:clamp(32px,3.6vw,50px);letter-spacing:-.035em;line-height:1;
+  font-variant-numeric:tabular-nums;font-weight:500}
+.stat .k{display:block;margin-top:14px}
+
+/* --------------------------------------------------------------- big cards */
+.bigcards{display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  margin-top:clamp(48px,6vw,88px)}
+.bigcard{border:1px solid var(--rule-dk);border-radius:4px;padding:clamp(26px,3vw,40px);
+  min-height:230px;display:flex;flex-direction:column;justify-content:space-between;
+  transition:border-color .3s var(--e-std),transform .3s var(--e-std),background .3s var(--e-std)}
+.bigcard:hover{border-color:rgba(255,255,255,.4);transform:translateY(-4px);
+  background:rgba(255,255,255,.03)}
+.bigcard .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.bigcard .ar{color:var(--accent);transition:transform .3s var(--e-std)}
+.bigcard:hover .ar{transform:translate(4px,-4px)}
+.bigcard h3{margin-bottom:12px}
+
+/* --------------------------------------------------------------- pricing */
+.price-head{align-items:end;row-gap:32px}
+.price-head .h{grid-column:1/7}
+.price-head .p{grid-column:8/13}
+.ptable{margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--ink)}
+.prow{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;
+  border-bottom:1px solid var(--rule);padding:20px 0;align-items:center}
+.prow.head{padding:18px 0}
+.prow .c{font-size:14.5px;color:var(--muted)}
+.prow .c.k{color:var(--ink)}
+.prow.head .c{color:var(--ink)}
+.prow .plan{display:block;font-size:17px;letter-spacing:-.02em;font-weight:500}
+.prow .sub{display:block;margin-top:4px}
+.tick{color:var(--accent)}
+.dash{color:var(--rule)}
+.pfoot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;padding-top:26px}
+
+/* --------------------------------------------------------------- cta */
+.cta{text-align:left}
+.cta-form{display:flex;gap:16px;align-items:flex-end;max-width:560px;
+  margin-top:40px;flex-wrap:wrap}
+.field{flex:1;min-width:240px}
+.field label{display:block;margin-bottom:10px}
+.field input{width:100%;background:none;border:0;border-bottom:1px solid var(--rule);
+  padding:10px 0;font:inherit;font-size:16px;color:inherit;
+  transition:border-color .25s var(--e-std)}
+.field input::placeholder{color:var(--muted);opacity:.6}
+.field input:focus{outline:none;border-bottom-color:var(--accent)}
+.dark .field input{border-bottom-color:var(--rule-dk);color:#fff}
+
+/* --------------------------------------------------------------- footer */
+.foot{border-top:1px solid var(--rule);padding-top:clamp(56px,7vw,88px);
+  padding-bottom:36px}
+.foot-grid{row-gap:40px}
+.foot-brand{grid-column:1/4}
+.fcol{grid-column:span 2}
+.fcol ul{list-style:none;margin:16px 0 0;padding:0}
+.fcol li{margin-bottom:10px}
+.fcol a{font-size:14px;color:var(--muted);transition:color .2s var(--e-std)}
+.fcol a:hover{color:var(--ink)}
+.wordmark{margin-top:clamp(56px,8vw,110px);font-size:clamp(58px,14.4vw,220px);
+  letter-spacing:-.05em;line-height:.86;font-weight:500;color:var(--ink);
+  opacity:.09;user-select:none;white-space:nowrap}
+.legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+
+/* --------------------------------------------------------------- drawer */
+.scrim{position:fixed;inset:0;z-index:90;background:rgba(10,11,10,.42);
+  backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .4s var(--e-std),visibility .4s}
+.scrim.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:91;width:min(480px,100%);
+  background:var(--paper);padding:clamp(28px,4vw,52px);overflow-y:auto;
+  transform:translateX(100%);transition:transform .5s var(--e-in);
+  display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer .x{position:absolute;top:22px;right:22px;width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;border:1px solid var(--rule);
+  border-radius:3px;transition:border-color .25s}
+.drawer .x:hover{border-color:var(--ink)}
+.drawer h3{margin:auto 0 26px;font-size:clamp(26px,3vw,34px);letter-spacing:-.03em;padding-top:40px}
+.drawer .f{margin-bottom:24px}
+.drawer .f label{display:block;margin-bottom:8px}
+.drawer .f input{width:100%;background:none;border:0;border-bottom:1px solid var(--rule);
+  padding:10px 0;font:inherit;font-size:16px;transition:border-color .25s}
+.drawer .f input:focus{outline:none;border-bottom-color:var(--accent)}
+.drawer .btn{width:100%;justify-content:center;margin-top:10px}
+.drawer .fine{margin-top:20px;font-size:12.5px;color:var(--muted);line-height:1.5;
+  margin-bottom:auto}
+
+/* mobile menu */
+.mmenu{position:fixed;inset:64px 0 0;z-index:78;background:var(--paper);
+  padding:36px var(--gut);display:none;flex-direction:column;gap:6px;overflow-y:auto}
+.mmenu.open{display:flex}
+.mmenu a{font-size:26px;letter-spacing:-.03em;padding:14px 0;
+  border-bottom:1px solid var(--rule)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);
+  transition:opacity .8s var(--e-in),transform .8s var(--e-in)}
+.rv.in{opacity:1;transform:none}
+
+/* --------------------------------------------------------------- responsive */
+@media(max-width:1200px){
+  .diagram{grid-template-columns:1fr}
+  .mega-col{grid-column:span 4}
+}
+@media(max-width:900px){
+  .nav-links,.nav-right a.txt{display:none}
+  .burger{display:block}
+  .mega{display:none}
+  .grid{grid-template-columns:repeat(6,1fr)}
+  .two-up .h,.two-up .p,.split .img,.split .lst,
+  .price-head .h,.price-head .p{grid-column:1/-1}
+  .cells{grid-template-columns:1fr}
+  .cell{border-right:0;border-bottom:1px solid var(--rule);padding:36px 0 40px}
+  .cell .plus{right:0}
+  .logo-grid{grid-template-columns:repeat(3,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{border-right:0;border-bottom:1px solid var(--rule);padding-bottom:28px}
+  .stat:nth-child(odd){border-right:1px solid var(--rule);padding-right:24px}
+  .bigcards{grid-template-columns:1fr}
+  .board{grid-template-columns:1fr}
+  .col:nth-child(3){display:none}
+  .float{position:static;width:100%;margin-top:16px;box-shadow:none}
+  .prow,.pfoot{grid-template-columns:1fr 1fr;row-gap:12px}
+  .prow.head .c:first-child{display:none}
+  .foot-brand{grid-column:1/-1}
+  .fcol{grid-column:span 3}
+  .figure{aspect-ratio:4/3.2}
+}
+@media(max-width:640px){
+  .grid{grid-template-columns:1fr}
+  .logo-grid{grid-template-columns:repeat(2,1fr)}
+  .fcol{grid-column:1/-1}
+  .hero-meta{gap:18px;flex-direction:column}
+  .prow,.pfoot{grid-template-columns:1fr}
+  .prow.head{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  .line span{transform:none}
+  .hero-sub,.hero-cta,.hero-meta{opacity:1}
+  .hero-media svg{transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="#top" aria-label="DoubleTab home">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="1.2" y="4.6" width="13" height="9.6" rx="2.2" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="9.4" y="9.6" width="13" height="9.6" rx="2.2" fill="#2F6BFF" fill-opacity=".14" stroke="#2F6BFF" stroke-width="1.4"/>
+      </svg>
+      DoubleTab
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <button type="button" id="megaBtn" aria-expanded="false" aria-controls="mega">Platform
+        <svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg>
+      </button>
+      <a href="#automation">Automation</a>
+      <a href="#open">Open source</a>
+      <a href="#deploy">Deploy</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div class="nav-right">
+      <a class="txt" href="#open">Docs</a>
+      <a class="txt" href="#open">GitHub</a>
+      <button class="btn btn-p" data-open-drawer type="button">Open the app</button>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mega" id="mega">
+  <div class="wrap">
+    <div class="mega-in">
+      <div class="mega-col">
+        <span class="lab">01 / Work</span>
+        <a class="mega-item" href="#hub"><strong>Tasks &amp; boards</strong><span>Shared boards that publish their own status</span></a>
+        <a class="mega-item" href="#hub"><strong>Docs &amp; specs</strong><span>Versioned, commentable, searchable</span></a>
+      </div>
+      <div class="mega-col">
+        <span class="lab">02 / Talk</span>
+        <a class="mega-item" href="#hub"><strong>Threaded channels</strong><span>Collective threads that stay readable</span></a>
+        <a class="mega-item" href="#hub"><strong>Direct messages</strong><span>One-to-one, end-to-end encrypted</span></a>
+      </div>
+      <div class="mega-col">
+        <span class="lab">03 / Media</span>
+        <a class="mega-item" href="#hub"><strong>Multimedia pipeline</strong><span>Transcode, transcribe, index on upload</span></a>
+        <a class="mega-item" href="#hub"><strong>Clips &amp; recordings</strong><span>Async video with searchable transcripts</span></a>
+      </div>
+      <div class="mega-col">
+        <span class="lab">04 / Run it</span>
+        <a class="mega-item" href="#deploy"><strong>DoubleTab Cloud</strong><span>Managed, free for every team size</span></a>
+        <a class="mega-item" href="#deploy"><strong>Self-hosted</strong><span>One container, your infrastructure</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mmenu" id="mmenu">
+  <a href="#hub">Platform</a>
+  <a href="#automation">Automation</a>
+  <a href="#open">Open source</a>
+  <a href="#deploy">Deploy</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#open">GitHub</a>
+</div>
+
+<main id="top">
+
+<!-- ============================================================ HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyDusk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#070A12"/>
+          <stop offset=".28" stop-color="#101A2C"/>
+          <stop offset=".54" stop-color="#2A3A55"/>
+          <stop offset=".74" stop-color="#6C7B93"/>
+          <stop offset=".88" stop-color="#B9B3AB"/>
+          <stop offset="1" stop-color="#D9CFC2"/>
+        </linearGradient>
+        <filter id="cl1" x="-25%" y="-25%" width="150%" height="150%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0032 0.0115" numOctaves="5" seed="14" result="n"/>
+          <feColorMatrix in="n" type="matrix"
+            values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.35 0.55 0 0 -0.42" result="c"/>
+          <feGaussianBlur in="c" stdDeviation="5"/>
+        </filter>
+        <filter id="cl2" x="-25%" y="-25%" width="150%" height="150%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0016 0.0052" numOctaves="4" seed="3" result="n"/>
+          <feColorMatrix in="n" type="matrix"
+            values="0 0 0 0 1  0 0 0 0 .96  0 0 0 0 .90  1.1 0.4 0 0 -0.36" result="c"/>
+          <feGaussianBlur in="c" stdDeviation="12"/>
+        </filter>
+        <linearGradient id="mskA" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".38" stop-color="#fff" stop-opacity=".55"/>
+          <stop offset=".72" stop-color="#fff" stop-opacity="1"/>
+          <stop offset="1" stop-color="#fff" stop-opacity=".2"/>
+        </linearGradient>
+        <mask id="mA"><rect width="1600" height="900" fill="url(#mskA)"/></mask>
+        <linearGradient id="mskB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".85"/>
+          <stop offset=".5" stop-color="#fff" stop-opacity=".45"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="mB"><rect width="1600" height="900" fill="url(#mskB)"/></mask>
+        <radialGradient id="sun" cx=".72" cy=".82" r=".42">
+          <stop offset="0" stop-color="#FFE9CE" stop-opacity=".78"/>
+          <stop offset=".45" stop-color="#E8C79E" stop-opacity=".28"/>
+          <stop offset="1" stop-color="#E8C79E" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#skyDusk)"/>
+      <rect width="1600" height="900" filter="url(#cl2)" opacity=".42" mask="url(#mB)"/>
+      <rect width="1600" height="900" fill="url(#sun)"/>
+      <rect width="1600" height="900" filter="url(#cl1)" opacity=".62" mask="url(#mA)"/>
+      <rect y="760" width="1600" height="140" fill="#0D1118" opacity=".55"/>
+      <rect y="757" width="1600" height="2.5" fill="#E4D9C9" opacity=".35"/>
+    </svg>
+  </div>
+  <div class="slats" aria-hidden="true"></div>
+  <div class="vig" aria-hidden="true"></div>
+  <svg class="grain" aria-hidden="true"><filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/></filter><rect width="100%" height="100%" filter="url(#gr)"/></svg>
+
+  <div class="hero-in wrap">
+    <div class="hero-copy">
+      <span class="lab">The open-source team cloud</span>
+      <h1>
+        <span class="line"><span>One place for the work.</span></span>
+        <span class="line"><span>One thread for the team.</span></span>
+      </h1>
+      <p class="hero-sub">DoubleTab centralizes remote teamwork — tasks, threaded channels and multimedia — then automates the direct communication between them. Free, open source, and yours to host.</p>
+      <div class="hero-cta">
+        <button class="btn btn-p" data-open-drawer type="button">Open the app</button>
+        <a class="btn btn-s on-dark" href="#open" style="border-color:rgba(255,255,255,.3);color:#fff">View on GitHub</a>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <span><b><span class="dot"></span>v4.2</b> &nbsp;shipping weekly</span>
+      <span>License &nbsp;<b>AGPL-3.0</b></span>
+      <span>Stars &nbsp;<b>18.4k</b></span>
+      <span>Regions &nbsp;<b>11</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ TRUST -->
+<section class="ruled" style="padding:0">
+  <div class="wrap">
+    <div class="trust-head">
+      <span class="lab">Trusted by distributed teams worldwide</span>
+      <a class="tlink" href="#open">Read the case notes <span class="ar">↗</span></a>
+    </div>
+    <div class="logo-grid rv">
+      <div class="logo-cell">Northmark</div>
+      <div class="logo-cell">Halcyon Labs</div>
+      <div class="logo-cell">Fieldnote</div>
+      <div class="logo-cell">Petrichor</div>
+      <div class="logo-cell">Vellum &amp; Co.</div>
+      <div class="logo-cell">Static Bureau</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ HUB -->
+<section class="sec" id="hub">
+  <div class="wrap">
+    <div class="grid two-up">
+      <div class="h rv">
+        <span class="lab" style="display:block;margin-bottom:24px">01 / The hub</span>
+        <h2>Centralize the work.<br>Automate the conversation.</h2>
+      </div>
+      <div class="p rv" data-d="1">
+        <p class="body">Most remote teams run on four tools that never speak to each other. DoubleTab collapses them into one secure hub — then wires the routine messages between them, so attention goes to the work instead of the reporting of it.</p>
+      </div>
+    </div>
+
+    <div class="panel rv" data-d="2">
+      <div class="panel-glow" aria-hidden="true"></div>
+      <div class="board">
+        <div class="col">
+          <div class="col-h"><span class="chip">Intake</span><span class="chip">6</span></div>
+          <div class="tk"><div class="t">Q3 launch brief — regional copy</div><div class="m"><span class="av"></span><span class="bar"><i style="width:22%"></i></span></div></div>
+          <div class="tk"><div class="t">Rewrite onboarding email sequence</div><div class="m"><span class="av"></span><span class="bar"><i style="width:8%"></i></span></div></div>
+          <div class="tk"><div class="t">Vendor security questionnaire</div><div class="m"><span class="av"></span><span class="bar"><i style="width:40%"></i></span></div></div>
+        </div>
+        <div class="col">
+          <div class="col-h"><span class="chip">In motion</span><span class="chip">3</span></div>
+          <div class="tk"><div class="t">Transcode &amp; index all-hands recording</div><div class="m"><span class="av b"></span><span class="bar"><i style="width:74%"></i></span></div></div>
+          <div class="tk"><div class="t">Migrate #design to threaded channel</div><div class="m"><span class="av"></span><span class="bar"><i style="width:55%"></i></span></div></div>
+        </div>
+        <div class="col">
+          <div class="col-h"><span class="chip">Shipped</span><span class="chip">12</span></div>
+          <div class="tk"><div class="t">SSO for self-hosted deployments</div><div class="m"><span class="av"></span><span class="bar"><i style="width:100%"></i></span></div></div>
+          <div class="tk"><div class="t">Quiet-hours routing rules</div><div class="m"><span class="av"></span><span class="bar"><i style="width:100%"></i></span></div></div>
+        </div>
+      </div>
+      <div class="float">
+        <div class="fh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="1.2" y="4.6" width="13" height="9.6" rx="2.2" stroke="#0C0D0C" stroke-width="1.6"/>
+            <rect x="9.4" y="9.6" width="13" height="9.6" rx="2.2" stroke="#2F6BFF" stroke-width="1.6"/>
+          </svg>
+          <span class="lab">#launch-q3 · auto</span>
+        </div>
+        <p class="msg"><b>Board update.</b> “Transcode &amp; index all-hands recording” moved to <b>In motion</b>. Transcript will post here when processing finishes.<span class="typing" aria-hidden="true"><i></i><i></i><i></i></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 3-UP -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="cells">
+
+      <article class="cell rv">
+        <svg class="plus" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1.2"/></svg>
+        <div class="mini" aria-hidden="true">
+          <svg viewBox="0 0 300 150" preserveAspectRatio="none" style="width:100%;height:100%">
+            <rect width="300" height="150" fill="#F3F4F2"/>
+            <g stroke="#DFE1DE" stroke-width="1">
+              <rect x="18" y="22" width="80" height="106" rx="3" fill="#fff"/>
+              <rect x="110" y="22" width="80" height="106" rx="3" fill="#fff"/>
+              <rect x="202" y="22" width="80" height="106" rx="3" fill="#fff"/>
+              <rect x="26" y="34" width="64" height="20" rx="2" fill="#FCFCFB"/>
+              <rect x="26" y="60" width="64" height="20" rx="2" fill="#FCFCFB"/>
+              <rect x="118" y="34" width="64" height="20" rx="2" fill="#FCFCFB"/>
+              <rect x="210" y="34" width="64" height="20" rx="2" fill="#FCFCFB"/>
+              <rect x="210" y="60" width="64" height="20" rx="2" fill="#FCFCFB"/>
+            </g>
+            <rect x="118" y="60" width="64" height="20" rx="2" fill="#2F6BFF" fill-opacity=".12" stroke="#2F6BFF" stroke-width="1"/>
+          </svg>
+        </div>
+        <span class="lab idx">01 / Tasks</span>
+        <h3>Boards that report themselves</h3>
+        <p class="body" style="font-size:14.5px">Every move on a board publishes to the channel that cares about it, with the context attached. The status meeting stops being necessary.</p>
+      </article>
+
+      <article class="cell rv" data-d="1">
+        <svg class="plus" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1.2"/></svg>
+        <div class="mini" aria-hidden="true">
+          <svg viewBox="0 0 300 150" preserveAspectRatio="none" style="width:100%;height:100%">
+            <rect width="300" height="150" fill="#F3F4F2"/>
+            <g stroke="#DFE1DE" stroke-width="1" fill="#fff">
+              <rect x="20" y="20" width="150" height="26" rx="13"/>
+              <rect x="46" y="54" width="170" height="26" rx="13"/>
+              <rect x="46" y="88" width="132" height="26" rx="13"/>
+            </g>
+            <path d="M32 46v46h12M32 46v14h12" stroke="#DFE1DE" stroke-width="1" fill="none"/>
+            <circle cx="238" cy="33" r="9" fill="#2F6BFF" fill-opacity=".14" stroke="#2F6BFF"/>
+            <circle cx="238" cy="33" r="2.4" fill="#2F6BFF"/>
+          </svg>
+        </div>
+        <span class="lab idx">02 / Channels</span>
+        <h3>Threads that stay readable</h3>
+        <p class="body" style="font-size:14.5px">One-to-one and collective channels with real threading and a summary rail, so a week of context reads in a minute — in any timezone.</p>
+      </article>
+
+      <article class="cell rv" data-d="2">
+        <svg class="plus" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1.2"/></svg>
+        <div class="mini" aria-hidden="true">
+          <svg viewBox="0 0 300 150" preserveAspectRatio="none" style="width:100%;height:100%">
+            <rect width="300" height="150" fill="#F3F4F2"/>
+            <rect x="20" y="26" width="260" height="60" rx="3" fill="#fff" stroke="#DFE1DE"/>
+            <g stroke="#C9CCC8" stroke-width="1.6" stroke-linecap="round">
+              <path d="M34 56v-9M46 56v-17M58 56v-25M70 56v-13M82 56v-21M94 56v-7M106 56v-18M118 56v-27M130 56v-11"/>
+            </g>
+            <g stroke="#2F6BFF" stroke-width="1.6" stroke-linecap="round">
+              <path d="M142 56v-22M154 56v-9M166 56v-16"/>
+            </g>
+            <rect x="20" y="98" width="150" height="10" rx="5" fill="#E4E5E2"/>
+            <rect x="20" y="116" width="96" height="10" rx="5" fill="#E4E5E2"/>
+          </svg>
+        </div>
+        <span class="lab idx">03 / Media</span>
+        <h3>Multimedia, processed on arrival</h3>
+        <p class="body" style="font-size:14.5px">Drop a recording, a design file or a forty-page PDF. DoubleTab transcodes, transcribes and indexes it, then posts the searchable result back to the thread.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ DARK I -->
+<section class="sec dark" id="open">
+  <div class="wrap">
+    <div class="chapter-head rv">
+      <span class="lab">Platform</span>
+      <h2>Built in the open.</h2>
+      <p>One codebase, six services, no hidden edition. Read every line, run it anywhere, and change what doesn't fit your team.</p>
+    </div>
+
+    <div class="diagram rv" data-d="1">
+      <div class="orbit" id="orbit">
+        <svg class="rings" viewBox="0 0 600 470" fill="none" aria-hidden="true">
+          <ellipse cx="300" cy="235" rx="238" ry="176" stroke="rgba(255,255,255,.13)"/>
+          <ellipse cx="300" cy="235" rx="150" ry="110" stroke="rgba(255,255,255,.09)"/>
+          <ellipse cx="300" cy="235" rx="70" ry="52" stroke="rgba(255,255,255,.06)"/>
+          <g stroke="rgba(255,255,255,.10)" stroke-dasharray="2 5">
+            <path d="M300 235L300 59M300 235L526 176M300 235L462 393M300 235L138 393M300 235L74 176"/>
+          </g>
+        </svg>
+        <div class="node core" style="left:50%;top:50%"><i style="background:#2F6BFF"></i>DoubleTab core</div>
+        <button class="node" role="tab" aria-selected="true" data-state="tasks" style="left:50%;top:12.5%"><i></i>Tasks</button>
+        <button class="node" role="tab" aria-selected="false" data-state="channels" style="left:87.6%;top:37.5%"><i></i>Channels</button>
+        <button class="node" role="tab" aria-selected="false" data-state="media" style="left:77%;top:83.6%"><i></i>Media</button>
+        <button class="node" role="tab" aria-selected="false" data-state="automations" style="left:23%;top:83.6%"><i></i>Automations</button>
+        <button class="node" role="tab" aria-selected="false" data-state="identity" style="left:12.4%;top:37.5%"><i></i>Identity</button>
+      </div>
+
+      <div class="dpanel">
+        <div class="dstate on" data-state="tasks">
+          <span class="lab">01 / Tasks service</span>
+          <h3>Work objects, not tickets</h3>
+          <p>A task is a first-class object with an owner, a thread, and a media bucket. Everything else in DoubleTab subscribes to it.</p>
+          <ul>
+            <li><b>API</b><span>REST + WebSocket, fully documented</span></li>
+            <li><b>Store</b><span>Postgres, append-only event log</span></li>
+            <li><b>Scale</b><span>2.4M objects per workspace, tested</span></li>
+          </ul>
+        </div>
+        <div class="dstate" data-state="channels">
+          <span class="lab">02 / Channel service</span>
+          <h3>Threading that holds up</h3>
+          <p>Collective channels and one-to-one messages share a single primitive, so a DM can become a thread without losing history.</p>
+          <ul>
+            <li><b>Crypto</b><span>End-to-end on direct messages</span></li>
+            <li><b>Search</b><span>Full-text across every thread you can see</span></li>
+            <li><b>Sync</b><span>Offline-first clients, CRDT merge</span></li>
+          </ul>
+        </div>
+        <div class="dstate" data-state="media">
+          <span class="lab">03 / Media pipeline</span>
+          <h3>Processed the moment it lands</h3>
+          <p>Uploads fan out to a worker pool for transcode, transcript, OCR and thumbnailing, then return to the originating thread.</p>
+          <ul>
+            <li><b>Formats</b><span>Video, audio, image, PDF, CAD preview</span></li>
+            <li><b>Speed</b><span>1080p hour-long recording in ~90s</span></li>
+            <li><b>Cost</b><span>Runs on your own object storage</span></li>
+          </ul>
+        </div>
+        <div class="dstate" data-state="automations">
+          <span class="lab">04 / Automation engine</span>
+          <h3>Direct communication, scheduled</h3>
+          <p>Rules watch objects and send the message a human would otherwise have to remember to send.</p>
+          <ul>
+            <li><b>Rules</b><span>Visual builder or plain YAML</span></li>
+            <li><b>Hooks</b><span>120+ integrations, signed webhooks</span></li>
+            <li><b>Audit</b><span>Every automated message is traceable</span></li>
+          </ul>
+        </div>
+        <div class="dstate" data-state="identity">
+          <span class="lab">05 / Identity</span>
+          <h3>Your directory, your rules</h3>
+          <p>SSO, SCIM and granular workspace roles ship in the free build — not behind an enterprise gate.</p>
+          <ul>
+            <li><b>Auth</b><span>SAML, OIDC, passkeys</span></li>
+            <li><b>Roles</b><span>Per-channel and per-board scopes</span></li>
+            <li><b>Residency</b><span>Pin data to any of 11 regions</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SPLIT -->
+<section class="sec" id="automation">
+  <div class="wrap">
+    <div class="grid split">
+      <div class="img rv">
+        <div class="figure">
+          <svg viewBox="0 0 800 880" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5C7AA6"/>
+                <stop offset=".34" stop-color="#93AAC6"/>
+                <stop offset=".64" stop-color="#C6D2DE"/>
+                <stop offset=".86" stop-color="#E7EAEA"/>
+                <stop offset="1" stop-color="#EFEEEA"/>
+              </linearGradient>
+              <filter id="cl3" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.0055 0.016" numOctaves="5" seed="21" result="n"/>
+                <feColorMatrix in="n" type="matrix"
+                  values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.3 0.5 0 0 -0.36" result="c"/>
+                <feGaussianBlur in="c" stdDeviation="4"/>
+              </filter>
+              <linearGradient id="mskC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".25"/>
+                <stop offset=".45" stop-color="#fff" stop-opacity="1"/>
+                <stop offset=".85" stop-color="#fff" stop-opacity=".35"/>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+              <mask id="mC"><rect width="800" height="880" fill="url(#mskC)"/></mask>
+            </defs>
+            <rect width="800" height="880" fill="url(#skyDay)"/>
+            <rect width="800" height="880" filter="url(#cl3)" opacity=".72" mask="url(#mC)"/>
+            <rect y="812" width="800" height="68" fill="#8E9AA6" opacity=".28"/>
+          </svg>
+          <div class="slats" style="opacity:.22"></div>
+          <span class="cap">Region EU-2 · 06:41 local</span>
+        </div>
+      </div>
+
+      <div class="lst rv" data-d="1">
+        <span class="lab" style="display:block;margin-bottom:24px">02 / Automation</span>
+        <h2 style="margin-bottom:24px">Direct communication,<br>on rails.</h2>
+        <p class="body" style="margin-bottom:44px">Four rule types cover most of what a distributed team asks a person to remember. Compose them in the builder, or commit them as YAML alongside your code.</p>
+
+        <div class="acc" id="acc">
+          <div class="acc-item open">
+            <button class="acc-btn" type="button" aria-expanded="true">
+              <span class="n">01</span><span class="t">Routing rules</span>
+              <svg class="pm" width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1.2"/></svg>
+            </button>
+            <div class="acc-body"><p>Send the right update to the right thread based on board, label, owner or client. A handoff on one board becomes a message in three channels, with the media already attached.</p></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              <span class="n">02</span><span class="t">Digest windows</span>
+              <svg class="pm" width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1.2"/></svg>
+            </button>
+            <div class="acc-body"><p>Collect low-priority activity and deliver it once, at a time each person chooses. Nine notifications become one paragraph they'll actually read.</p></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              <span class="n">03</span><span class="t">Escalation paths</span>
+              <svg class="pm" width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1.2"/></svg>
+            </button>
+            <div class="acc-body"><p>If a task stalls past its threshold, DoubleTab walks a defined ladder — thread, owner, then the next person on call — and stops the moment someone answers.</p></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              <span class="n">04</span><span class="t">Quiet hours</span>
+              <svg class="pm" width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1.2"/></svg>
+            </button>
+            <div class="acc-body"><p>Every automated message respects the recipient's local hours by default. Urgency is a deliberate override, held in the audit log, not an accident of timezone.</p></div>
+          </div>
+        </div>
+
+        <div style="margin-top:36px"><a class="tlink" href="#deploy">Read the automation docs <span class="ar">↗</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ STATS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="stats rv">
+      <div class="stat"><div class="v" data-count="18400" data-suffix="">0</div><span class="lab k">GitHub stars</span></div>
+      <div class="stat"><div class="v" data-count="120" data-suffix="+">0</div><span class="lab k">Integrations</span></div>
+      <div class="stat"><div class="v" data-count="99.98" data-dec="2" data-suffix="%">0</div><span class="lab k">Cloud uptime, trailing year</span></div>
+      <div class="stat"><div class="v">$0</div><span class="lab k">License cost, every seat</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ DARK II -->
+<section class="sec dark" id="deploy">
+  <div class="wrap">
+    <div class="chapter-head rv">
+      <span class="lab">Ways to run it</span>
+      <h2>Your cloud or ours.<br>Same code either way.</h2>
+      <p>No community edition, no feature gate. The managed service is the open-source build, operated by us.</p>
+    </div>
+
+    <div class="bigcards rv" data-d="1">
+      <a class="bigcard" href="#pricing">
+        <div class="top">
+          <span class="lab">Managed</span>
+          <span class="ar">↗</span>
+        </div>
+        <div>
+          <h3>DoubleTab Cloud</h3>
+          <p>Provision a workspace in under a minute across eleven regions. Backups, upgrades and residency handled — at no cost to your team.</p>
+        </div>
+      </a>
+      <a class="bigcard" href="#pricing">
+        <div class="top">
+          <span class="lab">Self-hosted</span>
+          <span class="ar">↗</span>
+        </div>
+        <div>
+          <h3>One container, your metal</h3>
+          <p>A single compose file brings up every service. Bring your own Postgres and object storage, keep every byte inside your perimeter.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PRICING -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="grid price-head">
+      <div class="h rv">
+        <span class="lab" style="display:block;margin-bottom:24px">03 / Pricing</span>
+        <h2>Free. Forever.<br>Including the good parts.</h2>
+      </div>
+      <div class="p rv" data-d="1">
+        <p class="body">DoubleTab is funded by support contracts and managed infrastructure for organisations that want them — never by removing features from everyone else.</p>
+      </div>
+    </div>
+
+    <div class="ptable rv" data-d="2">
+      <div class="prow head">
+        <div class="c"></div>
+        <div class="c"><span class="plan">Cloud</span><span class="lab sub">Free</span></div>
+        <div class="c"><span class="plan">Self-hosted</span><span class="lab sub">Free</span></div>
+        <div class="c"><span class="plan">Support</span><span class="lab sub">From $0.00/seat</span></div>
+      </div>
+      <div class="prow"><div class="c k">Unlimited members &amp; channels</div><div class="c tick">Included</div><div class="c tick">Included</div><div class="c tick">Included</div></div>
+      <div class="prow"><div class="c k">Threaded messaging &amp; DMs</div><div class="c tick">Included</div><div class="c tick">Included</div><div class="c tick">Included</div></div>
+      <div class="prow"><div class="c k">Automation engine &amp; webhooks</div><div class="c tick">Included</div><div class="c tick">Included</div><div class="c tick">Included</div></div>
+      <div class="prow"><div class="c k">Multimedia processing</div><div class="c">50 GB / mo</div><div class="c tick">Unmetered</div><div class="c tick">Unmetered</div></div>
+      <div class="prow"><div class="c k">SSO, SCIM, audit log</div><div class="c tick">Included</div><div class="c tick">Included</div><div class="c tick">Included</div></div>
+      <div class="prow"><div class="c k">Data residency &amp; region pinning</div><div class="c">11 regions</div><div class="c tick">Your choice</div><div class="c tick">Your choice</div></div>
+      <div class="prow"><div class="c k">Named engineer, 1-hour SLA</div><div class="c dash">—</div><div class="c dash">—</div><div class="c tick">Included</div></div>
+      <div class="pfoot">
+        <div></div>
+        <div><button class="btn btn-p" data-open-drawer type="button" style="width:100%;justify-content:center">Start free</button></div>
+        <div><a class="btn btn-s" href="#open" style="width:100%;justify-content:center">Get the container</a></div>
+        <div><a class="btn btn-s" href="#cta" style="width:100%;justify-content:center">Talk to us</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CTA -->
+<section class="sec ruled" id="cta">
+  <div class="wrap cta">
+    <div class="grid two-up">
+      <div class="h rv">
+        <span class="lab" style="display:block;margin-bottom:24px">Get started</span>
+        <h2>Two taps from anywhere<br>to everyone.</h2>
+      </div>
+      <div class="p rv" data-d="1">
+        <p class="body">Create a workspace, invite the team, connect a repository. Most teams have their first automated thread running the same afternoon.</p>
+        <form class="cta-form" onsubmit="return false">
+          <div class="field">
+            <label class="lab" for="email">Work email</label>
+            <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
+          </div>
+          <button class="btn btn-p" type="submit">Create workspace</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="grid foot-grid">
+      <div class="foot-brand">
+        <a class="mark" href="#top" aria-label="DoubleTab home">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="1.2" y="4.6" width="13" height="9.6" rx="2.2" stroke="currentColor" stroke-width="1.4"/>
+            <rect x="9.4" y="9.6" width="13" height="9.6" rx="2.2" fill="#2F6BFF" fill-opacity=".14" stroke="#2F6BFF" stroke-width="1.4"/>
+          </svg>
+          DoubleTab
+        </a>
+        <p class="body" style="font-size:14px;margin-top:18px;max-width:30ch">The open-source hub for distributed teams. AGPL-3.0.</p>
+      </div>
+      <div class="fcol"><span class="lab">Platform</span>
+        <ul><li><a href="#hub">Tasks &amp; boards</a></li><li><a href="#hub">Channels</a></li><li><a href="#hub">Media pipeline</a></li><li><a href="#automation">Automation</a></li></ul>
+      </div>
+      <div class="fcol"><span class="lab">Deploy</span>
+        <ul><li><a href="#deploy">DoubleTab Cloud</a></li><li><a href="#deploy">Self-hosted</a></li><li><a href="#deploy">Regions</a></li><li><a href="#pricing">Support plans</a></li></ul>
+      </div>
+      <div class="fcol"><span class="lab">Open source</span>
+        <ul><li><a href="#open">Repository</a></li><li><a href="#open">Documentation</a></li><li><a href="#open">Changelog</a></li><li><a href="#open">Contributing</a></li></ul>
+      </div>
+      <div class="fcol"><span class="lab">Company</span>
+        <ul><li><a href="#top">About</a></li><li><a href="#top">Security</a></li><li><a href="#top">Status</a></li><li><a href="#cta">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="wordmark" aria-hidden="true">DoubleTab</div>
+    <div class="legal">
+      <span class="lab">© 2026 DoubleTab Collective</span>
+      <span class="lab">Privacy · Terms · Security · Trademark</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ DRAWER -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Create a workspace">
+  <button class="x" id="drawerX" type="button" aria-label="Close">
+    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.2"/></svg>
+  </button>
+  <h3>Interested in bringing your team to DoubleTab?</h3>
+  <form onsubmit="return false">
+    <div class="f"><label class="lab" for="d1">First name</label><input id="d1" type="text" autocomplete="given-name"></div>
+    <div class="f"><label class="lab" for="d2">Last name</label><input id="d2" type="text" autocomplete="family-name"></div>
+    <div class="f"><label class="lab" for="d3">Work email</label><input id="d3" type="email" autocomplete="email"></div>
+    <div class="f"><label class="lab" for="d4">Team size</label><input id="d4" type="text" placeholder="e.g. 24"></div>
+    <button class="btn btn-p" type="submit">Create workspace</button>
+  </form>
+  <p class="fine">No card, no trial clock. DoubleTab Cloud is free for every seat — we'll only email you about your workspace.</p>
+</aside>
+
+<script>
+(function(){
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- nav scroll state ---- */
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    if (window.scrollY > 40) nav.classList.add('solid');
+    else nav.classList.remove('solid');
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---- mega panel ---- */
+  var mBtn = document.getElementById('megaBtn'), mega = document.getElementById('mega'), mT;
+  function megaOpen(v){
+    mega.classList.toggle('open', v);
+    mBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    if (v) nav.classList.add('solid'); else onScroll();
+  }
+  mBtn.addEventListener('click', function(){ megaOpen(!mega.classList.contains('open')); });
+  mBtn.addEventListener('mouseenter', function(){ clearTimeout(mT); megaOpen(true); });
+  [mBtn, mega].forEach(function(el){
+    el.addEventListener('mouseleave', function(){ mT = setTimeout(function(){ megaOpen(false); }, 220); });
+    el.addEventListener('mouseenter', function(){ clearTimeout(mT); });
+  });
+  mega.addEventListener('click', function(e){ if (e.target.closest('a')) megaOpen(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') megaOpen(false); });
+
+  /* ---- mobile menu ---- */
+  var burger = document.getElementById('burger'), mmenu = document.getElementById('mmenu');
+  burger.addEventListener('click', function(){
+    var open = !mmenu.classList.contains('open');
+    mmenu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.toggle('locked', open);
+    if (open) nav.classList.add('solid'); else onScroll();
+  });
+  mmenu.addEventListener('click', function(e){
+    if (e.target.tagName === 'A'){
+      mmenu.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      document.body.classList.remove('locked');
+    }
+  });
+
+  /* ---- reveal ---- */
+  var rvs = [].slice.call(document.querySelectorAll('.rv'));
+  if (rm || !('IntersectionObserver' in window)){
+    rvs.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        var d = parseInt(en.target.getAttribute('data-d') || '0', 10);
+        en.target.style.transitionDelay = (d * 80) + 'ms';
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      });
+    }, {threshold: 0.14, rootMargin: '0px 0px -8% 0px'});
+    rvs.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- counters ---- */
+  var counters = [].slice.call(document.querySelectorAll('[data-count]'));
+  function fmt(v, dec){
+    if (dec) return v.toFixed(dec);
+    return Math.round(v).toLocaleString('en-US');
+  }
+  function run(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var sfx = el.getAttribute('data-suffix') || '';
+    if (rm){ el.textContent = fmt(target, dec) + sfx; return; }
+    var t0 = null, dur = 1200;
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * e, dec) + sfx;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if ('IntersectionObserver' in window){
+    var cio = new IntersectionObserver(function(en){
+      en.forEach(function(e){ if (e.isIntersecting){ run(e.target); cio.unobserve(e.target); } });
+    }, {threshold: 0.5});
+    counters.forEach(function(el){ cio.observe(el); });
+  } else counters.forEach(run);
+
+  /* ---- diagram ---- */
+  var nodes = [].slice.call(document.querySelectorAll('.node[data-state]'));
+  var states = [].slice.call(document.querySelectorAll('.dstate'));
+  function select(key){
+    nodes.forEach(function(n){ n.setAttribute('aria-selected', n.getAttribute('data-state') === key ? 'true':'false'); });
+    states.forEach(function(s){ s.classList.toggle('on', s.getAttribute('data-state') === key); });
+  }
+  nodes.forEach(function(n, i){
+    n.addEventListener('click', function(){ select(n.getAttribute('data-state')); });
+    n.addEventListener('mouseenter', function(){ select(n.getAttribute('data-state')); });
+    n.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown'){ e.preventDefault(); nodes[(i+1)%nodes.length].focus(); nodes[(i+1)%nodes.length].click(); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ e.preventDefault(); var p=(i-1+nodes.length)%nodes.length; nodes[p].focus(); nodes[p].click(); }
+    });
+  });
+
+  /* ---- accordion ---- */
+  var accBtns = [].slice.call(document.querySelectorAll('.acc-btn'));
+  function setAcc(item, open){
+    var body = item.querySelector('.acc-body');
+    item.classList.toggle('open', open);
+    item.querySelector('.acc-btn').setAttribute('aria-expanded', open ? 'true':'false');
+    body.style.maxHeight = open ? (body.scrollHeight + 'px') : '0px';
+  }
+  accBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var item = b.parentElement, open = !item.classList.contains('open');
+      [].slice.call(document.querySelectorAll('.acc-item')).forEach(function(i){ setAcc(i, false); });
+      if (open) setAcc(item, true);
+    });
+  });
+  var first = document.querySelector('.acc-item.open');
+  if (first) setAcc(first, true);
+  window.addEventListener('resize', function(){
+    var o = document.querySelector('.acc-item.open');
+    if (o) o.querySelector('.acc-body').style.maxHeight = o.querySelector('.acc-body').scrollHeight + 'px';
+  });
+
+  /* ---- drawer ---- */
+  var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+  function drawerOpen(v){
+    drawer.classList.toggle('open', v);
+    scrim.classList.toggle('open', v);
+    drawer.setAttribute('aria-hidden', v ? 'false':'true');
+    document.body.classList.toggle('locked', v);
+    if (v) setTimeout(function(){ var f = drawer.querySelector('input'); if (f) f.focus(); }, 420);
+  }
+  [].slice.call(document.querySelectorAll('[data-open-drawer]')).forEach(function(b){
+    b.addEventListener('click', function(){ drawerOpen(true); });
+  });
+  document.getElementById('drawerX').addEventListener('click', function(){ drawerOpen(false); });
+  scrim.addEventListener('click', function(){ drawerOpen(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') drawerOpen(false); });
+
+  /* ---- hero parallax ---- */
+  if (!rm){
+    var media = document.querySelector('.hero-media');
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = Math.min(window.scrollY, 900);
+        media.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+        ticking = false;
+      });
+    }, {passive:true});
+  }
+})();
+</script>
+</body>
+</html>

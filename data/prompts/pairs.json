@@ -616,25 +616,25 @@
         "A": {
           "output_id": "doubletab_saas_001_A",
           "model": "Claude",
-          "workspace": "",
-          "source_path": "",
-          "render_url": "",
-          "status": "PENDING",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/doubletab_saas_001/A",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/doubletab_saas_001/a",
+          "render_url": "/renders/doubletab_saas_001/a/",
+          "status": "READY_FOR_EVALUATION",
           "build_log": "",
           "qa": {}
         },
         "B": {
           "output_id": "doubletab_saas_001_B",
           "model": "Codex",
-          "workspace": "",
-          "source_path": "",
-          "render_url": "",
-          "status": "PENDING",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/doubletab_saas_001/B",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/doubletab_saas_001/b",
+          "render_url": "/renders/doubletab_saas_001/b/",
+          "status": "READY_FOR_EVALUATION",
           "build_log": "",
           "qa": {}
         }
       },
-      "status": "NEW"
+      "status": "READY_FOR_EVALUATION"
     },
     {
       "pair_id": "possiblefinance_001",
