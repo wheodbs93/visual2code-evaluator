@@ -177,7 +177,7 @@ def append_evaluation(data: dict) -> dict:
     if not evaluator_id:
         raise ValueError("evaluator_id is required")
 
-    conn = _connect()
+    conn, db_type = _connect()
 
     try:
         existing = conn.execute(
@@ -240,7 +240,7 @@ def append_evaluation(data: dict) -> dict:
 
 
 def export_evaluations():
-    conn = _connect()
+    conn, db_type = _connect()
 
     try:
         rows = conn.execute(
