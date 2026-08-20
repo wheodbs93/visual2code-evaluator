@@ -3,6 +3,11 @@ from __future__ import annotations
 import json
 import os
 import sqlite3
+
+try:
+    import psycopg
+except ImportError:
+    psycopg = None
 from pathlib import Path
 
 from .models import PairRecord, OutputRecord, rubric_from_dict
@@ -10,6 +15,8 @@ from .models import PairRecord, OutputRecord, rubric_from_dict
 ROOT = Path(__file__).resolve().parents[1]
 
 PROMPT_FILE = ROOT / "data/prompts/pairs.json"
+
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 
 DB_PATH = Path(
     os.getenv(
@@ -20,6 +27,29 @@ DB_PATH = Path(
 
 
 def _connect():
+    if DATABASE_URL:
+        if psycopg is None:
+            raise RuntimeError(
+                "DATABASE_URL is set but psycopg is not installed."
+            )
+
+        conn = psycopg.connect(DATABASE_URL)
+
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS evaluations (
+                id BIGSERIAL PRIMARY KEY,
+                pair_id TEXT NOT NULL,
+                evaluator_id TEXT NOT NULL,
+                submitted_at TEXT NOT NULL,
+                payload_json TEXT NOT NULL
+            )
+            """
+        )
+
+        conn.commit()
+        return conn, "postgres"
+
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     conn = sqlite3.connect(
@@ -43,7 +73,7 @@ def _connect():
     )
 
     conn.commit()
-    return conn
+    return conn, "sqlite"
 
 
 def load_pairs(
@@ -109,10 +139,10 @@ def save_pairs(
 
 
 def evaluation_count(pair_id: str) -> int:
-    conn = _connect()
+    conn, db_type = _connect()
     try:
         row = conn.execute(
-            "SELECT COUNT(*) FROM evaluations WHERE pair_id = ?",
+            "SELECT COUNT(*) FROM evaluations WHERE pair_id = %s",
             (pair_id,),
         ).fetchone()
         return int(row[0])
@@ -121,13 +151,13 @@ def evaluation_count(pair_id: str) -> int:
 
 
 def evaluator_has_submitted(pair_id: str, evaluator_id: str) -> bool:
-    conn = _connect()
+    conn, db_type = _connect()
     try:
         row = conn.execute(
             """
             SELECT 1
             FROM evaluations
-            WHERE pair_id = ? AND evaluator_id = ?
+            WHERE pair_id = %s AND evaluator_id = ?
             LIMIT 1
             """,
             (pair_id, evaluator_id),
@@ -154,7 +184,7 @@ def append_evaluation(data: dict) -> dict:
             """
             SELECT 1
             FROM evaluations
-            WHERE pair_id = ? AND evaluator_id = ?
+            WHERE pair_id = %s AND evaluator_id = ?
             LIMIT 1
             """,
             (pair_id, evaluator_id),
@@ -167,7 +197,7 @@ def append_evaluation(data: dict) -> dict:
             )
 
         row = conn.execute(
-            "SELECT COUNT(*) FROM evaluations WHERE pair_id = ?",
+            "SELECT COUNT(*) FROM evaluations WHERE pair_id = %s",
             (pair_id,),
         ).fetchone()
 
@@ -186,7 +216,7 @@ def append_evaluation(data: dict) -> dict:
                 submitted_at,
                 payload_json
             )
-            VALUES (?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s)
             """,
             (
                 pair_id,
