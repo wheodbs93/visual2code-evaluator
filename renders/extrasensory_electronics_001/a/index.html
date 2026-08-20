@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extrasensory Electronics — Free your mind, keep the receipt.</title>
+<meta name="description" content="Extrasensory Electronics builds synthesizers, theremins, vocoders and other instruments for leaving your body and returning in time for dinner.">
+
+<script type="text/markdown" id="design-md">
+# Extrasensory Electronics — Design Direction (v2)
+(This is the design.md content. Filesystem writes were unavailable in the build
+environment, so the design direction ships inside the deliverable.)
+
+## 0. Source review
+Reviewed from reference_inputs/:
+- telepathicinstruments.com_.png (homepage)
+- telepathicinstruments.com_collections_shop-all.png (product index)
+- telepathicinstruments.com_products_pistil.png (product detail)
+- support.telepathicinstruments.com_hc_en-us.png (help centre)
+
+NOTE ON THE VIDEO: "Telepathic Instruments Screen Recording.mov" could not be
+decoded in this sandboxed session (frame extraction was not permitted). Motion
+direction is therefore derived from the motion artefacts visible in the stills:
+the scrolling announcement marquee, the floating blurred nav pill, the "1/3"
+carousel counter with circular prev/next controls, hover colour shifts, and the
+layered hero composite. It is deliberately kept in the low-amplitude, slow-easing
+register those artefacts imply. No source code from any reference site was
+inspected or used.
+
+## 1. Defining character of the reference (preserved)
+1. Two-voice typography. High-contrast transitional SERIF for display lines only,
+   set large, tight, sentence case. Neutral GROTESQUE SANS for body. Letterspaced
+   UPPERCASE MONO for every utility string: nav, prices, SOLD OUT, chips, footer,
+   legal. A third voice appears once or twice: an enormous BITMAP/PIXEL wordmark
+   used as a graphic field, not as reading text.
+2. Near-monochrome with saturated interruptions. ~80% near-black plus warm
+   off-white. Colour arrives in whole-block hits: an orange product field, a deep
+   green testimonial block, a violet channel card, one neon-green active link.
+   Saturation is high but rationed.
+3. Editorial asymmetry. A dense photo/video mosaic sits directly against enormous
+   quiet blocks. Rhythm: dense, empty, dense.
+4. Image scale is either full-bleed or square-in-grid. No fussy middle crops.
+5. UI restraint. Pill buttons, 1px hairlines, circular arrow icon buttons, chip
+   filters, no shadows, no gradients on controls. Product cards are borderless:
+   image, name, price.
+6. Floating blurred nav pill, centred, dark, bag counter, green active state.
+7. Motion subtlety. Looping marquee, soft reveal on scroll, slow carousel, hover
+   shifts of a few percent. Nothing bounces.
+
+## 2. Brand translation
+The reference reads as clean minimalism with one weird streak. Extrasensory keeps
+the identical structural language and pushes the weird streak from 10% to 40%:
+same grid, same restraint, same type pairing, but the palette warms into
+sun-faded 1970s ink, the photography becomes cosmic poster art, and the copy is
+knowingly funny about enlightenment. Voice: warm, unhurried, deadpan. It sells
+transcendence with a returns policy. Analog and hand-warm, never sleek.
+Primary line: "Free your mind. Keep the receipt."
+Footer mark: LEAVE YOUR BODY, BRING YOUR EARS.
+
+## 3. Colour (same relationships, shifted warm and dusty)
+--ink     #12100D  warm near-black ground
+--ink-2   #1B1713  raised surfaces, cards on dark
+--paper   #F0E6D2  warm cream sections
+--paper-2 #E2D4B8  pixel-wordmark fill, hairlines on cream
+--rust    #D0501E  primary accent: product fields, marquee, CTA
+--ember   #EE6A22  hover tint
+--mustard #E5A02F  secondary warm, sun, highlights
+--acid    #96E33C  active nav, in-stock dot (70s lime at comparable saturation)
+--avocado #3D4A21  full-bleed testimonial block
+--grape   #4B2FA8  channel/broadcast card
+--plum    #5A2545  cosmic gradient shadow tone
+Contrast rules: cream on ink and ink on cream only. Rust sits behind ink text or
+behind product art, never as small text on dark.
+
+## 4. Typography
+Display: 'Hoefler Text', Baskerville, 'Times New Roman', Georgia, serif.
+  clamp(3rem, 8vw, 8.4rem), line-height .94, tracking -.025em, sentence case,
+  occasional italic word for warmth.
+Section statement: same serif, clamp(1.6rem, 3.2vw, 3rem), line-height 1.12.
+Body: 'Helvetica Neue', Helvetica, Arial, sans-serif. 15-17px, 1.55, max 62ch.
+Utility: ui-monospace, 'SF Mono', Menlo. 10-12px, uppercase, tracking .14em.
+Bitmap display: custom 5x7 pixel font drawn as inline SVG rects. Full-width
+  graphic words: EGO DEATH, SIGN UP. No font file needed, crisp at any size.
+
+## 5. Grid, spacing, scale
+Container 1440px, gutter clamp(20px, 4vw, 40px). 12 columns, 24px gap; editorial
+blocks intentionally break it (7/5, 4/8). 8px vertical base. Section padding
+clamp(72px, 11vw, 172px). Two "empty" sections per page where over 70% of the
+block is ground colour: this is the reference's defining pacing move and is
+preserved literally. Product tiles 1:1, 4-up desktop, 2-up below.
+
+## 6. Page composition
+1 Marquee bar (rust, looping). 2 Floating blurred nav pill with bag counter and
+acid active state. 3 Hero: full-bleed cosmic poster (striped 70s sun, rolling
+hills, profile silhouette filled with concentric galaxy rings), product floating
+above the serif headline, two pill CTAs pinned to the bottom corners. 4 Broadcast
+mosaic of asymmetric tiles with a violet CHANNEL 070 card and a rotated ESE
+TELEVISION sticker. 5 Featured Instruments: mono label plus two oversized cards
+(rust field / cream field) with corner label and circular arrow. 6 Quiet
+statement block, mostly empty. 7 EGO DEATH cream section with giant pixel
+wordmark. 8 Instrument Files carousel with n/3 counter. 9 Shop All: chip filters
+and an 8-tile grid. 10 Tune Your Head: three draggable knobs morphing a waveform.
+11 Full-bleed avocado testimonials. 12 Showrooms on hairline rules. 13 SIGN UP
+pixel wordmark with a single-field form. 14 Footer with lockup, mono link
+columns, payment badges, region selector.
+
+## 7. Imagery and graphic direction
+All artwork is original inline SVG. Two registers at the reference's ratio.
+Product register: clean, centred, near-orthographic instrument renders (synth
+panel with knobs/sliders/keybed, theremin with loop and rod antennas, rack
+vocoder with LED ladder, step sequencer, phaser pedal, coiled cable, apparel) on
+flat saturated fields; these carry shopping clarity. Expressive register: sun-ray
+bursts, concentric ring fields, silhouettes, star scatter, 1970s screen-printed
+poster logic limited to 3-4 inks per composition. A global film-grain overlay
+(SVG feTurbulence, ~12% opacity, overlay blend) unifies the document and stands
+in for the reference's warm filmic photography.
+
+## 8. Components
+Buttons: full pill, 1px border, uppercase mono 11px/.14em; solid rust primary,
+hairline ghost secondary; hover inverts fill over 220ms. Circular icon button:
+44px, hairline ring, arrow; hover fills. Chips: pill, hairline, active is ink
+fill with cream text. Product card: square art, 12px gap, name in sans 15px,
+price in mono 12px, SOLD OUT replaces price; hover scales art 1.03 and fades in a
+quick-add pill. No borders, no shadows. Rules: 1px at 14% of the opposing ink.
+
+## 9. Motion
+Marquee 34s linear infinite, duplicated track, pauses on hover. Reveal on scroll:
+opacity 0 to 1 with translateY 20px to 0, 900ms cubic-bezier(.22,.8,.24,1),
+staggered 60ms, one-shot. Nav pill lifts from 56px to 14px and gains blur plus
+border past the marquee; hides on scroll-down, returns on scroll-up, 320ms. Hero
+product floats 7s, plus/minus 10px. Hero ring field rotates 90s linear, barely
+perceptible. Carousel uses scroll-snap plus circular controls and a mono counter.
+Card hover scales art 1.03 over 320ms. Knob module: pointer-drag rotation and
+waveform path morph, no inertia. Bag count increments with a brief pill flash and
+a mono toast for 2.4s. prefers-reduced-motion disables the marquee loop, float,
+ring rotation and transforms; reveals become instant.
+
+## 10. Deliberately not carried over
+The reference's marks, product names, product photography, copy, wordmark, its
+exact black and off-white values, and its specific green. Extrasensory keeps the
+system (type pairing, colour ratio, grid, pacing, UI restraint, motion amplitude)
+and supplies its own identity, catalogue, artwork and voice.
+</script>
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#12100D;
+  --ink-2:#1B1713;
+  --ink-3:#241E19;
+  --paper:#F0E6D2;
+  --paper-2:#E2D4B8;
+  --rust:#D0501E;
+  --ember:#EE6A22;
+  --mustard:#E5A02F;
+  --acid:#96E33C;
+  --avocado:#3D4A21;
+  --grape:#4B2FA8;
+  --plum:#5A2545;
+
+  --serif:'Hoefler Text',Baskerville,'Times New Roman',Georgia,serif;
+  --sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+
+  --gut:clamp(20px,4vw,40px);
+  --max:1440px;
+  --sec:clamp(72px,11vw,172px);
+  --ease:cubic-bezier(.22,.8,.24,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:var(--sans);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4,p{margin:0}
+::selection{background:var(--rust);color:var(--paper)}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.62}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;line-height:.98}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ============================================================
+   FILM GRAIN
+   ============================================================ */
+.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9998;opacity:.13;mix-blend-mode:overlay}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee{background:var(--rust);color:var(--paper);overflow:hidden;height:34px;display:flex;align-items:center;position:relative;z-index:60}
+.mq-track{display:flex;white-space:nowrap;will-change:transform;animation:mq 34s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-track span{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding-inline:26px;flex:none}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:fixed;left:50%;top:56px;transform:translateX(-50%);z-index:70;transition:top .32s var(--ease),transform .32s var(--ease),opacity .32s var(--ease)}
+.nav.stuck{top:14px}
+.nav.hide{transform:translateX(-50%) translateY(-140%);opacity:0}
+.nav-pill{
+  display:flex;align-items:center;gap:clamp(14px,2.2vw,30px);
+  background:rgba(18,16,13,.72);border:1px solid rgba(240,230,210,.10);
+  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-radius:999px;padding:9px 12px 9px 18px;
+}
+.nav-logo{display:flex;align-items:center;gap:9px;color:var(--paper);padding-right:6px}
+.nav-logo svg{width:26px;height:auto}
+.nav-logo b{font-size:15.5px;letter-spacing:-.015em;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,1.7vw,24px)}
+.nav-links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.82;transition:color .2s,opacity .2s;white-space:nowrap}
+.nav-links a:hover{opacity:1;color:var(--acid)}
+.nav-links a.on{color:var(--acid);opacity:1}
+.nav-tools{display:flex;align-items:center;gap:12px;padding-left:4px}
+.icon-btn{width:30px;height:30px;border-radius:999px;display:grid;place-items:center;border:1px solid rgba(240,230,210,.16);transition:background .2s,color .2s,border-color .2s}
+.icon-btn:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.icon-btn svg{width:14px;height:14px}
+.bag{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(240,230,210,.16);border-radius:999px;padding:6px 10px 6px 12px;transition:background .2s,color .2s}
+.bag:hover{background:var(--paper);color:var(--ink)}
+.bag i{font-style:normal;display:grid;place-items:center;min-width:17px;height:17px;border-radius:4px;background:var(--paper);color:var(--ink);font-size:10px;padding:0 4px;transition:transform .3s var(--ease),background .3s}
+.bag:hover i{background:var(--ink);color:var(--paper)}
+.bag i.pop{transform:scale(1.35);background:var(--acid);color:var(--ink)}
+
+.has-menu{position:relative}
+.menu{position:absolute;top:calc(100% + 16px);left:-18px;min-width:242px;background:rgba(18,16,13,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(240,230,210,.10);border-radius:14px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .24s var(--ease),transform .24s var(--ease),visibility .24s}
+.has-menu:hover .menu,.has-menu:focus-within .menu{opacity:1;visibility:visible;transform:none}
+.menu a{display:flex;justify-content:space-between;gap:18px;padding:9px 12px;border-radius:9px;letter-spacing:.1em;opacity:.75}
+.menu a:hover{background:rgba(240,230,210,.07);opacity:1;color:var(--paper)}
+.menu a em{font-style:normal;opacity:.5}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:13px 24px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;border:1px solid transparent;transition:background .22s,color .22s,border-color .22s;white-space:nowrap}
+.btn-rust{background:var(--rust);color:var(--paper);border-color:var(--rust)}
+.btn-rust:hover{background:var(--ember);border-color:var(--ember)}
+.btn-dark{background:rgba(18,16,13,.78);color:var(--paper);border-color:rgba(240,230,210,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-dark:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-ink:hover{background:var(--rust);border-color:var(--rust)}
+.btn-ghost{border-color:currentColor;opacity:.85}
+.btn-ghost:hover{background:currentColor;opacity:1}
+.btn-ghost:hover span{mix-blend-mode:difference}
+.btn-paper{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-paper:hover{background:transparent;color:var(--paper)}
+
+.circ{width:44px;height:44px;border-radius:999px;border:1px solid currentColor;display:grid;place-items:center;transition:background .24s,color .24s,transform .24s}
+.circ svg{width:15px;height:15px;transition:transform .3s var(--ease)}
+.circ:hover{background:currentColor}
+.circ:hover svg{transform:translateX(3px)}
+.circ:hover svg *{stroke:var(--paper)}
+.circ.on-dark:hover svg *{stroke:var(--ink)}
+.circ[disabled]{opacity:.3;pointer-events:none}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:var(--ink);isolation:isolate}
+.hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-art svg{width:100%;height:100%}
+.ringspin{transform-origin:760px 440px;animation:spin 90s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-stack{position:relative;z-index:2;text-align:center;padding-top:clamp(96px,15vh,164px);flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.hero-prod{width:clamp(280px,40vw,600px);filter:drop-shadow(0 34px 44px rgba(0,0,0,.55));animation:float 7s ease-in-out infinite;margin-bottom:clamp(-14px,-1vw,6px)}
+@keyframes float{0%,100%{transform:translateY(-9px)}50%{transform:translateY(9px)}}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.9rem,8vw,8.4rem);line-height:.94;letter-spacing:-.028em;color:var(--paper);text-shadow:0 6px 44px rgba(18,10,6,.45);padding-inline:var(--gut)}
+.hero h1 em{font-style:italic}
+.hero-foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:0 var(--gut) clamp(22px,4vh,42px);max-width:var(--max);margin:0 auto;width:100%;flex-wrap:wrap}
+.hero-note{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;margin-top:10px}
+
+/* ============================================================
+   MOSAIC
+   ============================================================ */
+.mosaic-sec{padding-block:clamp(10px,2vw,20px) 0;background:var(--ink)}
+.mosaic{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(168px,21vh);gap:6px;position:relative}
+.tile{position:relative;overflow:hidden;background:var(--ink-2)}
+.tile svg{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.tile:hover svg{transform:scale(1.045)}
+.tile figcaption{position:absolute;left:12px;bottom:11px;font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--paper);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.tile:hover figcaption{opacity:.92;transform:none}
+.t1{grid-column:1/4;grid-row:1/3}
+.t2{grid-column:4/8;grid-row:1/2}
+.t3{grid-column:8/11;grid-row:1/2}
+.t4{grid-column:11/13;grid-row:1/3}
+.t5{grid-column:4/6;grid-row:2/3}
+.t6{grid-column:6/11;grid-row:2/3}
+.sticker{position:absolute;right:calc(16.6666% + 18px);bottom:20px;z-index:5;background:var(--rust);color:var(--paper);border-radius:999px;padding:9px 15px;font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;transform:rotate(-7deg);line-height:1.25;text-align:center;border:1px solid rgba(240,230,210,.25)}
+.sticker b{display:block;font-weight:700;font-size:11px;letter-spacing:.18em}
+
+/* ============================================================
+   FEATURED
+   ============================================================ */
+.featured{padding-block:clamp(46px,7vw,96px) var(--sec);background:var(--ink)}
+.feat-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding-bottom:18px;flex-wrap:wrap}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.fcard{position:relative;aspect-ratio:1/.86;overflow:hidden;display:grid;place-items:center}
+.fcard.rust{background:var(--rust)}
+.fcard.cream{background:var(--paper)}
+.fcard .art{width:80%;transition:transform .8s var(--ease)}
+.fcard:hover .art{transform:scale(1.04)}
+.fcard-top{position:absolute;inset:20px 20px auto 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.fcard-top h3{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.fcard-top p{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;opacity:.62;margin-top:5px}
+.fcard.rust,.fcard.rust .circ{color:var(--paper)}
+.fcard.cream,.fcard.cream .circ{color:var(--ink)}
+.fcard-foot{position:absolute;left:20px;right:20px;bottom:20px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase}
+
+/* ============================================================
+   QUIET STATEMENT
+   ============================================================ */
+.quiet{background:var(--ink);min-height:78vh;display:flex;align-items:flex-start;padding-block:var(--sec)}
+.quiet .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;width:100%;align-items:start}
+.quiet .mark{grid-column:1/3;color:var(--paper);opacity:.9}
+.quiet .mark svg{width:38px}
+.quiet .say{grid-column:6/12}
+.quiet .say p{font-family:var(--sans);font-size:clamp(15px,1.35vw,18px);line-height:1.5;max-width:36ch}
+.quiet .say p+p{margin-top:1.5em;opacity:.55}
+
+/* ============================================================
+   PIXEL BLOCKS
+   ============================================================ */
+.pixel{width:100%;height:auto}
+.pixel rect{shape-rendering:crispEdges}
+
+.ego{background:var(--paper);color:var(--ink);padding-block:clamp(60px,9vw,130px);overflow:hidden;text-align:center}
+.ego .pixel{fill:var(--paper-2);max-width:100%}
+.ego-lock{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:clamp(30px,5vw,64px)}
+.ego-lock .lock{display:flex;align-items:center;gap:11px}
+.ego-lock .lock svg{width:34px}
+.ego-lock .lock b{font-size:16px;line-height:1.05;letter-spacing:-.01em;text-align:left}
+.ego-lock p{max-width:40ch;font-size:14.5px;line-height:1.55;opacity:.7}
+
+.signup{background:var(--ink);padding-block:clamp(60px,9vw,120px) clamp(40px,6vw,80px);overflow:hidden}
+.signup .pixel{fill:var(--paper)}
+.signup-row{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;margin-top:clamp(26px,4vw,48px)}
+.signup-row p{max-width:38ch;font-size:14.5px;opacity:.62}
+.field{display:flex;align-items:center;gap:0;border-bottom:1px solid rgba(240,230,210,.28);min-width:min(420px,100%);transition:border-color .25s}
+.field:focus-within{border-color:var(--acid)}
+.field input{flex:1;background:none;border:0;outline:0;color:var(--paper);font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;padding:14px 4px}
+.field input::placeholder{color:rgba(240,230,210,.4)}
+.field button{padding:12px 4px 12px 18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
+.field button:hover{color:var(--acid)}
+.signed{color:var(--acid);font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;padding:14px 0}
+
+/* ============================================================
+   FILES CAROUSEL
+   ============================================================ */
+.files{background:var(--ink);padding-block:var(--sec);border-top:1px solid rgba(240,230,210,.09)}
+.files .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
+.files-txt{grid-column:1/4}
+.files-txt h2{font-family:var(--serif);font-size:clamp(1.5rem,2.3vw,2.1rem);line-height:1.08;letter-spacing:-.02em;margin-block:14px 16px}
+.files-txt p{font-size:14.5px;opacity:.62;max-width:34ch}
+.files-car{grid-column:5/13}
+.car-view{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;display:flex;gap:6px;border-radius:2px}
+.car-view::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;position:relative;aspect-ratio:16/9.6;background:var(--ink-2);overflow:hidden}
+.slide svg{width:100%;height:100%}
+.slide .cap{position:absolute;left:16px;bottom:14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:rgba(18,16,13,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:6px 11px;border-radius:999px}
+.car-bar{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.car-bar .count{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;opacity:.55}
+.car-bar .ctrls{display:flex;gap:8px;color:var(--paper)}
+
+/* ============================================================
+   SHOP
+   ============================================================ */
+.shop{background:var(--paper);color:var(--ink);padding-block:clamp(50px,7vw,92px) var(--sec)}
+.shop-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(26px,3.4vw,44px)}
+.shop-head h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.025em;line-height:1}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid rgba(18,16,13,.28);border-radius:999px;padding:9px 17px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;transition:background .22s,color .22s,border-color .22s}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,30px) clamp(12px,1.6vw,24px)}
+.prod{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.prod.in{opacity:1;transform:none}
+.prod.gone{display:none}
+.prod .shot{position:relative;aspect-ratio:1/1;overflow:hidden;display:grid;place-items:center;margin-bottom:13px}
+.prod .shot .art{width:88%;transition:transform .7s var(--ease)}
+.prod:hover .shot .art{transform:scale(1.045)}
+.prod .quick{position:absolute;left:12px;bottom:12px;opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;padding:9px 15px;font-size:9.5px}
+.prod:hover .quick{opacity:1;transform:none}
+.prod h3{font-size:15px;font-weight:400;letter-spacing:-.005em;line-height:1.3}
+.prod .price{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;margin-top:4px;opacity:.72}
+.prod .price.out{opacity:.42}
+.f-rust{background:var(--rust)}.f-mustard{background:var(--mustard)}.f-ink{background:var(--ink-2)}
+.f-avocado{background:var(--avocado)}.f-grape{background:var(--grape)}.f-clay{background:#8A6A46}
+.f-sky{background:linear-gradient(170deg,#F0E6D2,#E5A02F 55%,#D0501E)}
+.f-field{background:linear-gradient(180deg,#6E7F3C,#A9B96A)}
+
+/* ============================================================
+   KNOBS
+   ============================================================ */
+.tune{background:var(--ink);padding-block:var(--sec);border-top:1px solid rgba(240,230,210,.09)}
+.tune .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.tune-txt{grid-column:1/5}
+.tune-txt h2{font-family:var(--serif);font-size:clamp(1.7rem,2.7vw,2.6rem);line-height:1.06;letter-spacing:-.022em;margin-block:14px 15px}
+.tune-txt p{font-size:14.5px;opacity:.62;max-width:32ch}
+.panel{grid-column:6/13;background:var(--ink-2);border:1px solid rgba(240,230,210,.1);border-radius:4px;padding:clamp(20px,2.6vw,34px)}
+.panel .scope{background:#0B0A08;border-radius:3px;overflow:hidden;border:1px solid rgba(240,230,210,.07)}
+.panel .scope svg{width:100%;height:auto;display:block}
+.knobs{display:flex;gap:clamp(20px,3vw,48px);margin-top:26px;flex-wrap:wrap}
+.knob{display:flex;flex-direction:column;align-items:center;gap:10px;touch-action:none;cursor:ns-resize;outline:none}
+.knob .dialwrap{width:66px;height:66px;border-radius:999px;background:var(--paper);display:grid;place-items:center;position:relative;transition:box-shadow .25s}
+.knob:focus-visible .dialwrap,.knob.act .dialwrap{box-shadow:0 0 0 3px rgba(150,227,60,.55)}
+.knob .dial{width:48px;height:48px;border-radius:999px;background:#2A2420;position:relative;transition:transform .06s linear}
+.knob .dial::after{content:"";position:absolute;left:50%;top:5px;width:3px;height:13px;border-radius:2px;background:var(--paper);transform:translateX(-50%)}
+.knob .nm{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;opacity:.55}
+.knob .val{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--acid)}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.says{background:var(--avocado);color:var(--paper);padding-block:var(--sec)}
+.says .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.says-lead{grid-column:1/5}
+.says-lead h2{font-family:var(--serif);font-size:clamp(1.7rem,2.8vw,2.7rem);line-height:1.06;letter-spacing:-.022em;margin-top:14px}
+.says-list{grid-column:7/13;display:flex;flex-direction:column;gap:12px}
+.say-card{background:rgba(18,16,13,.42);border:1px solid rgba(240,230,210,.1);border-radius:3px;padding:clamp(20px,2.4vw,30px)}
+.say-card p{font-size:15px;line-height:1.5}
+.say-card .who{margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.say-card .who em{display:block;font-style:normal;opacity:.5;margin-top:5px}
+
+/* ============================================================
+   SHOWROOMS
+   ============================================================ */
+.rooms{background:var(--paper);color:var(--ink);padding-block:var(--sec)}
+.rooms-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding-bottom:clamp(24px,3vw,40px)}
+.rooms-head h2{font-family:var(--serif);font-size:clamp(1.9rem,3.4vw,3rem);letter-spacing:-.025em;line-height:1}
+.room{display:grid;grid-template-columns:1.1fr 1.5fr 1fr auto;gap:20px;align-items:center;padding:clamp(20px,2.4vw,30px) 0;border-top:1px solid rgba(18,16,13,.15)}
+.room:last-child{border-bottom:1px solid rgba(18,16,13,.15)}
+.room h3{font-family:var(--serif);font-size:clamp(1.25rem,2vw,1.75rem);letter-spacing:-.02em;line-height:1.05}
+.room .addr{font-size:14px;opacity:.66;line-height:1.45}
+.room .hrs{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
+.room .circ{color:var(--ink)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{background:var(--ink);padding-block:clamp(40px,6vw,72px) 0;border-top:1px solid rgba(240,230,210,.09)}
+.foot-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-bottom:clamp(40px,6vw,80px)}
+.foot-lock{grid-column:1/5;display:flex;align-items:center;gap:13px}
+.foot-lock svg{width:44px}
+.foot-lock b{font-size:19px;line-height:1.04;letter-spacing:-.015em;display:block}
+.fcol{grid-column:span 2}
+.fcol:nth-of-type(2){grid-column:7/9}
+.fcol:nth-of-type(3){grid-column:9/11}
+.fcol:nth-of-type(4){grid-column:11/13}
+.fcol h4{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;opacity:.4;font-weight:400;margin-bottom:14px}
+.fcol a{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;opacity:.72;padding:5px 0;transition:color .2s,opacity .2s}
+.fcol a:hover{color:var(--acid);opacity:1}
+.pays{display:flex;gap:6px;flex-wrap:wrap;grid-column:7/13;padding-top:6px}
+.pay{width:38px;height:25px;border-radius:4px;background:rgba(240,230,210,.1);display:grid;place-items:center;font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;opacity:.62}
+.foot-bar{border-top:1px solid rgba(240,230,210,.09);padding-block:20px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
+.region{display:flex;align-items:center;gap:8px}
+.region svg{width:13px;height:13px}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast{position:fixed;left:var(--gut);bottom:26px;z-index:120;background:var(--paper);color:var(--ink);border-radius:999px;padding:12px 20px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(14px);transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none}
+.toast.show{opacity:1;transform:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .nav-links a[data-opt]{display:none}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .files .wrap,.tune .wrap{grid-template-columns:1fr}
+  .files-txt,.files-car,.tune-txt,.panel{grid-column:1/-1}
+  .quiet .say{grid-column:4/13}
+  .says .wrap{grid-template-columns:1fr}
+  .says-lead,.says-list{grid-column:1/-1}
+  .foot-grid{grid-template-columns:repeat(6,1fr)}
+  .foot-lock{grid-column:1/-1;padding-bottom:12px}
+  .fcol,.fcol:nth-of-type(2),.fcol:nth-of-type(3),.fcol:nth-of-type(4){grid-column:span 2}
+  .pays{grid-column:1/-1}
+}
+@media (max-width:820px){
+  .mosaic{grid-auto-rows:minmax(132px,17vh)}
+  .t1{grid-column:1/7;grid-row:1/2}
+  .t2{grid-column:7/13;grid-row:1/2}
+  .t3{grid-column:1/7;grid-row:2/3}
+  .t4{grid-column:7/13;grid-row:2/3}
+  .t5{grid-column:1/5;grid-row:3/4}
+  .t6{grid-column:5/13;grid-row:3/4}
+  .sticker{right:14px;bottom:14px}
+  .feat-grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .quiet{min-height:auto}
+  .quiet .mark{grid-column:1/-1}
+  .quiet .say{grid-column:1/-1;margin-top:40px}
+  .room{grid-template-columns:1fr auto;row-gap:10px}
+  .room .addr,.room .hrs{grid-column:1/2}
+  .room .circ{grid-row:1/2;grid-column:2/3}
+  .hero-foot{justify-content:center;text-align:center;flex-direction:column;align-items:center}
+}
+@media (max-width:560px){
+  .nav-pill{padding:8px 9px 8px 13px;gap:10px}
+  .nav-logo b{display:none}
+  .nav-links{gap:11px}
+  .btn{padding:12px 18px;font-size:9.5px}
+  .knobs{gap:20px;justify-content:space-between;width:100%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal,.prod{opacity:1!important;transform:none!important}
+  .mq-track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ FILM GRAIN ============ -->
+<svg class="grain" aria-hidden="true" focusable="false">
+  <filter id="grainF"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#grainF)"/>
+</svg>
+
+<!-- ============ SVG SYMBOL LIBRARY (instrument artwork) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+
+<!-- ORACLE-7 POLYSYNTH -->
+<symbol id="s-synth" viewBox="0 0 900 480">
+  <ellipse cx="450" cy="436" rx="332" ry="18" fill="#000" opacity=".3"/>
+  <rect x="52" y="58" width="796" height="362" rx="20" fill="#E2D4B8"/>
+  <path d="M52 78a20 20 0 0 1 20-20h56v362H72a20 20 0 0 1-20-20Z" fill="#C99A5B"/>
+  <path d="M772 58h56a20 20 0 0 1 20 20v322a20 20 0 0 1-20 20h-56Z" fill="#C99A5B"/>
+  <rect x="52" y="58" width="796" height="362" rx="20" fill="none" stroke="#12100D" stroke-opacity=".35" stroke-width="2"/>
+  <rect x="140" y="80" width="620" height="152" rx="8" fill="#1B1713"/>
+  <rect x="160" y="100" width="126" height="66" rx="4" fill="#080705"/>
+  <text x="223" y="150" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="40" fill="#96E33C">070</text>
+  <circle cx="176" cy="196" r="6" fill="#D0501E"/><circle cx="198" cy="196" r="6" fill="#E5A02F"/><circle cx="220" cy="196" r="6" fill="#96E33C"/>
+  <text x="256" y="201" font-family="ui-monospace,Menlo,monospace" font-size="13" fill="#F0E6D2" fill-opacity=".45" letter-spacing="2">ORACLE-7</text>
+  <g transform="translate(340,133) rotate(-32)"><circle r="27" fill="#F0E6D2"/><circle r="20" fill="#2A2420"/><rect x="-2" y="-20" width="4" height="12" rx="2" fill="#F0E6D2"/></g>
+  <g transform="translate(418,133) rotate(18)"><circle r="27" fill="#F0E6D2"/><circle r="20" fill="#2A2420"/><rect x="-2" y="-20" width="4" height="12" rx="2" fill="#F0E6D2"/></g>
+  <g transform="translate(496,133) rotate(62)"><circle r="27" fill="#D0501E"/><circle r="20" fill="#2A2420"/><rect x="-2" y="-20" width="4" height="12" rx="2" fill="#F0E6D2"/></g>
+  <g fill="#3A332C">
+    <rect x="574" y="96" width="7" height="120" rx="3.5"/><rect x="624" y="96" width="7" height="120" rx="3.5"/>
+    <rect x="674" y="96" width="7" height="120" rx="3.5"/><rect x="724" y="96" width="7" height="120" rx="3.5"/>
+  </g>
+  <g fill="#F0E6D2">
+    <rect x="564" y="150" width="27" height="13" rx="3"/><rect x="614" y="116" width="27" height="13" rx="3"/>
+    <rect x="664" y="176" width="27" height="13" rx="3"/><rect x="714" y="134" width="27" height="13" rx="3"/>
+  </g>
+  <g fill="#F0E6D2">
+    <rect x="138" y="252" width="74" height="140" rx="4"/><rect x="228" y="252" width="74" height="140" rx="4"/>
+    <rect x="318" y="252" width="74" height="140" rx="4"/><rect x="408" y="252" width="74" height="140" rx="4"/>
+    <rect x="498" y="252" width="74" height="140" rx="4"/><rect x="588" y="252" width="74" height="140" rx="4"/>
+    <rect x="678" y="252" width="74" height="140" rx="4"/><rect x="768" y="252" width="60" height="140" rx="4"/>
+  </g>
+  <g fill="#1B1713">
+    <rect x="190" y="252" width="44" height="88" rx="3"/><rect x="280" y="252" width="44" height="88" rx="3"/>
+    <rect x="460" y="252" width="44" height="88" rx="3"/><rect x="550" y="252" width="44" height="88" rx="3"/>
+    <rect x="640" y="252" width="44" height="88" rx="3"/>
+  </g>
+</symbol>
+
+<!-- THIRD EAR TH-1 THEREMIN -->
+<symbol id="s-theremin" viewBox="0 0 900 480">
+  <g fill="none" stroke="#12100D" stroke-opacity=".2" stroke-width="2">
+    <circle cx="676" cy="118" r="40"/><circle cx="676" cy="118" r="74"/><circle cx="676" cy="118" r="110"/>
+  </g>
+  <ellipse cx="450" cy="446" rx="256" ry="15" fill="#000" opacity=".26"/>
+  <rect x="670" y="96" width="11" height="190" rx="5.5" fill="#BDB6A7"/>
+  <circle cx="675.5" cy="94" r="10" fill="#DCD5C6"/>
+  <path d="M234 302c-118 0-130 96 0 96" fill="none" stroke="#BDB6A7" stroke-width="11" stroke-linecap="round"/>
+  <rect x="226" y="262" width="452" height="134" rx="12" fill="#C99A5B"/>
+  <rect x="226" y="262" width="452" height="134" rx="12" fill="none" stroke="#12100D" stroke-opacity=".3" stroke-width="2"/>
+  <rect x="250" y="286" width="404" height="56" rx="6" fill="#1B1713"/>
+  <text x="268" y="322" font-family="ui-monospace,Menlo,monospace" font-size="15" fill="#F0E6D2" fill-opacity=".5" letter-spacing="2">TH-1</text>
+  <g transform="translate(400,314) rotate(-40)"><circle r="17" fill="#F0E6D2"/><circle r="11.5" fill="#2A2420"/><rect x="-2" y="-11.5" width="4" height="7" rx="2" fill="#F0E6D2"/></g>
+  <g transform="translate(462,314) rotate(36)"><circle r="17" fill="#F0E6D2"/><circle r="11.5" fill="#2A2420"/><rect x="-2" y="-11.5" width="4" height="7" rx="2" fill="#F0E6D2"/></g>
+  <g transform="translate(524,314) rotate(96)"><circle r="17" fill="#D0501E"/><circle r="11.5" fill="#2A2420"/><rect x="-2" y="-11.5" width="4" height="7" rx="2" fill="#F0E6D2"/></g>
+  <circle cx="612" cy="314" r="6.5" fill="#96E33C"/>
+  <rect x="284" y="396" width="17" height="50" rx="7" fill="#8C6A3C"/>
+  <rect x="600" y="396" width="17" height="50" rx="7" fill="#8C6A3C"/>
+</symbol>
+
+<!-- MOUTHPIECE VC-3 VOCODER -->
+<symbol id="s-vocoder" viewBox="0 0 900 480">
+  <ellipse cx="450" cy="414" rx="300" ry="15" fill="#000" opacity=".22"/>
+  <path d="M188 300c0-116 74-158 148-158" fill="none" stroke="#8E877A" stroke-width="8"/>
+  <g transform="rotate(-18 340 140)"><ellipse cx="340" cy="140" rx="32" ry="23" fill="#2A2420" stroke="#8E877A" stroke-width="4"/><ellipse cx="340" cy="140" rx="20" ry="13" fill="#3E362E"/></g>
+  <rect x="58" y="252" width="36" height="132" rx="6" fill="#2A2420"/>
+  <rect x="806" y="252" width="36" height="132" rx="6" fill="#2A2420"/>
+  <circle cx="76" cy="272" r="4" fill="#8E877A"/><circle cx="76" cy="364" r="4" fill="#8E877A"/>
+  <circle cx="824" cy="272" r="4" fill="#8E877A"/><circle cx="824" cy="364" r="4" fill="#8E877A"/>
+  <rect x="88" y="240" width="724" height="160" rx="10" fill="#1B1713"/>
+  <rect x="88" y="240" width="724" height="160" rx="10" fill="none" stroke="#F0E6D2" stroke-opacity=".22" stroke-width="2"/>
+  <rect x="112" y="262" width="392" height="116" rx="5" fill="#0B0A08"/>
+  <g>
+    <rect x="128" y="330" width="17" height="32" fill="#96E33C"/><rect x="154" y="306" width="17" height="56" fill="#E5A02F"/>
+    <rect x="180" y="288" width="17" height="74" fill="#D0501E"/><rect x="206" y="318" width="17" height="44" fill="#96E33C"/>
+    <rect x="232" y="276" width="17" height="86" fill="#D0501E"/><rect x="258" y="298" width="17" height="64" fill="#E5A02F"/>
+    <rect x="284" y="270" width="17" height="92" fill="#D0501E"/><rect x="310" y="324" width="17" height="38" fill="#96E33C"/>
+    <rect x="336" y="292" width="17" height="70" fill="#E5A02F"/><rect x="362" y="336" width="17" height="26" fill="#96E33C"/>
+    <rect x="388" y="300" width="17" height="62" fill="#E5A02F"/><rect x="414" y="282" width="17" height="80" fill="#D0501E"/>
+    <rect x="440" y="340" width="17" height="22" fill="#96E33C"/><rect x="466" y="312" width="17" height="50" fill="#E5A02F"/>
+  </g>
+  <text x="530" y="278" font-family="ui-monospace,Menlo,monospace" font-size="14" fill="#F0E6D2" fill-opacity=".42" letter-spacing="2">MOUTHPIECE VC-3</text>
+  <g transform="translate(566,332) rotate(-44)"><circle r="26" fill="#F0E6D2"/><circle r="18.5" fill="#2A2420"/><rect x="-2" y="-18.5" width="4" height="11" rx="2" fill="#F0E6D2"/></g>
+  <g transform="translate(642,332) rotate(24)"><circle r="26" fill="#F0E6D2"/><circle r="18.5" fill="#2A2420"/><rect x="-2" y="-18.5" width="4" height="11" rx="2" fill="#F0E6D2"/></g>
+  <g transform="translate(718,332) rotate(78)"><circle r="26" fill="#D0501E"/><circle r="18.5" fill="#2A2420"/><rect x="-2" y="-18.5" width="4" height="11" rx="2" fill="#F0E6D2"/></g>
+  <circle cx="778" cy="332" r="8" fill="#96E33C"/>
+</symbol>
+
+<!-- ASTRAL BODY AB-2 RHYTHM ORACLE -->
+<symbol id="s-seq" viewBox="0 0 900 480">
+  <ellipse cx="450" cy="410" rx="300" ry="15" fill="#000" opacity=".24"/>
+  <rect x="118" y="86" width="664" height="300" rx="16" fill="#E2D4B8"/>
+  <rect x="118" y="86" width="664" height="300" rx="16" fill="none" stroke="#12100D" stroke-opacity=".3" stroke-width="2"/>
+  <rect x="152" y="116" width="596" height="60" rx="6" fill="#1B1713"/>
+  <rect x="168" y="128" width="104" height="36" rx="3" fill="#080705"/>
+  <text x="220" y="155" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="22" fill="#D0501E">AB-2</text>
+  <g transform="translate(624,146) rotate(-30)"><circle r="18" fill="#F0E6D2"/><circle r="12" fill="#2A2420"/><rect x="-2" y="-12" width="4" height="7" rx="2" fill="#F0E6D2"/></g>
+  <g transform="translate(690,146) rotate(42)"><circle r="18" fill="#F0E6D2"/><circle r="12" fill="#2A2420"/><rect x="-2" y="-12" width="4" height="7" rx="2" fill="#F0E6D2"/></g>
+  <g rx="6">
+    <rect x="152" y="206" width="64" height="64" rx="7" fill="#D0501E"/><rect x="228" y="206" width="64" height="64" rx="7" fill="#2A2420"/>
+    <rect x="304" y="206" width="64" height="64" rx="7" fill="#2A2420"/><rect x="380" y="206" width="64" height="64" rx="7" fill="#E5A02F"/>
+    <rect x="456" y="206" width="64" height="64" rx="7" fill="#2A2420"/><rect x="532" y="206" width="64" height="64" rx="7" fill="#D0501E"/>
+    <rect x="608" y="206" width="64" height="64" rx="7" fill="#2A2420"/><rect x="684" y="206" width="64" height="64" rx="7" fill="#2A2420"/>
+    <rect x="152" y="292" width="64" height="64" rx="7" fill="#2A2420"/><rect x="228" y="292" width="64" height="64" rx="7" fill="#96E33C"/>
+    <rect x="304" y="292" width="64" height="64" rx="7" fill="#2A2420"/><rect x="380" y="292" width="64" height="64" rx="7" fill="#2A2420"/>
+    <rect x="456" y="292" width="64" height="64" rx="7" fill="#D0501E"/><rect x="532" y="292" width="64" height="64" rx="7" fill="#2A2420"/>
+    <rect x="608" y="292" width="64" height="64" rx="7" fill="#E5A02F"/><rect x="684" y="292" width="64" height="64" rx="7" fill="#2A2420"/>
+  </g>
+</symbol>
+
+<!-- SUNBEAM PHASER PEDAL -->
+<symbol id="s-pedal" viewBox="0 0 900 480">
+  <ellipse cx="450" cy="404" rx="220" ry="14" fill="#000" opacity=".26"/>
+  <path d="M262 386V214l376-46v218a8 8 0 0 1-8 8H270a8 8 0 0 1-8-8Z" fill="#E5A02F"/>
+  <path d="M262 214 638 168l14 20-376 48Z" fill="#C98A1E"/>
+  <path d="M638 168v218a8 8 0 0 1-8 8h-8V190Z" fill="#C98A1E" opacity=".5"/>
+  <g transform="translate(330,268) rotate(-36)"><circle r="27" fill="#1B1713"/><circle r="19" fill="#F0E6D2"/><rect x="-2" y="-19" width="4" height="11" rx="2" fill="#1B1713"/></g>
+  <g transform="translate(444,254) rotate(20)"><circle r="27" fill="#1B1713"/><circle r="19" fill="#F0E6D2"/><rect x="-2" y="-19" width="4" height="11" rx="2" fill="#1B1713"/></g>
+  <g transform="translate(558,240) rotate(70)"><circle r="27" fill="#1B1713"/><circle r="19" fill="#F0E6D2"/><rect x="-2" y="-19" width="4" height="11" rx="2" fill="#1B1713"/></g>
+  <circle cx="450" cy="318" r="9" fill="#D0501E"/>
+  <circle cx="450" cy="360" r="24" fill="#BDB6A7"/><circle cx="450" cy="360" r="13" fill="#8E877A"/>
+  <rect x="228" y="238" width="36" height="42" rx="6" fill="#8E877A"/>
+  <rect x="636" y="200" width="36" height="42" rx="6" fill="#8E877A"/>
+  <text x="450" y="212" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" fill="#1B1713" fill-opacity=".7" letter-spacing="3" transform="rotate(-7 450 212)">SUNBEAM</text>
+</symbol>
+
+<!-- COILED PATCH CABLE -->
+<symbol id="s-cable" viewBox="0 0 900 480">
+  <g fill="none" stroke="#D0501E" stroke-width="13" stroke-linecap="round">
+    <path d="M150 240h96"/><path d="M654 240h96"/>
+    <ellipse cx="272" cy="240" rx="17" ry="56"/><ellipse cx="304" cy="240" rx="17" ry="56"/>
+    <ellipse cx="336" cy="240" rx="17" ry="56"/><ellipse cx="368" cy="240" rx="17" ry="56"/>
+    <ellipse cx="400" cy="240" rx="17" ry="56"/><ellipse cx="432" cy="240" rx="17" ry="56"/>
+    <ellipse cx="464" cy="240" rx="17" ry="56"/><ellipse cx="496" cy="240" rx="17" ry="56"/>
+    <ellipse cx="528" cy="240" rx="17" ry="56"/><ellipse cx="560" cy="240" rx="17" ry="56"/>
+    <ellipse cx="592" cy="240" rx="17" ry="56"/><ellipse cx="624" cy="240" rx="17" ry="56"/>
+  </g>
+  <rect x="98" y="226" width="58" height="28" rx="5" fill="#BDB6A7"/>
+  <rect x="80" y="232" width="22" height="16" rx="4" fill="#8E877A"/>
+  <rect x="744" y="226" width="58" height="28" rx="5" fill="#BDB6A7"/>
+  <rect x="798" y="232" width="22" height="16" rx="4" fill="#8E877A"/>
+</symbol>
+
+<!-- EGO DEATH TEE -->
+<symbol id="s-tee" viewBox="0 0 900 480">
+  <path d="M250 132 348 84l72 40c18 26 42 26 60 0l72-40 98 48-44 96-46-22v208H340V206l-46 22Z" fill="#1B1713"/>
+  <path d="M420 124c18 26 42 26 60 0" fill="none" stroke="#F0E6D2" stroke-opacity=".28" stroke-width="3"/>
+  <g fill="none" stroke="#D0501E" stroke-width="3.4">
+    <path d="M414 236c12-16 60-16 72 0-12 16-60 16-72 0Z"/>
+  </g>
+  <circle cx="450" cy="236" r="7" fill="#D0501E"/>
+  <text x="450" y="288" text-anchor="middle" font-family="Baskerville,'Times New Roman',serif" font-size="30" fill="#F0E6D2">Ego Death</text>
+  <text x="450" y="312" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#F0E6D2" fill-opacity=".45" letter-spacing="3">EXTRASENSORY</text>
+</symbol>
+
+<!-- GALAXY BRAIN BEANIE -->
+<symbol id="s-beanie" viewBox="0 0 900 480">
+  <path d="M266 300c0-158 368-158 368 0Z" fill="#1B1713"/>
+  <g fill="none" stroke="#F0E6D2" stroke-opacity=".14" stroke-width="2">
+    <path d="M320 300c0-120 260-120 260 0"/><path d="M374 300c0-84 152-84 152 0"/>
+  </g>
+  <rect x="252" y="296" width="396" height="80" rx="14" fill="#241E19"/>
+  <rect x="392" y="318" width="116" height="36" rx="3" fill="#F0E6D2"/>
+  <text x="450" y="343" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="14" fill="#12100D" letter-spacing="2">ESE</text>
+</symbol>
+
+</defs>
+</svg>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track" id="mqTrack"></div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <nav class="nav-pill" aria-label="Primary">
+    <a class="nav-logo" href="#top" aria-label="Extrasensory Electronics home">
+      <svg viewBox="0 0 44 28" fill="none" aria-hidden="true"><path d="M2.5 14C10 3.5 34 3.5 41.5 14 34 24.5 10 24.5 2.5 14Z" stroke="currentColor" stroke-width="2.6"/><circle cx="22" cy="14" r="5.2" fill="currentColor"/></svg>
+      <b>Extrasensory</b>
+    </a>
+    <div class="nav-links">
+      <div class="has-menu">
+        <a href="#shop">Instruments <span aria-hidden="true">&#9662;</span></a>
+        <div class="menu mono">
+          <a href="#shop">Oracle-7 Polysynth <em>$1,290</em></a>
+          <a href="#shop">Third Ear TH-1 <em>$740</em></a>
+          <a href="#shop">Mouthpiece VC-3 <em>$520</em></a>
+          <a href="#shop">Astral Body AB-2 <em>$610</em></a>
+          <a href="#shop">Sunbeam Phaser <em>$180</em></a>
+        </div>
+      </div>
+      <a href="#featured" data-opt>Oracle-7</a>
+      <a href="#shop" class="on">Shop All</a>
+      <a href="#rooms" data-opt>Visit Us</a>
+    </div>
+    <div class="nav-tools">
+      <button class="icon-btn" aria-label="Region and language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
+      </button>
+      <button class="bag" id="bagBtn">Bag <i id="bagCount">0</i></button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#17091A"/><stop offset=".34" stop-color="#3E1430"/>
+          <stop offset=".62" stop-color="#8E2C24"/><stop offset=".84" stop-color="#D0501E"/><stop offset="1" stop-color="#E5A02F"/>
+        </linearGradient>
+        <linearGradient id="sunG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FFE0A0"/><stop offset=".48" stop-color="#F0A62E"/><stop offset="1" stop-color="#D0501E"/>
+        </linearGradient>
+        <radialGradient id="vig" cx=".5" cy=".42" r=".78">
+          <stop offset=".5" stop-color="#12100D" stop-opacity="0"/><stop offset="1" stop-color="#12100D" stop-opacity=".88"/>
+        </radialGradient>
+        <clipPath id="sunClip"><circle cx="760" cy="418" r="300"/></clipPath>
+        <clipPath id="headClip">
+          <path d="M470 900V540c0-210 140-332 310-328 112 3 180 88 176 180 0 32-10 44-10 50l48 96c8 16 0 24-16 26l-32 4c-8 14-4 26-14 34-14 10-32 6-38 18-6 14 6 28-8 40-14 10-48 6-62 22-16 16-12 50-32 64-20 14-56 10-66 32v122Z"/>
+        </clipPath>
+        <path id="ray" d="M760 418 1980 380 1980 456Z"/>
+      </defs>
+
+      <rect width="1600" height="900" fill="url(#sky)"/>
+
+      <g opacity=".16" fill="#FFE0A0">
+        <use href="#ray"/><use href="#ray" transform="rotate(30 760 418)"/><use href="#ray" transform="rotate(60 760 418)"/>
+        <use href="#ray" transform="rotate(90 760 418)"/><use href="#ray" transform="rotate(120 760 418)"/><use href="#ray" transform="rotate(150 760 418)"/>
+        <use href="#ray" transform="rotate(180 760 418)"/><use href="#ray" transform="rotate(210 760 418)"/><use href="#ray" transform="rotate(240 760 418)"/>
+        <use href="#ray" transform="rotate(270 760 418)"/><use href="#ray" transform="rotate(300 760 418)"/><use href="#ray" transform="rotate(330 760 418)"/>
+      </g>
+
+      <circle cx="760" cy="418" r="300" fill="url(#sunG)"/>
+      <g clip-path="url(#sunClip)" fill="#3E1430" opacity=".55">
+        <rect x="440" y="470" width="640" height="9"/><rect x="440" y="494" width="640" height="12"/>
+        <rect x="440" y="522" width="640" height="15"/><rect x="440" y="554" width="640" height="19"/>
+        <rect x="440" y="592" width="640" height="24"/><rect x="440" y="636" width="640" height="30"/>
+        <rect x="440" y="688" width="640" height="40"/>
+      </g>
+
+      <g fill="#FFE0A0" opacity=".7">
+        <circle cx="180" cy="120" r="2.6"/><circle cx="320" cy="228" r="2"/><circle cx="1420" cy="96" r="3"/>
+        <circle cx="1268" cy="216" r="2.2"/><circle cx="96" cy="330" r="2"/><circle cx="1516" cy="330" r="2.4"/>
+        <circle cx="612" cy="86" r="2"/><circle cx="1010" cy="120" r="2.4"/>
+      </g>
+
+      <path d="M0 690c220-80 380 10 560-18 200-32 340 48 560 14 200-32 340 20 480-10v224H0Z" fill="#3E1430"/>
+      <path d="M0 766c260-62 470 18 700-8 240-28 460 38 900-12v154H0Z" fill="#1D0A1D"/>
+
+      <g>
+        <path d="M470 900V540c0-210 140-332 310-328 112 3 180 88 176 180 0 32-10 44-10 50l48 96c8 16 0 24-16 26l-32 4c-8 14-4 26-14 34-14 10-32 6-38 18-6 14 6 28-8 40-14 10-48 6-62 22-16 16-12 50-32 64-20 14-56 10-66 32v122Z" fill="#12100D"/>
+        <g clip-path="url(#headClip)">
+          <rect x="380" y="150" width="700" height="760" fill="#180C16"/>
+          <g class="ringspin" fill="none">
+            <circle cx="760" cy="440" r="46" stroke="#D0501E" stroke-width="12"/>
+            <circle cx="760" cy="440" r="82" stroke="#E5A02F" stroke-width="7"/>
+            <circle cx="760" cy="440" r="116" stroke="#F0E6D2" stroke-width="4" stroke-opacity=".8"/>
+            <circle cx="760" cy="440" r="152" stroke="#96E33C" stroke-width="6" stroke-opacity=".75"/>
+            <circle cx="760" cy="440" r="196" stroke="#D0501E" stroke-width="10" stroke-opacity=".85"/>
+            <circle cx="760" cy="440" r="244" stroke="#5A2545" stroke-width="14"/>
+            <circle cx="760" cy="440" r="296" stroke="#E5A02F" stroke-width="6" stroke-opacity=".7"/>
+            <circle cx="760" cy="440" r="352" stroke="#F0E6D2" stroke-width="3" stroke-opacity=".45"/>
+            <circle cx="760" cy="440" r="416" stroke="#D0501E" stroke-width="9" stroke-opacity=".6"/>
+            <circle cx="760" cy="440" r="486" stroke="#96E33C" stroke-width="4" stroke-opacity=".4"/>
+          </g>
+          <g fill="#F0E6D2" opacity=".9">
+            <circle cx="640" cy="330" r="3"/><circle cx="880" cy="286" r="2.4"/><circle cx="600" cy="600" r="2.6"/>
+            <circle cx="900" cy="640" r="3"/><circle cx="520" cy="470" r="2.2"/><circle cx="980" cy="470" r="2.4"/>
+          </g>
+          <circle cx="760" cy="440" r="14" fill="#F0E6D2"/>
+        </g>
+        <path d="M470 900V540c0-210 140-332 310-328 112 3 180 88 176 180 0 32-10 44-10 50l48 96c8 16 0 24-16 26l-32 4c-8 14-4 26-14 34-14 10-32 6-38 18-6 14 6 28-8 40-14 10-48 6-62 22-16 16-12 50-32 64-20 14-56 10-66 32v122Z" fill="none" stroke="#F0E6D2" stroke-opacity=".3" stroke-width="2.5"/>
+      </g>
+
+      <rect width="1600" height="900" fill="url(#vig)"/>
+    </svg>
+  </div>
+
+  <div class="hero-stack">
+    <svg class="hero-prod" viewBox="0 0 900 480" aria-label="Oracle-7 polyphonic synthesizer"><use href="#s-synth" width="900" height="480"/></svg>
+    <h1>Free your mind,<br><em>keep the receipt.</em></h1>
+  </div>
+
+  <div class="hero-foot">
+    <div>
+      <a class="btn btn-rust" href="#signup"><span>Join the cosmic mailing list</span></a>
+      <p class="hero-note">Dispatched from Topanga Canyon since 1971</p>
+    </div>
+    <a class="btn btn-dark" href="#featured"><span>Shop the Oracle-7</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============ BROADCAST MOSAIC ============ -->
+<section class="mosaic-sec" aria-label="Extrasensory broadcast">
+  <div class="mosaic">
+    <figure class="tile t1">
+      <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><radialGradient id="lamp1" cx=".68" cy=".32" r=".62"><stop offset="0" stop-color="#E5A02F" stop-opacity=".85"/><stop offset="1" stop-color="#E5A02F" stop-opacity="0"/></radialGradient></defs>
+        <rect width="400" height="520" fill="#241B24"/>
+        <rect width="400" height="520" fill="url(#lamp1)"/>
+        <path d="M0 300h400v220H0Z" fill="#1A1218"/>
+        <g fill="#0E0A0E">
+          <path d="M96 300c0-56 22-92 62-92s62 36 62 92Z"/>
+          <path d="M118 214c0-34 16-56 40-56s40 22 40 56Z"/>
+          <path d="M158 152a26 30 0 1 0 0-60 26 30 0 0 0 0 60Z"/>
+          <path d="M206 250c26 4 42 22 46 50h-46Z"/>
+        </g>
+        <rect x="150" y="292" width="220" height="18" rx="4" fill="#C99A5B"/>
+        <rect x="164" y="256" width="192" height="38" rx="5" fill="#12100D"/>
+        <g fill="#F0E6D2"><rect x="176" y="282" width="18" height="10" rx="2"/><rect x="198" y="282" width="18" height="10" rx="2"/><rect x="220" y="282" width="18" height="10" rx="2"/><rect x="242" y="282" width="18" height="10" rx="2"/><rect x="264" y="282" width="18" height="10" rx="2"/><rect x="286" y="282" width="18" height="10" rx="2"/></g>
+        <g fill="#D0501E"><circle cx="184" cy="268" r="5"/><circle cx="206" cy="268" r="5"/></g><circle cx="228" cy="268" r="5" fill="#96E33C"/>
+        <g fill="#3D4A21" opacity=".85">
+          <path d="M330 300c-6-52 10-96 34-118 4 46-8 90-34 118Z"/>
+          <path d="M356 300c14-42 40-66 44-64-8 30-24 52-44 64Z"/>
+        </g>
+        <g fill="#E5A02F" opacity=".35"><circle cx="316" cy="118" r="34"/></g>
+      </svg>
+      <figcaption>Session 041 &mdash; Topanga back room</figcaption>
+    </figure>
+
+    <figure class="tile t2">
+      <svg viewBox="0 0 560 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="560" height="260" fill="#170A16"/>
+        <g opacity=".55">
+          <path d="M120 0 40 260h56L180 0Z" fill="#D0501E"/>
+          <path d="M250 0 200 260h44L318 0Z" fill="#E5A02F"/>
+          <path d="M400 0 372 260h48L472 0Z" fill="#4B2FA8"/>
+        </g>
+        <ellipse cx="280" cy="270" rx="300" ry="90" fill="#0C060C"/>
+        <g fill="#0C060C">
+          <circle cx="70" cy="196" r="20"/><circle cx="130" cy="206" r="17"/><circle cx="196" cy="192" r="21"/>
+          <circle cx="262" cy="208" r="18"/><circle cx="330" cy="194" r="20"/><circle cx="398" cy="206" r="17"/>
+          <circle cx="462" cy="196" r="20"/><circle cx="520" cy="208" r="18"/>
+          <path d="M40 260c0-30 14-46 30-46s30 16 30 46Zm60 0c0-26 12-40 26-40s26 14 26 40Zm62 0c0-30 16-48 34-48s34 18 34 48Zm70 0c0-27 13-42 28-42s28 15 28 42Zm66 0c0-30 15-47 32-47s32 17 32 47Zm70 0c0-26 12-40 26-40s26 14 26 40Zm62 0c0-30 14-46 30-46s30 16 30 46Z"/>
+        </g>
+      </svg>
+      <figcaption>Live at the Dome &mdash; 8mm transfer</figcaption>
+    </figure>
+
+    <figure class="tile t3" style="background:var(--grape)">
+      <svg viewBox="0 0 420 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="420" height="260" fill="#4B2FA8"/>
+        <g fill="none" stroke="#F0E6D2" stroke-opacity=".18" stroke-width="1.4">
+          <ellipse cx="210" cy="130" rx="104" ry="104"/><ellipse cx="210" cy="130" rx="104" ry="42"/>
+          <ellipse cx="210" cy="130" rx="42" ry="104"/><path d="M106 130h208M210 26v208"/>
+        </g>
+        <path d="M148 130c18-26 76-26 94 0-18 26-76 26-94 0Z" fill="none" stroke="#F0E6D2" stroke-width="4.5"/>
+        <circle cx="195" cy="130" r="13" fill="#F0E6D2"/>
+        <text x="210" y="222" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" fill="#F0E6D2" letter-spacing="4">CHANNEL 070</text>
+        <text x="210" y="48" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#F0E6D2" fill-opacity=".62" letter-spacing="3">TUNE IN 24H A DAY</text>
+      </svg>
+      <figcaption>Broadcasting from the ionosphere</figcaption>
+    </figure>
+
+    <figure class="tile t4">
+      <svg viewBox="0 0 280 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E5A02F"/><stop offset=".55" stop-color="#D0501E"/><stop offset="1" stop-color="#5A2545"/></linearGradient></defs>
+        <rect width="280" height="520" fill="url(#room)"/>
+        <path d="M62 520V206a78 78 0 0 1 156 0v314Z" fill="#2A1120"/>
+        <path d="M86 520V212a54 54 0 0 1 108 0v308Z" fill="#F0E6D2" opacity=".14"/>
+        <ellipse cx="140" cy="470" rx="96" ry="16" fill="#12100D" opacity=".45"/>
+        <path d="M124 460c-14-26-6-58 16-84 22 26 30 58 16 84Z" fill="#96E33C" opacity=".85"/>
+        <rect x="128" y="452" width="24" height="26" rx="4" fill="#1B1713"/>
+        <g fill="#F0E6D2" opacity=".5"><circle cx="140" cy="150" r="30"/></g>
+        <g fill="none" stroke="#F0E6D2" stroke-opacity=".3" stroke-width="2"><circle cx="140" cy="150" r="46"/><circle cx="140" cy="150" r="64"/></g>
+      </svg>
+      <figcaption>Showroom No.3 &mdash; the quiet arch</figcaption>
+    </figure>
+
+    <figure class="tile t5">
+      <svg viewBox="0 0 280 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="280" height="260" fill="#1B1713"/>
+        <g transform="translate(-20,10)">
+          <g transform="translate(90,130) rotate(-34)"><circle r="72" fill="#F0E6D2"/><circle r="52" fill="#2A2420"/><rect x="-5" y="-52" width="10" height="30" rx="5" fill="#F0E6D2"/></g>
+          <g transform="translate(230,96) rotate(28)"><circle r="58" fill="#D0501E"/><circle r="42" fill="#2A2420"/><rect x="-4" y="-42" width="8" height="24" rx="4" fill="#F0E6D2"/></g>
+          <g transform="translate(250,232) rotate(70)"><circle r="46" fill="#E5A02F"/><circle r="33" fill="#2A2420"/><rect x="-4" y="-33" width="8" height="19" rx="4" fill="#F0E6D2"/></g>
+        </g>
+      </svg>
+      <figcaption>Detail &mdash; Oracle-7 control surface</figcaption>
+    </figure>
+
+    <figure class="tile t6">
+      <svg viewBox="0 0 720 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><radialGradient id="halo" cx=".28" cy=".4" r=".6"><stop offset="0" stop-color="#E5A02F" stop-opacity=".7"/><stop offset="1" stop-color="#E5A02F" stop-opacity="0"/></radialGradient></defs>
+        <rect width="720" height="260" fill="#20303A"/>
+        <rect width="720" height="260" fill="url(#halo)"/>
+        <g fill="#0D1418">
+          <path d="M206 260c0-72 30-118 76-118s76 46 76 118Z"/>
+          <circle cx="282" cy="112" r="42"/>
+          <path d="M232 108a52 52 0 0 1 100 0Z"/>
+        </g>
+        <g fill="none" stroke="#F0E6D2" stroke-width="7"><path d="M240 112a42 42 0 0 1 84 0"/></g>
+        <rect x="226" y="104" width="22" height="34" rx="9" fill="#F0E6D2"/>
+        <rect x="316" y="104" width="22" height="34" rx="9" fill="#F0E6D2"/>
+        <g fill="none" stroke="#96E33C" stroke-opacity=".55" stroke-width="2.4">
+          <path d="M400 130c14-32 28 32 42 0s28 32 42 0 28 32 42 0 28 32 42 0 28 32 42 0"/>
+        </g>
+        <g fill="none" stroke="#D0501E" stroke-opacity=".45" stroke-width="2.4">
+          <path d="M400 176c20-44 40 44 60 0s40 44 60 0 40 44 60 0 40 44 60 0"/>
+        </g>
+        <g fill="none" stroke="#F0E6D2" stroke-opacity=".25" stroke-width="2.4">
+          <path d="M400 84c10-22 20 22 30 0s20 22 30 0 20 22 30 0 20 22 30 0 20 22 30 0 20 22 30 0 20 22 30 0 20 22 30 0"/>
+        </g>
+      </svg>
+      <figcaption>What the vocoder hears</figcaption>
+    </figure>
+
+    <div class="sticker" aria-hidden="true">Now playing<b>ESE Television</b></div>
+  </div>
+</section>
+
+<!-- ============ FEATURED ============ -->
+<section class="featured" id="featured">
+  <div class="wrap">
+    <div class="feat-head reveal">
+      <p class="label">Featured Instruments</p>
+      <a class="mono" href="#shop" style="opacity:.62">View all 8 &rarr;</a>
+    </div>
+    <div class="feat-grid">
+      <article class="fcard rust reveal">
+        <div class="fcard-top">
+          <div>
+            <h3>Oracle-7 Polysynth</h3>
+            <p>Eight voices &middot; three oscillators &middot; one exit</p>
+          </div>
+          <button class="circ" aria-label="View the Oracle-7">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-synth" width="900" height="480"/></svg>
+        <div class="fcard-foot"><span>$1,290 USD</span><span>In orbit &middot; ships in 5 days</span></div>
+      </article>
+
+      <article class="fcard cream reveal">
+        <div class="fcard-top">
+          <div>
+            <h3>Mouthpiece VC-3</h3>
+            <p>20-band vocoder &middot; talks to plants</p>
+          </div>
+          <button class="circ" aria-label="View the Mouthpiece VC-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-vocoder" width="900" height="480"/></svg>
+        <div class="fcard-foot"><span>$520 USD</span><span>Batch of 200 &middot; hand-wired</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIET STATEMENT ============ -->
+<section class="quiet">
+  <div class="wrap">
+    <div class="mark reveal" aria-hidden="true">
+      <svg viewBox="0 0 44 28" fill="none"><path d="M2.5 14C10 3.5 34 3.5 41.5 14 34 24.5 10 24.5 2.5 14Z" stroke="currentColor" stroke-width="2.6"/><circle cx="22" cy="14" r="5.2" fill="currentColor"/></svg>
+    </div>
+    <div class="say">
+      <p class="reveal">Extrasensory Electronics makes instruments that help you leave your body and get back in time for dinner.</p>
+      <p class="reveal">Built by hand in a converted citrus packing shed. Tuned by ear. Tested by people who have not been entirely present since 1974.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EGO DEATH ============ -->
+<section class="ego">
+  <div class="wrap">
+    <div class="pixel-host reveal" data-word="EGO DEATH" aria-label="Ego Death"></div>
+    <div class="ego-lock reveal">
+      <div class="lock">
+        <svg viewBox="0 0 44 28" fill="none" aria-hidden="true"><path d="M2.5 14C10 3.5 34 3.5 41.5 14 34 24.5 10 24.5 2.5 14Z" stroke="currentColor" stroke-width="2.6"/><circle cx="22" cy="14" r="5.2" fill="currentColor"/></svg>
+        <b>Extrasensory<br>Sessions</b>
+      </div>
+      <p>Half an hour of unedited drone, filmed in our showrooms with whoever wanders in. No hosts, no charts, no thoughts. New episode every full moon.</p>
+      <a class="btn btn-ink" href="#files"><span>Watch on Channel 070</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILES CAROUSEL ============ -->
+<section class="files" id="files">
+  <div class="wrap">
+    <div class="files-txt reveal">
+      <p class="label">Instrument Files</p>
+      <h2>Three ways to lose track of an afternoon.</h2>
+      <p>Every instrument ships with a fold-out manual, a spare fuse, and a short apology from the person who built it. Patch notes are included in case you come back.</p>
+    </div>
+    <div class="files-car reveal">
+      <div class="car-view" id="carView">
+        <div class="slide">
+          <svg viewBox="0 0 900 540" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="900" height="540" fill="#D0501E"/>
+            <g fill="none" stroke="#12100D" stroke-opacity=".16" stroke-width="2"><circle cx="450" cy="270" r="120"/><circle cx="450" cy="270" r="180"/><circle cx="450" cy="270" r="240"/></g>
+            <g transform="translate(90,150) scale(0.8)"><use href="#s-synth" width="900" height="480"/></g>
+          </svg>
+          <span class="cap">01 &mdash; Oracle-7 / patch bank "Melting Cathedral"</span>
+        </div>
+        <div class="slide">
+          <svg viewBox="0 0 900 540" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="900" height="540" fill="#E2D4B8"/>
+            <g fill="none" stroke="#12100D" stroke-opacity=".14" stroke-width="2"><circle cx="676" cy="150" r="70"/><circle cx="676" cy="150" r="118"/><circle cx="676" cy="150" r="172"/></g>
+            <g transform="translate(50,120) scale(0.9)"><use href="#s-theremin" width="900" height="480"/></g>
+          </svg>
+          <span class="cap">02 &mdash; Third Ear TH-1 / never touch it</span>
+        </div>
+        <div class="slide">
+          <svg viewBox="0 0 900 540" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="900" height="540" fill="#3D4A21"/>
+            <g fill="none" stroke="#F0E6D2" stroke-opacity=".14" stroke-width="2"><path d="M0 140h900M0 400h900"/></g>
+            <g transform="translate(50,140) scale(0.9)"><use href="#s-seq" width="900" height="480"/></g>
+          </svg>
+          <span class="cap">03 &mdash; Astral Body AB-2 / 16 steps, no destination</span>
+        </div>
+      </div>
+      <div class="car-bar">
+        <span class="count" id="carCount">1 / 3</span>
+        <div class="ctrls">
+          <button class="circ on-dark" id="carPrev" aria-label="Previous file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg></button>
+          <button class="circ on-dark" id="carNext" aria-label="Next file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="shop-head">
+      <h2 class="reveal">Shop All</h2>
+      <div class="chips reveal" role="tablist" aria-label="Filter products">
+        <button class="chip on" data-cat="all" role="tab" aria-selected="true">Shop All</button>
+        <button class="chip" data-cat="inst" role="tab" aria-selected="false">Instruments</button>
+        <button class="chip" data-cat="acc" role="tab" aria-selected="false">Accessories</button>
+        <button class="chip" data-cat="app" role="tab" aria-selected="false">Apparel</button>
+      </div>
+    </div>
+
+    <div class="grid" id="grid">
+      <article class="prod" data-cat="inst">
+        <div class="shot f-rust"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-synth" width="900" height="480"/></svg>
+          <button class="btn btn-ink quick" data-add="Oracle-7 Polysynth"><span>Add &mdash; $1,290</span></button></div>
+        <h3>Oracle-7 Polysynth</h3><p class="price">$1,290 USD</p>
+      </article>
+
+      <article class="prod" data-cat="inst">
+        <div class="shot f-mustard"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-theremin" width="900" height="480"/></svg>
+          <button class="btn btn-ink quick" data-add="Third Ear TH-1"><span>Add &mdash; $740</span></button></div>
+        <h3>Third Ear TH&ndash;1 Theremin</h3><p class="price">$740 USD</p>
+      </article>
+
+      <article class="prod" data-cat="inst">
+        <div class="shot f-ink"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-vocoder" width="900" height="480"/></svg>
+          <button class="btn btn-paper quick" data-add="Mouthpiece VC-3"><span>Add &mdash; $520</span></button></div>
+        <h3>Mouthpiece VC&ndash;3 Vocoder</h3><p class="price">$520 USD</p>
+      </article>
+
+      <article class="prod" data-cat="inst">
+        <div class="shot f-avocado"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-seq" width="900" height="480"/></svg>
+          <button class="btn btn-paper quick" data-add="Astral Body AB-2"><span>Add &mdash; $610</span></button></div>
+        <h3>Astral Body AB&ndash;2 Rhythm Oracle</h3><p class="price">$610 USD</p>
+      </article>
+
+      <article class="prod" data-cat="acc">
+        <div class="shot f-grape"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-pedal" width="900" height="480"/></svg>
+          <button class="btn btn-paper quick" data-add="Sunbeam Phaser"><span>Add &mdash; $180</span></button></div>
+        <h3>Sunbeam Phaser Pedal</h3><p class="price">$180 USD</p>
+      </article>
+
+      <article class="prod" data-cat="acc">
+        <div class="shot f-clay"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-cable" width="900" height="480"/></svg></div>
+        <h3>Coiled Patch Cable, Marigold</h3><p class="price out">Sold Out</p>
+      </article>
+
+      <article class="prod" data-cat="app">
+        <div class="shot f-field"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-tee" width="900" height="480"/></svg>
+          <button class="btn btn-paper quick" data-add="Ego Death Tee"><span>Add &mdash; $48</span></button></div>
+        <h3>Ego Death Everlasting Tee</h3><p class="price">$48 USD</p>
+      </article>
+
+      <article class="prod" data-cat="app">
+        <div class="shot f-sky"><svg class="art" viewBox="0 0 900 480" aria-hidden="true"><use href="#s-beanie" width="900" height="480"/></svg>
+          <button class="btn btn-ink quick" data-add="Galaxy Brain Beanie"><span>Add &mdash; $34</span></button></div>
+        <h3>Galaxy Brain Beanie</h3><p class="price">$34 USD</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TUNE YOUR HEAD ============ -->
+<section class="tune">
+  <div class="wrap">
+    <div class="tune-txt reveal">
+      <p class="label">Try before you dissolve</p>
+      <h2>Tune your head.</h2>
+      <p>Three controls, borrowed from the Oracle-7 front panel. Drag them. Nothing here is dangerous, though we do say that about most of our products.</p>
+    </div>
+    <div class="panel reveal">
+      <div class="scope">
+        <svg viewBox="0 0 760 170" aria-hidden="true">
+          <g stroke="#F0E6D2" stroke-opacity=".07" stroke-width="1">
+            <path d="M0 42.5h760M0 85h760M0 127.5h760M190 0v170M380 0v170M570 0v170"/>
+          </g>
+          <path id="wave" d="M0 85" fill="none" stroke="#D0501E" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="knobs">
+        <div class="knob" data-v="42" tabindex="0" role="slider" aria-label="Drift" aria-valuemin="0" aria-valuemax="100" aria-valuenow="42">
+          <div class="dialwrap"><div class="dial"></div></div><span class="nm">Drift</span><span class="val">042</span>
+        </div>
+        <div class="knob" data-v="66" tabindex="0" role="slider" aria-label="Depth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="66">
+          <div class="dialwrap"><div class="dial"></div></div><span class="nm">Depth</span><span class="val">066</span>
+        </div>
+        <div class="knob" data-v="78" tabindex="0" role="slider" aria-label="Decay" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+          <div class="dialwrap"><div class="dial"></div></div><span class="nm">Decay</span><span class="val">078</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="says">
+  <div class="wrap">
+    <div class="says-lead reveal">
+      <p class="label">Field reports</p>
+      <h2>Unverified, but consistent.</h2>
+    </div>
+    <div class="says-list">
+      <blockquote class="say-card reveal">
+        <p>&ldquo;I set the theremin up by the window and within a minute my landlord called to cancel rent. Unrelated, probably. Still, five stars.&rdquo;</p>
+        <p class="who">Marguerite O.<em>Topanga, CA &middot; Third Ear TH&ndash;1</em></p>
+      </blockquote>
+      <blockquote class="say-card reveal">
+        <p>&ldquo;The Oracle-7 sounds like a cathedral slowly melting. Nine of my ten worst thoughts have left the building and I do not miss them.&rdquo;</p>
+        <p class="who">D. Fentress<em>Detroit, MI &middot; Oracle-7 Polysynth</em></p>
+      </blockquote>
+      <blockquote class="say-card reveal">
+        <p>&ldquo;Bought the vocoder. Now the plants answer back. Support says this is within normal operating parameters, which I found reassuring and also alarming.&rdquo;</p>
+        <p class="who">Sunny Okonkwo<em>Berlin &middot; Mouthpiece VC&ndash;3</em></p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOWROOMS ============ -->
+<section class="rooms" id="rooms">
+  <div class="wrap">
+    <div class="rooms-head">
+      <h2 class="reveal">Come sit in one.</h2>
+      <p class="label reveal" style="max-width:34ch;text-transform:none;letter-spacing:.02em;font-family:var(--sans);font-size:14px;opacity:.66">Three rooms, wall-to-wall carpet, one lava lamp each. Play anything. Nobody will approach you.</p>
+    </div>
+    <div class="room reveal">
+      <h3>Topanga Canyon</h3>
+      <p class="addr">2814 Old Canyon Road<br>Los Angeles, California</p>
+      <p class="hrs">Daily 11&ndash;7 &middot; Est. 1971</p>
+      <button class="circ" aria-label="Directions to Topanga Canyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="room reveal">
+      <h3>Detroit</h3>
+      <p class="addr">908 Grand River Ave, Floor 2<br>Detroit, Michigan</p>
+      <p class="hrs">Wed&ndash;Sun 12&ndash;8 &middot; Est. 1979</p>
+      <button class="circ" aria-label="Directions to Detroit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="room reveal">
+      <h3>Berlin&ndash;Kreuzberg</h3>
+      <p class="addr">Ohlauer Stra&szlig;e 44<br>10999 Berlin</p>
+      <p class="hrs">Tue&ndash;Sat 12&ndash;9 &middot; Est. 1994</p>
+      <button class="circ" aria-label="Directions to Berlin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGN UP ============ -->
+<section class="signup" id="signup">
+  <div class="wrap">
+    <div class="pixel-host reveal" data-word="SIGN UP" aria-label="Sign up"></div>
+    <div class="signup-row">
+      <p class="reveal">Restock notices, session films, and roughly one email a month written by somebody who has clearly just come back from somewhere.</p>
+      <form class="field reveal" id="mailForm" novalidate>
+        <input type="email" id="mailInput" placeholder="Your earthly email address" aria-label="Email address" required>
+        <button type="submit">Transmit &rarr;</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-lock">
+        <svg viewBox="0 0 44 28" fill="none" aria-hidden="true"><path d="M2.5 14C10 3.5 34 3.5 41.5 14 34 24.5 10 24.5 2.5 14Z" stroke="currentColor" stroke-width="2.6"/><circle cx="22" cy="14" r="5.2" fill="currentColor"/></svg>
+        <b>Extrasensory<br>Electronics</b>
+      </div>
+      <div class="fcol">
+        <h4>Shop</h4>
+        <a href="#shop">Instruments</a><a href="#shop">Accessories</a><a href="#shop">Apparel</a><a href="#shop">Gift Certificates</a>
+      </div>
+      <div class="fcol">
+        <h4>Support</h4>
+        <a href="#">Returns Policy</a><a href="#">Warranty</a><a href="#">Manuals</a><a href="#">Contact a Human</a>
+      </div>
+      <div class="fcol">
+        <h4>Elsewhere</h4>
+        <a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Bandcamp</a><a href="#">Discord</a>
+      </div>
+      <div class="pays" aria-label="Accepted payment methods">
+        <span class="pay">AMEX</span><span class="pay">APPLE</span><span class="pay">DINERS</span><span class="pay">DISC</span>
+        <span class="pay">GPAY</span><span class="pay">MC</span><span class="pay">SHOP</span><span class="pay">VISA</span>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span class="region">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
+        North America &#9662;
+      </span>
+      <span>Leave your body &mdash; bring your ears</span>
+      <span>&copy; 2026 Extrasensory Electronics</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- MARQUEE ---------- */
+  (function(){
+    var items = ['Free astral shipping on all instruments','No ego required','Hand-wired in a citrus shed',
+                 'Channel 070 broadcasting now','Returns accepted from any dimension','Free astral shipping on all instruments',
+                 'No ego required','Hand-wired in a citrus shed','Channel 070 broadcasting now','Returns accepted from any dimension'];
+    var t = document.getElementById('mqTrack'), html = '';
+    for (var pass=0; pass<2; pass++){
+      for (var i=0;i<items.length;i++){ html += '<span>'+items[i]+' &#10022;</span>'; }
+    }
+    t.innerHTML = html;
+  })();
+
+  /* ---------- 5x7 PIXEL FONT ---------- */
+  var PX = {
+    'A':['01110','10001','10001','11111','10001','10001','10001'],
+    'B':['11110','10001','10001','11110','10001','10001','11110'],
+    'C':['01110','10001','10000','10000','10000','10001','01110'],
+    'D':['11110','10001','10001','10001','10001','10001','11110'],
+    'E':['11111','10000','10000','11110','10000','10000','11111'],
+    'F':['11111','10000','10000','11110','10000','10000','10000'],
+    'G':['01110','10001','10000','10111','10001','10001','01111'],
+    'H':['10001','10001','10001','11111','10001','10001','10001'],
+    'I':['11111','00100','00100','00100','00100','00100','11111'],
+    'J':['00111','00010','00010','00010','00010','10010','01100'],
+    'K':['10001','10010','10100','11000','10100','10010','10001'],
+    'L':['10000','10000','10000','10000','10000','10000','11111'],
+    'M':['10001','11011','10101','10101','10001','10001','10001'],
+    'N':['10001','11001','10101','10011','10001','10001','10001'],
+    'O':['01110','10001','10001','10001','10001','10001','01110'],
+    'P':['11110','10001','10001','11110','10000','10000','10000'],
+    'Q':['01110','10001','10001','10001','10101','10010','01101'],
+    'R':['11110','10001','10001','11110','10100','10010','10001'],
+    'S':['01111','10000','10000','01110','00001','00001','11110'],
+    'T':['11111','00100','00100','00100','00100','00100','00100'],
+    'U':['10001','10001','10001','10001','10001','10001','01110'],
+    'V':['10001','10001','10001','10001','10001','01010','00100'],
+    'W':['10001','10001','10001','10101','10101','11011','10001'],
+    'X':['10001','10001','01010','00100','01010','10001','10001'],
+    'Y':['10001','10001','01010','00100','00100','00100','00100'],
+    'Z':['11111','00001','00010','00100','01000','10000','11111'],
+    ' ':['00000','00000','00000','00000','00000','00000','00000']
+  };
+  function renderPixel(host){
+    var word = (host.getAttribute('data-word')||'').toUpperCase();
+    var gap = 1, rects = '', x = 0, cols = 0, ch, g, r, c;
+    for (var i=0;i<word.length;i++){
+      ch = word.charAt(i); g = PX[ch] || PX[' '];
+      if (i) { x += gap; cols += gap; }
+      for (r=0;r<7;r++){
+        var run = 0;
+        for (c=0;c<=5;c++){
+          var on = c<5 && g[r].charAt(c)==='1';
+          if (on) { run++; }
+          else if (run) { rects += '<rect x="'+(x+c-run)+'" y="'+r+'" width="'+run+'" height="1"/>'; run = 0; }
+        }
+      }
+      x += 5; cols += 5;
+    }
+    host.innerHTML = '<svg class="pixel" viewBox="0 0 '+cols+' 7" preserveAspectRatio="xMidYMid meet" aria-hidden="true">'+rects+'</svg>';
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.pixel-host'), renderPixel);
+
+  /* ---------- REVEAL ON SCROLL ---------- */
+  var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal, .prod'));
+  if ('IntersectionObserver' in window && !reduced){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin:'0px 0px -6% 0px', threshold:0.08 });
+    revealables.forEach(function(el){
+      var sibs = Array.prototype.filter.call(el.parentNode.children, function(c){
+        return c.classList.contains('reveal') || c.classList.contains('prod');
+      });
+      el.style.transitionDelay = (Math.min(sibs.indexOf(el), 7) * 60) + 'ms';
+      io.observe(el);
+    });
+  } else {
+    revealables.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- NAV ---------- */
+  var nav = document.getElementById('nav'), lastY = 0;
+  window.addEventListener('scroll', function(){
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if (y > 40) nav.classList.add('stuck'); else nav.classList.remove('stuck');
+    if (y > 300 && y > lastY + 4) nav.classList.add('hide');
+    else if (y < lastY - 4 || y < 120) nav.classList.remove('hide');
+    lastY = y;
+  }, {passive:true});
+
+  /* ---------- FILTER CHIPS ---------- */
+  var chips = document.querySelectorAll('.chip');
+  var prods = document.querySelectorAll('.prod');
+  Array.prototype.forEach.call(chips, function(chip){
+    chip.addEventListener('click', function(){
+      Array.prototype.forEach.call(chips, function(c){ c.classList.remove('on'); c.setAttribute('aria-selected','false'); });
+      chip.classList.add('on'); chip.setAttribute('aria-selected','true');
+      var cat = chip.getAttribute('data-cat');
+      Array.prototype.forEach.call(prods, function(p, i){
+        var show = (cat === 'all') || (p.getAttribute('data-cat') === cat);
+        if (show){
+          p.classList.remove('gone');
+          p.classList.remove('in');
+          p.style.transitionDelay = (Math.min(i,7)*45) + 'ms';
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ p.classList.add('in'); }); });
+        } else {
+          p.classList.add('gone');
+        }
+      });
+    });
+  });
+
+  /* ---------- CAROUSEL ---------- */
+  (function(){
+    var view = document.getElementById('carView');
+    if (!view) return;
+    var count = document.getElementById('carCount');
+    var prev = document.getElementById('carPrev'), next = document.getElementById('carNext');
+    var n = view.children.length;
+    function idx(){ return Math.round(view.scrollLeft / Math.max(1, view.clientWidth)); }
+    function sync(){
+      var i = Math.min(n-1, Math.max(0, idx()));
+      count.textContent = (i+1) + ' / ' + n;
+      prev.disabled = i === 0;
+      next.disabled = i === n-1;
+    }
+    function go(dir){ view.scrollTo({ left: (idx()+dir) * view.clientWidth, behavior: reduced ? 'auto' : 'smooth' }); }
+    prev.addEventListener('click', function(){ go(-1); });
+    next.addEventListener('click', function(){ go(1); });
+    var tick;
+    view.addEventListener('scroll', function(){ clearTimeout(tick); tick = setTimeout(sync, 90); }, {passive:true});
+    window.addEventListener('resize', sync);
+    sync();
+  })();
+
+  /* ---------- KNOB MODULE ---------- */
+  (function(){
+    var knobs = Array.prototype.slice.call(document.querySelectorAll('.knob'));
+    var wave = document.getElementById('wave');
+    if (!knobs.length || !wave) return;
+
+    function draw(){
+      var d = +knobs[0].getAttribute('data-v');
+      var dp = +knobs[1].getAttribute('data-v');
+      var dc = +knobs[2].getAttribute('data-v');
+      var W = 760, mid = 85, pts = [];
+      for (var x = 0; x <= W; x += 4){
+        var env = Math.exp(-x * (1.04 - dc/100) * 0.0044);
+        var y = mid
+              + Math.sin(x * (0.0062 + d * 0.00024)) * (8 + dp * 0.62) * env
+              + Math.sin(x * (0.0215 + d * 0.00042)) * (3 + dp * 0.20) * env;
+        pts.push(x + ',' + y.toFixed(1));
+      }
+      wave.setAttribute('d', 'M' + pts.join('L'));
+      wave.setAttribute('stroke', 'hsl(' + Math.round(16 + d * 0.72) + ' 78% 55%)');
+    }
+
+    function set(k, v){
+      v = Math.max(0, Math.min(100, v));
+      k.setAttribute('data-v', v);
+      k.setAttribute('aria-valuenow', Math.round(v));
+      k.querySelector('.dial').style.transform = 'rotate(' + (-135 + v * 2.7) + 'deg)';
+      var s = String(Math.round(v)); while (s.length < 3) s = '0' + s;
+      k.querySelector('.val').textContent = s;
+      draw();
+    }
+
+    knobs.forEach(function(k){
+      set(k, +k.getAttribute('data-v'));
+      var startY = 0, startV = 0, active = false;
+
+      k.addEventListener('pointerdown', function(e){
+        active = true; startY = e.clientY; startV = +k.getAttribute('data-v');
+        k.classList.add('act');
+        k.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+      k.addEventListener('pointermove', function(e){
+        if (!active) return;
+        set(k, startV + (startY - e.clientY) * 0.55);
+      });
+      function end(e){
+        if (!active) return;
+        active = false; k.classList.remove('act');
+        try { k.releasePointerCapture(e.pointerId); } catch(err){}
+      }
+      k.addEventListener('pointerup', end);
+      k.addEventListener('pointercancel', end);
+      k.addEventListener('keydown', function(e){
+        var v = +k.getAttribute('data-v');
+        if (e.key === 'ArrowUp' || e.key === 'ArrowRight'){ set(k, v + 4); e.preventDefault(); }
+        else if (e.key === 'ArrowDown' || e.key === 'ArrowLeft'){ set(k, v - 4); e.preventDefault(); }
+      });
+    });
+    draw();
+  })();
+
+  /* ---------- BAG + TOAST ---------- */
+  var toastEl = document.getElementById('toast'), toastTimer;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2400);
+  }
+  var bagCount = document.getElementById('bagCount'), items = 0;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-add]'), function(b){
+    b.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      items++;
+      bagCount.textContent = items;
+      bagCount.classList.add('pop');
+      setTimeout(function(){ bagCount.classList.remove('pop'); }, 400);
+      toast(b.getAttribute('data-add') + ' added to bag');
+    });
+  });
+  document.getElementById('bagBtn').addEventListener('click', function(){
+    toast(items ? items + ' item' + (items>1?'s':'') + ' in your bag' : 'Your bag is empty, as are you');
+  });
+
+  /* ---------- MAILING LIST ---------- */
+  (function(){
+    var form = document.getElementById('mailForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var input = document.getElementById('mailInput');
+      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+      if (!ok){ toast('That address does not appear to exist here'); input.focus(); return; }
+      form.innerHTML = '<span class="signed">Received &mdash; welcome to the frequency</span>';
+    });
+  })();
+
+  /* ---------- SMOOTH ANCHORS ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if (id.length < 2) return;
+      var t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+})();
+</script>
+</body>
+</html>
