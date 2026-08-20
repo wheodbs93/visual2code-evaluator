@@ -1,2 +1,4 @@
-# MVP uses Python standard library only.
-# Optional QA: pip install playwright && playwright install chromium
+psycopg[binary]>=3.2,<4
+
+# Optional QA
+# playwright
