@@ -3,8 +3,10 @@ from __future__ import annotations
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse
 import json
+import csv
+import io
 from pathlib import Path
-from .store import load_pairs, append_evaluation
+from .store import load_pairs, append_evaluation, evaluation_count, evaluator_has_submitted
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -282,7 +284,27 @@ select{
 
 <body>
 <div class="wrap">
-  <h1>Visual2Code A/B Evaluator</h1>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <div>
+      <h1>Visual2Code A/B Evaluator</h1>
+      <div id="evaluatorBanner" class="muted"></div>
+    </div>
+
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button
+        id="changeEvaluator"
+        class="btn-link"
+        type="button"
+        style="display:none">
+        Change evaluator
+      </button>
+
+      <a class="btn-link" href="/api/evaluations/export">
+        Export Results CSV
+      </a>
+    </div>
+  </div>
+
   <div id="app">Loading...</div>
 </div>
 
@@ -345,7 +367,21 @@ function renderPrompt(p){
 }
 
 function renderOutputs(p){
+  const referenceUrl =
+    p.reference_folder_url ||
+    "https://drive.google.com/drive/folders/1PY_wVxDio9pYsRVRnl_KT55X-WkJY9oh";
+
   return `
+    <div class="card">
+      <h2>Reference Materials</h2>
+      <a class="btn-link" href="${esc(referenceUrl)}" target="_blank">
+        Open Reference Materials ↗
+      </a>
+      <div class="muted" style="margin-top:8px">
+        Use the supplied screenshots and screen recordings as the reference when evaluating the generated sites.
+      </div>
+    </div>
+
     <div class="outputs">
 
       ${["A","B"].map(k => {
@@ -589,8 +625,108 @@ async function copyUrl(url){
   }
 }
 
+function getStoredEvaluatorId(){
+  return localStorage.getItem("visual2code_evaluator_id") || "";
+}
+
+function setEvaluatorId(id){
+  id = String(id || "").trim();
+
+  if(!id){
+    throw new Error("Evaluator ID is required.");
+  }
+
+  localStorage.setItem(
+    "visual2code_evaluator_id",
+    id
+  );
+
+  return id;
+}
+
+function renderEvaluatorGate(){
+  document.getElementById("app").innerHTML = `
+    <div class="card" style="max-width:620px;margin:80px auto">
+      <h2>Visual2Code Evaluation</h2>
+
+      <p class="muted">
+        Enter your evaluator ID to begin. Your ID will be remembered
+        in this browser for future evaluations.
+      </p>
+
+      <label style="display:block;margin-top:20px">
+        <strong>Evaluator ID</strong>
+        <input
+          id="evaluatorIdInput"
+          type="text"
+          autocomplete="off"
+          placeholder="e.g. carrie"
+          style="width:100%;margin-top:8px;padding:12px;border:1px solid #ccc;border-radius:8px;font:inherit"
+        >
+      </label>
+
+      <button
+        id="startEvaluation"
+        class="submit"
+        type="button"
+        style="margin-top:16px">
+        Start evaluation
+      </button>
+    </div>
+  `;
+
+  const input = document.getElementById("evaluatorIdInput");
+  const button = document.getElementById("startEvaluation");
+
+  const submit = () => {
+    try{
+      setEvaluatorId(input.value);
+      load();
+    }catch(err){
+      alert(err.message);
+    }
+  };
+
+  button.onclick = submit;
+
+  input.addEventListener("keydown", (e) => {
+    if(e.key === "Enter"){
+      submit();
+    }
+  });
+
+  input.focus();
+}
+
+
 async function load(){
+  const evaluatorId = getStoredEvaluatorId();
+
+  if(!evaluatorId){
+    renderEvaluatorGate();
+    return;
+  }
+
   const data = await getJSON("/api/pairs");
+
+  const evaluatorBanner =
+    document.getElementById("evaluatorBanner");
+
+  if(evaluatorBanner){
+    evaluatorBanner.innerHTML =
+      `Evaluator: <strong>${esc(evaluatorId)}</strong>`;
+  }
+
+  const changeEvaluator =
+    document.getElementById("changeEvaluator");
+
+  if(changeEvaluator){
+    changeEvaluator.style.display = "inline-flex";
+    changeEvaluator.onclick = () => {
+      localStorage.removeItem("visual2code_evaluator_id");
+      renderEvaluatorGate();
+    };
+  }
 
   document.getElementById("app").innerHTML = `
     <div class="card">
@@ -618,6 +754,22 @@ async function render(){
   const p = await getJSON("/api/pairs/" + encodeURIComponent(id));
 
   let h = renderPrompt(p);
+
+  const evaluationCount = Number(p.evaluation_count || 0);
+  const evaluationLimit = Number(p.evaluation_limit || 5);
+
+  h += `
+    <div class="card">
+      <strong>Evaluations</strong>
+      <span class="pill">${evaluationCount} / ${evaluationLimit}</span>
+      ${
+        evaluationCount >= evaluationLimit
+          ? '<div class="muted" style="margin-top:8px">This pair has reached the maximum of 5 evaluations.</div>'
+          : '<div class="muted" style="margin-top:8px">Up to 5 raters can evaluate this pair.</div>'
+      }
+    </div>
+  `;
+
   h += renderOutputs(p);
 
   h += `<form id="eval">`;
@@ -640,14 +792,27 @@ async function render(){
 
   document.getElementById("pairview").innerHTML = h;
 
-  document.getElementById("eval").onsubmit = async (e) => {
+  const evalForm = document.getElementById("eval");
+
+  if(evaluationCount >= evaluationLimit){
+    evalForm.querySelectorAll("input, select, textarea, button")
+      .forEach(el => el.disabled = true);
+
+    const submitButton = evalForm.querySelector("button.submit");
+
+    if(submitButton){
+      submitButton.textContent = "Evaluation limit reached";
+    }
+  }
+
+  evalForm.onsubmit = async (e) => {
     e.preventDefault();
 
     const fd = new FormData(e.target);
 
     const payload = {
       pair_id: id,
-      evaluator_id: "local-demo",
+      evaluator_id: getStoredEvaluatorId(),
       answers: Object.fromEntries(fd.entries()),
       submitted_at: new Date().toISOString()
     };
@@ -703,7 +868,88 @@ class Handler(SimpleHTTPRequestHandler):
             if pid not in pairs:
                 return self.send_error(404)
 
-            return self.send_json(pairs[pid].to_dict())
+            result = pairs[pid].to_dict()
+            evaluator_id = ""
+            count = evaluation_count(pid)
+
+            result["evaluation_count"] = count
+            result["evaluation_limit"] = 5
+
+            return self.send_json(result)
+
+        if parsed.path == "/api/evaluations/export":
+            from .store import export_evaluations
+
+            rows = export_evaluations()
+
+            fieldnames = [
+                "id",
+                "pair_id",
+                "evaluator_id",
+                "submitted_at",
+                "overall",
+                "award_A",
+                "award_B",
+                "award_pref",
+                "difficulty",
+            ]
+
+            # Gather all answer keys so rubric/dimension fields are included.
+            answer_keys = set()
+
+            for row in rows:
+                answer_keys.update(
+                    row.get("payload", {}).get("answers", {}).keys()
+                )
+
+            fieldnames.extend(
+                sorted(
+                    k for k in answer_keys
+                    if k not in fieldnames
+                )
+            )
+
+            output = io.StringIO()
+            writer = csv.DictWriter(
+                output,
+                fieldnames=fieldnames,
+                extrasaction="ignore",
+            )
+            writer.writeheader()
+
+            for row in rows:
+                payload = row.get("payload", {})
+                answers = payload.get("answers", {})
+
+                record = {
+                    "id": row.get("id", ""),
+                    "pair_id": row.get("pair_id", ""),
+                    "evaluator_id": row.get("evaluator_id", ""),
+                    "submitted_at": row.get("submitted_at", ""),
+                }
+
+                record.update(answers)
+
+                writer.writerow(record)
+
+            data = output.getvalue().encode("utf-8")
+
+            self.send_response(200)
+            self.send_header(
+                "Content-Type",
+                "text/csv; charset=utf-8"
+            )
+            self.send_header(
+                "Content-Disposition",
+                'attachment; filename="visual2code_evaluations.csv"'
+            )
+            self.send_header(
+                "Content-Length",
+                str(len(data))
+            )
+            self.end_headers()
+            self.wfile.write(data)
+            return
 
         if parsed.path.startswith("/renders/"):
             rel = parsed.path[len("/renders/"):].lstrip("/")

@@ -1,6 +1,131 @@
 {
   "pairs": [
     {
+      "pair_id": "supra_pac_001",
+      "prompt_id": "supra_pac_001",
+      "prompt": "v2\n\nGenerate a new website concept for a Supra PAC organization that fights against Super PAC influence using the provided inspiration materials as visual and structural references.\n\nBrand information: Supra PAC is an organization designed to fight fire with fire. Through community organizing and effort, we can match the spending of Super PACs to oppose their chosen candidates while also investigating those PACs to see who is really funding the candidates, and exposing their influence.\n\nReview the attached screenshots and video. Use these materials to understand the reference brand\u2019s design principles, including:\n\nTypography and type hierarchy\n\nColor palette and contrast\n\nSpacing, scale, and grid system\n\nLayout patterns and page rhythm\n\nPhotography and graphic direction\n\nNavigation, buttons, cards, and other UI elements\n\nMotion, transitions, and interactive behavior shown in the reference video\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The references should be used only as visual inspiration and guidance. The final result should be a new website for the Supra PAC organization.\n\nUse the inspiration materials as a close visual-direction reference while adapting the experience appropriately for the new brand.\n\nFor this concept, focus on preserving the reference\u2019s overall approach in these design areas:\n\nComparable use of whitespace, image scale, and editorial asymmetry\n\nComparable UI restraint, border treatments, labels, and navigation hierarchy\n\nOriginality should come from the new brand identity, copy, products or offerings, imagery, and newly composed page experience. Do not interpret \"new website\" as permission to replace the reference's defining design language with an unrelated aesthetic.\n\nCreative Direction\n\nUse a similar page layout to the reference site, with open space and different-sized sections that help important content stand out. Use that layout to highlight our recent efforts. Show candidates we have helped fund and link to their campaigns in a similar way as events on the reference page.\n\nKeep the navigation simple and organized like the reference site. The quick nav menu in the top right should work the same, with clear subsections for previous campaigns we have helped, previous Super PACs exposed, and ways to contact our staff.\n\nFirst, create a design.md file that translates the inspiration into clear brand and web-design guidelines for the new brand. Include typography, colors, spacing, imagery, UI treatments, motion principles, and any other relevant visual rules.\n\nThen, without pausing for review, confirmation, or additional input, design and build the page using those guidelines. Use the inspiration materials as a close visual-direction reference while creating original brand content, imagery, and page compositions.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "mid",
+      "difficulty": 3,
+      "strategy": "inspiration_brief",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "CultureandCommunityPowerFund",
+      "reference_assets": [
+        "data/inputs/CultureandCommunityPowerFund/CultureandCommunityPowerFund_Screen Recording.mov",
+        "data/inputs/CultureandCommunityPowerFund/cultureandcommunitypowerfund.org_ (1).png",
+        "data/inputs/CultureandCommunityPowerFund/cultureandcommunitypowerfund.org_about-us_.png",
+        "data/inputs/CultureandCommunityPowerFund/cultureandcommunitypowerfund.org_community-power_ (1).png",
+        "data/inputs/CultureandCommunityPowerFund/cultureandcommunitypowerfund.org_connect_.png",
+        "data/inputs/CultureandCommunityPowerFund/cultureandcommunitypowerfund.org_how-we-distribute-funds_.png",
+        "data/inputs/CultureandCommunityPowerFund/cultureandcommunitypowerfund.org_knowledge-commons_.png"
+      ],
+      "rubric": [
+        {
+          "id": "im01",
+          "text": "Does the page preserve the defining visual characteristics evident in the supplied inspiration, such as its layout approach, visual hierarchy, imagery, spacing, and UI treatment where applicable?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im02",
+          "text": "Does the page implement the specific content, page structure, and creative direction explicitly requested in the prompt without material omissions or contradictions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im03",
+          "text": "Does the page appropriately adapt the inspiration to the new brand rather than simply recreating the reference or replacing it with an unrelated aesthetic?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im04",
+          "text": "Where navigation, motion, or interactive behavior is specified in the prompt or observable in the supplied references, does the page carry it through appropriately?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "supra_pac_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "supra_pac_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "roasty_coffee_001",
+      "prompt_id": "roasty_coffee_001",
+      "prompt": "Tab 2\n\nGenerate a new website concept for a coffee company named Roasty using the provided inspiration materials as visual and structural references.\n\nBrand information:\n\nThe Roasty coffee company is a modern twist on coffee. We offer several types of coffee ranging from light to dark roast. Our coffee beans come from all over the planet, but most notably from Cuba and Argentina. All of our locations have an aviation theme that captures modern airplane structure.\n\nReview the attached screenshots and video. Use these materials to understand the reference brand\u2019s design principles, including:\n\nSimilar color relationships and levels of saturation\n\nSimilar density and pacing between product, editorial, and photographic sections\n\nComparable UI restraint, border treatments, labels, and navigation hierarchy\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The references should be used only as visual inspiration and guidance. The final result should be a new website for the Roasty coffee company.\n\nUse the inspiration materials as a close visual-direction reference while adapting the experience appropriately for the new brand. Preserve the reference's defining visual character without simply recreating the reference site.\n\nOriginality should come from the new brand identity, copy, products or offerings, imagery, and newly composed page experience. Do not interpret \"new website\" as permission to replace the reference's defining design language with an unrelated aesthetic.\n\nCreative Direction\n\nIncorporate the aviation theme into the reference-inspired card and button treatments through subtle details, imagery, or graphic elements.\n\nUse a neutral color palette appropriate to the Roasty brand while preserving the overall color relationships and visual character of the inspiration materials.\n\nUse similar layout patterns and page rhythm throughout the site while adapting the experience to the Roasty brand.\n\nFirst, create a design.md file that captures the design direction you intend to use for the new brand.\n\nThen, continue directly into designing and building the landing page using those guidelines and the supplied inspiration materials, without pausing for review, confirmation, or additional input. Create original brand content and page compositions appropriate for the Roasty coffee company.\n\nInputs:\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "mid",
+      "difficulty": 3,
+      "strategy": "inspiration_brief",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "coffeecollective.dk",
+      "reference_assets": [
+        "data/inputs/coffeecollective.dk/Coffee Collective Screen Recording.mov",
+        "data/inputs/coffeecollective.dk/CoffeeCollective_login.png",
+        "data/inputs/coffeecollective.dk/coffeecollective.dk_landing page.png",
+        "data/inputs/coffeecollective.dk/coffeecollective.dk_pages_wholesale.png"
+      ],
+      "rubric": [
+        {
+          "id": "im01",
+          "text": "Does the page preserve the defining visual characteristics evident in the supplied inspiration, such as its layout approach, visual hierarchy, imagery, spacing, and UI treatment where applicable?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im02",
+          "text": "Does the page implement the specific content, page structure, and creative direction explicitly requested in the prompt without material omissions or contradictions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im03",
+          "text": "Does the page appropriately adapt the inspiration to the new brand rather than simply recreating the reference or replacing it with an unrelated aesthetic?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im04",
+          "text": "Where navigation, motion, or interactive behavior is specified in the prompt or observable in the supplied references, does the page carry it through appropriately?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "roasty_coffee_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "roasty_coffee_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
       "pair_id": "dukeandexter_001",
       "prompt_id": "dukeandexter_001",
       "prompt": "We need to perfectly recreate the website homepage shown in the provided reference materials.\n\nReview the attached screenshots and video and use them as the design reference. Recreate the design, layout, content structure, and scrolling interactions as faithfully as possible. Do not sway from what is shown in the supplied reference materials; the recreation should be as exact as possible.\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The supplied screenshots and video should be used as the visual reference for the recreation.\n\nDo not reinterpret, redesign, modernize, or add unsupported creative elements. If a minor implementation detail is not observable in the supplied materials, make the most reasonable choice consistent with the visible reference and continue.\n\nComplete the full landing-page implementation in this one-shot task without pausing for questions, review, confirmation, or additional input.\n\nBefore finishing, QA your work section by section against the supplied screenshots and video. Check for material differences from the reference and correct them before completing the task.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
@@ -13,79 +138,51 @@
       "reference_input_dir": "dukeandexter",
       "reference_assets": [
         "data/inputs/dukeandexter/DukeandDexter Screen Recording.mov",
-        "data/inputs/dukeandexter/dukeanddexter.com_pages_rewards.png",
-        "data/inputs/dukeandexter/dukeanddexter.com_landing page.png",
+        "data/inputs/dukeandexter/dukeanddexter.com_account_login.png",
         "data/inputs/dukeandexter/dukeanddexter.com_collections_custom-hand-painted-shoes.png",
-        "data/inputs/dukeandexter/dukeanddexter.com_account_login.png"
+        "data/inputs/dukeandexter/dukeanddexter.com_landing page.png",
+        "data/inputs/dukeandexter/dukeanddexter.com_pages_rewards.png"
       ],
       "rubric": [
         {
-          "id": "dd01",
-          "text": "The homepage reproduces the overall visual composition and section structure shown in the reference materials.",
-          "dimension": "prompt_adherence",
-          "importance": "essential",
-          "requires_interaction": false
-        },
-        {
-          "id": "dd02",
-          "text": "Major visible content areas and navigation structure are reproduced faithfully.",
-          "dimension": "prompt_adherence",
-          "importance": "essential",
-          "requires_interaction": false
-        },
-        {
-          "id": "dd03",
-          "text": "Typography, spacing, imagery, alignment, and visual hierarchy closely match the supplied reference materials.",
+          "id": "dr01",
+          "text": "Does the overall layout and composition faithfully match the reference, including section structure, sizing, positioning, spacing, and visual hierarchy?",
           "dimension": "visual_craft",
           "importance": "essential",
           "requires_interaction": false
         },
         {
-          "id": "dd04",
-          "text": "The implementation preserves the reference's visual character without introducing an unrelated or modernized aesthetic.",
+          "id": "dr02",
+          "text": "Does the typography faithfully match the reference in type style, scale, weight, hierarchy, and treatment?",
           "dimension": "visual_craft",
           "importance": "essential",
           "requires_interaction": false
         },
         {
-          "id": "dd05",
-          "text": "Scrolling behavior and visible motion/interactions are reproduced faithfully where they can be observed in the video.",
+          "id": "dr03",
+          "text": "Do the colors, imagery, backgrounds, and other significant visual treatments faithfully match the reference?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr04",
+          "text": "Are the major visible content areas and navigation structure reproduced faithfully, without material omissions, substitutions, or unsupported additions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr05",
+          "text": "Does the page avoid unsupported redesign or creative reinterpretation of what is shown in the reference?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr06",
+          "text": "Do navigation, scrolling behavior, motion, transitions, and other observable interactions faithfully match the supplied reference materials where they can be observed?",
           "dimension": "interaction_navigation",
-          "importance": "essential",
-          "requires_interaction": true
-        },
-        {
-          "id": "dd06",
-          "text": "The page remains coherent and usable across the evaluated viewport sizes.",
-          "dimension": "interaction_navigation",
-          "importance": "essential",
-          "requires_interaction": true
-        },
-        {
-          "id": "dd07",
-          "text": "The page communicates the same primary purpose and content hierarchy as the reference.",
-          "dimension": "clarity_messaging",
-          "importance": "essential",
-          "requires_interaction": false
-        },
-        {
-          "id": "dd08",
-          "text": "The implementation does not rely on or reproduce source code from the reference website.",
-          "dimension": "prompt_adherence",
-          "importance": "essential",
-          "requires_interaction": false
-        },
-        {
-          "id": "dd09",
-          "text": "No unsupported redesign, modernization, or creative reinterpretation is introduced.",
-          "dimension": "prompt_adherence",
-          "importance": "negated",
-          "requires_interaction": false
-        },
-        {
-          "id": "dd10",
-          "text": "The generated page passes section-by-section QA against the supplied screenshots and video without material visible discrepancies.",
-          "dimension": "visual_craft",
           "importance": "essential",
           "requires_interaction": true
         }
@@ -113,6 +210,581 @@
         }
       },
       "status": "READY_FOR_EVALUATION"
+    },
+    {
+      "pair_id": "withywindle_winyard_001",
+      "prompt_id": "withywindle_winyard_001",
+      "prompt": "v2\n\nGenerate a new website concept for Withywindle Winyard using the provided inspiration materials as visual and structural references.\n\nBrand information:\n\nWithywindle Winyard is a nearly four-and-a-half century old vineyard and winery specializing in growing only the finest grapes which, of course, make the finest wine. The vineyard and winery are named in honor of Tom Bombadil and after the river that flowed past his house. In the spirit of Tom we strive to and excel in using only the most natural and sustainable methods in bringing you the tastiest vintages inspired by Iarwain Ben-adar himself. We specialize in red, white, and ros\u00e9 wines.\n\nReview the attached screenshots and video. Use these materials to understand the reference brand\u2019s design principles, including:\n\nTypography and type hierarchy\n\nColor palette and contrast\n\nSpacing, scale, and grid system\n\nLayout patterns and page rhythm\n\nPhotography and graphic direction\n\nNavigation, buttons, cards, and other UI elements\n\nMotion, transitions, and interactive behavior shown in the reference video\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The references should be used only as visual inspiration and guidance. The final result should be a new website for the Withywindle Winyard.\n\nUse the inspiration materials as a close visual-direction reference while adapting the experience appropriately for the new brand. Preserve the reference's defining visual character without simply recreating the reference site.\n\nThis includes preserving, where visible:\n\nThe same general typography categories, such as serif display typography paired with sans-serif utility text\n\nSimilar color relationships and levels of saturation\n\nComparable use of whitespace, image scale, and editorial asymmetry\n\nSimilar density and pacing between product, editorial, and photographic sections\n\nComparable UI restraint, border treatments, labels, and navigation hierarchy\n\nSimilar motion character and interaction subtlety\n\nOriginality should come from the new brand identity, copy, products or offerings, imagery, and newly composed page experience. Do not interpret \"new website\" as permission to replace the reference's defining design language with an unrelated aesthetic.\n\nCreative Direction\n\nKeep the reference\u2019s oversized serif type, small sans-serif labels, generous whitespace, asymmetrical layouts, and simple UI. Create a palette of warm neutrals, earthy greens, and deep wine tones.\n\nBring in the coziness and whimsy of the Shire through vineyard landscapes, gardens, old stone and timber, shared meals, and plenty of food and wine. It should feel like a place where second breakfast makes perfect sense, without looking like a fantasy-themed website.\n\nKeep the photography large and the page spacious, mixing big visual moments with quieter sections. Motion should stay subtle and easy.\n\nOverall, make it feel old, warm, pastoral, and a little playful. Nothing gothic, medieval, or too Ren Faire.\n\nFirst, create a design.md file that captures the design direction you intend to use for the new brand.\n\nThen, continue directly into designing and building the landing page using those guidelines and the supplied inspiration materials, without pausing for review, confirmation, or additional input. Create original brand content and page compositions appropriate for the Withywindle Winyard.\n\nInputs:\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "structured",
+      "difficulty": 3,
+      "strategy": "inspiration_brief",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "ginivini",
+      "reference_assets": [
+        "data/inputs/ginivini/GiniVini_Screen Recording.mov",
+        "data/inputs/ginivini/www.ginivini.com_en (1).png",
+        "data/inputs/ginivini/www.ginivini.com_en (2).png",
+        "data/inputs/ginivini/www.ginivini.com_en (3).png",
+        "data/inputs/ginivini/www.ginivini.com_en (4).png",
+        "data/inputs/ginivini/www.ginivini.com_en (5).png",
+        "data/inputs/ginivini/www.ginivini.com_en.png"
+      ],
+      "rubric": [
+        {
+          "id": "is01",
+          "text": "Does the page faithfully execute the prompt's specified typography, color, spacing, layout, imagery, and UI treatments where those elements are defined?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is02",
+          "text": "Does the page preserve the defining visual character of the supplied inspiration while applying the adaptations specified for the new brand?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is03",
+          "text": "Does the page implement the requested content, structure, features, and other explicit requirements without material omissions or contradictions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is04",
+          "text": "Does the page respect explicit negative constraints and avoid elements or treatments the prompt specifically says not to use?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is05",
+          "text": "Where navigation, motion, transitions, or interactive behaviors are specified in the prompt or observable in the supplied references, does the page reproduce or adapt them as directed?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "withywindle_winyard_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "withywindle_winyard_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "habito_studio_001",
+      "prompt_id": "habito_studio_001",
+      "prompt": "We need to perfectly recreate the website homepage shown in the provided reference materials.\n\nReview the attached screenshots and video and use them as the design reference. Recreate the design, layout, content structure, and scrolling interactions as faithfully as possible. Do not sway from what is shown in the supplied reference materials; the recreation should be as exact as possible.\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The supplied screenshots and video should be used as the visual reference for the recreation.\n\nDo not reinterpret, redesign, modernize, or add unsupported creative elements. If a minor implementation detail is not observable in the supplied materials, make the most reasonable choice consistent with the visible reference and continue.\n\nComplete the full landing-page implementation in this one-shot task without pausing for questions, review, confirmation, or additional input.\n\nBefore finishing, QA your work section by section against the supplied screenshots and video. Check for material differences from the reference and correct them before completing the task.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "asset_based",
+      "difficulty": 3,
+      "strategy": "direct_recreation",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "habito_studio",
+      "reference_assets": [
+        "data/inputs/habito_studio/Habito_Studio_Screen Recording.mov",
+        "data/inputs/habito_studio/habito.studio_about.png",
+        "data/inputs/habito_studio/habito.studio_careers.png",
+        "data/inputs/habito_studio/habito.studio_landing page.png",
+        "data/inputs/habito_studio/habito.studio_pricing.png",
+        "data/inputs/habito_studio/habito.studio_services.png"
+      ],
+      "rubric": [
+        {
+          "id": "dr01",
+          "text": "Does the overall layout and composition faithfully match the reference, including section structure, sizing, positioning, spacing, and visual hierarchy?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr02",
+          "text": "Does the typography faithfully match the reference in type style, scale, weight, hierarchy, and treatment?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr03",
+          "text": "Do the colors, imagery, backgrounds, and other significant visual treatments faithfully match the reference?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr04",
+          "text": "Are the major visible content areas and navigation structure reproduced faithfully, without material omissions, substitutions, or unsupported additions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr05",
+          "text": "Does the page avoid unsupported redesign or creative reinterpretation of what is shown in the reference?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr06",
+          "text": "Do navigation, scrolling behavior, motion, transitions, and other observable interactions faithfully match the supplied reference materials where they can be observed?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "habito_studio_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "habito_studio_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "rangefinder_001",
+      "prompt_id": "rangefinder_001",
+      "prompt": "v2\n\nGenerate a new website concept for Rangefinder using the provided inspiration materials as visual and structural references.\n\nBrand information:\n\nRangefinder is a premium outdoor lifestyle and photography brand built around exploration, visual storytelling, and a deep appreciation for nature. Its initial launch will offer camera bags and straps, rucksacks, premium outdoor apparel, photo albums, and landscape prints.\n\nReview the attached screenshots and video. Use these materials to understand the reference brand\u2019s design principles, including:\n\nTypography and type hierarchy\n\nColor palette and contrast\n\nSpacing, scale, and grid system\n\nLayout patterns and page rhythm\n\nPhotography and graphic direction\n\nNavigation, buttons, cards, and other UI elements\n\nMotion, transitions, and interactive behavior shown in the reference video\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The references should be used only as visual inspiration and guidance. The final result should be a new website for the Rangefinder.\n\nUse the inspiration materials as a close visual-direction reference while adapting the experience appropriately for the new brand. Preserve the reference's defining visual character without simply recreating the reference site.\n\nThis includes preserving, where visible:\n\nThe same general typography categories, such as serif display typography paired with sans-serif utility text\n\nSimilar color relationships and levels of saturation\n\nComparable use of whitespace, image scale, and editorial asymmetry\n\nSimilar density and pacing between product, editorial, and photographic sections\n\nComparable UI restraint, border treatments, labels, and navigation hierarchy\n\nSimilar motion character and interaction subtlety\n\nOriginality should come from the new brand identity, copy, products or offerings, imagery, and newly composed page experience. Do not interpret \"new website\" as permission to replace the reference's defining design language with an unrelated aesthetic.\n\nCreative Direction\n\nThe site should have the same bold, rugged outdoor feel as the reference, with large serif headlines, simple supporting type, natural colors and strong photography.\n\nUse large images throughout the page, mixed with smaller images and sections. Products should be part of the photography and shown being used rather than always photographed on their own.\n\nFocus on the moments around a photography trip like loading gear into a truck, stopping on the side of the road, waiting for a ferry in bad weather, coffee before sunrise or coming back after dark. Show Rangefinder bags, clothing and other products naturally in these moments. They can look worn and well used.\n\nMix this with big landscapes, close product details and things collected along the way like maps, locations, coordinates and handwritten notes.\n\nNavigation, buttons and other page elements should follow the reference and not compete with the photography. Movement and transitions should also feel similar to what is shown in the reference video.\n\nFirst, create a design.md file that captures the design direction you intend to use for the new brand.\n\nThen, continue directly into designing and building the landing page using those guidelines and the supplied inspiration materials, without pausing for review, confirmation, or additional input. Create original brand content and page compositions appropriate for the Rangefinder.\n\nInputs:\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "structured",
+      "difficulty": 3,
+      "strategy": "inspiration_brief",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "modernhuntsman",
+      "reference_assets": [
+        "data/inputs/modernhuntsman/ModernHuntsman Screen Recording.mov",
+        "data/inputs/modernhuntsman/modernhuntsman.com_.png",
+        "data/inputs/modernhuntsman/modernhuntsman.com_experiences_.png",
+        "data/inputs/modernhuntsman/modernhuntsman.com_films_.png",
+        "data/inputs/modernhuntsman/modernhuntsman.com_my-account_.png",
+        "data/inputs/modernhuntsman/modernhuntsman.com_partners_.png",
+        "data/inputs/modernhuntsman/modernhuntsman.com_shop_.png",
+        "data/inputs/modernhuntsman/modernhuntsman.com_subscribe_.png"
+      ],
+      "rubric": [
+        {
+          "id": "is01",
+          "text": "Does the page faithfully execute the prompt's specified typography, color, spacing, layout, imagery, and UI treatments where those elements are defined?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is02",
+          "text": "Does the page preserve the defining visual character of the supplied inspiration while applying the adaptations specified for the new brand?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is03",
+          "text": "Does the page implement the requested content, structure, features, and other explicit requirements without material omissions or contradictions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is04",
+          "text": "Does the page respect explicit negative constraints and avoid elements or treatments the prompt specifically says not to use?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is05",
+          "text": "Where navigation, motion, transitions, or interactive behaviors are specified in the prompt or observable in the supplied references, does the page reproduce or adapt them as directed?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "rangefinder_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "rangefinder_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "oura_001",
+      "prompt_id": "oura_001",
+      "prompt": "We need to perfectly recreate the website homepage shown in the provided reference materials.\n\nReview the attached screenshots and video and use them as the design reference. Recreate the design, layout, content structure, and scrolling interactions as faithfully as possible. Do not sway from what is shown in the supplied reference materials; the recreation should be as exact as possible.\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The supplied screenshots and video should be used as the visual reference for the recreation.\n\nDo not reinterpret, redesign, modernize, or add unsupported creative elements. If a minor implementation detail is not observable in the supplied materials, make the most reasonable choice consistent with the visible reference and continue.\n\nComplete the full landing-page implementation in this one-shot task without pausing for questions, review, confirmation, or additional input.\n\nBefore finishing, QA your work section by section against the supplied screenshots and video. Check for material differences from the reference and correct them before completing the task.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "asset_based",
+      "difficulty": 3,
+      "strategy": "direct_recreation",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "ouraring.com",
+      "reference_assets": [
+        "data/inputs/ouraring.com/OuraRing.com_Screen Recording.mov",
+        "data/inputs/ouraring.com/organizations.ouraring.com_(1).png",
+        "data/inputs/ouraring.com/organizations.ouraring.com_.png",
+        "data/inputs/ouraring.com/ouraring.com_.png"
+      ],
+      "rubric": [
+        {
+          "id": "dr01",
+          "text": "Does the overall layout and composition faithfully match the reference, including section structure, sizing, positioning, spacing, and visual hierarchy?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr02",
+          "text": "Does the typography faithfully match the reference in type style, scale, weight, hierarchy, and treatment?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr03",
+          "text": "Do the colors, imagery, backgrounds, and other significant visual treatments faithfully match the reference?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr04",
+          "text": "Are the major visible content areas and navigation structure reproduced faithfully, without material omissions, substitutions, or unsupported additions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr05",
+          "text": "Does the page avoid unsupported redesign or creative reinterpretation of what is shown in the reference?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr06",
+          "text": "Do navigation, scrolling behavior, motion, transitions, and other observable interactions faithfully match the supplied reference materials where they can be observed?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "oura_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "oura_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "doubletab_saas_001",
+      "prompt_id": "doubletab_saas_001",
+      "prompt": "v2\n\nGenerate a new website concept for the DoubleTab company using the provided inspiration materials as visual and structural references.\n\nBrand information: DoubleTab is a free, open-source, cloud-based platform providing means of centralizing remote teamwork and automating direct communication across teams. The application provides a secure hub for managing tasks, one-to-one and collective threaded messaging channels, and multimedia processing.\n\nReview the attached screenshots and video. Use these materials to understand the reference brand\u2019s design principles, including:\n\nTypography and type hierarchy\n\nColor palette and contrast\n\nSpacing, scale, and grid system\n\nLayout patterns and page rhythm\n\nPhotography and graphic direction\n\nNavigation, buttons, cards, and other UI elements\n\nMotion, transitions, and interactive behavior shown in the reference video\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The references should be used only as visual inspiration and guidance. The final result should be a new website for the DoubleTab company.\n\nUse the inspiration materials as a close visual-direction reference while adapting the experience appropriately for the new brand.\n\nFor this concept, focus on preserving the reference\u2019s overall approach in these design areas:\n\nComparable UI restraint, border treatments, labels, and navigation hierarchy\n\nComparable use of whitespace, image scale, and editorial asymmetry\n\nOriginality should come from the new brand identity, copy, products, photography, and newly composed layouts. Do not interpret \u201cnew website\u201d as permission to replace the reference\u2019s defining design language with an unrelated aesthetic.\n\nCreative Direction\n\nCreate a calm, open feeling through generous whitespace and large-scale cloud and sky imagery, using asymmetrical layouts to reinforce DoubleTab\u2019s cloud-based concept. Keep labels, borders, and navigation clean and restrained so the platform feels simple and approachable despite supporting multiple ways for teams to work and communicate.\n\nFirst, create a design.md file that translates the inspiration into clear brand and web-design guidelines for the new brand. Include typography, colors, spacing, imagery, UI treatments, motion principles, and any other relevant visual rules.\n\nThen, without pausing for review, confirmation, or additional input, design and build the page using those guidelines. Use the inspiration materials as a close visual-direction reference while creating original brand content, imagery, and page compositions.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "mid",
+      "difficulty": 3,
+      "strategy": "inspiration_brief",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "planhat.com",
+      "reference_assets": [
+        "data/inputs/planhat.com/Planhat Screen Recording.mov",
+        "data/inputs/planhat.com/www.planhat.com_ request a demo.png",
+        "data/inputs/planhat.com/www.planhat.com_landing page.png"
+      ],
+      "rubric": [
+        {
+          "id": "im01",
+          "text": "Does the page preserve the defining visual characteristics evident in the supplied inspiration, such as its layout approach, visual hierarchy, imagery, spacing, and UI treatment where applicable?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im02",
+          "text": "Does the page implement the specific content, page structure, and creative direction explicitly requested in the prompt without material omissions or contradictions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im03",
+          "text": "Does the page appropriately adapt the inspiration to the new brand rather than simply recreating the reference or replacing it with an unrelated aesthetic?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "im04",
+          "text": "Where navigation, motion, or interactive behavior is specified in the prompt or observable in the supplied references, does the page carry it through appropriately?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "doubletab_saas_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "doubletab_saas_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "possiblefinance_001",
+      "prompt_id": "possiblefinance_001",
+      "prompt": "We need to perfectly recreate the website homepage shown in the provided reference materials.\n\nReview the attached screenshots and video and use them as the design reference. Recreate the design, layout, content structure, and scrolling interactions as faithfully as possible. Do not sway from what is shown in the supplied reference materials; the recreation should be as exact as possible.\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The supplied screenshots and video should be used as the visual reference for the recreation.\n\nDo not reinterpret, redesign, modernize, or add unsupported creative elements. If a minor implementation detail is not observable in the supplied materials, make the most reasonable choice consistent with the visible reference and continue.\n\nComplete the full landing-page implementation in this one-shot task without pausing for questions, review, confirmation, or additional input.\n\nBefore finishing, QA your work section by section against the supplied screenshots and video. Check for material differences from the reference and correct them before completing the task.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "asset_based",
+      "difficulty": 3,
+      "strategy": "direct_recreation",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "possiblefinance",
+      "reference_assets": [
+        "data/inputs/possiblefinance/PossibleFinance_Screen Recording.mov",
+        "data/inputs/possiblefinance/app.possiblefinance.com__wpsrc=PARTNERS&utm_campaign=navigation&utm_source=Website.png",
+        "data/inputs/possiblefinance/app.possiblefinance.com_login.png",
+        "data/inputs/possiblefinance/www.possiblefinance.com_.png"
+      ],
+      "rubric": [
+        {
+          "id": "dr01",
+          "text": "Does the overall layout and composition faithfully match the reference, including section structure, sizing, positioning, spacing, and visual hierarchy?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr02",
+          "text": "Does the typography faithfully match the reference in type style, scale, weight, hierarchy, and treatment?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr03",
+          "text": "Do the colors, imagery, backgrounds, and other significant visual treatments faithfully match the reference?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr04",
+          "text": "Are the major visible content areas and navigation structure reproduced faithfully, without material omissions, substitutions, or unsupported additions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr05",
+          "text": "Does the page avoid unsupported redesign or creative reinterpretation of what is shown in the reference?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr06",
+          "text": "Do navigation, scrolling behavior, motion, transitions, and other observable interactions faithfully match the supplied reference materials where they can be observed?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "possiblefinance_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "possiblefinance_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "extrasensory_electronics_001",
+      "prompt_id": "extrasensory_electronics_001",
+      "prompt": "v2\n\nGenerate a new website concept for Extrasensory Electronics using the provided inspiration materials as visual and structural references.\n\nBrand information:\n\nExtrasensory Electronics is more than just a company that makes electronic instruments. It\u2019s a way of life. We have synthesizers, theremins, vocoders, and all sorts of other instruments that will help you free your mind and escape this mortal coil. All of our locations have a space-age feel that matches the galaxy brain you\u2019ll unlock when you play our instruments. Come shop with us and experience true ego death today.\n\nReview the attached screenshots and video. Use these materials to understand the reference brand\u2019s design principles, including:\n\nTypography and type hierarchy\n\nColor palette and contrast\n\nSpacing, scale, and grid system\n\nLayout patterns and page rhythm\n\nPhotography and graphic direction\n\nNavigation, buttons, cards, and other UI elements\n\nMotion, transitions, and interactive behavior shown in the reference video\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The references should be used only as visual inspiration and guidance. The final result should be a new website for Extrasensory Electronics.\n\nUse the inspiration materials as a close visual-direction reference while adapting the experience appropriately for the new brand. Preserve the reference's defining visual character without simply recreating the reference site.\n\nThis includes preserving, where visible:\n\nThe same general typography categories, such as serif display typography paired with sans-serif utility text\n\nSimilar color relationships and levels of saturation\n\nComparable use of whitespace, image scale, and editorial asymmetry\n\nSimilar density and pacing between product, editorial, and photographic sections\n\nComparable UI restraint, border treatments, labels, and navigation hierarchy\n\nSimilar motion character and interaction subtlety\n\nOriginality should come from the new brand identity, copy, products or offerings, imagery, and newly composed page experience. Do not interpret \"new website\" as permission to replace the reference's defining design language with an unrelated aesthetic.\n\nCreative Direction\n\nGive Extrasensory Electronics a laid-back 1970s psychedelic feel, rooted in experimental electronic music, analog instruments, and a playful sense of mind expansion. It should feel warm, trippy, a little weird, and self-aware rather than sleek or futuristic.\n\nUse the reference's typography, color relationships, spacing, scale, and layout style as the visual foundation. Bring the Extrasensory personality through the products, imagery, and copy while translating the reference's design language for the new brand.\n\nMake synthesizers, theremins, vocoders, and other instruments the focus of the imagery. Mix clear product moments with more expressive sections that bring out the brand's psychedelic, cosmic personality and humor.\n\nKeep navigation, buttons, product information, and shopping interactions simple and easy to understand. Follow the reference's general UI approach and use the reference video to guide the style and amount of motion and interaction.\n\nFirst, create a design.md file that captures the design direction you intend to use for the new brand.\n\nThen, continue directly into designing and building the landing page using those guidelines and the supplied inspiration materials, without pausing for review, confirmation, or additional input. Create original brand content and page compositions appropriate for Extrasensory Electronics.\n\nInputs:\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "structured",
+      "difficulty": 3,
+      "strategy": "inspiration_brief",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "telepathicinstruments.com",
+      "reference_assets": [
+        "data/inputs/telepathicinstruments.com/Telepathic Instruments Screen Recording.mov",
+        "data/inputs/telepathicinstruments.com/support.telepathicinstruments.com_hc_en-us.png",
+        "data/inputs/telepathicinstruments.com/telepathicinstruments.com_.png",
+        "data/inputs/telepathicinstruments.com/telepathicinstruments.com_collections_shop-all.png",
+        "data/inputs/telepathicinstruments.com/telepathicinstruments.com_products_pistil.png"
+      ],
+      "rubric": [
+        {
+          "id": "is01",
+          "text": "Does the page faithfully execute the prompt's specified typography, color, spacing, layout, imagery, and UI treatments where those elements are defined?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is02",
+          "text": "Does the page preserve the defining visual character of the supplied inspiration while applying the adaptations specified for the new brand?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is03",
+          "text": "Does the page implement the requested content, structure, features, and other explicit requirements without material omissions or contradictions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is04",
+          "text": "Does the page respect explicit negative constraints and avoid elements or treatments the prompt specifically says not to use?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "is05",
+          "text": "Where navigation, motion, transitions, or interactive behaviors are specified in the prompt or observable in the supplied references, does the page reproduce or adapt them as directed?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "extrasensory_electronics_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "extrasensory_electronics_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
+    },
+    {
+      "pair_id": "weavy_001",
+      "prompt_id": "weavy_001",
+      "prompt": "We need to perfectly recreate the website homepage shown in the provided reference materials.\n\nReview the attached screenshots and video and use them as the design reference. Recreate the design, layout, content structure, and scrolling interactions as faithfully as possible. Do not sway from what is shown in the supplied reference materials; the recreation should be as exact as possible.\n\nDo not ingest, inspect, reproduce, or rely on source code from the reference website. The supplied screenshots and video should be used as the visual reference for the recreation.\n\nDo not reinterpret, redesign, modernize, or add unsupported creative elements. If a minor implementation detail is not observable in the supplied materials, make the most reasonable choice consistent with the visible reference and continue.\n\nComplete the full landing-page implementation in this one-shot task without pausing for questions, review, confirmation, or additional input.\n\nBefore finishing, QA your work section by section against the supplied screenshots and video. Check for material differences from the reference and correct them before completing the task.\n\nInputs\n\nScreenshots of the reference website\n\nVideo of the reference website",
+      "category": "TBD",
+      "complexity": "asset_based",
+      "difficulty": 3,
+      "strategy": "direct_recreation",
+      "quality_tier": "TBD",
+      "reference_site_url": "",
+      "reference_input_dir": "weavy.ai",
+      "reference_assets": [
+        "data/inputs/weavy.ai/Weavy_Screen Recording.mov",
+        "data/inputs/weavy.ai/weave.figma.com_collective.png",
+        "data/inputs/weavy.ai/weave.figma.com_enterprise.png",
+        "data/inputs/weavy.ai/weave.figma.com_landing page.png",
+        "data/inputs/weavy.ai/weave.figma.com_pricing.png"
+      ],
+      "rubric": [
+        {
+          "id": "dr01",
+          "text": "Does the overall layout and composition faithfully match the reference, including section structure, sizing, positioning, spacing, and visual hierarchy?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr02",
+          "text": "Does the typography faithfully match the reference in type style, scale, weight, hierarchy, and treatment?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr03",
+          "text": "Do the colors, imagery, backgrounds, and other significant visual treatments faithfully match the reference?",
+          "dimension": "visual_craft",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr04",
+          "text": "Are the major visible content areas and navigation structure reproduced faithfully, without material omissions, substitutions, or unsupported additions?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr05",
+          "text": "Does the page avoid unsupported redesign or creative reinterpretation of what is shown in the reference?",
+          "dimension": "prompt_adherence",
+          "importance": "essential",
+          "requires_interaction": false
+        },
+        {
+          "id": "dr06",
+          "text": "Do navigation, scrolling behavior, motion, transitions, and other observable interactions faithfully match the supplied reference materials where they can be observed?",
+          "dimension": "interaction_navigation",
+          "importance": "essential",
+          "requires_interaction": true
+        }
+      ],
+      "outputs": {
+        "A": {
+          "output_id": "weavy_001_A",
+          "model": "Claude",
+          "status": "PENDING"
+        },
+        "B": {
+          "output_id": "weavy_001_B",
+          "model": "Codex",
+          "status": "PENDING"
+        }
+      },
+      "status": "NEW"
     }
   ]
 }

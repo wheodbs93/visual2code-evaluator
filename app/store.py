@@ -108,10 +108,76 @@ def save_pairs(
     )
 
 
-def append_evaluation(data: dict):
+def evaluation_count(pair_id: str) -> int:
+    conn = _connect()
+    try:
+        row = conn.execute(
+            "SELECT COUNT(*) FROM evaluations WHERE pair_id = ?",
+            (pair_id,),
+        ).fetchone()
+        return int(row[0])
+    finally:
+        conn.close()
+
+
+def evaluator_has_submitted(pair_id: str, evaluator_id: str) -> bool:
+    conn = _connect()
+    try:
+        row = conn.execute(
+            """
+            SELECT 1
+            FROM evaluations
+            WHERE pair_id = ? AND evaluator_id = ?
+            LIMIT 1
+            """,
+            (pair_id, evaluator_id),
+        ).fetchone()
+        return row is not None
+    finally:
+        conn.close()
+
+
+def append_evaluation(data: dict) -> dict:
+    pair_id = str(data.get("pair_id", "")).strip()
+    evaluator_id = str(data.get("evaluator_id", "")).strip()
+
+    if not pair_id:
+        raise ValueError("pair_id is required")
+
+    if not evaluator_id:
+        raise ValueError("evaluator_id is required")
+
     conn = _connect()
 
     try:
+        existing = conn.execute(
+            """
+            SELECT 1
+            FROM evaluations
+            WHERE pair_id = ? AND evaluator_id = ?
+            LIMIT 1
+            """,
+            (pair_id, evaluator_id),
+        ).fetchone()
+
+        if existing is not None:
+            raise ValueError(
+                "This evaluator has already submitted an evaluation "
+                f"for {pair_id}."
+            )
+
+        row = conn.execute(
+            "SELECT COUNT(*) FROM evaluations WHERE pair_id = ?",
+            (pair_id,),
+        ).fetchone()
+
+        count = int(row[0])
+
+        if count >= 5:
+            raise ValueError(
+                f"{pair_id} already has 5 completed evaluations."
+            )
+
         conn.execute(
             """
             INSERT INTO evaluations (
@@ -123,17 +189,21 @@ def append_evaluation(data: dict):
             VALUES (?, ?, ?, ?)
             """,
             (
-                data.get("pair_id", ""),
-                data.get("evaluator_id", ""),
+                pair_id,
+                evaluator_id,
                 data.get("submitted_at", ""),
-                json.dumps(
-                    data,
-                    ensure_ascii=False,
-                ),
+                json.dumps(data, ensure_ascii=False),
             ),
         )
 
         conn.commit()
+
+        return {
+            "ok": True,
+            "pair_id": pair_id,
+            "evaluation_count": count + 1,
+            "evaluation_limit": 5,
+        }
 
     finally:
         conn.close()
