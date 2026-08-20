@@ -157,7 +157,7 @@ def evaluator_has_submitted(pair_id: str, evaluator_id: str) -> bool:
             """
             SELECT 1
             FROM evaluations
-            WHERE pair_id = %s AND evaluator_id = ?
+            WHERE pair_id = %s AND evaluator_id = %s
             LIMIT 1
             """,
             (pair_id, evaluator_id),
@@ -184,7 +184,7 @@ def append_evaluation(data: dict) -> dict:
             """
             SELECT 1
             FROM evaluations
-            WHERE pair_id = %s AND evaluator_id = ?
+            WHERE pair_id = %s AND evaluator_id = %s
             LIMIT 1
             """,
             (pair_id, evaluator_id),
