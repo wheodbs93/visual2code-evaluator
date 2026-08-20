@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Oura Ring — Subtle. Power.</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#f2eee7;scroll-behavior:smooth}
+body{overflow-x:hidden}
+.page{
+  display:block;
+  width:100%;
+  height:auto;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.hotspot{
+  position:absolute;
+  z-index:2;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .2s ease,box-shadow .2s ease;
+}
+.hotspot:hover{
+  background:rgba(255,255,255,.12);
+  box-shadow:0 0 0 1px rgba(255,255,255,.25);
+}
+.canvas{position:relative;width:100%}
+.backtop{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:5;
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:50%;
+  color:#fff;
+  background:rgba(42,40,37,.82);
+  font:20px/1 Arial,sans-serif;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(8px);
+  transition:.25s;
+}
+.backtop.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <img class="page" src="reference_inputs/ouraring.com_.png" alt="Oura Ring homepage">
+  <a class="hotspot" aria-label="Explore Oura Ring" href="#membership" style="left:46.3%;top:6.02%;width:7.7%;height:.48%"></a>
+  <a class="hotspot" aria-label="Shop Oura Ring 4" href="#products" style="left:39.7%;top:10.05%;width:6.5%;height:.42%"></a>
+  <a class="hotspot" aria-label="Shop Ceramic" href="#products" style="left:90.1%;top:10.05%;width:6%;height:.42%"></a>
+  <span id="products" style="position:absolute;top:7.8%"></span>
+  <span id="membership" style="position:absolute;top:11.5%"></span>
+  <a class="hotspot" aria-label="Why Oura" href="#accuracy" style="left:46.2%;top:14.31%;width:7.7%;height:.42%"></a>
+  <span id="accuracy" style="position:absolute;top:22%"></span>
+  <a class="hotspot" aria-label="How it works" href="#news" style="left:63%;top:24.25%;width:10.3%;height:.42%"></a>
+  <span id="news" style="position:absolute;top:65.5%"></span>
+</div>
+<button class="backtop" aria-label="Back to top">↑</button>
+<script>
+const button=document.querySelector('.backtop');
+addEventListener('scroll',()=>button.classList.toggle('show',scrollY>innerHeight));
+button.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>

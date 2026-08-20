@@ -461,25 +461,25 @@
         "A": {
           "output_id": "rangefinder_001_A",
           "model": "Claude",
-          "workspace": "",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/rangefinder_001/A",
           "source_path": "",
           "render_url": "",
-          "status": "PENDING",
-          "build_log": "",
+          "status": "GENERATION_FAILED",
+          "build_log": "Claude completed successfully but did not return HTML.",
           "qa": {}
         },
         "B": {
           "output_id": "rangefinder_001_B",
           "model": "Codex",
-          "workspace": "",
-          "source_path": "",
-          "render_url": "",
-          "status": "PENDING",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/rangefinder_001/B",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/rangefinder_001/b",
+          "render_url": "/renders/rangefinder_001/b/",
+          "status": "READY_FOR_EVALUATION",
           "build_log": "",
           "qa": {}
         }
       },
-      "status": "NEW"
+      "status": "PARTIAL"
     },
     {
       "pair_id": "oura_001",
@@ -546,25 +546,25 @@
         "A": {
           "output_id": "oura_001_A",
           "model": "Claude",
-          "workspace": "",
-          "source_path": "",
-          "render_url": "",
-          "status": "PENDING",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/oura_001/A",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/oura_001/a",
+          "render_url": "/renders/oura_001/a/",
+          "status": "READY_FOR_EVALUATION",
           "build_log": "",
           "qa": {}
         },
         "B": {
           "output_id": "oura_001_B",
           "model": "Codex",
-          "workspace": "",
-          "source_path": "",
-          "render_url": "",
-          "status": "PENDING",
+          "workspace": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/workspaces/oura_001/B",
+          "source_path": "/Users/grantc/Documents/visual2code/pipeline_v021_lite/renders/oura_001/b",
+          "render_url": "/renders/oura_001/b/",
+          "status": "READY_FOR_EVALUATION",
           "build_log": "",
           "qa": {}
         }
       },
-      "status": "NEW"
+      "status": "READY_FOR_EVALUATION"
     },
     {
       "pair_id": "doubletab_saas_001",
